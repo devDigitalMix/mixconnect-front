@@ -1,11 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
-import {
-  EmployeeBtns,
-  EmployeeContainer,
-  HomeBody,
-  HomeHeader,
-} from "./HomeStyled.jsx";
+
 import {
   deleteEmployee,
   getAllEmployees,
@@ -14,6 +9,12 @@ import { Card } from "../../components/Card/Card.jsx";
 import { Button } from "../../components/Button/Button.jsx";
 import { CreateEmployee } from "../../components/CreateEmployee/CreateEmployee.jsx";
 import { UpdateEmployee } from "../../components/UpdateEmployee/UpdateEmployee.jsx";
+import {
+  EmployeeBtns,
+  EmployeeContainer,
+  HomeBody,
+  HomeHeader,
+} from "./HomeStyled.jsx";
 
 export default function Home() {
   const [employees, setEmployees] = useState([]);

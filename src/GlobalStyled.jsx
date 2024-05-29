@@ -4,16 +4,19 @@ export const GlobalStyled = createGlobalStyle`
 /*Reset*/
 /* 17a1f1 */
 :root {
-  --main: #17a1f1;
-  --light: #fff;
+  --main: #807DF0;
+  --light: #F9F8FE;
   --gray: #eeeeee;
-  --dark: #000;
+  --dark: #141415;
 }
 html {
   box-sizing: border-box;
   scroll-behavior: smooth;
   cursor: default;
-  font-family: "Roboto", sans-serif;
+  background: url("/bg.webp") no-repeat center center;
+  background-size: cover;
+  color: var(--light);
+  font-family: 'Epilogue', sans-serif;
 }
 
 *,
@@ -26,7 +29,6 @@ body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
-  background-color: var(--gray);
 }
 
 body,
@@ -194,7 +196,6 @@ svg path {
   background-color: var(--main);
   max-width: fit-content;
   margin: 0 auto;
-  padding: 5px 20px;
   border-radius: 0.3em;
   color: var(--light);
   border: 1px solid var(--main);
@@ -202,12 +203,6 @@ svg path {
     background-color: var(--light);
     color: var(--main);
   }
-}
-.btn-danger {
-  background-color: red;
-  border: 1px solid red;&:hover {
-    background-color: transparent;
-    color: red;
-  }
+
 }
 `;

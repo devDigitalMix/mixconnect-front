@@ -5,23 +5,36 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Navbar } from "./components/Navbar/Navbar.jsx";
 import Home from "./pages/Home/Home.jsx";
 import { GlobalStyled } from "./GlobalStyled.jsx";
+import { Authentication } from "./pages/Authentication/Authentication.jsx";
+import UserProvider from "./Context/UserContent.jsx";
+import Profile from "./pages/Profile/Profile.jsx";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/home",
     element: <Navbar />,
     children: [
       {
-        path: "/",
+        path: "/home",
         element: <Home />,
       },
+      {
+        path: "/home/profile",
+        element: <Profile />,
+      },
     ],
+  },
+  {
+    path: "/",
+    element: <Authentication />,
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <GlobalStyled />
-    <RouterProvider router={router} />
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   </React.StrictMode>
 );

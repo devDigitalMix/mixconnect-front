@@ -1,10 +1,29 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const baseURL = "http://localhost:3000";
 
+export function signin(data) {
+  const response = axios.post(`${baseURL}/auth/login`, data);
+  return response;
+}
+
+export function userLogged() {
+  const response = axios.get(`${baseURL}/employee/findById`, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
+  return response;
+}
+
 export function getAllEmployees() {
-  const response = axios.get(`${baseURL}/employee`);
+  const response = axios.get(`${baseURL}/employee`, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
   return response;
 }
 

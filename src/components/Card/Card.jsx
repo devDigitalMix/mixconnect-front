@@ -5,7 +5,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { CardStyled } from "./CardStyled";
 
 export function Card(props) {
-  console.log(props.imgSrc);
   return (
     <CardStyled>
       <p>{props.name}</p>

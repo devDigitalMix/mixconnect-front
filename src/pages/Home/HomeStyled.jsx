@@ -25,9 +25,7 @@ export const EmployeeBtns = styled.div`
   gap: 20px;
   margin-top: 10px;
   button {
-    background: #1e1e1e;
-    color: #f2f2f2;
-    padding: 5px 10px;
+    padding: 8px 10px 5px;
     border-radius: 5px;
   }
 `;
