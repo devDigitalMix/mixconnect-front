@@ -12,7 +12,7 @@ export function Card(props) {
       <p>{props.email}</p>
       <p>{props.role}</p>
       <p>{props.whats}</p>
-      {props.imgSrc && <img src={props.imgSrc} alt="" />}
+      {props.imgSrc && <img src={props.imgSrc} draggable="false" />}
     </CardStyled>
   );
 }

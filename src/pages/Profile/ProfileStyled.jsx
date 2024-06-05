@@ -13,7 +13,23 @@ export const ProfileStyled = styled.div`
   background-color: var(--dark);
   border-radius: 12px;
   width: 100%;
+  position: relative;
   display: grid;
+  & > img {
+    position: absolute;
+    right: 10px;
+    transition: all.3s;
+    top: 10px;
+    cursor: pointer;
+    &:hover {
+      filter: hue-rotate(280deg);
+      filter: saturate(1000%) drop-shadow(0 0 5px #4441c8);
+    }
+    &:active {
+      transform: scale(0.9);
+      transition: transform 0.1s;
+    }
+  }
 `;
 
 export const TopProfile = styled.div`
@@ -79,5 +95,50 @@ export const ProfileBody = styled.div`
     p + p {
       /* margin-top: 10px; */
     }
+  }
+`;
+
+export const ProfileUpdate = styled.form`
+  width: 100%;
+  padding: 50px 20px 70px;
+  display: grid;
+  position: relative;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: start;
+  gap: 50px;
+  div {
+    width: 100%;
+    max-width: 300px;
+    display: grid;
+    gap: 10px;
+    label {
+      color: var(--main);
+      font-family: Audiowide;
+      font-size: 1.2rem;
+    }
+    input {
+      background-color: #dbd4ff;
+      color: var(--dark);
+      outline: none;
+      padding: 8px 10px 5px;
+      max-height: 37px;
+      font-weight: 600;
+      border-radius: 6px;
+      max-width: 300px;
+    }
+  }
+  button.btn {
+    position: absolute;
+    left: 50%;
+    bottom: 0px;
+    transform: translate(-50%);
+  }
+  .addInput {
+    background: url("/cancel.svg") no-repeat center center;
+    background-size: contain;
+    height: 25px;
+    width: 25px;
+    transform: rotate(45deg);
+    margin: 0 auto;
   }
 `;

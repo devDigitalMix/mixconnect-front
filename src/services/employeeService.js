@@ -35,13 +35,18 @@ export function CreateEmployeeService(data) {
 export function UpdateEmployeeService(formData, id) {
   const response = axios.patch(`${baseURL}/employee/update/${id}`, formData, {
     headers: {
-      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${Cookies.get("token")}`,
     },
   });
+  console.log(response);
   return response;
 }
 
 export function deleteEmployee(id) {
-  const response = axios.delete(`${baseURL}/employee/delete/${id}`);
+  const response = axios.delete(`${baseURL}/employee/delete/${id}`, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
   return response;
 }

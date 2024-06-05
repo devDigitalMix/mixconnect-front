@@ -196,7 +196,8 @@ svg path {
   background-color: var(--main);
   max-width: fit-content;
   margin: 0 auto;
-  border-radius: 0.3em;
+  padding: 7px 15px;
+  border-radius: 5px;
   color: var(--light);
   border: 1px solid var(--main);
   &:hover {

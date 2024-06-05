@@ -44,7 +44,7 @@ export function Authentication() {
     <AuthContainer>
       <div>
         <Section type="signin">
-          <img src="logo-login.svg" alt="" />
+          <img src="logo-login.svg" draggable="false" />
           <form onSubmit={handleSubmitSignin(inHandleSubmit)}>
             <div>
               <label htmlFor="email">Usuário</label>
@@ -69,9 +69,9 @@ export function Authentication() {
                 />
                 <span id="pass" onClick={togglePassword}>
                   {pass ? (
-                    <img src="hide-password.svg" alt="" />
+                    <img src="hide-password.svg" draggable="false" />
                   ) : (
-                    <img src="view-password.svg" alt="" />
+                    <img src="view-password.svg" draggable="false" />
                   )}
                 </span>
               </article>

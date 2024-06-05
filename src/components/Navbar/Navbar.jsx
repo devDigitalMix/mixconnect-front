@@ -56,7 +56,7 @@ export function Navbar() {
         <div>
           <Nav>
             <Link to={"/home"}>
-              <img src="/logo.svg" alt="MixConnect" />
+              <img src="/logo.svg" alt="MixConnect" draggable="false" />
             </Link>
             <NavMenu>
               <button>CLIENTES</button>
@@ -66,7 +66,7 @@ export function Navbar() {
               <button>LOGINS</button>
             </NavMenu>
             <Link to={"/home/profile"}>
-              <img src={user.avatar} id="perfil-img" />
+              <img src={user.avatar} id="perfil-img" draggable="false" />
             </Link>
           </Nav>
         </div>
