@@ -6,10 +6,17 @@ export const ProfileContainer = styled.section`
   padding: 1px;
   width: 100%;
   max-width: 1200px;
+  margin: 0 0 50px;
+  @media only screen and (max-width: 610px) {
+    margin: 20px 0 50px;
+  }
 `;
 
 export const ProfileStyled = styled.div`
   padding: 20px;
+  @media only screen and (max-width: 390px) {
+    padding: 20px 10px;
+  }
   background-color: var(--dark);
   border-radius: 12px;
   width: 100%;
@@ -36,21 +43,71 @@ export const TopProfile = styled.div`
   display: flex;
   align-items: center;
   gap: 30px;
+  iframe {
+    border-radius: 12px;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: 40px;
+  }
+  @media only screen and (max-width: 780px) {
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+    text-align: center;
+    iframe {
+      margin-right: auto;
+    }
+  }
 `;
 
 export const ProfileAvatar = styled.div`
   display: grid;
   justify-items: center;
   gap: 10px;
-  #avatar {
-    width: 100px;
+  #avatarImg {
+    width: 100%;
+    max-width: 100px;
+    min-width: 100px;
     height: 100px;
     border-radius: 100%;
     object-fit: cover;
-    box-shadow: 0 0 0 1px var(--main);
+    box-shadow: 0 0 0 2px var(--main);
   }
-  img:not(#avatar) {
+  img:not(#avatarImg) {
     cursor: pointer;
+    transition: all.3s;
+    &:hover {
+      filter: hue-rotate(280deg);
+      filter: saturate(1000%) drop-shadow(0 0 5px #4441c8);
+    }
+    &:active {
+      transform: scale(0.9);
+      transition: transform 0.1s;
+    }
+  }
+`;
+
+export const UploadAvatar = styled.form`
+  position: relative;
+  button {
+    position: absolute;
+    bottom: 0px;
+    height: 20px;
+    width: 20px;
+    z-index: 10;
+  }
+  button:not(#cancelaAvatar) {
+    left: -17px;
+    background: url("/confirm-avatar.svg") no-repeat center center;
+    background-size: contain;
+  }
+  #cancelaAvatar {
+    margin-left: 12px;
+    background: url("/cancel.svg") no-repeat center center;
+    background-size: contain;
+  }
+  input {
+    display: none;
   }
 `;
 
@@ -74,6 +131,14 @@ export const ProfileBody = styled.div`
   padding: 50px 20px 30px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  @media only screen and (min-width: 630px) and (max-width: 1060px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media only screen and (max-width: 629px) {
+    grid-template-columns: 1fr;
+    padding: 50px 0 70px;
+  }
   align-items: start;
   gap: 50px;
   div {
@@ -104,6 +169,14 @@ export const ProfileUpdate = styled.form`
   display: grid;
   position: relative;
   grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  @media only screen and (min-width: 630px) and (max-width: 1060px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media only screen and (max-width: 629px) {
+    padding: 50px 0 70px;
+    grid-template-columns: 1fr;
+  }
   align-items: start;
   gap: 50px;
   div {
@@ -111,20 +184,17 @@ export const ProfileUpdate = styled.form`
     max-width: 300px;
     display: grid;
     gap: 10px;
-    label {
-      color: var(--main);
-      font-family: Audiowide;
-      font-size: 1.2rem;
-    }
-    input {
-      background-color: #dbd4ff;
+    textarea {
+      background-color: #beb1fd;
       color: var(--dark);
       outline: none;
       padding: 8px 10px 5px;
-      max-height: 37px;
+      max-height: none;
       font-weight: 600;
       border-radius: 6px;
       max-width: 300px;
+      resize: vertical;
+      min-height: 90px;
     }
   }
   button.btn {
@@ -134,11 +204,10 @@ export const ProfileUpdate = styled.form`
     transform: translate(-50%);
   }
   .addInput {
-    background: url("/cancel.svg") no-repeat center center;
+    background: url("/mais.svg") no-repeat center center;
     background-size: contain;
     height: 25px;
     width: 25px;
-    transform: rotate(45deg);
     margin: 0 auto;
   }
 `;

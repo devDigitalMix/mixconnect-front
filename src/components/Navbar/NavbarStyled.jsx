@@ -17,6 +17,12 @@ export const Header = styled.header`
     @media only screen and (max-width: 800px) {
       margin: 30px auto 60px;
     }
+    @media only screen and (max-width: 580px) {
+      margin: 30px auto 90px;
+    }
+    @media only screen and (max-width: 340px) {
+      margin: 30px auto 130px;
+    }
   }
 `;
 
@@ -53,8 +59,20 @@ export const NavMenu = styled.div`
   button {
     font-size: 1.25rem;
     font-weight: 500;
+    &::after {
+      height: 2px;
+      margin: 0 auto;
+      width: 0;
+      background-color: var(--main);
+      content: "";
+      display: block;
+      transition: 0.3s;
+    }
     &:hover {
       color: var(--main);
+      &::after {
+        width: 100%;
+      }
     }
   }
   @media only screen and (max-width: 800px) {

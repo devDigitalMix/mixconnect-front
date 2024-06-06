@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { UpdateEmployeeService } from "../../services/employeeService";
+import { updateEmployeeService } from "../../services/employeeService";
 import { UpdateForm } from "./UpdateEmployeeStyled";
 
 export function UpdateEmployee(props) {
@@ -8,7 +8,7 @@ export function UpdateEmployee(props) {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
     try {
-      await UpdateEmployeeService(data, props.id);
+      await updateEmployeeService(data, props.id);
     } catch (error) {
       console.log(error);
     }

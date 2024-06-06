@@ -2,17 +2,18 @@
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
 import React, { useContext, useEffect, useState } from "react";
-import { CardStyled } from "./CardStyled";
+import { CardContainer, CardStyled } from "./CardStyled";
 
 export function Card(props) {
   return (
-    <CardStyled>
-      <p>{props.name}</p>
-      <p>{props.desc}</p>
-      <p>{props.email}</p>
-      <p>{props.role}</p>
-      <p>{props.whats}</p>
-      {props.imgSrc && <img src={props.imgSrc} draggable="false" />}
-    </CardStyled>
+    <CardContainer>
+      <CardStyled>
+        {props.imgSrc && <img src={props.imgSrc} draggable="false" />}
+        <div>
+          <h2>{props.name}</h2>
+          <p>{props.role}</p>
+        </div>
+      </CardStyled>
+    </CardContainer>
   );
 }

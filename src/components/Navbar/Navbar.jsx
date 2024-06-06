@@ -60,7 +60,9 @@ export function Navbar() {
             </Link>
             <NavMenu>
               <button>CLIENTES</button>
-              <button>FUNCIONÁRIOS</button>
+              <Link to={"/home/employees"}>
+                <button>FUNCIONÁRIOS</button>
+              </Link>
               <button>PLAYBOOK</button>
               <button>EVENTOS</button>
               <button>LOGINS</button>

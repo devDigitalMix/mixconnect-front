@@ -1,45 +1,75 @@
 import styled from "styled-components";
 
 export const CreateEmployeeStyled = styled.section`
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2000;
-  background-color: #fff;
-  max-width: 500px;
+  background: linear-gradient(to right, #c5c3ff 0%, #a3a0f8 50%, #4441c8 100%);
+  padding: 1px;
+  max-width: 1200px;
   width: 100%;
+  margin: 0 0 20px;
+  border-radius: 12px;
+`;
+
+export const CreateForm = styled.form`
+  padding: 40px 40px 30px;
+  background-color: var(--dark);
+  width: 100%;
+  border-radius: 12px;
   display: grid;
+  position: relative;
+  .btn {
+    margin: 40px auto 0px;
+  }
+  & > img:first-child {
+    position: absolute;
+    right: 10px;
+    transition: 0.3s;
+    top: 10px;
+    cursor: pointer;
+    &:hover {
+      filter: hue-rotate(280deg);
+      filter: saturate(1000%) drop-shadow(0 0 5px #4441c8);
+    }
+    &:active {
+      transform: scale(0.9);
+      transition: transform 0.1s;
+    }
+  }
+`;
+
+export const ContainCreate = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
-  form {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  align-items: start;
+  width: 100%;
+  gap: 25px;
+  div {
     width: 100%;
-    gap: 25px;
-    label {
-      font-size: 1.1rem;
-      display: block;
-    }
-    div {
-      width: 100%;
-      display: grid;
-      justify-items: center;
-    }
-    input,
-    textarea {
-      max-width: 300px;
-      width: 100%;
-      padding: 5px;
-      margin-top: 5px;
-      border: none;
-      outline: none;
-      border-radius: 0.3em;
-      box-shadow: 0 0 0px 1px #a3a3a3;
-      &:focus {
-        box-shadow: 0 0 2px 1px var(--main);
-      }
-    }
+    display: grid;
+    max-width: 300px;
+  }
+  textarea {
+    background-color: #beb1fd;
+    color: var(--dark);
+    outline: none;
+    padding: 8px 10px 5px;
+    max-height: none;
+    font-weight: 600;
+    border-radius: 6px;
+    max-width: 300px;
+    resize: vertical;
+    min-height: 90px;
+  }
+  select {
+    background-color: #beb1fd;
+    color: var(--dark);
+    outline: none;
+    padding: 8px 10px 5px;
+    max-height: 37px;
+    font-weight: 600;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 300px;
+    resize: vertical;
   }
 `;

@@ -18,6 +18,15 @@ export function userLogged() {
   return response;
 }
 
+export function getEmployeeById(id) {
+  const response = axios.get(`${baseURL}/employee/${id}`, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
+  return response;
+}
+
 export function getAllEmployees() {
   const response = axios.get(`${baseURL}/employee`, {
     headers: {
@@ -27,18 +36,27 @@ export function getAllEmployees() {
   return response;
 }
 
-export function CreateEmployeeService(data) {
+export function createEmployeeService(data) {
   const response = axios.post(`${baseURL}/employee/create`, data);
   return response;
 }
 
-export function UpdateEmployeeService(formData, id) {
+export function updateEmployeeService(formData, id) {
   const response = axios.patch(`${baseURL}/employee/update/${id}`, formData, {
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,
     },
   });
-  console.log(response);
+  return response;
+}
+
+export function UpdateEmployeeAvatar(formData, id) {
+  const response = axios.patch(`${baseURL}/employee/upload/${id}`, formData, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
   return response;
 }
 

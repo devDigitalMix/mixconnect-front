@@ -29,9 +29,10 @@ body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
+  padding: 0 10px;
+  margin: 0;
 }
 
-body,
 h1,
 h2,
 h3,
@@ -206,4 +207,5 @@ svg path {
   }
 
 }
+
 `;

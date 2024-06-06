@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../Context/UserContent";
 import {
-  UpdateEmployeeService,
+  UpdateEmployeeAvatar,
+  updateEmployeeService,
   userLogged,
 } from "../../services/employeeService";
 import Cookies from "js-cookie";
@@ -13,13 +14,47 @@ import {
   ProfileStyled,
   ProfileUpdate,
   TopProfile,
+  UploadAvatar,
 } from "./ProfileStyled";
+import { Input } from "../../components/Input/Input";
 
 export default function Profile() {
   const { user, setUser } = useContext(UserContext);
   const [update, setUpdate] = useState(false);
+  const [updateAvatar, setUpdateAvatar] = useState(false);
   const [socialMedia, setSocialMedia] = useState(user.socialMedia || []);
   const [musicLink, setMusicLink] = useState(user.music || "");
+
+  async function handleUpdateAvatar(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData.entries());
+    const allowedFormats = [
+      "image/png",
+      "image/jpeg",
+      "image/jpg",
+      "image/webp",
+      "image/svg+xml",
+    ];
+    if (!allowedFormats.includes(data.avatar.type)) {
+      alert("Formato de arquivo não permitido.");
+      return;
+    }
+
+    try {
+      await UpdateEmployeeAvatar(data, user._id);
+      setUpdateAvatar(!updateAvatar);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function updateAvatarClick(e) {
+    if (update && e.target == document.getElementById("cancelaAvatar")) {
+      setUpdateAvatar(!updateAvatar);
+    }
+    setUpdateAvatar(!updateAvatar);
+  }
 
   const getSpotifyTrackId = (url) => {
     if (url) {
@@ -47,13 +82,25 @@ export default function Profile() {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
-    data.socialMedia = socialMedia.filter((item) => item.trim() !== ""); // Remove entradas vazias
+    data.socialMedia = socialMedia.filter((item) => item.trim() !== "");
+    if (!data.birthday) {
+      data.birthday = user.birthday;
+    }
     try {
-      await UpdateEmployeeService(data, user._id);
+      await updateEmployeeService(data, user._id);
       setUpdate(!update);
     } catch (error) {
       console.log(error);
     }
+  }
+
+  function formatDate(data) {
+    const date = new Date(data);
+    const dia = String(date.getDate() + 1).padStart(2, "0");
+    const mes = String(date.getMonth() + 1).padStart(2, "0");
+    const ano = date.getFullYear();
+    const dataAtt = `${dia}/${mes}/${ano}`;
+    return dataAtt;
   }
 
   async function findUserLogged() {
@@ -67,9 +114,13 @@ export default function Profile() {
 
   useEffect(() => {
     if (Cookies.get("token")) findUserLogged();
-    getSpotifyTrackId(user.music);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [handleUpdate]);
+  }, [update, updateAvatar]);
+
+  useEffect(() => {
+    if (user.music) {
+      getSpotifyTrackId(user.music);
+    }
+  }, [user.music]);
 
   return (
     <>
@@ -95,10 +146,32 @@ export default function Profile() {
               <img
                 src={user.avatar ? user.avatar : "/avatar-default.png"}
                 alt="avatar"
-                id="avatar"
+                id="avatarImg"
                 draggable="false"
               />
-              <img src="/upload-avatar.svg" alt="Upload" draggable="false" />
+              <UploadAvatar
+                onSubmit={handleUpdateAvatar}
+                encType="multipart/form-data"
+              >
+                <label htmlFor="avatar" onClick={updateAvatarClick}>
+                  <img
+                    src="/upload-avatar.svg"
+                    alt="Upload"
+                    draggable="false"
+                    style={updateAvatar ? { opacity: 0 } : {}}
+                  />
+                </label>
+                {updateAvatar && (
+                  <>
+                    <button type="submit"></button>
+                    <button
+                      id="cancelaAvatar"
+                      onClick={updateAvatarClick}
+                    ></button>
+                  </>
+                )}
+                <input type="file" name="avatar" id="avatar" />
+              </UploadAvatar>
             </ProfileAvatar>
             <ProfileData>
               <h4>{user.level}</h4>
@@ -107,17 +180,10 @@ export default function Profile() {
             </ProfileData>
             {musicLink != "" && (
               <iframe
-                style={{
-                  borderRadius: 12,
-                  maxWidth: 300,
-                  marginLeft: "auto",
-                  marginRight: 40,
-                }}
-                src={`https://open.spotify.com/embed/track/${musicLink}?utm_source=generator`}
+                src={`https://open.spotify.com/embed/track/${musicLink}`}
                 width="100%"
                 height="152"
                 frameBorder="0"
-                allowfullscreen=""
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                 loading="lazy"
               ></iframe>
@@ -127,36 +193,40 @@ export default function Profile() {
             <>
               <ProfileUpdate onSubmit={handleUpdate}>
                 <div>
+                  <label htmlFor="name">Nome:</label>
+                  <Input type="text" name="name" defaultValue={user.name} />
+                </div>
+                <div>
                   <label htmlFor="role">Cargo:</label>
-                  <input type="text" name="role" defaultValue={user.role} />
+                  <Input type="text" name="role" defaultValue={user.role} />
                 </div>
                 <div>
                   <label htmlFor="desc">Descrição:</label>
-                  <input type="text" name="desc" defaultValue={user.desc} />
+                  <textarea
+                    type="text"
+                    name="desc"
+                    defaultValue={user.desc}
+                  ></textarea>
                 </div>
                 <div>
                   <label htmlFor="birthday">Aniversário:</label>
-                  <input
-                    type="text"
+                  <Input
+                    type="date"
                     name="birthday"
                     defaultValue={user.birthday}
                   />
                 </div>
                 <div>
                   <label htmlFor="whatsapp">Whatsapp:</label>
-                  <input
+                  <Input
                     type="text"
                     name="whatsapp"
                     defaultValue={user.whatsapp}
                   />
                 </div>
                 <div>
-                  <label htmlFor="name">Nome:</label>
-                  <input type="text" name="name" defaultValue={user.name} />
-                </div>
-                <div>
                   <label htmlFor="music">Link da Música:</label>
-                  <input type="text" name="music" defaultValue={user.music} />
+                  <Input type="text" name="music" defaultValue={user.music} />
                 </div>
                 <div>
                   <label htmlFor="socialMedia">Redes Sociais:</label>
@@ -165,7 +235,7 @@ export default function Profile() {
                       key={index}
                       style={{ display: "flex", alignItems: "center" }}
                     >
-                      <input
+                      <Input
                         type="text"
                         name={`socialMedia-${index}`}
                         value={item}
@@ -196,7 +266,7 @@ export default function Profile() {
               </div>
               <div>
                 <h4>Aniversário:</h4>
-                <p>{user.birthday}</p>
+                <p>{formatDate(user.birthday)}</p>
               </div>
               <div>
                 <h4>Whatsapp:</h4>

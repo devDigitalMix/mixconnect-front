@@ -1,31 +1,20 @@
 import styled from "styled-components";
 
-export const HomeBody = styled.section`
-  max-width: 1200px;
-  padding: 50px 20px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  align-items: center;
-  gap: 1rem;
-`;
-
-export const HomeHeader = styled.section`
-  max-width: 1200px;
+export const HomeContainer = styled.section`
+  background: linear-gradient(to right, #c5c3ff 0%, #a3a0f8 50%, #4441c8 100%);
+  border-radius: 12px;
+  padding: 1px;
   width: 100%;
-  padding: 50px 20px 0px;
-  margin: 0 auto;
+  max-width: 1200px;
+  margin: 0 0 50px;
+  @media only screen and (max-width: 610px) {
+    margin: 50px 0 50px;
+  }
 `;
 
-export const EmployeeContainer = styled.article``;
-
-export const EmployeeBtns = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 10px;
-  button {
-    padding: 8px 10px 5px;
-    border-radius: 5px;
-  }
+export const HomeBody = styled.section`
+  background-color: var(--dark);
+  border-radius: 12px;
+  padding: 20px;
+  width: 100%;
 `;

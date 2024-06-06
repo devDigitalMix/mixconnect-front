@@ -8,6 +8,8 @@ import { GlobalStyled } from "./GlobalStyled.jsx";
 import { Authentication } from "./pages/Authentication/Authentication.jsx";
 import UserProvider from "./Context/UserContent.jsx";
 import Profile from "./pages/Profile/Profile.jsx";
+import Employees from "./pages/Employees/Employees.jsx";
+import { Employee } from "./pages/Employee/Employee.jsx";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +23,14 @@ const router = createBrowserRouter([
       {
         path: "/home/profile",
         element: <Profile />,
+      },
+      {
+        path: "/home/employees",
+        element: <Employees />,
+      },
+      {
+        path: "/home/employee/:id",
+        element: <Employee />,
       },
     ],
   },

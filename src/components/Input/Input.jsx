@@ -2,12 +2,33 @@
 /* eslint-disable react/prop-types */
 import { InputSpace } from "./InputStyled";
 
-export function Input({ type, placeholder, name, register }) {
-  return (
-    <InputSpace
-      type={type}
-      placeholder={placeholder}
-      {...register(name)}
-    ></InputSpace>
-  );
+export function Input({
+  type,
+  placeholder,
+  name,
+  id,
+  required,
+  defaultValue,
+  value,
+  onChange,
+  autoComplete,
+  style,
+  readOnly,
+  register,
+}) {
+  const inputProps = {
+    type,
+    placeholder,
+    name,
+    id,
+    required,
+    defaultValue,
+    value,
+    onChange,
+    autoComplete,
+    style,
+    readOnly,
+  };
+
+  return <InputSpace {...inputProps} {...(register ? register(name) : {})} />;
 }
