@@ -21,7 +21,9 @@ export const CardStyled = styled.div`
     justify-content: center;
     flex-direction: column;
     h2 {
-      font-size: 1.125rem;
+      font-size: 1rem;
+      font-family: var(--font);
+      text-transform: uppercase;
     }
     p {
       color: var(--main);

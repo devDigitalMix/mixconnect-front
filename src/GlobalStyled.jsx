@@ -6,15 +6,29 @@ export const GlobalStyled = createGlobalStyle`
 :root {
   --main: #807DF0;
   --light: #F9F8FE;
+  --sec: #76ffbd;
   --gray: #eeeeee;
+  --danger: #D20E0E;
   --dark: #141415;
+  --font: Audiowide;
+  --linear: linear-gradient(
+      to right,
+      #c5c3ff 0%,
+      #a3a0f8 50%,
+      #4441c8 100%
+    );;
+}
+::selection {
+  background-color: var(--main);
+  color: var(--light);
 }
 html {
   box-sizing: border-box;
   scroll-behavior: smooth;
+  background-color: var(--dark);
   cursor: default;
-  background: url("/bg.webp") no-repeat center center;
-  background-size: cover;
+  /* background: url("/bg.webp") no-repeat center center; */
+  /* background-size: cover; */
   color: var(--light);
   font-family: 'Epilogue', sans-serif;
 }
@@ -24,15 +38,45 @@ html {
 *::after {
   box-sizing: inherit;
 }
-
+#bolinha {
+  display: block;
+  background-color: var(--main);
+  width: 10px;
+  transition: all.1s ease;
+  border-radius: 90px;
+  height: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
   padding: 0 10px;
   margin: 0;
+  position: relative;
 }
-
+#roxo {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  height: 1px;
+  width: 1px;
+  box-shadow: 0 0 300px 150px var(--main);
+}
+#verde {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  height: 1px;
+  width: 1px;
+  box-shadow: 0 0 300px 100px #76FFBD;
+}
 h1,
 h2,
 h3,
@@ -194,18 +238,48 @@ svg path {
  align-items: center;
 }
 .btn {
-  background-color: var(--main);
+  background: linear-gradient(to left, #C5C3FF 0%, #A3A0F8 49%, #4441C8 100%);
   max-width: fit-content;
   margin: 0 auto;
   padding: 7px 15px;
-  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1.25rem;
+  border-radius: 10px;
   color: var(--light);
-  border: 1px solid var(--main);
+  box-shadow: 0 0 0 0px var(--light) inset;
   &:hover {
-    background-color: var(--light);
     color: var(--main);
+    box-shadow: 0 0 30px 20px var(--light) inset;
   }
+}
+.danger {
+  background: var(--danger);&:hover {
+    color: var(--danger);
+    box-shadow: 0 0 30px 20px var(--light) inset;
+  }
+}
+.neutral {
+  background: var(--dark);
+  box-shadow: 0 0 0 2px var(--main) inset;
+  color: var(--main);
+  &:hover {
+    color: var(--light);
+    box-shadow: 0 0 30px 20px var(--main) inset;
+  }
+}
 
+.img-effect {
+  cursor: pointer;
+    transition: all.3s;
+    &:hover {
+      filter: hue-rotate(280deg);
+      filter: saturate(1000%) drop-shadow(0 0 5px #4441c8);
+    }
+    &:active {
+      transform: scale(0.9);
+      transition: transform 0.1s;
+    }
 }
 
 `;

@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import {
   deleteEmployee,
   getAllEmployees,
+  getEmployeesByName,
   userLogged,
 } from "../../services/employeeService.js";
 import { Card } from "../../components/Card/Card.jsx";
@@ -12,19 +13,52 @@ import {
   EmployeeBody,
   EmployeeContainer,
   EmployeesHeader,
+  Felipe,
 } from "./EmployeesStyled.jsx";
 import { Link } from "react-router-dom";
 import { Input } from "../../components/Input/Input.jsx";
 import { UserContext } from "../../Context/UserContent.jsx";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { InputNav } from "../../components/Navbar/NavbarStyled.jsx";
+import { searchSchema } from "../../schemas/searchSchema.js";
 
 export default function Employees() {
   const { user, setUser } = useContext(UserContext);
   const [employees, setEmployees] = useState([]);
   const [createEmployeeModal, setCreateEmployeeModal] = useState(false);
+  const [search, setSearch] = useState(false);
+  const [felipe, setFelipe] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(searchSchema),
+  });
+
+  async function onSearch(data) {
+    const { name } = data;
+    const validNames = ["fe", "fel", "feli", "felip", "felipe"];
+
+    if (validNames.includes(name.toLowerCase())) {
+      setFelipe(true);
+    } else {
+      setFelipe(false);
+    }
+    const response = await getEmployeesByName(name);
+    setEmployees(response.data.results);
+    setSearch(true);
+    reset();
+  }
 
   async function getEmployees() {
     const response = await getAllEmployees();
     setEmployees(response.data.results);
+    setSearch(false);
+    setFelipe(false);
   }
 
   function handleClickCreate() {
@@ -48,19 +82,47 @@ export default function Employees() {
   return (
     <>
       <EmployeesHeader>
+        {felipe && (
+          <Felipe>
+            <h2>O Felipe é calvo</h2>
+            <img src="/felipe.jpg" />
+          </Felipe>
+        )}
         {(user.level == "lider" || user.level == "adm") && (
           <img
             src="/mais.svg"
             alt="Novo funcionário"
+            title="Novo funcionário"
+            className="img-effect"
             onClick={handleClickCreate}
           />
         )}
-        <Input type="text" placeholder="Procurar Funcionário" />
+        <form onSubmit={handleSubmit(onSearch)}>
+          {search && (
+            <img
+              src="/no-filter.svg"
+              alt="desfazer filtro"
+              title="Desfazer Filtro"
+              className="img-effect"
+              onClick={getEmployees}
+            />
+          )}
+          <InputNav className="input-search-space">
+            <button type="submit">
+              <i className="bi bi-search"></i>
+            </button>
+            <input
+              {...register("name")}
+              type="text"
+              placeholder="Procurar Funcionário"
+            />
+          </InputNav>
+        </form>
       </EmployeesHeader>
       {createEmployeeModal && (
         <CreateEmployee
           func={handleClickCreate}
-          updateEmployees={getEmployees} // Passe a função para atualizar os funcionários
+          updateEmployees={getEmployees}
         />
       )}
       <EmployeeBody>

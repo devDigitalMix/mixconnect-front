@@ -9,6 +9,7 @@ import Cookies from "js-cookie";
 import {
   ProfileAvatar,
   ProfileBody,
+  ProfileBottom,
   ProfileContainer,
   ProfileData,
   ProfileStyled,
@@ -17,6 +18,7 @@ import {
   UploadAvatar,
 } from "./ProfileStyled";
 import { Input } from "../../components/Input/Input";
+import { Link } from "react-router-dom";
 
 export default function Profile() {
   const { user, setUser } = useContext(UserContext);
@@ -24,6 +26,8 @@ export default function Profile() {
   const [updateAvatar, setUpdateAvatar] = useState(false);
   const [socialMedia, setSocialMedia] = useState(user.socialMedia || []);
   const [musicLink, setMusicLink] = useState(user.music || "");
+
+  var cont = 0;
 
   async function handleUpdateAvatar(event) {
     event.preventDefault();
@@ -76,6 +80,13 @@ export default function Profile() {
   function updateForm() {
     setUpdate(!update);
     setSocialMedia(user.socialMedia || []); // Atualiza o estado quando o formulário é aberto
+  }
+
+  function mamao() {
+    if (cont >= 9) {
+      alert("O Felipe é calvo");
+    }
+    cont++;
   }
 
   async function handleUpdate(event) {
@@ -174,7 +185,7 @@ export default function Profile() {
               </UploadAvatar>
             </ProfileAvatar>
             <ProfileData>
-              <h4>{user.level}</h4>
+              <h4 onClick={mamao}>{user.level}</h4>
               <h2>{user.name}</h2>
               <h3>{user.email}</h3>
             </ProfileData>
@@ -255,32 +266,39 @@ export default function Profile() {
               </ProfileUpdate>
             </>
           ) : (
-            <ProfileBody>
-              <div>
-                <h4>Cargo:</h4>
-                <p>{user.role}</p>
-              </div>
-              <div>
-                <h4>Descrição:</h4>
-                <p>{user.desc}</p>
-              </div>
-              <div>
-                <h4>Aniversário:</h4>
-                <p>{formatDate(user.birthday)}</p>
-              </div>
-              <div>
-                <h4>Whatsapp:</h4>
-                <p>{user.whatsapp}</p>
-              </div>
-              <div>
-                <h4>Redes Sociais:</h4>
-                {user.socialMedia
-                  ? user.socialMedia.map((item, index) => (
-                      <p key={index}>{item}</p>
-                    ))
-                  : null}
-              </div>
-            </ProfileBody>
+            <>
+              <ProfileBody>
+                <div>
+                  <h4>Cargo:</h4>
+                  <p>{user.role}</p>
+                </div>
+                <div>
+                  <h4>Descrição:</h4>
+                  <p>{user.desc}</p>
+                </div>
+                <div>
+                  <h4>Aniversário:</h4>
+                  <p>{formatDate(user.birthday)}</p>
+                </div>
+                <div>
+                  <h4>Whatsapp:</h4>
+                  <p>{user.whatsapp}</p>
+                </div>
+                <div>
+                  <h4>Redes Sociais:</h4>
+                  {user.socialMedia
+                    ? user.socialMedia.map((item, index) => (
+                        <p key={index}>{item}</p>
+                      ))
+                    : null}
+                </div>
+              </ProfileBody>
+              <ProfileBottom>
+                <Link to={`/home/chores/`}>
+                  <button className="btn">TAREFAS</button>
+                </Link>
+              </ProfileBottom>
+            </>
           )}
         </ProfileStyled>
       </ProfileContainer>

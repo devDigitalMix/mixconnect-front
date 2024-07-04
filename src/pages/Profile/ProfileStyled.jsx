@@ -58,6 +58,12 @@ export const TopProfile = styled.div`
       margin-right: auto;
     }
   }
+  .voltar {
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    max-width: 23px;
+  }
 `;
 
 export const ProfileAvatar = styled.div`
@@ -116,6 +122,7 @@ export const ProfileData = styled.div`
   gap: 1px;
   h2 {
     font-size: 1.4rem;
+    font-family: var(--font);
   }
   h3 {
     font-size: 0.9rem;
@@ -210,4 +217,8 @@ export const ProfileUpdate = styled.form`
     width: 25px;
     margin: 0 auto;
   }
+`;
+export const ProfileBottom = styled.div`
+  display: flex;
+  justify-content: center;
 `;

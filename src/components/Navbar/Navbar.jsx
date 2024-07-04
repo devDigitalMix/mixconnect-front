@@ -59,13 +59,15 @@ export function Navbar() {
               <img src="/logo.svg" alt="MixConnect" draggable="false" />
             </Link>
             <NavMenu>
-              <button>CLIENTES</button>
+              <Link to={"/home/clients"}>
+                <button>CLIENTES</button>
+              </Link>
               <Link to={"/home/employees"}>
                 <button>FUNCIONÁRIOS</button>
               </Link>
               <button>PLAYBOOK</button>
-              <button>EVENTOS</button>
-              <button>LOGINS</button>
+              <button>PLANOS</button>
+              <button>ACESSOS</button>
             </NavMenu>
             <Link to={"/home/profile"}>
               <img src={user.avatar} id="perfil-img" draggable="false" />

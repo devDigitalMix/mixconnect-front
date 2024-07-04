@@ -19,7 +19,6 @@ export function CreateEmployee(props) {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
 
-    // Verificação dos campos necessários
     const requiredFields = [
       "name",
       "role",

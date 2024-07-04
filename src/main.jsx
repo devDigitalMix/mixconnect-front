@@ -10,6 +10,9 @@ import UserProvider from "./Context/UserContent.jsx";
 import Profile from "./pages/Profile/Profile.jsx";
 import Employees from "./pages/Employees/Employees.jsx";
 import { Employee } from "./pages/Employee/Employee.jsx";
+import { Chores } from "./pages/Chores/Chores.jsx";
+import { ChoreTasks } from "./pages/ChoreTasks/ChoreTasks.jsx";
+import { Clients } from "./pages/Clients/Clients.jsx";
 
 const router = createBrowserRouter([
   {
@@ -25,12 +28,24 @@ const router = createBrowserRouter([
         element: <Profile />,
       },
       {
+        path: "/home/clients",
+        element: <Clients />,
+      },
+      {
         path: "/home/employees",
         element: <Employees />,
       },
       {
         path: "/home/employee/:id",
         element: <Employee />,
+      },
+      {
+        path: "/home/chores/",
+        element: <Chores />,
+      },
+      {
+        path: "/home/chores/:id",
+        element: <ChoreTasks />,
       },
     ],
   },

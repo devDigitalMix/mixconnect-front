@@ -36,6 +36,15 @@ export function getAllEmployees() {
   return response;
 }
 
+export function getEmployeesByName(name) {
+  const response = axios.get(`${baseURL}/employee/search?name=${name}`, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
+  return response;
+}
+
 export function createEmployeeService(data) {
   const response = axios.post(`${baseURL}/employee/create`, data);
   return response;
@@ -67,4 +76,30 @@ export function deleteEmployee(id) {
     },
   });
   return response;
+}
+
+export async function createchore(id, data) {
+  console.log(data);
+  const response = await axios.patch(
+    `${baseURL}/employee/${id}/createChore/`,
+    data,
+    {
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+    }
+  );
+  return response;
+}
+
+export async function excludeChore(userId, choreId) {
+  const response = await axios.patch(
+    `${baseURL}/employee/deleteChore/${userId}/choreId/${choreId}`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+    }
+  );
 }

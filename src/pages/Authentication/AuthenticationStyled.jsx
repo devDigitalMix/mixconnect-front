@@ -34,6 +34,10 @@ export const AuthContainer = styled.div`
       font-size: 1.25rem;
       max-width: fit-content;
     }
+    input {
+      width: 100%;
+      max-width: none;
+    }
   }
 `;
 

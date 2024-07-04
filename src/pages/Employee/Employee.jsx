@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import {
   ProfileAvatar,
@@ -21,6 +21,8 @@ import { UserContext } from "../../Context/UserContent";
 import { TopButtons } from "./EmployeeStyled";
 import { Delete } from "../../components/Delete/Delete";
 import { Input } from "../../components/Input/Input";
+import { Label } from "../../components/Label/Label";
+import { ErrorSpan } from "../../components/ErrorSpan/ErrorSpan";
 
 export function Employee() {
   const { id } = useParams();
@@ -31,6 +33,8 @@ export function Employee() {
   const [socialMedia, setSocialMedia] = useState(employee.socialMedia || []);
   const [musicLink, setMusicLink] = useState(employee.music || "");
   const [deleteClick, setDeleteClick] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorText, setErrorText] = useState("");
 
   function handleDeleteClick() {
     setDeleteClick(!deleteClick);
@@ -64,8 +68,12 @@ export function Employee() {
     try {
       await UpdateEmployeeAvatar(data, employee.id);
       setUpdateAvatar(!updateAvatar);
+      if (error) {
+        setError(false);
+      }
     } catch (error) {
-      console.log(error);
+      setError(true);
+      setErrorText(error.response.data);
     }
   }
 
@@ -95,7 +103,7 @@ export function Employee() {
 
   function updateForm() {
     setUpdate(!update);
-    setSocialMedia(employee.socialMedia || []); // Atualiza o estado quando o formulário é aberto
+    setSocialMedia(employee.socialMedia || []);
   }
 
   async function handleUpdate(event) {
@@ -105,6 +113,24 @@ export function Employee() {
     data.socialMedia = socialMedia.filter((item) => item.trim() !== "");
     if (!data.birthday) {
       data.birthday = employee.birthday;
+    }
+    const requiredFields = ["name", "role", "whatsapp", "desc"];
+    for (let field of requiredFields) {
+      if (!data[field] || data[field].trim() === "") {
+        setError(true);
+        if (field === "name") {
+          setErrorText(`Por favor, preencha o campo Nome corretamente.`);
+        } else if (field === "role") {
+          setErrorText(`Por favor, preencha o campo Cargo corretamente.`);
+        } else if (field === "password") {
+          setErrorText(`Por favor, preencha o campo Senha corretamente.`);
+        } else if (field === "desc") {
+          setErrorText(`Por favor, preencha o campo Descrição corretamente.`);
+        } else {
+          setErrorText(`Por favor, preencha o campo ${field} corretamente.`);
+        }
+        return;
+      }
     }
     try {
       await updateEmployeeService(data, employee.id);
@@ -154,12 +180,18 @@ export function Employee() {
         )}
         {(user.level == "lider" || user.level == "adm") && (
           <TopButtons>
-            <img src="/exclude.svg" alt="excluir" onClick={handleDeleteClick} />
+            <img
+              src="/exclude.svg"
+              alt="excluir"
+              className="img-effect"
+              onClick={handleDeleteClick}
+            />
             {!update ? (
               <img
                 src="/update-profile.svg"
                 alt="update"
                 draggable="false"
+                className="img-effect"
                 onClick={updateForm}
               />
             ) : (
@@ -167,12 +199,16 @@ export function Employee() {
                 src="/cancel.svg"
                 alt="cancel"
                 draggable="false"
+                className="img-effect"
                 onClick={updateForm}
               />
             )}
           </TopButtons>
         )}
         <TopProfile>
+          <Link to={"/home/employees"}>
+            <img src="/cancel.svg" alt="voltar" className="voltar img-effect" />
+          </Link>
           <ProfileAvatar>
             <img
               src={employee.avatar ? employee.avatar : "/avatar-default.png"}
@@ -222,17 +258,18 @@ export function Employee() {
         </TopProfile>
         {update ? (
           <>
+            {error && <ErrorSpan text={errorText} />}
             <ProfileUpdate onSubmit={handleUpdate}>
               <div>
-                <label htmlFor="name">Nome:</label>
+                <Label htmlFor="name" text="Nome:" />
                 <Input type="text" name="name" defaultValue={employee.name} />
               </div>
               <div>
-                <label htmlFor="role">Cargo:</label>
+                <Label htmlFor="role" text="Cargo:" />
                 <Input type="text" name="role" defaultValue={employee.role} />
               </div>
               <div>
-                <label htmlFor="desc">Descrição:</label>
+                <Label htmlFor="desc" text="Descrição:" />
                 <textarea
                   type="text"
                   name="desc"
@@ -240,7 +277,7 @@ export function Employee() {
                 ></textarea>
               </div>
               <div>
-                <label htmlFor="birthday">Aniversário:</label>
+                <Label htmlFor="birthday" text="Aniversário:" />
                 <Input
                   type="date"
                   name="birthday"
@@ -248,7 +285,7 @@ export function Employee() {
                 />
               </div>
               <div>
-                <label htmlFor="whatsapp">Whatsapp:</label>
+                <Label htmlFor="whatsapp" text="Whatsapp:" />
                 <Input
                   type="text"
                   name="whatsapp"
@@ -256,11 +293,11 @@ export function Employee() {
                 />
               </div>
               <div>
-                <label htmlFor="music">Link da Música:</label>
+                <Label htmlFor="music" text="Link da Música:" />
                 <Input type="text" name="music" defaultValue={employee.music} />
               </div>
               <div>
-                <label htmlFor="socialMedia">Redes Sociais:</label>
+                <Label htmlFor="socialMedia" text="Redes Sociais:" />
                 {socialMedia.map((item, index) => (
                   <div
                     key={index}

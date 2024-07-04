@@ -27,16 +27,28 @@ export const EmployeesHeader = styled.div`
   input {
     margin-left: auto;
   }
-  & > img:first-child {
-    transition: all.3s;
-    cursor: pointer;
-    &:hover {
-      filter: hue-rotate(280deg);
-      filter: saturate(1000%) drop-shadow(0 0 5px #4441c8);
-    }
-    &:active {
-      transform: scale(0.9);
-      transition: transform 0.1s;
+  form {
+    display: flex;
+    gap: 10px;
+  }
+`;
+
+export const Felipe = styled.div`
+  position: absolute;
+  font-size: 3rem;
+  left: 50%;
+  transform: translate(-50%);
+  display: grid;
+  justify-items: center;
+  z-index: 10;
+  filter: drop-shadow(0 0 20px var(--main));
+  img {
+    box-shadow: 0 0 30px 2px var(--main);
+  }
+  animation: pisca 1s infinite;
+  @keyframes pisca {
+    50% {
+      filter: drop-shadow(0 0 50px var(--main));
     }
   }
 `;

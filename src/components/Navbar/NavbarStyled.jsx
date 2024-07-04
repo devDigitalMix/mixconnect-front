@@ -57,8 +57,9 @@ export const NavMenu = styled.div`
   align-items: center;
   gap: 5px 20px;
   button {
-    font-size: 1.25rem;
+    font-size: 1.05rem;
     font-weight: 500;
+    font-family: var(--font);
     &::after {
       height: 2px;
       margin: 0 auto;
@@ -97,4 +98,19 @@ export const ErrorSpan = styled.span`
   justify-content: center;
   font-size: 1rem;
   border-radius: 7px;
+`;
+
+export const InputNav = styled.div`
+  input {
+    background-color: #beb1fd !important;
+    color: var(--dark);
+    outline: none;
+    padding: 8px 10px 5px;
+    max-height: 37px;
+    font-weight: 600;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 300px;
+    resize: vertical;
+  }
 `;
