@@ -43,5 +43,13 @@ export async function deleteTaskService(choreId, taskId) {
       },
     }
   );
-  console.log(response);
+}
+
+export async function updateChoreTitleService(id, data) {
+  const response = await axios.patch(`${baseURL}/chore/update/${id}`, data, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
+  return response;
 }

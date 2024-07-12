@@ -104,9 +104,13 @@ export function Chores() {
         </CreateChoreModal>
       )}
       <ChoresContent>
-        {chores.length > 0 ? (
+        {chores.length > 0 && chores[0]._id ? (
           chores.map((chore) => (
-            <Link key={chore._id} to={"/home/chores/" + chore._id}>
+            <Link
+              key={chore._id}
+              style={chore._id ? { display: "flex" } : { display: "none" }}
+              to={"/home/chores/" + chore._id}
+            >
               <h2>{chore.title}</h2>
             </Link>
           ))

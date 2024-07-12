@@ -192,7 +192,7 @@ export const ProfileUpdate = styled.form`
     display: grid;
     gap: 10px;
     textarea {
-      background-color: #beb1fd;
+      background-color: #f8f8f8;
       color: var(--dark);
       outline: none;
       padding: 8px 10px 5px;

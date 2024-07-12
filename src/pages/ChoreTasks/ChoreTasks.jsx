@@ -3,10 +3,12 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   createTaskService,
   getChoreById,
+  updateChoreTitleService,
   //   updateTaskState,
 } from "../../services/choreService";
 import Cookies from "js-cookie";
 import {
+  ChoreTaskBtn2,
   ChoreTasksBody,
   ChoreTasksButtons,
   ChoreTasksHeader,
@@ -46,6 +48,18 @@ export function ChoreTasks() {
   async function handleExcludeChore() {
     await excludeChore(user._id, chore._id);
     navigate("/home/chores");
+  }
+
+  async function updateChoreTitle(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData.entries());
+    if (!data.title || data.title.trim() === "") {
+      alert("O campo está vazio ou contém apenas espaços.");
+      return;
+    }
+    await updateChoreTitleService(id, data);
+    getChore();
   }
 
   async function handleCreateTask(event) {
@@ -112,12 +126,6 @@ export function ChoreTasks() {
         </CreateTaskModalStyled>
       )}
       <ChoreTasksHeader>
-        <img
-          src="/exclude.svg"
-          alt="excluir"
-          title="Excluir Trabalho"
-          onClick={excludeChoreClick}
-        />
         <ChoreTasksButtons>
           <Link to="/home/chores/">
             <img
@@ -135,7 +143,23 @@ export function ChoreTasks() {
             onClick={handleClickCreate}
           />
         </ChoreTasksButtons>
-        <h4>{chore.title}</h4>
+        <form onSubmit={updateChoreTitle}>
+          <input
+            type="text"
+            name="title"
+            id="titleUpdate"
+            defaultValue={chore.title}
+          />
+        </form>
+        <ChoreTaskBtn2>
+          <img
+            src="/exclude.svg"
+            alt="excluir"
+            title="Excluir Trabalho"
+            className="img-effect"
+            onClick={excludeChoreClick}
+          />
+        </ChoreTaskBtn2>
       </ChoreTasksHeader>
       <ChoreTasksBody>
         {chore.tasks

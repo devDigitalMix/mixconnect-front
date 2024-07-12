@@ -13,6 +13,7 @@ import { Employee } from "./pages/Employee/Employee.jsx";
 import { Chores } from "./pages/Chores/Chores.jsx";
 import { ChoreTasks } from "./pages/ChoreTasks/ChoreTasks.jsx";
 import { Clients } from "./pages/Clients/Clients.jsx";
+import Plans from "./pages/Plans/Plans.jsx";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "/home/chores/:id",
         element: <ChoreTasks />,
+      },
+      {
+        path: "/home/plans",
+        element: <Plans />,
       },
     ],
   },

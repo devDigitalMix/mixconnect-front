@@ -13,6 +13,16 @@ export const ChoreTasksHeader = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  #titleUpdate {
+    max-width: fit-content;
+    min-width: 0;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 1.5rem;
+    text-align: center;
+    border-bottom: 2px solid var(--main);
+  }
   h4 {
     font-size: 1.5rem;
     text-align: center;
@@ -82,4 +92,13 @@ export const ExcludeChoreModal = styled.div`
     display: flex;
     gap: 15px;
   }
+`;
+
+export const ChoreTaskBtn2 = styled.div`
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  gap: 10px;
 `;

@@ -102,7 +102,7 @@ export const ErrorSpan = styled.span`
 
 export const InputNav = styled.div`
   input {
-    background-color: #beb1fd !important;
+    background-color: #f9f8fe !important;
     color: var(--dark);
     outline: none;
     padding: 8px 10px 5px;
@@ -112,5 +112,8 @@ export const InputNav = styled.div`
     width: 100%;
     max-width: 300px;
     resize: vertical;
+    &::placeholder {
+      font-style: italic;
+    }
   }
 `;

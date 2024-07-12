@@ -66,7 +66,9 @@ export function Navbar() {
                 <button>FUNCIONÁRIOS</button>
               </Link>
               <button>PLAYBOOK</button>
-              <button>PLANOS</button>
+              <Link to={"/home/plans"}>
+                <button>PLANOS</button>
+              </Link>
               <button>ACESSOS</button>
             </NavMenu>
             <Link to={"/home/profile"}>
