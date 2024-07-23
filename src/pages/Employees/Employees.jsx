@@ -126,22 +126,21 @@ export default function Employees() {
         />
       )}
       <EmployeeBody>
-        {employees
-          ? employees.map((item) => (
-              <Link key={item.id} to={"/home/employee/" + item.id}>
-                <EmployeeContainer>
-                  <Card
-                    name={item.name}
-                    desc={item.desc}
-                    email={item.email}
-                    role={item.role}
-                    whats={item.whatsapp}
-                    imgSrc={item.avatar}
-                  />
-                </EmployeeContainer>
-              </Link>
-            ))
-          : null}
+        {employees &&
+          employees.map((item) => (
+            <Link key={item.id} to={"/home/employee/" + item.id}>
+              <EmployeeContainer>
+                <Card
+                  name={item.name}
+                  desc={item.desc}
+                  email={item.email}
+                  role={item.role}
+                  whats={item.whatsapp}
+                  imgSrc={item.avatar}
+                />
+              </EmployeeContainer>
+            </Link>
+          ))}
       </EmployeeBody>
     </>
   );

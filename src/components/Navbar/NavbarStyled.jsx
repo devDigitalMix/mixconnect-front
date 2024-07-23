@@ -46,8 +46,11 @@ export const Nav = styled.nav`
     cursor: pointer;
     box-shadow: 0 0 0 1px var(--main);
   }
-  @media only screen and (max-width: 800px) {
-    border-radius: 12px 12px 0 0;
+  @media only screen and (max-width: 875px) {
+    padding-bottom: 80px;
+  }
+  @media only screen and (max-width: 360px) {
+    padding-bottom: 120px;
   }
 `;
 export const NavMenu = styled.div`
@@ -76,16 +79,21 @@ export const NavMenu = styled.div`
       }
     }
   }
-  @media only screen and (max-width: 800px) {
-    background-color: var(--dark);
-    box-shadow: 0 1px 0 var(--main);
-    border-radius: 0 0 12px 12px;
+  @media only screen and (max-width: 875px) {
     padding: 10px 5px;
     position: absolute;
     width: 100%;
     bottom: 0px;
     left: 50%;
-    transform: translate(-50%, 100%);
+    transform: translate(-50%);
+  }
+  @media only screen and (max-width: 365px) {
+    padding: 10px 5px;
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    left: 50%;
+    transform: translate(-50%);
   }
 `;
 

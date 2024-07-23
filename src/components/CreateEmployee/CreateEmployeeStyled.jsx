@@ -49,7 +49,7 @@ export const ContainCreate = styled.div`
     max-width: 300px;
   }
   textarea {
-    background-color: #beb1fd;
+    background-color: #f9f8fe;
     color: var(--dark);
     outline: none;
     padding: 8px 10px 5px;
@@ -61,7 +61,7 @@ export const ContainCreate = styled.div`
     min-height: 90px;
   }
   select {
-    background-color: #beb1fd;
+    background-color: #f9f8fe;
     color: var(--dark);
     outline: none;
     padding: 8px 10px 5px;

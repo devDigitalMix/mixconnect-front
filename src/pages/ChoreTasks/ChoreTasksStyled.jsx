@@ -13,17 +13,16 @@ export const ChoreTasksHeader = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  form {
+    width: 100%;
+    max-width: 400px;
+  }
   #titleUpdate {
-    max-width: fit-content;
+    width: 100%;
     min-width: 0;
     background-color: transparent;
     border: none;
     outline: none;
-    font-size: 1.5rem;
-    text-align: center;
-    border-bottom: 2px solid var(--main);
-  }
-  h4 {
     font-size: 1.5rem;
     text-align: center;
     border-bottom: 2px solid var(--main);

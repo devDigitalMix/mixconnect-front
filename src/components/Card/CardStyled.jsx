@@ -6,6 +6,12 @@ export const CardContainer = styled.article`
   padding: 1px;
   width: 100%;
   max-width: 1200px;
+  transition: all.3s;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.01) translateY(-2px);
+    box-shadow: 0 0 8px 1px var(--main);
+  }
 `;
 
 export const CardStyled = styled.div`

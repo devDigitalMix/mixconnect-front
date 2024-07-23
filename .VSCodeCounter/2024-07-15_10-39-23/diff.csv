@@ -1,0 +1,43 @@
+"filename", "language", "JavaScript", "JavaScript JSX", "comment", "blank", "total"
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\Context\UserContent.jsx", "JavaScript JSX", 0, 13, 1, 5, 19
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\GlobalStyled.jsx", "JavaScript JSX", 0, 72, 0, 0, 72
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Button\ButtonStyled.jsx", "JavaScript JSX", 0, 4, 0, 0, 4
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Card\CardStyled.jsx", "JavaScript JSX", 0, 33, 0, 1, 34
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\CreateEmployee\CreateEmployee.jsx", "JavaScript JSX", 0, 50, 1, 5, 56
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\CreateEmployee\CreateEmployeeStyled.jsx", "JavaScript JSX", 0, 28, 0, 2, 30
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Delete\Delete.jsx", "JavaScript JSX", 0, 52, 1, 4, 57
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Delete\DeleteStyled.jsx", "JavaScript JSX", 0, 44, 0, 2, 46
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\ErrorSpan\ErrorSpan.jsx", "JavaScript JSX", 0, 4, 1, 2, 7
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\ErrorSpan\ErrorSpanStyled.jsx", "JavaScript JSX", 0, 9, 0, 2, 11
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Input\Input.jsx", "JavaScript JSX", 0, 30, 2, 3, 35
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Input\InputStyled.jsx", "JavaScript JSX", 0, 16, 0, 2, 18
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Label\Label.jsx", "JavaScript JSX", 0, 4, 2, 3, 9
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Label\LabelStyled.jsx", "JavaScript JSX", 0, 6, 0, 2, 8
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Navbar\Navbar.jsx", "JavaScript JSX", 0, 52, 15, 4, 71
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Navbar\NavbarStyled.jsx", "JavaScript JSX", 0, 114, 1, 5, 120
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Task\Task.jsx", "JavaScript JSX", 0, 93, 2, 8, 103
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Task\TaskStyled.jsx", "JavaScript JSX", 0, 90, 0, 5, 95
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\main.jsx", "JavaScript JSX", 0, 43, 0, 0, 43
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Authentication\Authentication.jsx", "JavaScript JSX", 0, 82, 1, 7, 90
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Authentication\AuthenticationStyled.jsx", "JavaScript JSX", 0, 74, 0, 3, 77
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\ChoreTasks\ChoreTasks.jsx", "JavaScript JSX", 0, 169, 1, 11, 181
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\ChoreTasks\ChoreTasksStyled.jsx", "JavaScript JSX", 0, 98, 0, 6, 104
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Chores\Chores.jsx", "JavaScript JSX", 0, 113, 1, 10, 124
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Chores\ChoresStyled.jsx", "JavaScript JSX", 0, 66, 0, 4, 70
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Clients\Clients.jsx", "JavaScript JSX", 0, 57, 1, 5, 63
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Clients\ClientsStyled.jsx", "JavaScript JSX", 0, 39, 0, 3, 42
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Employee\Employee.jsx", "JavaScript JSX", 0, 339, 0, 18, 357
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Employee\EmployeeStyled.jsx", "JavaScript JSX", 0, 9, 0, 2, 11
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Employees\Employees.jsx", "JavaScript JSX", 0, 138, 1, 10, 149
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Employees\EmployeesStyled.jsx", "JavaScript JSX", 0, 51, 0, 4, 55
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Home\Home.jsx", "JavaScript JSX", 0, -79, 0, -5, -84
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Home\HomeStyled.jsx", "JavaScript JSX", 0, -11, 0, -2, -13
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Plans\Plans.jsx", "JavaScript JSX", 0, 4, 0, 2, 6
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Profile\Profile.jsx", "JavaScript JSX", 0, 291, 0, 17, 308
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Profile\ProfileStyled.jsx", "JavaScript JSX", 0, 216, 0, 9, 225
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\schemas\searchSchema.js", "JavaScript", 9, 0, 0, 2, 11
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\schemas\signinSchema.js", "JavaScript", 7, 0, 0, 2, 9
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\services\choreService.js", "JavaScript", 48, 0, 1, 7, 56
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\services\clientService.js", "JavaScript", 11, 0, 0, 3, 14
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\services\employeeService.js", "JavaScript", 70, 0, 0, 7, 77
+"Total", "-", 145, 2413, 32, 180, 2770

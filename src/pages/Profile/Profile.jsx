@@ -19,6 +19,7 @@ import {
 } from "./ProfileStyled";
 import { Input } from "../../components/Input/Input";
 import { Link } from "react-router-dom";
+import { Felipe } from "../Employees/EmployeesStyled";
 
 export default function Profile() {
   const { user, setUser } = useContext(UserContext);
@@ -26,6 +27,7 @@ export default function Profile() {
   const [updateAvatar, setUpdateAvatar] = useState(false);
   const [socialMedia, setSocialMedia] = useState(user.socialMedia || []);
   const [musicLink, setMusicLink] = useState(user.music || "");
+  const [felipe, setFelipe] = useState(false);
 
   var cont = 0;
 
@@ -84,7 +86,7 @@ export default function Profile() {
 
   function mamao() {
     if (cont >= 9) {
-      alert("O Felipe é calvo");
+      setFelipe(true);
     }
     cont++;
   }
@@ -136,6 +138,12 @@ export default function Profile() {
   return (
     <>
       <ProfileContainer>
+        {felipe && (
+          <Felipe>
+            <h2>O Felipe é calvo</h2>
+            <img src="/felipe.jpg" />
+          </Felipe>
+        )}
         <ProfileStyled>
           {!update ? (
             <img

@@ -10,11 +10,6 @@ export const EmployeeBody = styled.section`
 export const EmployeeContainer = styled.article`
   transition: all.3s;
   border-radius: 12px;
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.01) translateY(-2px);
-    box-shadow: 0 0 8px 1px var(--main);
-  }
 `;
 
 export const EmployeesHeader = styled.div`
