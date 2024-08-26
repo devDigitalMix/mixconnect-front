@@ -85,6 +85,7 @@ export const PlanModal = styled.form`
     margin: 10px auto 0;
     font-size: 1.25rem;
     font-family: var(--font);
+    color: var(--sec);
   }
   div {
     width: 100%;

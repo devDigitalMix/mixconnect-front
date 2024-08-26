@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const ClientsStyled = styled.section`
   max-width: 1200px;
   width: 100%;
+  padding-bottom: 50px;
   margin: o auto;
 `;
 export const ClientHeader = styled.div`
@@ -14,6 +15,10 @@ export const ClientHeader = styled.div`
     align-items: center;
     gap: 10px;
   }
+  form {
+    display: flex;
+    gap: 10px;
+  }
 `;
 export const ClientBody = styled.div`
   display: flex;
@@ -22,20 +27,167 @@ export const ClientBody = styled.div`
   gap: 40px;
   align-items: center;
   width: 100%;
+  & > a {
+    max-width: 370px;
+    width: 100%;
+    min-height: 267px;
+  }
 `;
 export const AClient = styled.article`
-  max-width: 340px;
-  width: 100%;
-  height: 267px;
   background: var(--linear);
   padding: 1px;
   border-radius: 12px;
+  min-height: 267px;
+  width: 100%;
 `;
 
 export const ClientContent = styled.div`
   height: 100%;
+  min-height: 267px;
   width: 100%;
   background-color: var(--dark);
   padding: 20px;
   border-radius: 12px;
+  display: grid;
+`;
+
+export const ClientHead = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  h2 {
+    font-size: 1.25rem;
+  }
+  p {
+    color: var(--main);
+    font-family: var(--font);
+    font-size: 1.2rem;
+  }
+  .clientLogo {
+    width: 100%;
+    max-width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    object-fit: cover;
+    box-shadow: 0 0 0 2px var(--main);
+  }
+`;
+
+export const AddClientModal = styled.form`
+  width: 100%;
+  background-color: var(--dark);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--main);
+  display: grid;
+  gap: 30px;
+
+  & > input {
+    max-width: 300px;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.5rem;
+    font-family: var(--font);
+    color: var(--main);
+  }
+  .clientInfo {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    gap: 20px;
+
+    div {
+      display: grid;
+      max-width: 300px;
+      width: 100%;
+      label {
+        font-family: var(--font);
+        color: var(--main);
+        font-size: 1.2rem;
+      }
+      select {
+        background-color: #f9f8fe !important;
+        color: var(--dark);
+        outline: none;
+        padding: 8px 10px 5px;
+        max-height: 37px;
+        font-weight: 600;
+        border-radius: 6px;
+        width: 100%;
+        max-width: 300px;
+      }
+      option {
+        font-weight: 600;
+      }
+    }
+  }
+`;
+
+export const FiltroModal = styled.form`
+  background-color: var(--dark);
+  border: 1px solid var(--main);
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  z-index: 10;
+  border-radius: 12px;
+  display: grid;
+  justify-items: center;
+  gap: 20px;
+  max-width: 500px;
+  width: 100%;
+  .value {
+    display: flex;
+    align-items: center;
+    position: relative;
+    gap: 10px;
+    input {
+      height: 25px;
+      cursor: pointer;
+      width: 25px;
+      position: relative;
+      z-index: 3;
+      opacity: 0;
+    }
+    input:checked + .checkbox {
+      transform: rotate(180deg);
+    }
+  }
+  .checkbox {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    transition: all.3s;
+    left: 4px;
+  }
+  div {
+    display: grid;
+    text-align: center;
+    width: 100%;
+    max-width: 250px;
+    text-align: center;
+    label {
+      font-size: 1.25rem;
+      font-weight: 500;
+    }
+    select {
+      background-color: #f9f8fe !important;
+      color: var(--dark);
+      outline: none;
+      padding: 8px 10px 5px;
+      max-height: 37px;
+      font-weight: 600;
+      border-radius: 6px;
+    }
+    option {
+      font-weight: 600;
+      text-align: center;
+    }
+  }
 `;

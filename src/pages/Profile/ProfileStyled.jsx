@@ -124,7 +124,8 @@ export const ProfileData = styled.div`
     font-size: 1.4rem;
     font-family: var(--font);
   }
-  h3 {
+  h3,
+  a {
     font-size: 0.9rem;
     color: var(--main);
   }
@@ -158,11 +159,14 @@ export const ProfileBody = styled.div`
       font-family: Audiowide;
       font-size: 1.2rem;
     }
-    p {
+
+    p,
+    a {
       background-color: #313131;
       padding: 8px 10px 5px;
       border-radius: 5px;
       max-width: 300px;
+      overflow: hidden;
     }
     p + p {
       /* margin-top: 10px; */
@@ -186,11 +190,18 @@ export const ProfileUpdate = styled.form`
   }
   align-items: start;
   gap: 50px;
+
+  label {
+    color: var(--sec);
+    font-family: var(--font);
+    font-size: 1.2rem;
+  }
   div {
     width: 100%;
     max-width: 300px;
     display: grid;
     gap: 10px;
+
     textarea {
       background-color: #f8f8f8;
       color: var(--dark);

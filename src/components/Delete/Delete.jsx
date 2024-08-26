@@ -33,8 +33,7 @@ export function Delete(props) {
         <>
           <img src="/cancel.svg" alt="cancelar" onClick={props.func} />
           <h2>
-            Tem certeza que deseja excluir o funcionário{" "}
-            <strong>{props.name}</strong>?
+            Tem certeza que deseja excluir <strong>{props.name}</strong>?
           </h2>
           <h3>
             Se sim, digite <i>excluir-{props.name}</i>

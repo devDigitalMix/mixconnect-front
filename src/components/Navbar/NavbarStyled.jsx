@@ -67,13 +67,14 @@ export const NavMenu = styled.div`
       height: 2px;
       margin: 0 auto;
       width: 0;
-      background-color: var(--main);
+      background-color: var(--sec);
       content: "";
       display: block;
       transition: 0.3s;
     }
-    &:hover {
-      color: var(--main);
+    &:hover,
+    &.active {
+      color: var(--sec);
       &::after {
         width: 100%;
       }

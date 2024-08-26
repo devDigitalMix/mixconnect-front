@@ -14,6 +14,8 @@ import { Chores } from "./pages/Chores/Chores.jsx";
 import { ChoreTasks } from "./pages/ChoreTasks/ChoreTasks.jsx";
 import { Clients } from "./pages/Clients/Clients.jsx";
 import Plans from "./pages/Plans/Plans.jsx";
+import Client from "./pages/Client/Client.jsx";
+import Logins from "./pages/Logins/Logins.jsx";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/home/clients",
         element: <Clients />,
+      },
+      {
+        path: "/home/client/:id",
+        element: <Client />,
       },
       {
         path: "/home/employees",
@@ -51,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: "/home/plans",
         element: <Plans />,
+      },
+      {
+        path: "/home/acessos",
+        element: <Logins />,
       },
     ],
   },

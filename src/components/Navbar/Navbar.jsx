@@ -13,23 +13,11 @@ import Cookies from "js-cookie";
 import { UserContext } from "../../Context/UserContent";
 
 export function Navbar() {
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   reset,
-  //   formState: { errors },
-  // } = useForm({
-  //   resolver: zodResolver(searchSchema),
-  // });
   const navigate = useNavigate();
-
   const { user, setUser } = useContext(UserContext);
 
-  // function onSearch(data) {
-  //   const { title } = data;
-  //   navigate(`/search/${title}`);
-  //   reset();
-  // }
+  const [activeButton, setActiveButton] = useState(null);
+
   async function findUserLogged() {
     try {
       const response = await userLogged();
@@ -45,6 +33,10 @@ export function Navbar() {
     navigate("/");
   }
 
+  function handleButtonClick(buttonName) {
+    setActiveButton(buttonName);
+  }
+
   useEffect(() => {
     if (Cookies.get("token")) findUserLogged();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -55,23 +47,50 @@ export function Navbar() {
       <Header>
         <div>
           <Nav>
-            <Link to={"/home"}>
+            <Link to={"/home"} onClick={() => handleButtonClick("")}>
               <img src="/logo.svg" alt="MixConnect" draggable="false" />
             </Link>
             <NavMenu>
               <Link to={"/home/clients"}>
-                <button>CLIENTES</button>
+                <button
+                  className={activeButton === "clients" ? "active" : ""}
+                  onClick={() => handleButtonClick("clients")}
+                >
+                  CLIENTES
+                </button>
               </Link>
               <Link to={"/home/employees"}>
-                <button>FUNCIONÁRIOS</button>
+                <button
+                  className={activeButton === "employees" ? "active" : ""}
+                  onClick={() => handleButtonClick("employees")}
+                >
+                  FUNCIONÁRIOS
+                </button>
               </Link>
-              <button>PLAYBOOK</button>
+              <button
+                className={activeButton === "playbook" ? "active" : ""}
+                onClick={() => handleButtonClick("playbook")}
+              >
+                PLAYBOOK
+              </button>
               <Link to={"/home/plans"}>
-                <button>PLANOS</button>
+                <button
+                  className={activeButton === "plans" ? "active" : ""}
+                  onClick={() => handleButtonClick("plans")}
+                >
+                  PLANOS
+                </button>
               </Link>
-              <button>ACESSOS</button>
+              <Link to={"/home/acessos"}>
+                <button
+                  className={activeButton === "access" ? "active" : ""}
+                  onClick={() => handleButtonClick("access")}
+                >
+                  ACESSOS
+                </button>
+              </Link>
             </NavMenu>
-            <Link to={"/home/profile"}>
+            <Link to={"/home/profile"} onClick={() => handleButtonClick("")}>
               <img src={user.avatar} id="perfil-img" draggable="false" />
             </Link>
           </Nav>
