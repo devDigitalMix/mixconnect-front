@@ -88,7 +88,7 @@ export default function Employees() {
             <img src="/felipe.jpg" />
           </Felipe>
         )}
-        {(user.level == "lider" || user.level == "adm") && (
+        {(user.level == "Líder" || user.level == "adm") && (
           <img
             src="/mais.svg"
             alt="Novo funcionário"
@@ -133,9 +133,7 @@ export default function Employees() {
                 <Card
                   name={item.name}
                   desc={item.desc}
-                  email={item.email}
                   role={item.role}
-                  whats={item.whatsapp}
                   imgSrc={item.avatar}
                 />
               </EmployeeContainer>

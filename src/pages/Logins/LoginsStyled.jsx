@@ -12,16 +12,55 @@ export const LoginsBody = styled.div`
   flex-wrap: wrap;
   align-items: center;
   gap: 20px;
+  margin-top: 30px;
 `;
-export const LoginsHeader = styled.div``;
+export const LoginsHeader = styled.div`
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  .hide {
+    cursor: pointer;
+    max-width: 35px;
+    filter: invert(60%);
+  }
+  form {
+    margin-left: auto;
+    display: flex;
+    gap: 15px;
+  }
+`;
 export const LoginItem = styled.article`
   background-color: var(--dark);
   border: 1px solid var(--main);
   padding: 20px;
   border-radius: 12px;
   max-width: fit-content;
-  max-width: 200px;
+  max-width: 300px;
   width: 100%;
+  min-height: 150px;
+  position: relative;
+  & > * {
+    max-width: fit-content;
+  }
+
+  .login-settings {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    opacity: 0;
+    display: grid;
+    gap: 10px;
+    cursor: pointer;
+    transition: all.3s;
+    img {
+      max-width: 30px;
+    }
+  }
+  &:hover {
+    .login-settings {
+      opacity: 1;
+    }
+  }
 `;
 
 export const CreateLogin = styled.form`

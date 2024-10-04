@@ -19,12 +19,11 @@ export const EmployeesHeader = styled.div`
   margin: 10px auto 20px;
   justify-content: space-between;
   gap: 20px;
-  input {
-    margin-left: auto;
-  }
+
   form {
     display: flex;
     gap: 10px;
+    margin-left: auto;
   }
 `;
 

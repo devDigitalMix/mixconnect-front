@@ -91,4 +91,8 @@ export const UpdateDescStyled = styled.form`
   display: flex;
   align-items: center;
   gap: 10px;
+  width: 100%;
+  input {
+    max-width: 500px;
+  }
 `;

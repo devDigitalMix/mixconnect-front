@@ -178,7 +178,7 @@ export function Employee() {
             func={handleDeleteClick}
           />
         )}
-        {(user.level == "lider" || user.level == "adm") && (
+        {(user.level == "Líder" || user.level == "adm") && (
           <TopButtons>
             <img
               src="/exclude.svg"
@@ -216,29 +216,31 @@ export function Employee() {
               id="avatarImg"
               draggable="false"
             />
-            <UploadAvatar
-              onSubmit={handleUpdateAvatar}
-              encType="multipart/form-data"
-            >
-              <label htmlFor="avatar" onClick={updateAvatarClick}>
-                <img
-                  src="/upload-avatar.svg"
-                  alt="Upload"
-                  draggable="false"
-                  style={updateAvatar ? { opacity: 0 } : {}}
-                />
-              </label>
-              {updateAvatar && (
-                <>
-                  <button type="submit"></button>
-                  <button
-                    id="cancelaAvatar"
-                    onClick={updateAvatarClick}
-                  ></button>
-                </>
-              )}
-              <Input type="file" name="avatar" id="avatar" />
-            </UploadAvatar>
+            {(user.level == "Líder" || user.level == "adm") && (
+              <UploadAvatar
+                onSubmit={handleUpdateAvatar}
+                encType="multipart/form-data"
+              >
+                <label htmlFor="avatar" onClick={updateAvatarClick}>
+                  <img
+                    src="/upload-avatar.svg"
+                    alt="Upload"
+                    draggable="false"
+                    style={updateAvatar ? { opacity: 0 } : {}}
+                  />
+                </label>
+                {updateAvatar && (
+                  <>
+                    <button type="submit"></button>
+                    <button
+                      id="cancelaAvatar"
+                      onClick={updateAvatarClick}
+                    ></button>
+                  </>
+                )}
+                <Input type="file" name="avatar" id="avatar" />
+              </UploadAvatar>
+            )}
           </ProfileAvatar>
           <ProfileData>
             <h4>{employee.level}</h4>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   deleteClient,
@@ -17,12 +17,16 @@ import {
   TopProfile,
   UploadAvatar,
 } from "../Profile/ProfileStyled";
+import Cookies from "js-cookie";
 import { Input } from "../../components/Input/Input";
 import { TopButtons } from "../Employee/EmployeeStyled";
 import { DeleteClientStyled } from "./ClientStyled";
+import { userLogged } from "../../services/employeeService";
+import { UserContext } from "../../Context/UserContent";
 
 export default function Client() {
   const { id } = useParams();
+  const { user, setUser } = useContext(UserContext);
   const [client, setClient] = useState({});
   const [update, setUpdate] = useState(false);
   const [updateAvatar, setUpdateAvatar] = useState(false);
@@ -173,12 +177,22 @@ export default function Client() {
     }
   }
 
+  async function findUserLogged() {
+    try {
+      const response = await userLogged();
+      setUser(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     getClient();
   }, [id]);
 
   useEffect(() => {
     getClient();
+    if (Cookies.get("token")) findUserLogged();
   }, []);
 
   return (
@@ -204,31 +218,33 @@ export default function Client() {
               </button>
             </DeleteClientStyled>
           )}
-          <TopButtons>
-            <img
-              src="/exclude.svg"
-              alt="excluir"
-              className="img-effect"
-              onClick={handleDeleteClick}
-            />
-            {!update ? (
+          {(user.level == "Líder" || user.level == "adm") && (
+            <TopButtons>
               <img
-                src="/update-profile.svg"
-                alt="update"
-                draggable="false"
+                src="/exclude.svg"
+                alt="excluir"
                 className="img-effect"
-                onClick={updateForm}
+                onClick={handleDeleteClick}
               />
-            ) : (
-              <img
-                src="/cancel.svg"
-                alt="cancel"
-                draggable="false"
-                className="img-effect"
-                onClick={updateForm}
-              />
-            )}
-          </TopButtons>
+              {!update ? (
+                <img
+                  src="/update-profile.svg"
+                  alt="update"
+                  draggable="false"
+                  className="img-effect"
+                  onClick={updateForm}
+                />
+              ) : (
+                <img
+                  src="/cancel.svg"
+                  alt="cancel"
+                  draggable="false"
+                  className="img-effect"
+                  onClick={updateForm}
+                />
+              )}
+            </TopButtons>
+          )}
           <TopProfile>
             <Link to={"/home/clients"}>
               <img
@@ -244,29 +260,31 @@ export default function Client() {
                 id="avatarImg"
                 draggable="false"
               />
-              <UploadAvatar
-                onSubmit={handleUpdateAvatar}
-                encType="multipart/form-data"
-              >
-                <label htmlFor="logo" onClick={updateAvatarClick}>
-                  <img
-                    src="/upload-avatar.svg"
-                    alt="Upload"
-                    draggable="false"
-                    style={updateAvatar ? { opacity: 0 } : {}}
-                  />
-                </label>
-                {updateAvatar && (
-                  <>
-                    <button type="submit"></button>
-                    <button
-                      id="cancelaAvatar"
-                      onClick={updateAvatarClick}
-                    ></button>
-                  </>
-                )}
-                <input type="file" name="logo" id="logo" />
-              </UploadAvatar>
+              {(user.level == "Líder" || user.level == "adm") && (
+                <UploadAvatar
+                  onSubmit={handleUpdateAvatar}
+                  encType="multipart/form-data"
+                >
+                  <label htmlFor="logo" onClick={updateAvatarClick}>
+                    <img
+                      src="/upload-avatar.svg"
+                      alt="Upload"
+                      draggable="false"
+                      style={updateAvatar ? { opacity: 0 } : {}}
+                    />
+                  </label>
+                  {updateAvatar && (
+                    <>
+                      <button type="submit"></button>
+                      <button
+                        id="cancelaAvatar"
+                        onClick={updateAvatarClick}
+                      ></button>
+                    </>
+                  )}
+                  <input type="file" name="logo" id="logo" />
+                </UploadAvatar>
+              )}
             </ProfileAvatar>
             <ProfileData>
               <h2>{client.name}</h2>

@@ -63,7 +63,6 @@ export async function getClientsByName(name) {
       Authorization: `Bearer ${Cookies.get("token")}`,
     },
   });
-  console.log(response.data);
   return response;
 }
 
@@ -83,6 +82,5 @@ export async function deleteClient(id) {
       Authorization: `Bearer ${Cookies.get("token")}`,
     },
   });
-  console.log(response);
   return response;
 }

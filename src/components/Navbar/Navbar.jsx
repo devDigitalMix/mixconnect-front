@@ -67,28 +67,32 @@ export function Navbar() {
                   FUNCIONÁRIOS
                 </button>
               </Link>
-              <button
+              {/* <button
                 className={activeButton === "playbook" ? "active" : ""}
                 onClick={() => handleButtonClick("playbook")}
               >
                 PLAYBOOK
-              </button>
-              <Link to={"/home/plans"}>
-                <button
-                  className={activeButton === "plans" ? "active" : ""}
-                  onClick={() => handleButtonClick("plans")}
-                >
-                  PLANOS
-                </button>
-              </Link>
-              <Link to={"/home/acessos"}>
-                <button
-                  className={activeButton === "access" ? "active" : ""}
-                  onClick={() => handleButtonClick("access")}
-                >
-                  ACESSOS
-                </button>
-              </Link>
+              </button> */}
+              {(user.level == "Líder" || user.level == "adm") && (
+                <Link to={"/home/plans"}>
+                  <button
+                    className={activeButton === "plans" ? "active" : ""}
+                    onClick={() => handleButtonClick("plans")}
+                  >
+                    PLANOS
+                  </button>
+                </Link>
+              )}
+              {(user.level == "Líder" || user.level == "adm") && (
+                <Link to={"/home/acessos"}>
+                  <button
+                    className={activeButton === "access" ? "active" : ""}
+                    onClick={() => handleButtonClick("access")}
+                  >
+                    ACESSOS
+                  </button>
+                </Link>
+              )}
             </NavMenu>
             <Link to={"/home/profile"} onClick={() => handleButtonClick("")}>
               <img src={user.avatar} id="perfil-img" draggable="false" />

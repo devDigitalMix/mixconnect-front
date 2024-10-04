@@ -16,6 +16,7 @@ export const ClientHeader = styled.div`
     gap: 10px;
   }
   form {
+    margin-left: auto;
     display: flex;
     gap: 10px;
   }

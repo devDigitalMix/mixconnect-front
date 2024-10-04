@@ -80,7 +80,6 @@ export function deleteEmployee(id) {
 }
 
 export async function createchore(id, data) {
-  console.log(data);
   const response = await axios.patch(
     `${baseURL}/employee/${id}/createChore/`,
     data,

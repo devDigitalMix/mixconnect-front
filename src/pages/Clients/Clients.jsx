@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   createClientService,
   findClients,
@@ -18,15 +18,18 @@ import {
 } from "./ClientsStyled";
 import { Input } from "../../components/Input/Input";
 import { Label } from "../../components/Label/Label";
+import Cookies from "js-cookie";
 import { getPlanById, getPlansService } from "../../services/planService";
-import { getAllEmployees } from "../../services/employeeService";
+import { getAllEmployees, userLogged } from "../../services/employeeService";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { searchSchema } from "../../schemas/searchSchema";
 import { InputNav } from "../../components/Navbar/NavbarStyled";
+import { UserContext } from "../../Context/UserContent";
 
 export function Clients() {
+  const { user, setUser } = useContext(UserContext);
   const [clients, setClients] = useState([]);
   const [plans, setPlans] = useState([]);
   const [employees, setEmployees] = useState([]);
@@ -95,15 +98,21 @@ export function Clients() {
       return map;
     }, {});
 
-    const clientList = response.data.results.map((client) => {
-      return {
-        ...client,
-        plan: plansMap[client.plan] || "Plano desconhecido",
-      };
-    });
-    setClients(clientList);
-    setFiltro(false);
-    setSearch(true);
+    if (response.data.results) {
+      const clientList = response.data.results.map((client) => {
+        return {
+          ...client,
+          plan: plansMap[client.plan] || "Plano desconhecido",
+        };
+      });
+      setClients(clientList);
+      setFiltro(false);
+      setSearch(true);
+    } else {
+      alert("Nenhum cliente se encaixa no filtro");
+      setFiltro(false);
+      setSearch(false);
+    }
   }
 
   async function onSearch(data) {
@@ -130,8 +139,33 @@ export function Clients() {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
-    await createClientService(data);
-    getClients();
+    if (
+      !data.name ||
+      !data.adsValue ||
+      !data.value ||
+      !data.plan ||
+      !data.gestor ||
+      !data.cs ||
+      !data.cnpj ||
+      !data.posts ||
+      !data.whatsapp ||
+      user.email == "camila.silva@digitalmix.tech"
+    ) {
+      alert("Preencha os campos necessários");
+    } else {
+      await createClientService(data);
+      setAddClientModal(false);
+      getClients();
+    }
+  }
+
+  async function findUserLogged() {
+    try {
+      const response = await userLogged();
+      setUser(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function clickAddClient() {
@@ -142,6 +176,7 @@ export function Clients() {
 
   useEffect(() => {
     getClients();
+    if (Cookies.get("token")) findUserLogged();
   }, []);
 
   useEffect(() => {
@@ -211,13 +246,15 @@ export function Clients() {
         </FiltroModal>
       )}
       <ClientHeader>
-        <img
-          src="/mais.svg"
-          className="img-effect"
-          alt="novo cliente"
-          title="Novo Cliente"
-          onClick={clickAddClient}
-        />
+        {(user.level == "Líder" || user.level == "adm") && (
+          <img
+            src="/mais.svg"
+            className="img-effect"
+            alt="novo cliente"
+            title="Novo Cliente"
+            onClick={clickAddClient}
+          />
+        )}
         <form onSubmit={handleSubmit(onSearch)}>
           {search && (
             <img
@@ -333,38 +370,37 @@ export function Clients() {
           </AddClientModal>
         )}
 
-        {clients
-          ? clients.map((client, index) => (
-              <Link to={"/home/client/" + client.id} key={index}>
-                <AClient>
-                  <ClientContent>
-                    <ClientHead>
-                      {!client.logo ? (
-                        <img
-                          src="/avatar-default.png"
-                          className="clientLogo"
-                          alt="logo"
-                        />
-                      ) : (
-                        <img
-                          src={client.logo}
-                          className="clientLogo"
-                          alt="logo"
-                        />
-                      )}
-                      <div>
-                        <h2>{client.name}</h2>
-                        <p>{client.plan}</p>
-                      </div>
-                    </ClientHead>
-                    <p>Gestor: {client.gestor}</p>
-                    <p>CS: {client.cs}</p>
-                    <p>Valor Contrato: R$ {client.value}</p>
-                  </ClientContent>
-                </AClient>
-              </Link>
-            ))
-          : null}
+        {clients &&
+          clients.map((client, index) => (
+            <Link to={"/home/client/" + client.id} key={index}>
+              <AClient>
+                <ClientContent>
+                  <ClientHead>
+                    {!client.logo ? (
+                      <img
+                        src="/avatar-default.png"
+                        className="clientLogo"
+                        alt="logo"
+                      />
+                    ) : (
+                      <img
+                        src={client.logo}
+                        className="clientLogo"
+                        alt="logo"
+                      />
+                    )}
+                    <div>
+                      <h2>{client.name}</h2>
+                      <p>{client.plan}</p>
+                    </div>
+                  </ClientHead>
+                  <p>Gestor: {client.gestor}</p>
+                  <p>CS: {client.cs}</p>
+                  <p>Valor Contrato: R$ {client.value}</p>
+                </ClientContent>
+              </AClient>
+            </Link>
+          ))}
       </ClientBody>
     </ClientsStyled>
   );
