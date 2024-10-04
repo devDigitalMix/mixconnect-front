@@ -73,7 +73,8 @@ export function Clients() {
   async function getEmployees() {
     const response = await getAllEmployees();
     const listaEmployees = response.data.results.filter(
-      (employee) => employee.role === "Gestor" || employee.role === "CS"
+      (employee) =>
+        employee.role === "Gestor de Tráfego" || employee.role === "CS"
     );
     setEmployees(listaEmployees);
   }
@@ -218,7 +219,7 @@ export function Clients() {
             <select name="gestor">
               <option value="">Gestor</option>
               {employees
-                .filter((employee) => employee.role === "Gestor")
+                .filter((employee) => employee.role === "Gestor de Tráfego")
                 .map((employee, index) => (
                   <option key={index} value={employee.name}>
                     {employee.name}
@@ -312,7 +313,7 @@ export function Clients() {
                 <select name="gestor">
                   {employees.map(
                     (employee, index) =>
-                      employee.role === "Gestor" && (
+                      employee.role === "Gestor de Tráfego" && (
                         <option value={employee.name} key={index}>
                           {employee.name}
                         </option>
