@@ -215,14 +215,14 @@ export default function Logins() {
         />
         {!viewPassword ? (
           <img
-            src="../../../public/hide-password.svg"
+            src="/hide-password.svg"
             className="hide"
             title="Mostrar Senhas"
             onClick={() => setViewPassword(!viewPassword)}
           />
         ) : (
           <img
-            src="../../../public/view-password.svg"
+            src="/view-password.svg"
             className="hide"
             title="Esconder Senhas"
             onClick={() => setViewPassword(!viewPassword)}
@@ -256,12 +256,12 @@ export default function Logins() {
             <LoginItem key={index}>
               <div className="login-settings">
                 <img
-                  src="../../../public/update-profile.svg"
+                  src="/update-profile.svg"
                   className="img-effect"
                   onClick={() => updateClick(login.id)}
                 />
                 <img
-                  src="../../../public/exclude.svg"
+                  src="/exclude.svg"
                   className="img-effect"
                   onClick={() => deleteLoginClick(login.id)}
                 />
