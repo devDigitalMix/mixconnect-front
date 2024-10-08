@@ -28,14 +28,6 @@ export const ProfileStyled = styled.div`
     transition: all.3s;
     top: 10px;
     cursor: pointer;
-    &:hover {
-      filter: hue-rotate(280deg);
-      filter: saturate(1000%) drop-shadow(0 0 5px #4441c8);
-    }
-    &:active {
-      transform: scale(0.9);
-      transition: transform 0.1s;
-    }
   }
 `;
 

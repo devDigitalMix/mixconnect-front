@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import { ErrorSpan, Header, Nav, NavMenu } from "./NavbarStyled";
+import { ErrorSpan, Header, Nav, NavMenu, PerfilMenu } from "./NavbarStyled";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -44,62 +44,72 @@ export function Navbar() {
 
   return (
     <>
-      <Header>
-        <div>
-          <Nav>
-            <Link to={"/home"} onClick={() => handleButtonClick("")}>
-              <img src="/logo.svg" alt="MixConnect" draggable="false" />
-            </Link>
-            <NavMenu>
-              <Link to={"/home/clients"}>
-                <button
-                  className={activeButton === "clients" ? "active" : ""}
-                  onClick={() => handleButtonClick("clients")}
-                >
-                  CLIENTES
-                </button>
+      {user && (
+        <Header>
+          <div>
+            <Nav>
+              <Link to={"/home"} onClick={() => handleButtonClick("")}>
+                <img src="/logo.svg" alt="MixConnect" draggable="false" />
               </Link>
-              <Link to={"/home/employees"}>
-                <button
-                  className={activeButton === "employees" ? "active" : ""}
-                  onClick={() => handleButtonClick("employees")}
-                >
-                  FUNCIONÁRIOS
-                </button>
-              </Link>
-              {/* <button
+              <NavMenu>
+                <Link to={"/home/clients"}>
+                  <button
+                    className={activeButton === "clients" ? "active" : ""}
+                    onClick={() => handleButtonClick("clients")}
+                  >
+                    CLIENTES
+                  </button>
+                </Link>
+                <Link to={"/home/employees"}>
+                  <button
+                    className={activeButton === "employees" ? "active" : ""}
+                    onClick={() => handleButtonClick("employees")}
+                  >
+                    FUNCIONÁRIOS
+                  </button>
+                </Link>
+                {/* <button
                 className={activeButton === "playbook" ? "active" : ""}
                 onClick={() => handleButtonClick("playbook")}
               >
                 PLAYBOOK
               </button> */}
-              {(user.level == "Líder" || user.level == "adm") && (
-                <Link to={"/home/plans"}>
-                  <button
-                    className={activeButton === "plans" ? "active" : ""}
-                    onClick={() => handleButtonClick("plans")}
-                  >
-                    PLANOS
-                  </button>
+                {(user.level == "Líder" || user.level == "adm") && (
+                  <Link to={"/home/plans"}>
+                    <button
+                      className={activeButton === "plans" ? "active" : ""}
+                      onClick={() => handleButtonClick("plans")}
+                    >
+                      PLANOS
+                    </button>
+                  </Link>
+                )}
+                {(user.level == "Líder" || user.level == "adm") && (
+                  <Link to={"/home/acessos"}>
+                    <button
+                      className={activeButton === "access" ? "active" : ""}
+                      onClick={() => handleButtonClick("access")}
+                    >
+                      ACESSOS
+                    </button>
+                  </Link>
+                )}
+              </NavMenu>
+              <PerfilMenu>
+                <Link
+                  to={"/home/profile"}
+                  onClick={() => handleButtonClick("")}
+                >
+                  <img src={user.avatar} id="perfil-img" draggable="false" />
                 </Link>
-              )}
-              {(user.level == "Líder" || user.level == "adm") && (
-                <Link to={"/home/acessos"}>
-                  <button
-                    className={activeButton === "access" ? "active" : ""}
-                    onClick={() => handleButtonClick("access")}
-                  >
-                    ACESSOS
-                  </button>
-                </Link>
-              )}
-            </NavMenu>
-            <Link to={"/home/profile"} onClick={() => handleButtonClick("")}>
-              <img src={user.avatar} id="perfil-img" draggable="false" />
-            </Link>
-          </Nav>
-        </div>
-      </Header>
+                <button onClick={signout}>
+                  <img src="/logout.svg" alt="Sair" title="Sair" />
+                </button>
+              </PerfilMenu>
+            </Nav>
+          </div>
+        </Header>
+      )}
       <Outlet />
     </>
   );

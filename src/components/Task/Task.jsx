@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import {
+  Arrows,
   SelectState,
   TaskBtns,
   TaskStyled,
@@ -51,7 +52,15 @@ export function Task(props) {
   }
 
   return (
-    <TaskStyled>
+    <TaskStyled className="task">
+      <Arrows>
+        <img
+          src="/up-arrow.svg"
+          title="Mover para cima"
+          onClick={props.moverCima}
+        />
+        <img src="/down-arrow.svg" title="Mover para baixo" />
+      </Arrows>
       {!updateStateModal ? (
         <span className={taskState} onClick={clickUpdateState}></span>
       ) : (

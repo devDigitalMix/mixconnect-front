@@ -31,6 +31,9 @@ export const TaskStyled = styled.article`
     button {
       opacity: 1;
     }
+    div {
+      opacity: 1;
+    }
   }
 `;
 
@@ -94,5 +97,29 @@ export const UpdateDescStyled = styled.form`
   width: 100%;
   input {
     max-width: 500px;
+  }
+`;
+
+export const Arrows = styled.div`
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all.3s;
+  position: absolute;
+  left: 0;
+  transform: translateX(-100%);
+  opacity: 0;
+  img {
+    cursor: pointer;
+    &:hover {
+      transition: all.3s;
+      filter: drop-shadow(0 0 1px var(--main)) drop-shadow(0 0 1px var(--main))
+        drop-shadow(0 0 1px var(--main)) contrast(150%);
+    }
+    &:active {
+      transition: all.1s;
+      transform: scale(0.9);
+    }
   }
 `;

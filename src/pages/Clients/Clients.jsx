@@ -273,7 +273,7 @@ export function Clients() {
             <input
               {...register("name")}
               type="text"
-              placeholder="Procurar Funcionário"
+              placeholder="Procurar Cliente"
             />
           </InputNav>
           <img

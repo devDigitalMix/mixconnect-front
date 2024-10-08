@@ -6,6 +6,7 @@ export const EmployeeBody = styled.section`
   margin: 0 auto;
   display: grid;
   gap: 20px;
+  padding-bottom: 50px;
 `;
 export const EmployeeContainer = styled.article`
   transition: all.3s;

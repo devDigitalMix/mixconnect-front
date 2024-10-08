@@ -274,12 +274,26 @@ svg path {
     transition: all.3s;
     &:hover {
       filter: hue-rotate(280deg);
-      filter: saturate(1000%) drop-shadow(0 0 5px #4441c8);
+      filter: saturate(1000%) brightness(120%);
     }
     &:active {
       transform: scale(0.9);
       transition: transform 0.1s;
     }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--dark);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: var(--main);
 }
 
 `;

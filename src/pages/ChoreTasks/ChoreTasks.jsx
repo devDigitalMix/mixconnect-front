@@ -1,9 +1,12 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
+  changeTaskService,
   createTaskService,
   getChoreById,
   updateChoreTitleService,
+  updateTaskService,
   //   updateTaskState,
 } from "../../services/choreService";
 import Cookies from "js-cookie";
@@ -24,6 +27,7 @@ import { UserContext } from "../../Context/UserContent";
 export function ChoreTasks() {
   const { id } = useParams();
   const [chore, setChore] = useState({});
+  const [taskList, setTaskList] = useState([]);
   const [createTaskModal, setCreateTaskModal] = useState(false);
   const [excludeModal, setExcludeModal] = useState(false);
   const { user, setUser } = useContext(UserContext);
@@ -71,7 +75,10 @@ export function ChoreTasks() {
       return;
     }
     const state = { state: "open" };
-    const dataFinal = { ...data, ...state };
+    const position = {
+      position: chore.tasks.length > 0 ? chore.tasks.length : 0,
+    };
+    const dataFinal = { ...data, ...state, ...position };
     try {
       await createTaskService(id, dataFinal);
       setCreateTaskModal(false);
@@ -90,13 +97,22 @@ export function ChoreTasks() {
     }
   }
 
+  async function moverCima(task) {
+    if (task.position > 0) {
+      var taskAntiga = chore.tasks[task.position - 1];
+
+      await changeTaskService(chore._id, task._id, taskAntiga._id, {
+        position: task.position - 1,
+        position2: task.position,
+      });
+      getChore();
+    }
+  }
+
   useEffect(() => {
     if (Cookies.get("token")) {
       findUserLogged();
     }
-  }, []);
-
-  useEffect(() => {
     getChore();
   }, []);
 
@@ -170,6 +186,7 @@ export function ChoreTasks() {
                 desc={task.desc}
                 state={task.state}
                 func={getChore}
+                moverCima={() => moverCima(task)}
                 choreId={id}
               />
             ))

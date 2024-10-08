@@ -245,7 +245,7 @@ export default function Logins() {
             <input
               {...register("name")}
               type="text"
-              placeholder="Procurar Funcionário"
+              placeholder="Procurar Acesso"
             />
           </InputNav>
         </form>

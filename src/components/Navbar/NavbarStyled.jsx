@@ -34,18 +34,12 @@ export const Nav = styled.nav`
   position: relative;
   width: 100%;
   padding: 20px;
+  padding-right: 5px;
   background-color: var(--dark);
   z-index: 1;
   border-radius: 12px;
   color: var(--light);
-  #perfil-img {
-    width: 50px;
-    height: 50px;
-    border-radius: 100%;
-    object-fit: cover;
-    cursor: pointer;
-    box-shadow: 0 0 0 1px var(--main);
-  }
+
   @media only screen and (max-width: 875px) {
     padding-bottom: 80px;
   }
@@ -124,5 +118,22 @@ export const InputNav = styled.div`
     &::placeholder {
       font-style: italic;
     }
+  }
+`;
+export const PerfilMenu = styled.div`
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  #perfil-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    object-fit: cover;
+    cursor: pointer;
+    box-shadow: 0 0 0 1.5px var(--main);
+  }
+  button:hover {
+    filter: drop-shadow(0 0 2px var(--main)) drop-shadow(0 0 2px var(--main))
+      brightness(110%);
   }
 `;

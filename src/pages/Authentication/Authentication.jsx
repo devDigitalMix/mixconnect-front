@@ -27,7 +27,7 @@ export function Authentication() {
       Cookies.set("token", response.data, { expires: 7 });
       navigate("/home");
     } catch (error) {
-      if (error.response.data == "Wrong password or email") {
+      if (error.response.data == "Invalid password") {
         setErrorMessage("E-mail ou senha estão incorretos");
       }
       console.log(error);

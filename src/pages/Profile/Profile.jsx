@@ -149,6 +149,7 @@ export default function Profile() {
             <img
               src="/update-profile.svg"
               alt="update"
+              className="img-effect"
               draggable="false"
               onClick={updateForm}
             />
@@ -156,6 +157,7 @@ export default function Profile() {
             <img
               src="/cancel.svg"
               alt="cancel"
+              className="img-effect"
               draggable="false"
               onClick={updateForm}
             />
