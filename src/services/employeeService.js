@@ -2,8 +2,8 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-const baseURL = "http://localhost:3000";
-// const baseURL = "https://mixconnect-back.onrender.com";
+// const baseURL = "http://localhost:3000";
+const baseURL = "https://mixconnect-back.onrender.com";
 
 export function signin(data) {
   const response = axios.post(`${baseURL}/auth/login`, data);
