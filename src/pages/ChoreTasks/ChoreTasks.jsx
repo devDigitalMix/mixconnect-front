@@ -101,11 +101,39 @@ export function ChoreTasks() {
     if (task.position > 0) {
       var taskAntiga = chore.tasks[task.position - 1];
 
-      await changeTaskService(chore._id, task._id, taskAntiga._id, {
-        position: task.position - 1,
-        position2: task.position,
-      });
-      getChore();
+      const response = await changeTaskService(
+        chore._id,
+        task._id,
+        taskAntiga._id,
+        {
+          position: task.position - 1,
+          position2: task.position,
+        }
+      );
+
+      if (response.data) {
+        setChore(response.data);
+      }
+    }
+  }
+
+  async function moverBaixo(task) {
+    if (task.position < chore.tasks.length - 1) {
+      var taskAntiga = chore.tasks[task.position + 1];
+
+      const response = await changeTaskService(
+        chore._id,
+        task._id,
+        taskAntiga._id,
+        {
+          position: task.position + 1,
+          position2: task.position,
+        }
+      );
+
+      if (response.data) {
+        setChore(response.data);
+      }
     }
   }
 
@@ -114,7 +142,7 @@ export function ChoreTasks() {
       findUserLogged();
     }
     getChore();
-  }, []);
+  }, [chore]);
 
   return (
     <ChoreTasksStyled>
@@ -187,6 +215,7 @@ export function ChoreTasks() {
                 state={task.state}
                 func={getChore}
                 moverCima={() => moverCima(task)}
+                moverBaixo={() => moverBaixo(task)}
                 choreId={id}
               />
             ))

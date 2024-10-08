@@ -15,6 +15,7 @@ import { UserContext } from "../../Context/UserContent";
 export function Navbar() {
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
+  const [nav, setNav] = useState("");
 
   const [activeButton, setActiveButton] = useState(null);
 
@@ -25,6 +26,10 @@ export function Navbar() {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  function getURL() {
+    setNav(window.location.href);
   }
 
   function signout() {
@@ -40,7 +45,8 @@ export function Navbar() {
   useEffect(() => {
     if (Cookies.get("token")) findUserLogged();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    getURL();
+  }, [activeButton]);
 
   return (
     <>
@@ -54,7 +60,7 @@ export function Navbar() {
               <NavMenu>
                 <Link to={"/home/clients"}>
                   <button
-                    className={activeButton === "clients" ? "active" : ""}
+                    className={nav.includes("clients") ? "active" : ""}
                     onClick={() => handleButtonClick("clients")}
                   >
                     CLIENTES
@@ -62,7 +68,7 @@ export function Navbar() {
                 </Link>
                 <Link to={"/home/employees"}>
                   <button
-                    className={activeButton === "employees" ? "active" : ""}
+                    className={nav.includes("employees") ? "active" : ""}
                     onClick={() => handleButtonClick("employees")}
                   >
                     FUNCIONÁRIOS
@@ -77,7 +83,7 @@ export function Navbar() {
                 {(user.level == "Líder" || user.level == "adm") && (
                   <Link to={"/home/plans"}>
                     <button
-                      className={activeButton === "plans" ? "active" : ""}
+                      className={nav.includes("plans") ? "active" : ""}
                       onClick={() => handleButtonClick("plans")}
                     >
                       PLANOS
@@ -87,8 +93,8 @@ export function Navbar() {
                 {(user.level == "Líder" || user.level == "adm") && (
                   <Link to={"/home/acessos"}>
                     <button
-                      className={activeButton === "access" ? "active" : ""}
-                      onClick={() => handleButtonClick("access")}
+                      className={nav.includes("acessos") ? "active" : ""}
+                      onClick={() => handleButtonClick("acessos")}
                     >
                       ACESSOS
                     </button>

@@ -20,7 +20,7 @@ import {
 import Cookies from "js-cookie";
 import { Input } from "../../components/Input/Input";
 import { TopButtons } from "../Employee/EmployeeStyled";
-import { DeleteClientStyled } from "./ClientStyled";
+import { DeleteClientStyled, Drive } from "./ClientStyled";
 import { userLogged } from "../../services/employeeService";
 import { UserContext } from "../../Context/UserContent";
 
@@ -297,6 +297,11 @@ export default function Client() {
                 {client.whatsapp}
               </a>
             </ProfileData>
+            {client.drive && (
+              <Drive target="_blank" href={client.drive}>
+                Link para o drive
+              </Drive>
+            )}
           </TopProfile>
           {update ? (
             <>
@@ -358,12 +363,16 @@ export default function Client() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="birthday">Data Início:</label>
+                  <label htmlFor="dateStart">Data Início:</label>
                   <Input
                     type="date"
                     name="dateStart"
                     defaultValue={client.dateStart}
                   />
+                </div>
+                <div>
+                  <label htmlFor="drive">Link Drive:</label>
+                  <Input type="text" name="drive" defaultValue={client.drive} />
                 </div>
                 <div>
                   <label htmlFor="socialMedia">Redes Sociais:</label>
@@ -472,34 +481,40 @@ export default function Client() {
                   <h4>Data Início:</h4>
                   <p>{formatDate(client.dateStart)}</p>
                 </div>
-                <div>
-                  <h4>Redes Sociais:</h4>
-                  {client.socialMedia
-                    ? client.socialMedia.map((item, index) => {
-                        const displayText = removeTexts(item, textsToRemove);
-                        return (
-                          <a target="_blank" href={item} key={index}>
-                            {displayText}
-                          </a>
-                        );
-                      })
-                    : null}
-                </div>
+                {client.socialMedia != "" && (
+                  <div>
+                    <h4>Redes Sociais:</h4>
+                    {client.socialMedia.map((item, index) => {
+                      const displayText = removeTexts(item, textsToRemove);
+                      return (
+                        <a target="_blank" href={item} key={index}>
+                          {displayText}
+                        </a>
+                      );
+                    })}
+                  </div>
+                )}
 
-                <div>
-                  <h4>GMB:</h4>
-                  {client.gmb
-                    ? client.gmb.map((item, index) => <p key={index}>{item}</p>)
-                    : null}
-                </div>
-                <div>
-                  <h4>Pages:</h4>
-                  {client.pages
-                    ? client.pages.map((item, index) => (
-                        <p key={index}>{item}</p>
-                      ))
-                    : null}
-                </div>
+                {client.gmb != "" && (
+                  <div>
+                    <h4>GMB:</h4>
+                    {client.gmb
+                      ? client.gmb.map((item, index) => (
+                          <p key={index}>{item}</p>
+                        ))
+                      : null}
+                  </div>
+                )}
+                {client.pages != "" && (
+                  <div>
+                    <h4>Pages:</h4>
+                    {client.pages
+                      ? client.pages.map((item, index) => (
+                          <p key={index}>{item}</p>
+                        ))
+                      : null}
+                  </div>
+                )}
               </ProfileBody>
             </>
           )}

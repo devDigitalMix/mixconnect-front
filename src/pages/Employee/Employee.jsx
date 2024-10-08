@@ -52,7 +52,8 @@ export function Employee() {
   async function handleUpdateAvatar(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData.entries());
+    const file = formData.get("avatar"); // Obtém o arquivo de imagem diretamente do FormData
+
     const allowedFormats = [
       "image/png",
       "image/jpeg",
@@ -60,12 +61,20 @@ export function Employee() {
       "image/webp",
       "image/svg+xml",
     ];
-    if (!allowedFormats.includes(data.avatar.type)) {
+
+    if (!allowedFormats.includes(file.type)) {
       alert("Formato de arquivo não permitido.");
       return;
     }
 
+    const maxSizeInBytes = 5 * 1024 * 1024;
+    if (file.size > maxSizeInBytes) {
+      alert("O arquivo é muito grande. O tamanho máximo permitido é 5 MB.");
+      return;
+    }
+
     try {
+      const data = Object.fromEntries(formData.entries());
       await UpdateEmployeeAvatar(data, employee.id);
       setUpdateAvatar(!updateAvatar);
       if (error) {

@@ -35,7 +35,7 @@ export async function updateTaskService(choreId, taskId, data) {
 }
 
 export async function changeTaskService(choreId, taskId, task2Id, data) {
-  await axios.patch(
+  const response = await axios.patch(
     `${baseURL}/chore/change/${choreId}/taskId/${taskId}/task2Id/${task2Id}`,
     data,
     {
@@ -44,6 +44,7 @@ export async function changeTaskService(choreId, taskId, task2Id, data) {
       },
     }
   );
+  return response;
 }
 
 export async function deleteTaskService(choreId, taskId) {

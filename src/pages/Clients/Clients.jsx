@@ -59,15 +59,16 @@ export function Clients() {
       return map;
     }, {});
 
-    const clientList = response.data.results.map((client) => {
-      return {
-        ...client,
-        plan: plansMap[client.plan] || "Plano desconhecido",
-      };
-    });
-
-    setSearch(false);
-    setClients(clientList);
+    if (response.data.results) {
+      const clientList = response.data.results.map((client) => {
+        return {
+          ...client,
+          plan: plansMap[client.plan] || "Plano desconhecido",
+        };
+      });
+      setSearch(false);
+      setClients(clientList);
+    }
   }
 
   async function getEmployees() {
@@ -173,6 +174,12 @@ export function Clients() {
     setAddClientModal(!addClientModal);
     getPlans();
     getEmployees();
+    formatValues();
+  }
+
+  function formatValues() {
+    const values = document.querySelectorAll(".formatValue");
+    console.log(values);
   }
 
   useEffect(() => {
@@ -199,7 +206,7 @@ export function Clients() {
           <div className="value">
             <input type="checkbox" name="value" id="value" />
             <span className="checkbox">
-              <img src="/valor.svg" alt="" />
+              <img src="/valor.svg" />
             </span>
             <label htmlFor="value">value</label>
           </div>
@@ -250,7 +257,7 @@ export function Clients() {
         {(user.level == "Líder" || user.level == "adm") && (
           <img
             src="/mais.svg"
-            className="img-effect"
+            className="img-effect prepareValue"
             alt="novo cliente"
             title="Novo Cliente"
             onClick={clickAddClient}
@@ -291,10 +298,6 @@ export function Clients() {
             <input type="text" name="name" defaultValue="Novo Cliente" />
             <div className="clientInfo">
               <div>
-                <label htmlFor="value">VALOR:</label>
-                <Input name="value" type="number" />
-              </div>
-              <div>
                 <label htmlFor="plan">PLANO:</label>
                 <select
                   name="plan"
@@ -307,6 +310,10 @@ export function Clients() {
                     </option>
                   ))}
                 </select>
+              </div>
+              <div>
+                <label htmlFor="value">VALOR:</label>
+                <Input name="value" type="number" />
               </div>
               <div>
                 <label htmlFor="gestor">GESTOR:</label>
@@ -339,6 +346,7 @@ export function Clients() {
                 <Input
                   name="adsValue"
                   type="number"
+                  className="formatValue"
                   value={formValues.adsValue}
                   onChange={(e) =>
                     setFormValues({ ...formValues, adsValue: e.target.value })

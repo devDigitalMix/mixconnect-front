@@ -59,7 +59,11 @@ export function Task(props) {
           title="Mover para cima"
           onClick={props.moverCima}
         />
-        <img src="/down-arrow.svg" title="Mover para baixo" />
+        <img
+          src="/down-arrow.svg"
+          title="Mover para baixo"
+          onClick={props.moverBaixo}
+        />
       </Arrows>
       {!updateStateModal ? (
         <span className={taskState} onClick={clickUpdateState}></span>

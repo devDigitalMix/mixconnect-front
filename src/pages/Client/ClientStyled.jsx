@@ -46,3 +46,9 @@ export const DeleteClientStyled = styled.form`
     }
   }
 `;
+
+export const Drive = styled.a`
+  margin-left: auto;
+  margin-right: 100px;
+  color: #a3a0f8;
+`;

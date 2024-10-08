@@ -15,6 +15,8 @@ export function Input({
   style,
   readOnly,
   register,
+  className,
+  onKeyDown,
 }) {
   const inputProps = {
     type,
@@ -28,6 +30,8 @@ export function Input({
     autoComplete,
     style,
     readOnly,
+    className,
+    onKeyDown,
   };
 
   return <InputSpace {...inputProps} {...(register ? register(name) : {})} />;

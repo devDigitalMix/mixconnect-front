@@ -41,6 +41,6 @@ export const CardStyled = styled.div`
     height: 100px;
     border-radius: 100%;
     object-fit: cover;
-    box-shadow: 0 0 0 2px var(--main);
+    /* box-shadow: 0 0 0 2px var(--main); */
   }
 `;

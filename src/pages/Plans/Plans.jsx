@@ -51,6 +51,15 @@ export default function Plans() {
     }
   }
 
+  // function format(e) {
+  //   let value = e.target.value;
+  //   value = value.replace(/\D/g, ""); // Remove todos os caracteres que não são números
+  //   value = value.replace(/\B(?=(\d{2})+(?!\d))/g, "."); // Adiciona pontos como separadores de milhares a cada 3 dígitos
+
+  //   e.target.value = value;
+  //   console.log(value);
+  // }
+
   async function updatePlan(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -155,7 +164,12 @@ export default function Plans() {
           <input type="text" name="name" defaultValue={plan.name} />
           <div>
             <label htmlFor="adsValue">Valor ADS:</label>
-            <input type="text" name="adsValue" defaultValue={plan.adsValue} />
+            <input
+              type="text"
+              name="adsValue"
+              defaultValue={plan.adsValue}
+              // onKeyDown={format}
+            />
           </div>
           <div>
             <label htmlFor="report">Relatório:</label>
