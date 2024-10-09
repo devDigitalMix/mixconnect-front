@@ -16,7 +16,10 @@ export const GlobalStyled = createGlobalStyle`
       #c5c3ff 0%,
       #a3a0f8 50%,
       #4441c8 100%
-    );;
+    );
+  --cantoEsq: radial-gradient(circle farthest-corner at top left, #807DF0 0%, var(--dark) 32%, var(--dark) 83%, #807DF0 100%);
+  --cantoDir: radial-gradient(circle farthest-corner at top right, #807DF0 0%, var(--dark) 32%, var(--dark) 83%, #807DF0 100%);
+
 }
 ::selection {
   background-color: var(--main);
@@ -25,7 +28,7 @@ export const GlobalStyled = createGlobalStyle`
 html {
   box-sizing: border-box;
   scroll-behavior: smooth;
-  background-color: var(--dark);
+  background-color: #1E1E1E;
   cursor: default;
   /* background: url("/bg.webp") no-repeat center center; */
   /* background-size: cover; */
@@ -57,7 +60,7 @@ body {
   margin: 0;
   position: relative;
 }
-#roxo {
+#roxo, #roxo2 {
   display: block;
   position: absolute;
   bottom: 0;
@@ -66,6 +69,12 @@ body {
   height: 1px;
   width: 1px;
   box-shadow: 0 0 300px 150px var(--main);
+}
+#roxo2{
+  bottom: inherit;
+  top: 0;
+  left: 30%;
+  box-shadow: 0 0 850px 150px var(--main);
 }
 #verde {
   display: block;

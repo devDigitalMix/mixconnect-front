@@ -351,14 +351,15 @@ export function Employee() {
               <h4>Whatsapp:</h4>
               <p>{employee.whatsapp}</p>
             </div>
-            <div>
-              <h4>Redes Sociais:</h4>
-              {employee.socialMedia
-                ? employee.socialMedia.map((item, index) => (
+            {employee.socialMedia != "" && (
+              <div>
+                <h4>Redes Sociais:</h4>
+                {employee.socialMedia &&
+                  employee.socialMedia.map((item, index) => (
                     <p key={index}>{item}</p>
-                  ))
-                : null}
-            </div>
+                  ))}
+              </div>
+            )}
           </ProfileBody>
         )}
       </ProfileStyled>
