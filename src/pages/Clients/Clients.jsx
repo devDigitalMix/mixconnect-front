@@ -27,6 +27,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { searchSchema } from "../../schemas/searchSchema";
 import { InputNav } from "../../components/Navbar/NavbarStyled";
 import { UserContext } from "../../Context/UserContent";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { ClientSkeleton } from "../../components/ClientSkeleton/ClientSkeleton";
 
 export function Clients() {
   const { user, setUser } = useContext(UserContext);
@@ -35,6 +38,7 @@ export function Clients() {
   const [employees, setEmployees] = useState([]);
   const [addClientModal, setAddClientModal] = useState(false);
   const [filtro, setFiltro] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [formValues, setFormValues] = useState({
     adsValue: "",
@@ -86,6 +90,7 @@ export function Clients() {
   }
 
   async function handleFilter(event) {
+    setIsLoading(true);
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
@@ -110,14 +115,17 @@ export function Clients() {
       setClients(clientList);
       setFiltro(false);
       setSearch(true);
+      setIsLoading(false);
     } else {
       alert("Nenhum cliente se encaixa no filtro");
       setFiltro(false);
       setSearch(false);
+      setIsLoading(false);
     }
   }
 
   async function onSearch(data) {
+    setIsLoading(true);
     const { name } = data;
     const response = await getClientsByName(name);
     const plansResponse = await getPlansService();
@@ -135,6 +143,7 @@ export function Clients() {
     setClients(clientList);
     setSearch(true);
     reset();
+    setIsLoading(false);
   }
 
   async function createClient(event) {
@@ -247,14 +256,17 @@ export function Clients() {
                 ))}
             </select>
           </div>
-
-          <button type="submit" className="btn">
-            Pesquisar
-          </button>
+          {!isLoading ? (
+            <button type="submit" className="btn">
+              Pesquisar
+            </button>
+          ) : (
+            <div className="custom-loader"></div>
+          )}
         </FiltroModal>
       )}
       <ClientHeader>
-        {(user.level == "Líder" || user.level == "adm") && (
+        {(user.level == "Líder" || user.level == "Admin") && (
           <img
             src="/mais.svg"
             className="img-effect prepareValue"
@@ -283,6 +295,7 @@ export function Clients() {
               placeholder="Procurar Cliente"
             />
           </InputNav>
+          {isLoading && <div className="custom-loader"></div>}
           <img
             src="/filters.svg"
             alt="mais opções"
@@ -295,7 +308,7 @@ export function Clients() {
       <ClientBody>
         {addClientModal && (
           <AddClientModal onSubmit={createClient}>
-            <input type="text" name="name" defaultValue="Novo Cliente" />
+            <Input type="text" name="name" defaultValue="Novo Cliente"></Input>
             <div className="clientInfo">
               <div>
                 <label htmlFor="plan">PLANO:</label>
@@ -348,6 +361,7 @@ export function Clients() {
                   type="number"
                   className="formatValue"
                   value={formValues.adsValue}
+                  placeholder="valor ads"
                   onChange={(e) =>
                     setFormValues({ ...formValues, adsValue: e.target.value })
                   }
@@ -379,7 +393,7 @@ export function Clients() {
           </AddClientModal>
         )}
 
-        {clients &&
+        {clients.length > 0 ? (
           clients.map((client, index) => (
             <Link to={"/home/client/" + client.id} key={index}>
               <AClient>
@@ -409,7 +423,10 @@ export function Clients() {
                 </ClientContent>
               </AClient>
             </Link>
-          ))}
+          ))
+        ) : (
+          <ClientSkeleton cards={6}></ClientSkeleton>
+        )}
       </ClientBody>
     </ClientsStyled>
   );

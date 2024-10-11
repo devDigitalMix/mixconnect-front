@@ -13,6 +13,7 @@ import { useState } from "react";
 
 export function Authentication() {
   const [pass, setPass] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const {
@@ -22,14 +23,17 @@ export function Authentication() {
   } = useForm({ resolver: zodResolver(signinSchema) });
 
   async function inHandleSubmit(data) {
+    setIsLoading(true);
     try {
       const response = await signin(data);
       Cookies.set("token", response.data, { expires: 7 });
+      setIsLoading(false);
       navigate("/home");
     } catch (error) {
       if (error.response.data == "Invalid password") {
         setErrorMessage("E-mail ou senha estão incorretos");
       }
+      setIsLoading(false);
       console.log(error);
     }
   }
@@ -80,7 +84,11 @@ export function Authentication() {
               )}
               {errorMessage && <ErrorSpan>{errorMessage}</ErrorSpan>}
             </div>
-            <Button type="submit" text="Entrar" />
+            {!isLoading ? (
+              <Button type="submit" text="Entrar" />
+            ) : (
+              <div className="custom-loader"></div>
+            )}
           </form>
         </Section>
       </div>

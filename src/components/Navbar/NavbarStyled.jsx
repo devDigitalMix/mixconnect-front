@@ -52,11 +52,11 @@ export const NavMenu = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   align-items: center;
-  gap: 5px 20px;
+  gap: 5px 30px;
   button {
-    font-size: 1.05rem;
+    font-size: 1.25rem;
+    letter-spacing: 1px;
     font-weight: 500;
-    font-family: var(--font);
     &::after {
       height: 2px;
       margin: 0 auto;
@@ -104,19 +104,25 @@ export const ErrorSpan = styled.span`
 `;
 
 export const InputNav = styled.div`
+  display: flex;
+  gap: 5px;
   input {
     background-color: #f9f8fe !important;
+    border: none;
     color: var(--dark);
     outline: none;
-    padding: 8px 10px 5px;
+    padding: 8px 10px;
     max-height: 37px;
     font-weight: 600;
-    border-radius: 6px;
+    border-radius: 13px;
     width: 100%;
     max-width: 300px;
     resize: vertical;
+    font-family: var(--font2);
     &::placeholder {
       font-style: italic;
+      color: var(--main);
+      font-weight: 400;
     }
   }
 `;

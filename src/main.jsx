@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import ReactDOM from "react-dom/client";
 // import App from "./App.jsx";
@@ -16,6 +17,8 @@ import { Clients } from "./pages/Clients/Clients.jsx";
 import Plans from "./pages/Plans/Plans.jsx";
 import Client from "./pages/Client/Client.jsx";
 import Logins from "./pages/Logins/Logins.jsx";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const router = createBrowserRouter([
   {
@@ -73,8 +76,10 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <GlobalStyled />
-    <UserProvider>
-      <RouterProvider router={router} />
-    </UserProvider>
+    <SkeletonTheme baseColor="#3b3b3b" highlightColor="#807DF0" duration={0.5}>
+      <UserProvider>
+        <RouterProvider router={router} />
+      </UserProvider>
+    </SkeletonTheme>
   </React.StrictMode>
 );

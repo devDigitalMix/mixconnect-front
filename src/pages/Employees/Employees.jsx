@@ -22,13 +22,14 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputNav } from "../../components/Navbar/NavbarStyled.jsx";
 import { searchSchema } from "../../schemas/searchSchema.js";
+import { SkeletonCard } from "../../components/SkeletonCard/SkeletonCard.jsx";
 
 export default function Employees() {
   const { user, setUser } = useContext(UserContext);
   const [employees, setEmployees] = useState([]);
   const [createEmployeeModal, setCreateEmployeeModal] = useState(false);
   const [search, setSearch] = useState(false);
-  const [felipe, setFelipe] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -40,17 +41,13 @@ export default function Employees() {
   });
 
   async function onSearch(data) {
+    setIsLoading(true);
     const { name } = data;
-    const validNames = ["fe", "fel", "feli", "felip", "felipe"];
 
-    if (validNames.includes(name.toLowerCase())) {
-      setFelipe(true);
-    } else {
-      setFelipe(false);
-    }
     const response = await getEmployeesByName(name);
     setEmployees(response.data.results);
     setSearch(true);
+    setIsLoading(false);
     reset();
   }
 
@@ -58,7 +55,7 @@ export default function Employees() {
     const response = await getAllEmployees();
     setEmployees(response.data.results);
     setSearch(false);
-    setFelipe(false);
+    setIsLoading(false);
   }
 
   function handleClickCreate() {
@@ -82,13 +79,7 @@ export default function Employees() {
   return (
     <>
       <EmployeesHeader>
-        {felipe && (
-          <Felipe>
-            <h2>O Felipe é calvo</h2>
-            <img src="/felipe.jpg" />
-          </Felipe>
-        )}
-        {(user.level == "Líder" || user.level == "adm") && (
+        {(user.level == "Líder" || user.level == "Admin") && (
           <img
             src="/mais.svg"
             alt="Novo funcionário"
@@ -116,6 +107,7 @@ export default function Employees() {
               type="text"
               placeholder="Procurar Funcionário"
             />
+            {isLoading && <div className="custom-loader"></div>}
           </InputNav>
         </form>
       </EmployeesHeader>
@@ -126,7 +118,7 @@ export default function Employees() {
         />
       )}
       <EmployeeBody>
-        {employees &&
+        {employees.length > 0 ? (
           employees.map((item) => (
             <Link key={item.id} to={"/home/employee/" + item.id}>
               <EmployeeContainer>
@@ -138,7 +130,10 @@ export default function Employees() {
                 />
               </EmployeeContainer>
             </Link>
-          ))}
+          ))
+        ) : (
+          <SkeletonCard cards={8}></SkeletonCard>
+        )}
       </EmployeeBody>
     </>
   );

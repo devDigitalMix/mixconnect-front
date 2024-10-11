@@ -15,6 +15,7 @@ export const HomeBody = styled.section`
 export const MainBody = styled.div`
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
 `;
 export const GuardaMainData = styled.article`
@@ -39,6 +40,13 @@ export const MainData = styled.div`
     font-weight: 900;
     line-height: 1em;
     font-size: 4.37rem;
+    position: relative;
+    img {
+      position: absolute;
+      right: -10px;
+      bottom: 50%;
+      transform: translate(100%, 50%);
+    }
   }
   h2 {
     font-weight: 500;
@@ -97,10 +105,12 @@ export const BodyInfo = styled.div`
   background-color: var(--dark);
   padding: 20px;
   width: 100%;
+  border-radius: 7px;
 `;
 export const GuardaBodyInfo = styled.div`
   background: var(--cantoDir);
   padding: 2px;
   max-width: 512px;
   width: 100%;
+  border-radius: 8px;
 `;

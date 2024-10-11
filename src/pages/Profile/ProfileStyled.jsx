@@ -114,6 +114,7 @@ export const ProfileData = styled.div`
   gap: 1px;
   h2 {
     font-size: 1.4rem;
+    width: 100%;
     font-family: var(--font);
   }
   h3,

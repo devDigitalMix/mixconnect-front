@@ -11,6 +11,7 @@ export const GlobalStyled = createGlobalStyle`
   --danger: #D20E0E;
   --dark: #141415;
   --font: Audiowide;
+  --font2: IBM Plex Mono;
   --linear: linear-gradient(
       to right,
       #c5c3ff 0%,
@@ -289,6 +290,21 @@ svg path {
       transform: scale(0.9);
       transition: transform 0.1s;
     }
+}
+
+.custom-loader {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: 
+    radial-gradient(farthest-side,#766DF4 94%,#0000) top/6px 6px no-repeat,
+    conic-gradient(#0000 30%,#766DF4);
+  -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 6px),#000 0);
+  animation:s3 1s infinite linear;
+}
+
+@keyframes s3{ 
+  100%{transform: rotate(1turn)}
 }
 
 ::-webkit-scrollbar {

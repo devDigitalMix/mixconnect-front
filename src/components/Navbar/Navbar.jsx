@@ -11,11 +11,13 @@ import { userLogged } from "../../services/employeeService";
 import { useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { UserContext } from "../../Context/UserContent";
+import Skeleton from "react-loading-skeleton";
 
 export function Navbar() {
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
   const [nav, setNav] = useState("");
+  const [findingUser, setFindingUser] = useState(true);
 
   const [activeButton, setActiveButton] = useState(null);
 
@@ -23,6 +25,7 @@ export function Navbar() {
     try {
       const response = await userLogged();
       setUser(response.data);
+      setFindingUser(false);
     } catch (error) {
       console.log(error);
     }
@@ -50,37 +53,41 @@ export function Navbar() {
 
   return (
     <>
-      {user && (
-        <Header>
-          <div>
-            <Nav>
-              <Link to={"/home"} onClick={() => handleButtonClick("")}>
-                <img src="/logo.svg" alt="MixConnect" draggable="false" />
+      <Header>
+        <div>
+          <Nav>
+            <Link to={"/home"} onClick={() => handleButtonClick("")}>
+              <img src="/logo.svg" alt="MixConnect" draggable="false" />
+            </Link>
+            <NavMenu>
+              <Link to={"/home/clients"}>
+                <button
+                  className={nav.includes("clients") ? "active" : ""}
+                  onClick={() => handleButtonClick("clients")}
+                >
+                  CLIENTES
+                </button>
               </Link>
-              <NavMenu>
-                <Link to={"/home/clients"}>
-                  <button
-                    className={nav.includes("clients") ? "active" : ""}
-                    onClick={() => handleButtonClick("clients")}
-                  >
-                    CLIENTES
-                  </button>
-                </Link>
-                <Link to={"/home/employees"}>
-                  <button
-                    className={nav.includes("employees") ? "active" : ""}
-                    onClick={() => handleButtonClick("employees")}
-                  >
-                    FUNCIONÁRIOS
-                  </button>
-                </Link>
-                {/* <button
+              <Link to={"/home/employees"}>
+                <button
+                  className={nav.includes("employees") ? "active" : ""}
+                  onClick={() => handleButtonClick("employees")}
+                >
+                  FUNCIONÁRIOS
+                </button>
+              </Link>
+              {/* <button
                 className={activeButton === "playbook" ? "active" : ""}
                 onClick={() => handleButtonClick("playbook")}
               >
                 PLAYBOOK
               </button> */}
-                {(user.level == "Líder" || user.level == "adm") && (
+              {findingUser ? (
+                <>
+                  <Skeleton width="80px" />
+                </>
+              ) : (
+                (user.level == "Líder" || user.level == "Admin") && (
                   <Link to={"/home/plans"}>
                     <button
                       className={nav.includes("plans") ? "active" : ""}
@@ -89,8 +96,14 @@ export function Navbar() {
                       PLANOS
                     </button>
                   </Link>
-                )}
-                {(user.level == "Líder" || user.level == "adm") && (
+                )
+              )}
+              {findingUser ? (
+                <>
+                  <Skeleton width="90px" />
+                </>
+              ) : (
+                (user.level == "Líder" || user.level == "Admin") && (
                   <Link to={"/home/acessos"}>
                     <button
                       className={nav.includes("acessos") ? "active" : ""}
@@ -99,23 +112,24 @@ export function Navbar() {
                       ACESSOS
                     </button>
                   </Link>
-                )}
-              </NavMenu>
-              <PerfilMenu>
-                <Link
-                  to={"/home/profile"}
-                  onClick={() => handleButtonClick("")}
-                >
-                  <img src={user.avatar} id="perfil-img" draggable="false" />
-                </Link>
-                <button onClick={signout}>
-                  <img src="/logout.svg" alt="Sair" title="Sair" />
-                </button>
-              </PerfilMenu>
-            </Nav>
-          </div>
-        </Header>
-      )}
+                )
+              )}
+            </NavMenu>
+            <PerfilMenu>
+              <Link to={"/home/profile"} onClick={() => handleButtonClick("")}>
+                <img
+                  src={user.avatar || "/avatar-default.png"}
+                  id="perfil-img"
+                  draggable="false"
+                />
+              </Link>
+              <button onClick={signout}>
+                <img src="/logout.svg" alt="Sair" title="Sair" />
+              </button>
+            </PerfilMenu>
+          </Nav>
+        </div>
+      </Header>
       <Outlet />
     </>
   );

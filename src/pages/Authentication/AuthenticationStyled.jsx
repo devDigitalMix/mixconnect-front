@@ -53,7 +53,7 @@ export const Section = styled.section`
   color: white;
   width: 100%;
   min-height: 573px;
-  div {
+  div:not(.custom-loader) {
     max-width: 375px;
     width: 100%;
     position: relative;

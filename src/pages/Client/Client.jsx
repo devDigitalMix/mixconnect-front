@@ -23,6 +23,7 @@ import { TopButtons } from "../Employee/EmployeeStyled";
 import { DeleteClientStyled, Drive } from "./ClientStyled";
 import { userLogged } from "../../services/employeeService";
 import { UserContext } from "../../Context/UserContent";
+import Skeleton from "react-loading-skeleton";
 
 export default function Client() {
   const { id } = useParams();
@@ -218,7 +219,7 @@ export default function Client() {
               </button>
             </DeleteClientStyled>
           )}
-          {(user.level == "Líder" || user.level == "adm") && (
+          {(user.level == "Líder" || user.level == "Admin") && (
             <TopButtons>
               <img
                 src="/exclude.svg"
@@ -260,7 +261,7 @@ export default function Client() {
                 id="avatarImg"
                 draggable="false"
               />
-              {(user.level == "Líder" || user.level == "adm") && (
+              {(user.level == "Líder" || user.level == "Admin") && (
                 <UploadAvatar
                   onSubmit={handleUpdateAvatar}
                   encType="multipart/form-data"
@@ -287,14 +288,14 @@ export default function Client() {
               )}
             </ProfileAvatar>
             <ProfileData>
-              <h2>{client.name}</h2>
+              <h2>{client.name || <Skeleton width="200px" />}</h2>
               <a
                 target="_blank"
                 href={
                   "https://api.whatsapp.com/send?phone=55" + client.whatsapp
                 }
               >
-                {client.whatsapp}
+                {client.whatsapp || <Skeleton width="150px" />}
               </a>
             </ProfileData>
             {client.drive && (
@@ -451,27 +452,39 @@ export default function Client() {
                 </div>
                 <div>
                   <h4>Valor Contrato:</h4>
-                  <p>R$ {client.adsValue}</p>
+                  <p>R$ {client.value || <Skeleton width="200px" />}</p>
                 </div>
                 <div>
                   <h4>CNPJ:</h4>
-                  <p>{client.cnpj}</p>
+                  <p>{client.cnpj || <Skeleton width="200px" />}</p>
                 </div>
                 <div>
                   <h4>Valor ADS:</h4>
-                  <p>{client.adsValue}</p>
+                  <p>
+                    {client.adsValue >= 0 ? (
+                      client.adsValue
+                    ) : (
+                      <Skeleton width="200px" />
+                    )}
+                  </p>
                 </div>
                 <div>
                   <h4>Gestor:</h4>
-                  <p>{client.gestor}</p>
+                  <p>{client.gestor || <Skeleton width="200px" />}</p>
                 </div>
                 <div>
                   <h4>CS:</h4>
-                  <p>{client.cs}</p>
+                  <p>{client.cs || <Skeleton width="200px" />}</p>
                 </div>
                 <div>
                   <h4>Criativos:</h4>
-                  <p>{client.posts}</p>
+                  <p>
+                    {client.posts >= 0 ? (
+                      client.posts
+                    ) : (
+                      <Skeleton width="200px" />
+                    )}
+                  </p>
                 </div>
                 <div>
                   <h4>E-mail:</h4>
@@ -479,9 +492,11 @@ export default function Client() {
                 </div>
                 <div>
                   <h4>Data Início:</h4>
-                  <p>{formatDate(client.dateStart)}</p>
+                  <p>
+                    {formatDate(client.dateStart) || <Skeleton width="200px" />}
+                  </p>
                 </div>
-                {client.socialMedia != "" && (
+                {client.socialMedia && client.socialMedia != "" && (
                   <div>
                     <h4>Redes Sociais:</h4>
                     {client.socialMedia.map((item, index) => {
@@ -495,7 +510,7 @@ export default function Client() {
                   </div>
                 )}
 
-                {client.gmb != "" && (
+                {client.gmb && client.gmb != "" && (
                   <div>
                     <h4>GMB:</h4>
                     {client.gmb
@@ -505,7 +520,7 @@ export default function Client() {
                       : null}
                   </div>
                 )}
-                {client.pages != "" && (
+                {client.pages && client.pages != "" && (
                   <div>
                     <h4>Pages:</h4>
                     {client.pages

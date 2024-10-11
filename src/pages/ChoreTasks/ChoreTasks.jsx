@@ -23,11 +23,13 @@ import { Task } from "../../components/Task/Task";
 import { Input } from "../../components/Input/Input";
 import { excludeChore, userLogged } from "../../services/employeeService";
 import { UserContext } from "../../Context/UserContent";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export function ChoreTasks() {
   const { id } = useParams();
   const [chore, setChore] = useState({});
-  const [taskList, setTaskList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [createTaskModal, setCreateTaskModal] = useState(false);
   const [excludeModal, setExcludeModal] = useState(false);
   const { user, setUser } = useContext(UserContext);
@@ -37,6 +39,7 @@ export function ChoreTasks() {
     try {
       const response = await getChoreById(id);
       setChore(response.data);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -188,13 +191,16 @@ export function ChoreTasks() {
           />
         </ChoreTasksButtons>
         <form onSubmit={updateChoreTitle}>
-          <input
-            type="text"
-            name="title"
-            id="titleUpdate"
-            defaultValue={chore.title}
-          />
+          {chore.title ? (
+            <input
+              type="text"
+              name="title"
+              id="titleUpdate"
+              defaultValue={chore.title}
+            />
+          ) : null}
         </form>
+
         <ChoreTaskBtn2>
           <img
             src="/exclude.svg"

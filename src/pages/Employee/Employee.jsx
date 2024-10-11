@@ -23,6 +23,8 @@ import { Delete } from "../../components/Delete/Delete";
 import { Input } from "../../components/Input/Input";
 import { Label } from "../../components/Label/Label";
 import { ErrorSpan } from "../../components/ErrorSpan/ErrorSpan";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export function Employee() {
   const { id } = useParams();
@@ -123,6 +125,9 @@ export function Employee() {
     if (!data.birthday) {
       data.birthday = employee.birthday;
     }
+    if (data.password == "") {
+      data.password = undefined;
+    }
     const requiredFields = ["name", "role", "whatsapp", "desc"];
     for (let field of requiredFields) {
       if (!data[field] || data[field].trim() === "") {
@@ -187,7 +192,8 @@ export function Employee() {
             func={handleDeleteClick}
           />
         )}
-        {(user.level == "Líder" || user.level == "adm") && (
+        {((user.level == "Líder" && employee.level == "Base") ||
+          user.level == "Admin") && (
           <TopButtons>
             <img
               src="/exclude.svg"
@@ -225,7 +231,7 @@ export function Employee() {
               id="avatarImg"
               draggable="false"
             />
-            {(user.level == "Líder" || user.level == "adm") && (
+            {(user.level == "Líder" || user.level == "Admin") && (
               <UploadAvatar
                 onSubmit={handleUpdateAvatar}
                 encType="multipart/form-data"
@@ -252,9 +258,9 @@ export function Employee() {
             )}
           </ProfileAvatar>
           <ProfileData>
-            <h4>{employee.level}</h4>
-            <h2>{employee.name}</h2>
-            <h3>{employee.email}</h3>
+            <h4>{employee.level || <Skeleton width="70px" />}</h4>
+            <h2>{employee.name || <Skeleton width="200px" />}</h2>
+            <h3>{employee.email || <Skeleton width="200px" />}</h3>
           </ProfileData>
           {musicLink != "" && (
             <iframe
@@ -307,6 +313,12 @@ export function Employee() {
                 <Label htmlFor="music" text="Link da Música:" />
                 <Input type="text" name="music" defaultValue={employee.music} />
               </div>
+              {user.level == "Admin" && (
+                <div>
+                  <Label htmlFor="password" text="Senha:" />
+                  <Input type="text" name="password" />
+                </div>
+              )}
               <div>
                 <Label htmlFor="socialMedia" text="Redes Sociais:" />
                 {socialMedia.map((item, index) => (
@@ -337,19 +349,21 @@ export function Employee() {
           <ProfileBody>
             <div>
               <h4>Cargo:</h4>
-              <p>{employee.role}</p>
+              <p>{employee.role || <Skeleton width="200px" />}</p>
             </div>
             <div>
               <h4>Descrição:</h4>
-              <p>{employee.desc}</p>
+              <p>{employee.desc || <Skeleton width="200px" />}</p>
             </div>
             <div>
               <h4>Aniversário:</h4>
-              <p>{formatDate(employee.birthday)}</p>
+              <p>
+                {formatDate(employee.birthday) || <Skeleton width="200px" />}
+              </p>
             </div>
             <div>
               <h4>Whatsapp:</h4>
-              <p>{employee.whatsapp}</p>
+              <p>{employee.whatsapp || <Skeleton width="200px" />}</p>
             </div>
             {employee.socialMedia != "" && (
               <div>

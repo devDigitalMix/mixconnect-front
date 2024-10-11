@@ -1,0 +1,112 @@
+Date : 2024-10-10 16:42:25
+Directory : c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src
+Total : 57 files,  5573 codes, 61 comments, 358 blanks, all 5992 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| JavaScript JSX |         48 |      5,217 |         50 |        304 |      5,571 |
+| JavaScript     |          8 |        355 |         11 |         54 |        420 |
+| XML            |          1 |          1 |          0 |          0 |          1 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                           | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                              |         57 |      5,573 |         61 |        358 |      5,992 |
+| . (Files)                                                                                                      |          3 |        409 |          2 |          7 |        418 |
+| Context                                                                                                        |          1 |         13 |          1 |          5 |         19 |
+| assets                                                                                                         |          1 |          1 |          0 |          0 |          1 |
+| components                                                                                                     |         22 |      1,010 |         29 |         78 |      1,117 |
+| components\Button                                                                                              |          2 |         27 |          1 |          4 |         32 |
+| components\Card                                                                                                |          2 |         61 |          3 |          5 |         69 |
+| components\CreateEmployee                                                                                      |          2 |        171 |          2 |         12 |        185 |
+| components\Delete                                                                                              |          2 |         95 |          1 |          6 |        102 |
+| components\ErrorSpan                                                                                           |          2 |         13 |          1 |          4 |         18 |
+| components\Input                                                                                               |          2 |         54 |          2 |          5 |         61 |
+| components\Label                                                                                               |          2 |         10 |          2 |          5 |         17 |
+| components\Navbar                                                                                              |          2 |        244 |         11 |         14 |        269 |
+| components\SkeletonCard                                                                                        |          2 |         19 |          3 |          4 |         26 |
+| components\Task                                                                                                |          2 |        226 |          2 |         14 |        242 |
+| components\UpdateEmployee                                                                                      |          2 |         90 |          1 |          5 |         96 |
+| pages                                                                                                          |         22 |      3,785 |         18 |        214 |      4,017 |
+| pages\Authentication                                                                                           |          2 |        156 |          1 |         10 |        167 |
+| pages\ChoreTasks                                                                                               |          2 |        310 |          2 |         23 |        335 |
+| pages\Chores                                                                                                   |          2 |        179 |          1 |         14 |        194 |
+| pages\Client                                                                                                   |          2 |        552 |          1 |         28 |        581 |
+| pages\Clients                                                                                                  |          2 |        590 |          1 |         27 |        618 |
+| pages\Employee                                                                                                 |          2 |        361 |          0 |         23 |        384 |
+| pages\Employees                                                                                                |          2 |        190 |          1 |         14 |        205 |
+| pages\Home                                                                                                     |          2 |        192 |          1 |         12 |        205 |
+| pages\Logins                                                                                                   |          2 |        360 |          1 |         17 |        378 |
+| pages\Plans                                                                                                    |          2 |        374 |          9 |         20 |        403 |
+| pages\Profile                                                                                                  |          2 |        521 |          0 |         26 |        547 |
+| schemas                                                                                                        |          2 |         16 |          0 |          4 |         20 |
+| services                                                                                                       |          6 |        339 |         11 |         50 |        400 |
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                                                       | language       | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\App.jsx                                            | JavaScript JSX |          5 |          0 |          2 |          7 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\Context\UserContent.jsx                            | JavaScript JSX |         13 |          1 |          5 |         19 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\GlobalStyled.jsx                                   | JavaScript JSX |        323 |          0 |          2 |        325 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\assets\react.svg                                   | XML            |          1 |          0 |          0 |          1 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Button\Button.jsx                       | JavaScript JSX |          8 |          1 |          2 |         11 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Button\ButtonStyled.jsx                 | JavaScript JSX |         19 |          0 |          2 |         21 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Card\Card.jsx                           | JavaScript JSX |         17 |          3 |          2 |         22 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Card\CardStyled.jsx                     | JavaScript JSX |         44 |          0 |          3 |         47 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\CreateEmployee\CreateEmployee.jsx       | JavaScript JSX |         99 |          2 |          8 |        109 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\CreateEmployee\CreateEmployeeStyled.jsx | JavaScript JSX |         72 |          0 |          4 |         76 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Delete\Delete.jsx                       | JavaScript JSX |         51 |          1 |          4 |         56 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Delete\DeleteStyled.jsx                 | JavaScript JSX |         44 |          0 |          2 |         46 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\ErrorSpan\ErrorSpan.jsx                 | JavaScript JSX |          4 |          1 |          2 |          7 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\ErrorSpan\ErrorSpanStyled.jsx           | JavaScript JSX |          9 |          0 |          2 |         11 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Input\Input.jsx                         | JavaScript JSX |         34 |          2 |          3 |         39 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Input\InputStyled.jsx                   | JavaScript JSX |         20 |          0 |          2 |         22 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Label\Label.jsx                         | JavaScript JSX |          4 |          2 |          3 |          9 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Label\LabelStyled.jsx                   | JavaScript JSX |          6 |          0 |          2 |          8 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Navbar\Navbar.jsx                       | JavaScript JSX |        104 |         10 |          9 |        123 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Navbar\NavbarStyled.jsx                 | JavaScript JSX |        140 |          1 |          5 |        146 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\SkeletonCard\SkeletonCard.jsx           | JavaScript JSX |         19 |          3 |          3 |         25 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\SkeletonCard\SkeletonCardStyled.jsx     | JavaScript JSX |          0 |          0 |          1 |          1 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Task\Task.jsx                           | JavaScript JSX |        106 |          2 |          8 |        116 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Task\TaskStyled.jsx                     | JavaScript JSX |        120 |          0 |          6 |        126 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\UpdateEmployee\UpdateEmployee.jsx       | JavaScript JSX |         44 |          1 |          3 |         48 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\UpdateEmployee\UpdateEmployeeStyled.jsx | JavaScript JSX |         46 |          0 |          2 |         48 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\main.jsx                                           | JavaScript JSX |         81 |          2 |          3 |         86 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Authentication\Authentication.jsx            | JavaScript JSX |         82 |          1 |          7 |         90 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Authentication\AuthenticationStyled.jsx      | JavaScript JSX |         74 |          0 |          3 |         77 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\ChoreTasks\ChoreTasks.jsx                    | JavaScript JSX |        212 |          2 |         17 |        231 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\ChoreTasks\ChoreTasksStyled.jsx              | JavaScript JSX |         98 |          0 |          6 |        104 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Chores\Chores.jsx                            | JavaScript JSX |        113 |          1 |         10 |        124 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Chores\ChoresStyled.jsx                      | JavaScript JSX |         66 |          0 |          4 |         70 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Client\Client.jsx                            | JavaScript JSX |        501 |          1 |         24 |        526 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Client\ClientStyled.jsx                      | JavaScript JSX |         51 |          0 |          4 |         55 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Clients\Clients.jsx                          | JavaScript JSX |        400 |          1 |         20 |        421 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Clients\ClientsStyled.jsx                    | JavaScript JSX |        190 |          0 |          7 |        197 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Employee\Employee.jsx                        | JavaScript JSX |        352 |          0 |         21 |        373 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Employee\EmployeeStyled.jsx                  | JavaScript JSX |          9 |          0 |          2 |         11 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Employees\Employees.jsx                      | JavaScript JSX |        144 |          1 |         10 |        155 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Employees\EmployeesStyled.jsx                | JavaScript JSX |         46 |          0 |          4 |         50 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Home\Home.jsx                                | JavaScript JSX |         91 |          1 |          6 |         98 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Home\HomeStyled.jsx                          | JavaScript JSX |        101 |          0 |          6 |        107 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Logins\Logins.jsx                            | JavaScript JSX |        271 |          1 |         14 |        286 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Logins\LoginsStyled.jsx                      | JavaScript JSX |         89 |          0 |          3 |         92 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Plans\PlanStyled.jsx                         | JavaScript JSX |        163 |          0 |          5 |        168 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Plans\Plans.jsx                              | JavaScript JSX |        211 |          9 |         15 |        235 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Profile\Profile.jsx                          | JavaScript JSX |        301 |          0 |         17 |        318 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Profile\ProfileStyled.jsx                    | JavaScript JSX |        220 |          0 |          9 |        229 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\schemas\searchSchema.js                            | JavaScript     |          9 |          0 |          2 |         11 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\schemas\signinSchema.js                            | JavaScript     |          7 |          0 |          2 |          9 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\services\choreService.js                           | JavaScript     |         60 |          2 |          8 |         70 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\services\clientService.js                          | JavaScript     |         77 |          1 |          9 |         87 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\services\employeeService.js                        | JavaScript     |         91 |          2 |         13 |        106 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\services\loginService.js                           | JavaScript     |         54 |          2 |          8 |         64 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\services\ltvService.js                             | JavaScript     |         14 |          2 |          5 |         21 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\services\planService.js                            | JavaScript     |         43 |          2 |          7 |         52 |
+| Total                                                                                                          |                |      5,573 |         61 |        358 |      5,992 |
++----------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+

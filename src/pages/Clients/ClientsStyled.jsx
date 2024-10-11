@@ -22,9 +22,8 @@ export const ClientHeader = styled.div`
   }
 `;
 export const ClientBody = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 40px;
   align-items: center;
   width: 100%;
@@ -38,8 +37,9 @@ export const AClient = styled.article`
   background: var(--linear);
   padding: 1px;
   border-radius: 12px;
-  min-height: 267px;
+  max-width: 370px;
   width: 100%;
+  min-height: 267px;
 `;
 
 export const ClientContent = styled.div`
@@ -83,6 +83,7 @@ export const AddClientModal = styled.form`
   border: 1px solid var(--main);
   display: grid;
   gap: 30px;
+  grid-column: 1 / 4;
 
   & > input {
     max-width: 300px;
@@ -117,7 +118,7 @@ export const AddClientModal = styled.form`
         padding: 8px 10px 5px;
         max-height: 37px;
         font-weight: 600;
-        border-radius: 6px;
+        border-radius: 30px;
         width: 100%;
         max-width: 300px;
       }
@@ -148,6 +149,9 @@ export const FiltroModal = styled.form`
     align-items: center;
     position: relative;
     gap: 10px;
+    font-size: 1.25rem;
+    font-weight: 500;
+    right: 25px;
     input {
       height: 25px;
       cursor: pointer;
@@ -167,7 +171,7 @@ export const FiltroModal = styled.form`
     transition: all.3s;
     left: 4px;
   }
-  div {
+  div:not(.custom-loader, .value) {
     display: grid;
     text-align: center;
     width: 100%;
