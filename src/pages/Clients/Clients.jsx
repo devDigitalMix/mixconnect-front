@@ -31,7 +31,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { ClientSkeleton } from "../../components/ClientSkeleton/ClientSkeleton";
 
-export function Clients() {
+export default function Clients() {
   const { user, setUser } = useContext(UserContext);
   const [clients, setClients] = useState([]);
   const [plans, setPlans] = useState([]);
