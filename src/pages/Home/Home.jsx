@@ -6,7 +6,10 @@ import {
   BodyContent,
   BodyInfo,
   DataNumber,
+  Graph,
+  GraphBtns,
   GuardaBodyInfo,
+  GuardaGraph,
   GuardaMainData,
   HomeBody,
   MainBody,
@@ -25,12 +28,14 @@ export default function Home() {
   const [clients, setClients] = useState();
   const [churn, setChurn] = useState();
   const [newClients, setNewClients] = useState();
-  const [outClients, setOutClients] = useState();
   const [infos, setInfos] = useState();
+  const [graph, setGraph] = useState("");
+  const [graphUrl, setGraphUrl] = useState("");
 
   async function getLtv() {
     const response = await getLtvService();
     setLtv(response.data.result);
+    handleGraph("planos");
   }
   async function getClients() {
     const response = await getCellService("C4");
@@ -47,6 +52,21 @@ export default function Home() {
   async function getInfos() {
     const response = await getInfosService();
     setInfos(response.data);
+  }
+
+  function handleGraph(string) {
+    if (string == "planos") {
+      setGraph("planos");
+      setGraphUrl(
+        "https://charts.mongodb.com/charts-mixconnect-swftspq/embed/charts?id=3494e42b-93a3-4aed-8597-a54627d13bd4&maxDataAge=3600&theme=dark&autoRefresh=true"
+      );
+    }
+    if (string == "ads") {
+      setGraph("ads");
+      setGraphUrl(
+        "https://charts.mongodb.com/charts-mixconnect-swftspq/embed/charts?id=7f34005b-e41c-4558-862f-9e56cd54b661&maxDataAge=3600&theme=dark&autoRefresh=true"
+      );
+    }
   }
 
   useEffect(() => {
@@ -122,6 +142,31 @@ export default function Home() {
           ) : (
             <InfoSkeleton></InfoSkeleton>
           )}
+          <GuardaGraph>
+            <Graph>
+              <iframe width="400" height="300" src={graphUrl}></iframe>
+            </Graph>
+            <GraphBtns>
+              <button
+                className={graph == "planos" ? "active" : ""}
+                onClick={() => handleGraph("planos")}
+              >
+                <span>
+                  <span></span>
+                </span>
+                <p>Planos</p>
+              </button>
+              <button
+                className={graph == "ads" ? "active" : ""}
+                onClick={() => handleGraph("ads")}
+              >
+                <span>
+                  <span></span>
+                </span>
+                <p>Ads</p>
+              </button>
+            </GraphBtns>
+          </GuardaGraph>
         </BodyContent>
       </HomeBody>
     </>

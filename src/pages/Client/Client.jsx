@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
@@ -166,6 +167,12 @@ export default function Client() {
     return dataAtt;
   }
 
+  function formatWhats(numero) {
+    let numeroLimpo = numero.toString().replace(/[()\-\s]/g, "");
+
+    return numeroLimpo;
+  }
+
   async function getClient() {
     try {
       const response = await getClientById(id);
@@ -289,14 +296,19 @@ export default function Client() {
             </ProfileAvatar>
             <ProfileData>
               <h2>{client.name || <Skeleton width="200px" />}</h2>
-              <a
-                target="_blank"
-                href={
-                  "https://api.whatsapp.com/send?phone=55" + client.whatsapp
-                }
-              >
-                {client.whatsapp || <Skeleton width="150px" />}
-              </a>
+              {client.whatsapp ? (
+                <a
+                // target="_blank"
+                // href={
+                //   "https://api.whatsapp.com/send?phone=55" +
+                //   formatWhats(client.whatsapp)
+                // }
+                >
+                  {client.whatsapp}
+                </a>
+              ) : (
+                <Skeleton width="150px" />
+              )}
             </ProfileData>
             {client.drive && (
               <Drive target="_blank" href={client.drive}>
