@@ -22,55 +22,55 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const router = createBrowserRouter([
   {
-    path: "/home",
+    path: "/",
     element: <Navbar />,
     children: [
       {
-        path: "/home",
+        path: "/",
         element: <Home />,
       },
       {
-        path: "home/profile",
+        path: "/profile",
         element: <Profile />,
       },
       {
-        path: "home/clients",
+        path: "/clients",
         element: <Clients />,
       },
       {
-        path: "home/client/:id",
+        path: "/client/:id",
         element: <Client />,
       },
       {
-        path: "home/employees",
+        path: "/employees",
         element: <Employees />,
       },
       {
-        path: "home/employee/:id",
+        path: "/employee/:id",
         element: <Employee />,
       },
       {
-        path: "home/chores/",
+        path: "/chores/",
         element: <Chores />,
       },
       {
-        path: "home/chores/:id",
+        path: "/chores/:id",
         element: <ChoreTasks />,
       },
       {
-        path: "home/plans",
+        path: "/plans",
         element: <Plans />,
       },
       {
-        path: "home/acessos",
+        path: "/acessos",
         element: <Logins />,
       },
     ],
   },
-  // {
-  //   path: "/",
-  //   element: <Authentication />,
-  // },
+  {
+    path: "/auth",
+    element: <Authentication />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
