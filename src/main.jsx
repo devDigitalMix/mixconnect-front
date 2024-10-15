@@ -13,7 +13,7 @@ import Employees from "./pages/Employees/Employees.jsx";
 import { Employee } from "./pages/Employee/Employee.jsx";
 import { Chores } from "./pages/Chores/Chores.jsx";
 import { ChoreTasks } from "./pages/ChoreTasks/ChoreTasks.jsx";
-import { Clients } from "./pages/Clients/Clients.jsx";
+import Clients from "./pages/Clients/Clients.jsx";
 import Plans from "./pages/Plans/Plans.jsx";
 import Client from "./pages/Client/Client.jsx";
 import Logins from "./pages/Logins/Logins.jsx";
