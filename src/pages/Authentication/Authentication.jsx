@@ -28,7 +28,7 @@ export function Authentication() {
       const response = await signin(data);
       Cookies.set("token", response.data, { expires: 7 });
       setIsLoading(false);
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       if (error.response.data == "Invalid password") {
         setErrorMessage("E-mail ou senha estão incorretos");
