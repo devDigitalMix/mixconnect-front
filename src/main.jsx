@@ -30,39 +30,39 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "home/profile",
+        path: "/home/profile",
         element: <Profile />,
       },
       {
-        path: "home/clients",
+        path: "/home/clients",
         element: <Clients />,
       },
       {
-        path: "home/client/:id",
+        path: "/home/client/:id",
         element: <Client />,
       },
       {
-        path: "home/employees",
+        path: "/home/employees",
         element: <Employees />,
       },
       {
-        path: "home/employee/:id",
+        path: "/home/employee/:id",
         element: <Employee />,
       },
       {
-        path: "home/chores/",
+        path: "/home/chores/",
         element: <Chores />,
       },
       {
-        path: "home/chores/:id",
+        path: "/home/chores/:id",
         element: <ChoreTasks />,
       },
       {
-        path: "home/plans",
+        path: "/home/plans",
         element: <Plans />,
       },
       {
-        path: "home/acessos",
+        path: "/home/acessos",
         element: <Logins />,
       },
     ],
