@@ -23,7 +23,6 @@ import {
 import Skeleton from "react-loading-skeleton";
 import { InfoSkeleton } from "../../components/InfoSkeleton/InfoSkeleton.jsx";
 import { useLocation, useNavigate } from "react-router-dom";
-import PreventReload from "../../components/PreventReload/PreventReload.jsx";
 
 export default function Home() {
   const [ltv, setLtv] = useState();
@@ -81,7 +80,6 @@ export default function Home() {
 
   return (
     <>
-      <PreventReload />
       <HomeBody>
         <MainBody>
           <GuardaMainData>
