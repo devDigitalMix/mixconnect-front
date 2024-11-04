@@ -19,11 +19,8 @@ import Client from "./pages/Client/Client.jsx";
 import Logins from "./pages/Logins/Logins.jsx";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import PreventReload from "./components/PreventReload/PreventReload.jsx";
 
 const router = createBrowserRouter([
-  // eslint-disable-next-line react/jsx-key
-  <PreventReload />,
   {
     path: "/home",
     element: <Navbar />,
