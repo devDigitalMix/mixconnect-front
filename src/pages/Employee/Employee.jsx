@@ -37,6 +37,7 @@ export function Employee() {
   const [deleteClick, setDeleteClick] = useState(false);
   const [error, setError] = useState(false);
   const [errorText, setErrorText] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleDeleteClick() {
     setDeleteClick(!deleteClick);
@@ -118,6 +119,7 @@ export function Employee() {
   }
 
   async function handleUpdate(event) {
+    setIsLoading(true);
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
@@ -152,6 +154,8 @@ export function Employee() {
     } catch (error) {
       console.log(error);
     }
+
+    setIsLoading(false);
   }
 
   function formatDate(data) {
@@ -340,9 +344,13 @@ export function Employee() {
                   onClick={handleAddSocialMedia}
                 ></button>
               </div>
-              <button type="submit" className="btn">
-                Salvar
-              </button>
+              {!isLoading ? (
+                <button type="submit" className="btn">
+                  Salvar
+                </button>
+              ) : (
+                <div className="custom-loader"></div>
+              )}
             </ProfileUpdate>
           </>
         ) : (

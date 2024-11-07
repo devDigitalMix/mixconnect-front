@@ -42,6 +42,7 @@ export default function Clients() {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [pages, setPages] = useState(0);
+  const [totalClients, setTotalClients] = useState(0);
   const [formValues, setFormValues] = useState({
     adsValue: "",
     posts: "",
@@ -69,6 +70,7 @@ export default function Clients() {
     }
     setSearch(false);
     setClients(response.data.results);
+    setTotalClients(response.data.total);
     setIsLoading(false);
     setReceived(true);
   }
@@ -149,6 +151,7 @@ export default function Clients() {
   }
 
   async function createClient(event) {
+    setIsLoading(true);
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
@@ -170,6 +173,7 @@ export default function Clients() {
       setAddClientModal(false);
       getClients();
     }
+    setIsLoading(false);
   }
 
   async function findUserLogged() {
@@ -393,9 +397,13 @@ export default function Clients() {
                 <Input name="whatsapp" />
               </div>
             </div>
-            <button type="submit" className="btn">
-              Enviar
-            </button>
+            {!isLoading ? (
+              <button type="submit" className="btn">
+                Enviar
+              </button>
+            ) : (
+              <div className="custom-loader"></div>
+            )}
           </AddClientModal>
         )}
 
@@ -434,14 +442,20 @@ export default function Clients() {
           <ClientSkeleton cards={12}></ClientSkeleton>
         )}
       </ClientBody>
-      <PageButtons>
-        <a onClick={() => getClients(12, pages - 12, false)} href="#nav">
-          <img src="/back.svg" alt="" />
-        </a>
-        <a onClick={() => getClients(12, pages + 12, true)} href="#nav">
-          <img src="/next.svg" alt="" />
-        </a>
-      </PageButtons>
+      {!search && (
+        <PageButtons>
+          {pages > 0 && (
+            <a onClick={() => getClients(12, pages - 12, false)} href="#nav">
+              <img src="/back.svg" alt="Voltar" title="Página anterior" />
+            </a>
+          )}
+          {pages + 12 < totalClients && (
+            <a onClick={() => getClients(12, pages + 12, true)} href="#nav">
+              <img src="/next.svg" alt="Próximo" title="Próxima página" />
+            </a>
+          )}
+        </PageButtons>
+      )}
     </ClientsStyled>
   );
 }

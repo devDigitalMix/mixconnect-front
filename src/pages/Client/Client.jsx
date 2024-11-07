@@ -126,15 +126,16 @@ export default function Client() {
   }
 
   async function handleDelete(event) {
+    setIsLoading(true);
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
     try {
       if (data.text == `excluir-${client.name}`) {
         await deleteClient(client._id);
-        setTimeout(() => {
-          navigate("/home/clients");
-        }, 3000);
+        navigate("/home/clients");
+      } else {
+        alert("Insira o nome correto");
       }
     } catch (error) {
       console.error(error);
@@ -225,9 +226,13 @@ export default function Client() {
                 Se sim, digite <i>excluir-{client.name}</i>
               </h3>
               <Input type="text" name="text" />
-              <button type="submit" className="btn">
-                Excluir
-              </button>
+              {!isLoading ? (
+                <button type="submit" className="btn">
+                  Excluir
+                </button>
+              ) : (
+                <div className="custom-loader"></div>
+              )}
             </DeleteClientStyled>
           )}
           {(user.level == "Líder" || user.level == "Admin") && (

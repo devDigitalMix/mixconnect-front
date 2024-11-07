@@ -7,9 +7,11 @@ import { useNavigate } from "react-router-dom";
 
 export function Delete(props) {
   const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   async function handleDelete(event) {
+    setIsLoading(true);
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
@@ -21,6 +23,9 @@ export function Delete(props) {
           setShowModal(false);
           navigate("/home/employees");
         }, 3000);
+      } else {
+        setIsLoading(false);
+        alert("Insira o nome correto");
       }
     } catch (error) {
       console.error(error);
@@ -39,9 +44,13 @@ export function Delete(props) {
             Se sim, digite <i>excluir-{props.name}</i>
           </h3>
           <Input type="text" name="text" />
-          <button type="submit" className="btn">
-            Excluir
-          </button>
+          {!isLoading ? (
+            <button type="submit" className="btn">
+              Excluir
+            </button>
+          ) : (
+            <div className="custom-loader"></div>
+          )}
         </>
       ) : (
         <>
