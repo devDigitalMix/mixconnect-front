@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from "react";
 import {
@@ -41,7 +42,10 @@ export default function Clients() {
   const [filtro, setFiltro] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
-  const [pages, setPages] = useState(0);
+  const [pages, setPages] = useState(() => {
+    const savedPage = localStorage.getItem("pages");
+    return savedPage ? parseInt(savedPage, 10) : 0;
+  });
   const [totalClients, setTotalClients] = useState(0);
   const [formValues, setFormValues] = useState({
     adsValue: "",
@@ -62,12 +66,18 @@ export default function Clients() {
   async function getClients(limit, offset, dir) {
     setReceived(false);
     setIsLoading(true);
-    const response = await getAllClients(limit, offset);
-    if (dir === true) {
+    var response = {};
+    if (dir === 2) {
       setPages(pages + 12);
-    } else if (dir === false) {
+    } else if (dir === 1) {
       setPages(pages - 12);
     }
+    if (!dir) {
+      response = await getAllClients(limit, pages);
+    } else {
+      response = await getAllClients(limit, offset);
+    }
+
     setSearch(false);
     setClients(response.data.results);
     setTotalClients(response.data.total);
@@ -201,6 +211,10 @@ export default function Clients() {
     getClients();
     if (Cookies.get("token")) findUserLogged();
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("pages", pages);
+  }, [pages]);
 
   useEffect(() => {
     if (selectedPlan) {
@@ -445,12 +459,12 @@ export default function Clients() {
       {!search && (
         <PageButtons>
           {pages > 0 && (
-            <a onClick={() => getClients(12, pages - 12, false)} href="#nav">
+            <a onClick={() => getClients(12, pages - 12, 1)} href="#nav">
               <img src="/back.svg" alt="Voltar" title="Página anterior" />
             </a>
           )}
           {pages + 12 < totalClients && (
-            <a onClick={() => getClients(12, pages + 12, true)} href="#nav">
+            <a onClick={() => getClients(12, pages + 12, 2)} href="#nav">
               <img src="/next.svg" alt="Próximo" title="Próxima página" />
             </a>
           )}

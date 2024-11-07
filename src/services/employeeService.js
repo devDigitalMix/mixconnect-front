@@ -10,8 +10,8 @@ export function signin(data) {
   return response;
 }
 
-export function userLogged() {
-  const response = axios.get(`${baseURL}/employee/findById`, {
+export async function userLogged() {
+  const response = await axios.get(`${baseURL}/employee/findById`, {
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,
     },
