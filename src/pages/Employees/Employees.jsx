@@ -30,6 +30,7 @@ export default function Employees() {
   const [createEmployeeModal, setCreateEmployeeModal] = useState(false);
   const [search, setSearch] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [received, setReceived] = useState(false);
 
   const {
     register,
@@ -42,20 +43,24 @@ export default function Employees() {
 
   async function onSearch(data) {
     setIsLoading(true);
+    setReceived(false);
     const { name } = data;
 
     const response = await getEmployeesByName(name);
     setEmployees(response.data.results);
     setSearch(true);
     setIsLoading(false);
+    setReceived(true);
     reset();
   }
 
   async function getEmployees() {
+    setReceived(false);
     const response = await getAllEmployees();
     setEmployees(response.data.results);
     setSearch(false);
     setIsLoading(false);
+    setReceived(true);
   }
 
   function handleClickCreate() {
@@ -118,7 +123,7 @@ export default function Employees() {
         />
       )}
       <EmployeeBody>
-        {employees.length > 0 ? (
+        {received ? (
           employees.map((item) => (
             <Link key={item.id} to={"/home/employee/" + item.id}>
               <EmployeeContainer>

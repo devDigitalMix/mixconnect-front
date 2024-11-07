@@ -24,6 +24,7 @@ export const ClientHeader = styled.div`
 export const ClientBody = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
   gap: 40px;
   align-items: center;
   width: 100%;
@@ -31,6 +32,12 @@ export const ClientBody = styled.div`
     max-width: 370px;
     width: 100%;
     min-height: 267px;
+  }
+  @media only screen and (max-width: 1090px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media only screen and (max-width: 750px) {
+    grid-template-columns: 1fr;
   }
 `;
 export const AClient = styled.article`
@@ -101,7 +108,12 @@ export const AddClientModal = styled.form`
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
     gap: 20px;
-
+    @media only screen and (max-width: 990px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media only screen and (max-width: 750px) {
+      grid-template-columns: 1fr;
+    }
     div {
       display: grid;
       max-width: 300px;
@@ -195,4 +207,11 @@ export const FiltroModal = styled.form`
       text-align: center;
     }
   }
+`;
+
+export const PageButtons = styled.div`
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
 `;

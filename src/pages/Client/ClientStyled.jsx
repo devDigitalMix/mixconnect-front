@@ -1,8 +1,5 @@
 import styled from "styled-components";
 
-export const ClientStyled = styled.section``;
-export const ClientStyledContent = styled.section``;
-
 export const DeleteClientStyled = styled.form`
   width: 100%;
   max-width: 500px;

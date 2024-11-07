@@ -10,12 +10,17 @@ export const HomeBody = styled.section`
   gap: 20px;
   justify-content: center;
   align-items: start;
+  @media only screen and (max-width: 900px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 `;
 
 export const MainBody = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 30px 20px;
 `;
 export const GuardaMainData = styled.article`
@@ -55,6 +60,7 @@ export const MainData = styled.div`
 
 export const BodyContent = styled.section`
   display: grid;
+  justify-items: center;
   gap: 10px;
   width: 100%;
 `;
@@ -65,6 +71,11 @@ export const GuardaGraph = styled.section`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media only screen and (max-width: 570px) {
+    flex-wrap: wrap-reverse;
+    width: 100%;
+    justify-content: center;
+  }
 `;
 
 export const Graph = styled.div`
@@ -75,6 +86,9 @@ export const Graph = styled.div`
   max-height: 268px;
   width: 100%;
   background: var(--dark);
+  @media only screen and (max-width: 570px) {
+    border-radius: 0 0 8px 8px;
+  }
 
   iframe {
     border: none;
@@ -92,6 +106,11 @@ export const GraphBtns = styled.div`
   grid-template-columns: 1fr 1fr;
   justify-items: center;
   align-items: start;
+  @media only screen and (max-width: 570px) {
+    height: inherit;
+    max-width: 600px;
+    border-radius: 8px 8px 0 0;
+  }
   button {
     max-width: 45px;
     width: 100%;
@@ -174,11 +193,18 @@ export const BodyInfo = styled.div`
   padding: 10px 20px;
   width: 100%;
   border-radius: 7px;
+
+  @media only screen and (max-width: 570px) {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px 50px;
+    padding: 20px;
+  }
 `;
 export const GuardaBodyInfo = styled.div`
   background: var(--cantoDir);
   padding: 2px;
-  max-width: 612px;
+  max-width: 512px;
   width: 100%;
   border-radius: 8px;
 `;

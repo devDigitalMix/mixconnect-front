@@ -18,10 +18,10 @@ export const Header = styled.header`
       margin: 30px auto 60px;
     }
     @media only screen and (max-width: 580px) {
-      margin: 30px auto 90px;
+      margin: 30px auto 40px;
     }
     @media only screen and (max-width: 340px) {
-      margin: 30px auto 130px;
+      margin: 30px auto 40px;
     }
   }
 `;
@@ -78,7 +78,15 @@ export const NavMenu = styled.div`
     padding: 10px 5px;
     position: absolute;
     width: 100%;
-    bottom: 0px;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%);
+  }
+  @media only screen and (max-width: 545px) {
+    padding: 10px 5px;
+    position: absolute;
+    width: 100%;
+    bottom: -10px;
     left: 50%;
     transform: translate(-50%);
   }

@@ -32,6 +32,7 @@ export default function Client() {
   const [client, setClient] = useState({});
   const [update, setUpdate] = useState(false);
   const [updateAvatar, setUpdateAvatar] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [socialMedia, setSocialMedia] = useState(client.socialMedia || []);
   const [page, setPage] = useState(client.pages || []);
   const [gmb, setGmb] = useState(client.gmb || []);
@@ -53,6 +54,7 @@ export default function Client() {
   }
 
   async function handleUpdateAvatar(event) {
+    setIsLoading(true);
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
@@ -140,6 +142,7 @@ export default function Client() {
   }
 
   async function handleUpdate(event) {
+    setIsLoading(true);
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
@@ -183,6 +186,7 @@ export default function Client() {
     } catch (error) {
       console.log(error);
     }
+    setIsLoading(false);
   }
 
   async function findUserLogged() {
@@ -450,9 +454,14 @@ export default function Client() {
                     onClick={handleAddGmb}
                   ></button>
                 </div>
-                <button type="submit" className="btn">
-                  Salvar
-                </button>
+
+                {!isLoading ? (
+                  <button type="submit" className="btn">
+                    Salvar
+                  </button>
+                ) : (
+                  <div className="custom-loader"></div>
+                )}
               </ProfileUpdate>
             </>
           ) : (

@@ -4,12 +4,15 @@ import Cookies from "js-cookie";
 const baseURL = "http://localhost:3000";
 // const baseURL = "https://mixconnect-back.onrender.com";
 
-export async function getAllClients() {
-  const response = await axios.get(`${baseURL}/client/`, {
-    headers: {
-      Authorization: `Bearer ${Cookies.get("token")}`,
-    },
-  });
+export async function getAllClients(limit, offset) {
+  const response = await axios.get(
+    `${baseURL}/client/?limit=${limit}&offset=${offset}`,
+    {
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+    }
+  );
   return response;
 }
 

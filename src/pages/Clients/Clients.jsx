@@ -15,6 +15,7 @@ import {
   ClientHeader,
   ClientsStyled,
   FiltroModal,
+  PageButtons,
 } from "./ClientsStyled";
 import { Input } from "../../components/Input/Input";
 import { Label } from "../../components/Label/Label";
@@ -40,11 +41,13 @@ export default function Clients() {
   const [filtro, setFiltro] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
+  const [pages, setPages] = useState(0);
   const [formValues, setFormValues] = useState({
     adsValue: "",
     posts: "",
   });
   const [search, setSearch] = useState(false);
+  const [received, setReceived] = useState(false);
 
   const {
     register,
@@ -55,31 +58,28 @@ export default function Clients() {
     resolver: zodResolver(searchSchema),
   });
 
-  async function getClients() {
-    const response = await getAllClients();
-    const plansResponse = await getPlansService();
-    const plansMap = plansResponse.data.results.reduce((map, plan) => {
-      map[plan.id] = plan.name;
-      return map;
-    }, {});
-
-    if (response.data.results) {
-      const clientList = response.data.results.map((client) => {
-        return {
-          ...client,
-          plan: plansMap[client.plan] || "Plano desconhecido",
-        };
-      });
-      setSearch(false);
-      setClients(clientList);
+  async function getClients(limit, offset, dir) {
+    setReceived(false);
+    setIsLoading(true);
+    const response = await getAllClients(limit, offset);
+    if (dir === true) {
+      setPages(pages + 12);
+    } else if (dir === false) {
+      setPages(pages - 12);
     }
+    setSearch(false);
+    setClients(response.data.results);
+    setIsLoading(false);
+    setReceived(true);
   }
 
   async function getEmployees() {
     const response = await getAllEmployees();
     const listaEmployees = response.data.results.filter(
       (employee) =>
-        employee.role === "Gestor de Tráfego" || employee.role === "CS"
+        employee.role === "Gestor de Tráfego" ||
+        employee.role === "CS" ||
+        employee.role === "Gestor de Projetos"
     );
     setEmployees(listaEmployees);
   }
@@ -125,6 +125,7 @@ export default function Clients() {
   }
 
   async function onSearch(data) {
+    setReceived(false);
     setIsLoading(true);
     const { name } = data;
     const response = await getClientsByName(name);
@@ -144,6 +145,7 @@ export default function Clients() {
     setSearch(true);
     reset();
     setIsLoading(false);
+    setReceived(true);
   }
 
   async function createClient(event) {
@@ -235,7 +237,11 @@ export default function Clients() {
             <select name="gestor">
               <option value="">Gestor</option>
               {employees
-                .filter((employee) => employee.role === "Gestor de Tráfego")
+                .filter(
+                  (employee) =>
+                    employee.role === "Gestor de Tráfego" ||
+                    employee.role === "Gestor de Projetos"
+                )
                 .map((employee, index) => (
                   <option key={index} value={employee.name}>
                     {employee.name}
@@ -393,7 +399,7 @@ export default function Clients() {
           </AddClientModal>
         )}
 
-        {clients.length > 0 ? (
+        {received ? (
           clients.map((client, index) => (
             <Link to={"/home/client/" + client.id} key={index}>
               <AClient>
@@ -425,9 +431,17 @@ export default function Clients() {
             </Link>
           ))
         ) : (
-          <ClientSkeleton cards={6}></ClientSkeleton>
+          <ClientSkeleton cards={12}></ClientSkeleton>
         )}
       </ClientBody>
+      <PageButtons>
+        <a onClick={() => getClients(12, pages - 12, false)} href="#nav">
+          <img src="/back.svg" alt="" />
+        </a>
+        <a onClick={() => getClients(12, pages + 12, true)} href="#nav">
+          <img src="/next.svg" alt="" />
+        </a>
+      </PageButtons>
     </ClientsStyled>
   );
 }

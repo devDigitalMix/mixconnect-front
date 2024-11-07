@@ -293,9 +293,9 @@ svg path {
 }
 
 .custom-loader {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 50% !important;
   background: 
     radial-gradient(farthest-side,#766DF4 94%,#0000) top/6px 6px no-repeat,
     conic-gradient(#0000 30%,#766DF4);

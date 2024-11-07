@@ -24,6 +24,7 @@ import { Felipe } from "../Employees/EmployeesStyled";
 export default function Profile() {
   const { user, setUser } = useContext(UserContext);
   const [update, setUpdate] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [updateAvatar, setUpdateAvatar] = useState(false);
   const [socialMedia, setSocialMedia] = useState(user.socialMedia || []);
   const [musicLink, setMusicLink] = useState(user.music || "");
@@ -92,6 +93,7 @@ export default function Profile() {
   }
 
   async function handleUpdate(event) {
+    setIsLoading(true);
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
@@ -123,6 +125,7 @@ export default function Profile() {
     } catch (error) {
       console.log(error);
     }
+    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -270,9 +273,13 @@ export default function Profile() {
                     onClick={handleAddSocialMedia}
                   ></button>
                 </div>
-                <button type="submit" className="btn">
-                  Salvar
-                </button>
+                {!isLoading ? (
+                  <button type="submit" className="btn">
+                    Salvar
+                  </button>
+                ) : (
+                  <div className="custom-loader"></div>
+                )}
               </ProfileUpdate>
             </>
           ) : (

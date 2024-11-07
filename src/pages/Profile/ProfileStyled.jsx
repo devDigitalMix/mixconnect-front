@@ -142,7 +142,7 @@ export const ProfileBody = styled.div`
   }
   align-items: start;
   gap: 50px;
-  div {
+  & > div {
     width: 100%;
     max-width: 300px;
     display: grid;
@@ -189,7 +189,7 @@ export const ProfileUpdate = styled.form`
     font-family: var(--font);
     font-size: 1.2rem;
   }
-  div {
+  & > div {
     width: 100%;
     max-width: 300px;
     display: grid;
@@ -213,6 +213,11 @@ export const ProfileUpdate = styled.form`
     left: 50%;
     bottom: 0px;
     transform: translate(-50%);
+  }
+  .custom-loader {
+    position: absolute;
+    left: calc(50% - 15px);
+    bottom: 0px;
   }
   .addInput {
     background: url("/mais.svg") no-repeat center center;
