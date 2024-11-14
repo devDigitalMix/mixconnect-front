@@ -47,6 +47,7 @@ export default function Clients() {
     return savedPage ? parseInt(savedPage, 10) : 0;
   });
   const [totalClients, setTotalClients] = useState(0);
+  const [lista, setLista] = useState([]);
   const [formValues, setFormValues] = useState({
     adsValue: "",
     posts: "",
@@ -67,11 +68,7 @@ export default function Clients() {
     setReceived(false);
     setIsLoading(true);
     var response = {};
-    if (dir === 2) {
-      setPages(pages + 12);
-    } else if (dir === 1) {
-      setPages(pages - 12);
-    }
+    setPages(offset);
     if (!dir) {
       response = await getAllClients(limit, pages);
     } else {
@@ -81,6 +78,13 @@ export default function Clients() {
     setSearch(false);
     setClients(response.data.results);
     setTotalClients(response.data.total);
+    var c = 0;
+    var tempList = [];
+    while (c <= response.data.total / 12) {
+      tempList.push(c);
+      c++;
+    }
+    setLista(tempList);
     setIsLoading(false);
     setReceived(true);
   }
@@ -458,16 +462,51 @@ export default function Clients() {
       </ClientBody>
       {!search && (
         <PageButtons>
-          {pages > 0 && (
-            <a onClick={() => getClients(12, pages - 12, 1)} href="#nav">
-              <img src="/back.svg" alt="Voltar" title="Página anterior" />
-            </a>
+          {lista.map((n) => (
+            <p
+              key={n}
+              style={{ color: pages / 12 == n ? "red" : "green" }}
+              onClick={() => getClients(12, n * 12, 1)}
+            >
+              {n + 1}
+            </p>
+          ))}
+          {/* {pages > 0 && (
+            <div>
+              <a onClick={() => getClients(12, 0, 1)} href="#nav">
+                <img
+                  src="/skip-previous.svg"
+                  alt="Voltar"
+                  title="Página anterior"
+                />
+              </a>
+              <a
+                onClick={() =>
+                  getClients(12, pages - 12 > 0 ? pages - 12 : 0, 1)
+                }
+                href="#nav"
+              >
+                <img src="/back.svg" alt="Voltar" title="Página anterior" />
+              </a>
+            </div>
           )}
           {pages + 12 < totalClients && (
-            <a onClick={() => getClients(12, pages + 12, 2)} href="#nav">
-              <img src="/next.svg" alt="Próximo" title="Próxima página" />
-            </a>
-          )}
+            <div>
+              <a onClick={() => getClients(12, pages + 12, 2)} href="#nav">
+                <img src="/next.svg" alt="Próximo" title="Próxima página" />
+              </a>
+              <a
+                onClick={() => getClients(12, totalClients - 12, 2)}
+                href="#nav"
+              >
+                <img
+                  src="/skip-next.svg"
+                  alt="Próximo"
+                  title="Próxima página"
+                />
+              </a>
+            </div>
+          )} */}
         </PageButtons>
       )}
     </ClientsStyled>

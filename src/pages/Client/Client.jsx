@@ -221,7 +221,9 @@ export default function Client() {
               )}
             </DeleteClientStyled>
           )}
-          {(user.level == "Líder" || user.level == "Admin") && (
+          {(user.level == "Líder" ||
+            user.level == "Admin" ||
+            user.role == "Comercial") && (
             <TopButtons>
               <img
                 src="/exclude.svg"

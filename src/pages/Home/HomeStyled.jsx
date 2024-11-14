@@ -112,17 +112,16 @@ export const GraphBtns = styled.div`
     border-radius: 8px 8px 0 0;
   }
   button {
-    max-width: 45px;
     width: 100%;
     gap: 5px;
     display: grid;
     justify-items: center;
     & > span {
-      height: 45px;
-      max-width: 45px;
+      height: 46px;
+      max-width: 46px;
       width: 100%;
       background: var(--linear);
-      padding: 6px;
+      /* padding: 0px; */
       border-radius: 40px;
       display: flex;
       justify-content: center;
@@ -130,7 +129,7 @@ export const GraphBtns = styled.div`
       & > span {
         background: var(--dark);
         transition: all.3s;
-        padding: 0px;
+        padding: 17px;
         border-radius: 30px;
       }
     }
@@ -141,7 +140,7 @@ export const GraphBtns = styled.div`
     }
     &.active {
       & > span span {
-        padding: 16px;
+        padding: 0;
       }
     }
   }

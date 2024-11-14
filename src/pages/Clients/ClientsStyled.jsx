@@ -214,4 +214,13 @@ export const PageButtons = styled.div`
   display: flex;
   justify-content: center;
   gap: 30px;
+  p {
+    padding: 5px;
+    cursor: pointer;
+  }
+  /* div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  } */
 `;
