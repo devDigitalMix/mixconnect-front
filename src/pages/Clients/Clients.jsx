@@ -68,7 +68,11 @@ export default function Clients() {
     setReceived(false);
     setIsLoading(true);
     var response = {};
-    setPages(offset);
+    if (offset != 0 && !offset) {
+      offset = pages;
+    } else {
+      setPages(offset);
+    }
     if (!dir) {
       response = await getAllClients(limit, pages);
     } else {
@@ -465,7 +469,7 @@ export default function Clients() {
           {lista.map((n) => (
             <p
               key={n}
-              style={{ color: pages / 12 == n ? "#444444" : "var(--light)" }}
+              style={{ color: pages / 12 == n ? "#6d6d6d" : "var(--light)" }}
               onClick={() => getClients(12, n * 12, 1)}
             >
               {n + 1}

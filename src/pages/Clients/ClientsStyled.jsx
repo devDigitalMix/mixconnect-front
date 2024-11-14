@@ -92,6 +92,13 @@ export const AddClientModal = styled.form`
   gap: 30px;
   grid-column: 1 / 4;
 
+  @media only screen and (max-width: 990px) {
+    grid-column: 1 / 3;
+  }
+  @media only screen and (max-width: 750px) {
+    grid-column: 1;
+  }
+
   & > input {
     max-width: 300px;
     width: 100%;
@@ -102,6 +109,10 @@ export const AddClientModal = styled.form`
     font-size: 1.5rem;
     font-family: var(--font);
     color: var(--main);
+  }
+  .custom-loader {
+    max-width: fit-content;
+    margin: 0 auto;
   }
   .clientInfo {
     display: grid;
@@ -212,6 +223,7 @@ export const FiltroModal = styled.form`
 export const PageButtons = styled.div`
   margin-top: 30px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
   p {
