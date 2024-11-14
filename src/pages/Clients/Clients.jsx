@@ -462,19 +462,15 @@ export default function Clients() {
       </ClientBody>
       {!search && (
         <PageButtons>
-          {pages ? (
-            lista.map((n) => (
-              <p
-                key={n}
-                style={{ color: pages / 12 == n ? "#444444" : "var(--light)" }}
-                onClick={() => getClients(12, n * 12, 1)}
-              >
-                {n + 1}
-              </p>
-            ))
-          ) : (
-            <h2>asdasda</h2>
-          )}
+          {lista.map((n) => (
+            <p
+              key={n}
+              style={{ color: pages / 12 == n ? "#444444" : "var(--light)" }}
+              onClick={() => getClients(12, n * 12, 1)}
+            >
+              {n + 1}
+            </p>
+          ))}
           {/* {pages > 0 && (
             <div>
               <a onClick={() => getClients(12, 0, 1)} href="#nav">
