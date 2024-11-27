@@ -167,6 +167,17 @@ export const FiltroModal = styled.form`
   gap: 20px;
   max-width: 500px;
   width: 100%;
+  #close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    padding: 5px;
+    transition: 0.3s;
+    cursor: pointer;
+    &:hover {
+      color: var(--main);
+    }
+  }
   .value {
     display: flex;
     align-items: center;

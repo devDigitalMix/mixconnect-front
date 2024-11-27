@@ -240,6 +240,9 @@ export default function Clients() {
     <ClientsStyled>
       {filtro && (
         <FiltroModal onSubmit={handleFilter}>
+          <p onClick={() => setFiltro(false)} id="close">
+            X
+          </p>
           <div className="value">
             <input type="checkbox" name="value" id="value" />
             <span className="checkbox">
@@ -298,7 +301,9 @@ export default function Clients() {
         </FiltroModal>
       )}
       <ClientHeader>
-        {(user.level == "Líder" || user.level == "Admin") && (
+        {(user.level == "Líder" ||
+          user.level == "Admin" ||
+          user.role == "Comercial") && (
           <img
             src="/mais.svg"
             className="img-effect prepareValue"
