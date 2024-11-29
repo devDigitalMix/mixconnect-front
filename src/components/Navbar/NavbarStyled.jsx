@@ -41,7 +41,7 @@ export const Nav = styled.nav`
   color: var(--light);
 
   @media only screen and (max-width: 875px) {
-    padding-bottom: 80px;
+    padding-bottom: 90px;
   }
   @media only screen and (max-width: 360px) {
     padding-bottom: 120px;
@@ -83,7 +83,7 @@ export const NavMenu = styled.div`
     transform: translate(-50%);
   }
   @media only screen and (max-width: 545px) {
-    padding: 10px 5px;
+    padding: 10px 15px;
     position: absolute;
     width: 100%;
     bottom: -10px;

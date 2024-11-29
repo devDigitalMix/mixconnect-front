@@ -14,6 +14,7 @@ import {
   HomeBody,
   MainBody,
   MainData,
+  MainHeader,
 } from "./HomeStyled.jsx";
 import {
   getCellService,
@@ -32,6 +33,50 @@ export default function Home() {
   const [infos, setInfos] = useState();
   const [graph, setGraph] = useState("");
   const [graphUrl, setGraphUrl] = useState("");
+  const [texto1, setTexto1] = useState("");
+  const [texto2, setTexto2] = useState("");
+  const [mostra, setMostra] = useState(false);
+  const [cronometro, setCronometro] = useState();
+
+  function isDiaUtil(data) {
+    const diaSemana = data.getDay();
+    return diaSemana >= 1 && diaSemana <= 5;
+  }
+
+  function paintball() {
+    const dataAtual = new Date();
+    let mesAtual = dataAtual.getMonth();
+    let anoAtual = dataAtual.getFullYear();
+
+    if (dataAtual.getDate() > 5) {
+      mesAtual += 1;
+      if (mesAtual > 11) {
+        mesAtual = 0;
+        anoAtual += 1;
+      }
+    }
+
+    let dia = 1;
+    let diaUtilCount = 0;
+    let dataAlvo;
+
+    while (diaUtilCount < 4) {
+      dataAlvo = new Date(anoAtual, mesAtual, dia);
+      if (isDiaUtil(dataAlvo)) {
+        diaUtilCount++;
+      }
+      dia++;
+    }
+
+    const diferencaEmMilissegundos = dataAlvo.getTime() - dataAtual.getTime();
+    const diferencaEmDias = diferencaEmMilissegundos / (1000 * 3600 * 24);
+
+    if (Math.ceil(diferencaEmDias) == 0) {
+      setTexto2("É hoje o pix! Vamo Andreza!");
+    } else {
+      setTexto2(Math.ceil(diferencaEmDias) + " dias até o pix!");
+    }
+  }
 
   async function getLtv() {
     const response = await getLtvService();
@@ -76,11 +121,69 @@ export default function Home() {
     getChurn();
     getNewClients();
     getInfos();
+    paintball();
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const date = new Date();
+      const hours = date.getHours();
+
+      if (hours < 12) {
+        setTexto1("Bom dia!");
+      } else if (hours === 12) {
+        setTexto1("AL mossar!");
+      } else if (hours > 12 && hours < 18) {
+        setTexto1("Boa tarde!");
+      } else {
+        setTexto1("Boa noite!");
+      }
+    }, 8000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setMostra((prevMostra) => !prevMostra);
+    }, 8000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const cronometroInterval = setInterval(() => {
+      const now = new Date();
+      const target = new Date();
+      target.setHours(17, 0, 0, 0);
+
+      const diff = target - now;
+
+      if (diff > 0) {
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+        setCronometro(`${hours}h ${minutes}m`);
+      } else {
+        setCronometro("0h 0m");
+        clearInterval(cronometroInterval);
+      }
+    }, 1000);
+
+    return () => clearInterval(cronometroInterval);
   }, []);
 
   return (
     <>
+      <MainHeader>
+        <div className={mostra ? "metaTexto texto2" : "metaTexto"}>
+          <p id="texto1">{texto1 || "Bom dia!"}</p>
+          <p id="texto2">{texto2}</p>
+          <div className="clock"></div>
+        </div>
+      </MainHeader>
       <HomeBody>
+        <div id="cronometro">{cronometro}</div>
         <MainBody>
           <GuardaMainData>
             <MainData>
