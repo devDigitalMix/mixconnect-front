@@ -35,6 +35,7 @@ export default function Home() {
   const [graphUrl, setGraphUrl] = useState("");
   const [texto1, setTexto1] = useState("");
   const [texto2, setTexto2] = useState("");
+  const [clock, setClock] = useState("");
   const [mostra, setMostra] = useState(false);
   const [cronometro, setCronometro] = useState();
 
@@ -131,6 +132,18 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    const getHours = setInterval(() => {
+      const date = new Date();
+      const hours = date.getHours();
+      const minutes = date.getMinutes();
+      const hour = hours < 10 ? `0${hours}` : hours;
+      const minute = minutes < 10 ? `0${minutes}` : minutes;
+      setClock(`${hour}:${minute}`);
+    }, 15000);
+
+    return () => clearInterval(getHours);
+  }, []);
+  useEffect(() => {
     const interval = setInterval(() => {
       const date = new Date();
       const hours = date.getHours();
@@ -185,7 +198,7 @@ export default function Home() {
         <div className={mostra ? "metaTexto texto2" : "metaTexto"}>
           <p id="texto1">{texto1 || "Bom dia!"}</p>
           <p id="texto2">{texto2}</p>
-          <div className="clock"></div>
+          <div className="clock">{clock}</div>
         </div>
       </MainHeader>
       <HomeBody>
