@@ -216,7 +216,7 @@ export const GraphBtns = styled.div`
       & > span {
         background: var(--dark);
         transition: all.3s;
-        padding: 17px;
+        padding: 0;
         border-radius: 30px;
       }
     }
@@ -227,7 +227,7 @@ export const GraphBtns = styled.div`
     }
     &.active {
       & > span span {
-        padding: 0;
+        padding: 17px;
       }
     }
   }

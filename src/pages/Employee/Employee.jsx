@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import {
   ProfileAvatar,
@@ -38,6 +38,7 @@ export function Employee() {
   const [error, setError] = useState(false);
   const [errorText, setErrorText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   function handleDeleteClick() {
     setDeleteClick(!deleteClick);
@@ -174,6 +175,7 @@ export function Employee() {
 
   useEffect(() => {
     if (Cookies.get("token")) findUserLogged();
+    else navigate("/");
   }, []);
 
   useEffect(() => {

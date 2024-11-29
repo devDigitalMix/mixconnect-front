@@ -23,7 +23,7 @@ import { Label } from "../../components/Label/Label";
 import Cookies from "js-cookie";
 import { getPlanById, getPlansService } from "../../services/planService";
 import { getAllEmployees, userLogged } from "../../services/employeeService";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { searchSchema } from "../../schemas/searchSchema";
@@ -54,6 +54,7 @@ export default function Clients() {
   });
   const [search, setSearch] = useState(false);
   const [received, setReceived] = useState(false);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -65,32 +66,36 @@ export default function Clients() {
   });
 
   async function getClients(limit, offset, dir) {
-    setReceived(false);
-    setIsLoading(true);
-    var response = {};
-    if (offset != 0 && !offset) {
-      offset = pages;
-    } else {
-      setPages(offset);
-    }
-    if (!dir) {
-      response = await getAllClients(limit, pages);
-    } else {
-      response = await getAllClients(limit, offset);
-    }
+    try {
+      setReceived(false);
+      setIsLoading(true);
+      var response = {};
+      if (offset != 0 && !offset) {
+        offset = pages;
+      } else {
+        setPages(offset);
+      }
+      if (!dir) {
+        response = await getAllClients(limit, pages);
+      } else {
+        response = await getAllClients(limit, offset);
+      }
 
-    setSearch(false);
-    setClients(response.data.results);
-    setTotalClients(response.data.total);
-    var c = 0;
-    var tempList = [];
-    while (c <= response.data.total / 12) {
-      tempList.push(c);
-      c++;
+      setSearch(false);
+      setClients(response.data.results);
+      setTotalClients(response.data.total);
+      var c = 0;
+      var tempList = [];
+      while (c <= response.data.total / 12) {
+        tempList.push(c);
+        c++;
+      }
+      setLista(tempList);
+      setIsLoading(false);
+      setReceived(true);
+    } catch (error) {
+      console.log(error);
     }
-    setLista(tempList);
-    setIsLoading(false);
-    setReceived(true);
   }
 
   async function getEmployees() {
@@ -182,8 +187,7 @@ export default function Clients() {
       !data.cs ||
       !data.cnpj ||
       !data.posts ||
-      !data.whatsapp ||
-      user.email == "camila.silva@digitalmix.tech"
+      !data.whatsapp
     ) {
       alert("Preencha os campos necessários");
     } else {
@@ -216,8 +220,9 @@ export default function Clients() {
   }
 
   useEffect(() => {
-    getClients();
     if (Cookies.get("token")) findUserLogged();
+    else navigate("/");
+    getClients();
   }, []);
 
   useEffect(() => {

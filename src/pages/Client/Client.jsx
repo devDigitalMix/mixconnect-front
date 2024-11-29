@@ -28,7 +28,7 @@ import Skeleton from "react-loading-skeleton";
 
 export default function Client() {
   const { id } = useParams();
-  const { user, loading } = useContext(UserContext);
+  const { user, setUser, loading } = useContext(UserContext);
   const [client, setClient] = useState({});
   const [update, setUpdate] = useState(false);
   const [updateAvatar, setUpdateAvatar] = useState(false);
@@ -190,7 +190,18 @@ export default function Client() {
     setIsLoading(false);
   }
 
+  async function findUserLogged() {
+    try {
+      const response = await userLogged();
+      setUser(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
+    if (Cookies.get("token")) findUserLogged();
+    else navigate("/");
     getClient();
   }, [id]);
 

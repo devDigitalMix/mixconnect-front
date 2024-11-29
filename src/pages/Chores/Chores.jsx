@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { createchore, userLogged } from "../../services/employeeService";
 import { useContext, useEffect, useState } from "react";
 import { ChoresContent, ChoresStyled, CreateChoreModal } from "./ChoresStyled";
@@ -13,6 +13,7 @@ export function Chores() {
   const { user, setUser } = useContext(UserContext);
   const [chores, setChores] = useState([]);
   const [choreModal, setChoreModal] = useState(false);
+  const navigate = useNavigate();
 
   async function findUserLogged() {
     try {
@@ -64,9 +65,8 @@ export function Chores() {
   }
 
   useEffect(() => {
-    if (Cookies.get("token")) {
-      findUserLogged();
-    }
+    if (Cookies.get("token")) findUserLogged();
+    else navigate("/");
   }, []);
 
   useEffect(() => {

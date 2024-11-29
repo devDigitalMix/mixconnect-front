@@ -18,7 +18,7 @@ import {
   UploadAvatar,
 } from "./ProfileStyled";
 import { Input } from "../../components/Input/Input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Felipe } from "../Employees/EmployeesStyled";
 
 export default function Profile() {
@@ -29,6 +29,7 @@ export default function Profile() {
   const [socialMedia, setSocialMedia] = useState(user.socialMedia || []);
   const [musicLink, setMusicLink] = useState(user.music || "");
   const [felipe, setFelipe] = useState(false);
+  const navigate = useNavigate();
 
   var cont = 0;
 
@@ -130,6 +131,7 @@ export default function Profile() {
 
   useEffect(() => {
     if (Cookies.get("token")) findUserLogged();
+    else navigate("/");
   }, [update, updateAvatar]);
 
   useEffect(() => {

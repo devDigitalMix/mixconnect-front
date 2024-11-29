@@ -141,9 +141,8 @@ export function ChoreTasks() {
   }
 
   useEffect(() => {
-    if (Cookies.get("token")) {
-      findUserLogged();
-    }
+    if (Cookies.get("token")) findUserLogged();
+    else navigate("/");
     getChore();
   }, [chore]);
 

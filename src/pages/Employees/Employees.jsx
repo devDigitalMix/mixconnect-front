@@ -15,7 +15,7 @@ import {
   EmployeesHeader,
   Felipe,
 } from "./EmployeesStyled.jsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Input } from "../../components/Input/Input.jsx";
 import { UserContext } from "../../Context/UserContent.jsx";
 import { useForm } from "react-hook-form";
@@ -31,6 +31,7 @@ export default function Employees() {
   const [search, setSearch] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [received, setReceived] = useState(false);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -55,12 +56,16 @@ export default function Employees() {
   }
 
   async function getEmployees() {
-    setReceived(false);
-    const response = await getAllEmployees();
-    setEmployees(response.data.results);
-    setSearch(false);
-    setIsLoading(false);
-    setReceived(true);
+    try {
+      setReceived(false);
+      const response = await getAllEmployees();
+      setEmployees(response.data.results);
+      setSearch(false);
+      setIsLoading(false);
+      setReceived(true);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function handleClickCreate() {
@@ -79,6 +84,7 @@ export default function Employees() {
   useEffect(() => {
     getEmployees();
     if (Cookies.get("token")) findUserLogged();
+    else navigate("/");
   }, []);
 
   return (
