@@ -25,6 +25,7 @@ import { DeleteClientStyled, Drive } from "./ClientStyled";
 import { userLogged } from "../../services/employeeService";
 import { UserContext } from "../../Context/UserContent";
 import Skeleton from "react-loading-skeleton";
+import { getPlansService } from "../../services/planService";
 
 export default function Client() {
   const { id } = useParams();
@@ -36,8 +37,11 @@ export default function Client() {
   const [socialMedia, setSocialMedia] = useState(client.socialMedia || []);
   const [page, setPage] = useState(client.pages || []);
   const [gmb, setGmb] = useState(client.gmb || []);
+  const [plans, setPlans] = useState([]);
   const [deleteClick, setDeleteClick] = useState(false);
   const navigate = useNavigate();
+
+  async function getPlans() {}
 
   const textsToRemove = [
     "https://www.instagram.com/",
@@ -184,6 +188,20 @@ export default function Client() {
       setSocialMedia(response.data.socialMedia || []);
       setPage(response.data.pages || []);
       setGmb(response.data.gmb || []);
+      const responsePlans = await getPlansService();
+      const lista = [];
+      let planName = "";
+      responsePlans.data.results.forEach((plano) => {
+        if (response.data.plan == plano.id) {
+          planName = plano.name;
+        } else {
+          lista.push(plano.name);
+        }
+      });
+      lista.reverse();
+      lista.push(planName);
+      lista.reverse();
+      setPlans(lista);
     } catch (error) {
       console.log(error);
     }
@@ -303,6 +321,7 @@ export default function Client() {
               )}
             </ProfileAvatar>
             <ProfileData>
+              <h4>{plans[0] || <Skeleton width="200px" />}</h4>
               <h2>{client.name || <Skeleton width="200px" />}</h2>
               {client.whatsapp ? (
                 <a
@@ -330,6 +349,16 @@ export default function Client() {
                 <div>
                   <label htmlFor="name">Nome:</label>
                   <Input type="text" name="name" defaultValue={client.name} />
+                </div>
+                <div>
+                  <label htmlFor="plan">Plano:</label>
+                  <select name="plan">
+                    {plans.map((plano) => (
+                      <option key={plano} value={plano}>
+                        {plano}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div>
                   <label htmlFor="desc">Descrição:</label>

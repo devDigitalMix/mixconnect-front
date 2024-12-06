@@ -196,7 +196,7 @@ export const ProfileUpdate = styled.form`
     gap: 10px;
 
     textarea {
-      background-color: #f8f8f8;
+      background-color: var(--light);
       color: var(--dark);
       outline: none;
       padding: 8px 10px 5px;
@@ -207,6 +207,14 @@ export const ProfileUpdate = styled.form`
       resize: vertical;
       min-height: 90px;
     }
+  }
+  select {
+    color: var(--dark);
+    background-color: var(--light);
+    padding: 8px 10px;
+    font-family: var(--font2);
+    font-weight: 600;
+    border-radius: 13px;
   }
   button.btn {
     position: absolute;
