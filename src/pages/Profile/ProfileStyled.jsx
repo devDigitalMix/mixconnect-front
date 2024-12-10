@@ -112,18 +112,20 @@ export const UploadAvatar = styled.form`
 export const ProfileData = styled.div`
   display: grid;
   gap: 1px;
-  h2 {
-    font-size: 1.4rem;
-    width: 100%;
-    font-family: var(--font);
+  div {
+    display: flex;
+    align-items: center;
+    gap: 15px;
   }
-  h3,
-  a {
-    font-size: 0.9rem;
-    color: var(--main);
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    width: 100%;
   }
   h4 {
-    color: #7a7a7a;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    color: var(--main);
   }
 `;
 
@@ -148,9 +150,7 @@ export const ProfileBody = styled.div`
     display: grid;
     gap: 10px;
     h4 {
-      color: var(--main);
-      font-family: Audiowide;
-      font-size: 1.2rem;
+      font-weight: 700;
     }
 
     p,

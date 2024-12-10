@@ -3,17 +3,22 @@ import styled from "styled-components";
 
 export const Header = styled.header`
   width: 100%;
-  & > div {
+  #nav {
     margin: 30px auto;
     max-width: 1200px;
     border-radius: 12px;
     padding: 1px;
-    background: linear-gradient(
-      to right,
-      #c5c3ff 0%,
-      #a3a0f8 50%,
-      #4441c8 100%
-    );
+    position: relative;
+    #navgradbottom {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
+    #navgradtop {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
     @media only screen and (max-width: 800px) {
       margin: 30px auto 60px;
     }
@@ -37,7 +42,7 @@ export const Nav = styled.nav`
   padding-right: 5px;
   background-color: var(--dark);
   z-index: 1;
-  border-radius: 12px;
+  border-radius: 11px;
   color: var(--light);
 
   @media only screen and (max-width: 875px) {

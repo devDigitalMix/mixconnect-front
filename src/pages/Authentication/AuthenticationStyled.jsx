@@ -12,13 +12,19 @@ export const AuthContainer = styled.div`
     width: 100%;
     min-height: 573px;
     padding: 1px;
-    border-radius: 50px;
-    background: linear-gradient(
-      to right,
-      #c5c3ff 0%,
-      #a3a0f8 50%,
-      #4441c8 100%
-    );
+    background-color: var(--dark);
+    border-radius: 10px;
+    position: relative;
+    #card-b-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+    #card-b-top {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
   }
 
   form {
@@ -29,9 +35,8 @@ export const AuthContainer = styled.div`
     width: 100%;
     label {
       display: block;
-      font-family: Audiowide;
-      color: var(--main);
       font-size: 1.25rem;
+      font-weight: 700;
       max-width: fit-content;
     }
     input {
@@ -49,10 +54,12 @@ export const Section = styled.section`
   padding: 2rem 10px;
   gap: 1rem;
   background-color: var(--dark);
-  border-radius: 50px;
+  border-radius: 10px;
   color: white;
   width: 100%;
   min-height: 573px;
+  position: relative;
+  z-index: 5;
   div:not(.custom-loader) {
     max-width: 375px;
     width: 100%;

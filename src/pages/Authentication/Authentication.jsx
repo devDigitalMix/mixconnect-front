@@ -47,6 +47,8 @@ export function Authentication() {
   return (
     <AuthContainer>
       <div>
+        <img src="/card-b-bottom.svg" id="card-b-bottom" />
+        <img src="/card-b-top.svg" id="card-b-top" />
         <Section type="signin">
           <img src="logo-login.svg" draggable="false" />
           <form onSubmit={handleSubmitSignin(inHandleSubmit)}>

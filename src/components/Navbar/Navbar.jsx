@@ -55,6 +55,8 @@ export function Navbar() {
     <>
       <Header>
         <div id="nav">
+          <img src="/navgradbottom.png" id="navgradbottom" />
+          <img src="/navgradtop.png" id="navgradtop" />
           <Nav>
             <Link to={"/home"} onClick={() => handleButtonClick("")}>
               <img src="/logo.svg" alt="MixConnect" draggable="false" />

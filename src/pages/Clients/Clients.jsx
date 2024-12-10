@@ -348,96 +348,97 @@ export default function Clients() {
         </form>
       </ClientHeader>
       <ClientBody>
-        {addClientModal && (
-          <AddClientModal onSubmit={createClient}>
-            <Input type="text" name="name" defaultValue="Novo Cliente"></Input>
-            <div className="clientInfo">
-              <div>
-                <label htmlFor="plan">PLANO:</label>
-                <select
-                  name="plan"
-                  onChange={(e) => setSelectedPlan(e.target.value)}
-                >
-                  <option value="">Selecione um plano</option>
-                  {plans.map((plan, index) => (
-                    <option value={plan.id} key={index}>
-                      {plan.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label htmlFor="value">VALOR:</label>
-                <Input name="value" type="number" />
-              </div>
-              <div>
-                <label htmlFor="gestor">GESTOR:</label>
-                <select name="gestor">
-                  {employees.map(
-                    (employee, index) =>
-                      employee.role === "Gestor de Tráfego" && (
-                        <option value={employee.name} key={index}>
-                          {employee.name}
-                        </option>
-                      )
-                  )}
-                </select>
-              </div>
-              <div>
-                <label htmlFor="cs">CS:</label>
-                <select name="cs">
-                  {employees.map(
-                    (employee, index) =>
-                      employee.role === "CS" && (
-                        <option value={employee.name} key={index}>
-                          {employee.name}
-                        </option>
-                      )
-                  )}
-                </select>
-              </div>
-              <div>
-                <label htmlFor="adsValue">VALOR ADS:</label>
-                <Input
-                  name="adsValue"
-                  type="number"
-                  className="formatValue"
-                  value={formValues.adsValue}
-                  placeholder="valor ads"
-                  onChange={(e) =>
-                    setFormValues({ ...formValues, adsValue: e.target.value })
-                  }
-                />
-              </div>
-              <div>
-                <label htmlFor="posts">Nº CRIATIVOS:</label>
-                <Input
-                  name="posts"
-                  type="number"
-                  value={formValues.posts}
-                  onChange={(e) =>
-                    setFormValues({ ...formValues, posts: e.target.value })
-                  }
-                />
-              </div>
-              <div>
-                <label htmlFor="cnpj">CNPJ:</label>
-                <Input name="cnpj" />
-              </div>
-              <div>
-                <label htmlFor="whatsapp">WHATSAPP:</label>
-                <Input name="whatsapp" />
-              </div>
+        <AddClientModal
+          onSubmit={createClient}
+          className={addClientModal ? "active" : undefined}
+        >
+          <Input type="text" name="name" defaultValue="Novo Cliente"></Input>
+          <div className="clientInfo">
+            <div>
+              <label htmlFor="plan">PLANO:</label>
+              <select
+                name="plan"
+                onChange={(e) => setSelectedPlan(e.target.value)}
+              >
+                <option value="">Selecione um plano</option>
+                {plans.map((plan, index) => (
+                  <option value={plan.id} key={index}>
+                    {plan.name}
+                  </option>
+                ))}
+              </select>
             </div>
-            {!isLoading ? (
-              <button type="submit" className="btn">
-                Enviar
-              </button>
-            ) : (
-              <div className="custom-loader"></div>
-            )}
-          </AddClientModal>
-        )}
+            <div>
+              <label htmlFor="value">VALOR:</label>
+              <Input name="value" type="number" />
+            </div>
+            <div>
+              <label htmlFor="gestor">GESTOR:</label>
+              <select name="gestor">
+                {employees.map(
+                  (employee, index) =>
+                    employee.role === "Gestor de Tráfego" && (
+                      <option value={employee.name} key={index}>
+                        {employee.name}
+                      </option>
+                    )
+                )}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="cs">CS:</label>
+              <select name="cs">
+                {employees.map(
+                  (employee, index) =>
+                    employee.role === "CS" && (
+                      <option value={employee.name} key={index}>
+                        {employee.name}
+                      </option>
+                    )
+                )}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="adsValue">VALOR ADS:</label>
+              <Input
+                name="adsValue"
+                type="number"
+                className="formatValue"
+                value={formValues.adsValue}
+                placeholder="valor ads"
+                onChange={(e) =>
+                  setFormValues({ ...formValues, adsValue: e.target.value })
+                }
+              />
+            </div>
+            <div>
+              <label htmlFor="posts">Nº CRIATIVOS:</label>
+              <Input
+                name="posts"
+                type="number"
+                value={formValues.posts}
+                onChange={(e) =>
+                  setFormValues({ ...formValues, posts: e.target.value })
+                }
+              />
+            </div>
+            <div>
+              <label htmlFor="cnpj">CNPJ:</label>
+              <Input name="cnpj" />
+            </div>
+            <div>
+              <label htmlFor="whatsapp">WHATSAPP:</label>
+              <Input name="whatsapp" />
+            </div>
+          </div>
+          {!isLoading ? (
+            <button type="submit" className="btn">
+              Enviar
+            </button>
+          ) : (
+            <div className="custom-loader"></div>
+          )}
+        </AddClientModal>
 
         {received ? (
           clients.map((client, index) => (

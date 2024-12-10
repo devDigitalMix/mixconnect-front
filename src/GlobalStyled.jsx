@@ -18,8 +18,8 @@ export const GlobalStyled = createGlobalStyle`
       #a3a0f8 50%,
       #4441c8 100%
     );
-  --cantoEsq: radial-gradient(circle farthest-corner at top left, #807DF0 0%, var(--dark) 32%, var(--dark) 83%, #807DF0 100%);
-  --cantoDir: radial-gradient(circle farthest-corner at top right, #807DF0 0%, var(--dark) 32%, var(--dark) 83%, #807DF0 100%);
+  --cantoEsq: radial-gradient(circle farthest-corner at top left, #807DF0 0%, #14141511 32%, #14141511 83%, #807DF0 100%);
+  --cantoDir: radial-gradient(circle farthest-corner at top right, #807DF0 0%, #14141511 32%, #14141511 83%, #807DF0 100%);
 
 }
 ::selection {

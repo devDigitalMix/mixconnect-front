@@ -39,6 +39,7 @@ export default function Client() {
   const [gmb, setGmb] = useState(client.gmb || []);
   const [plans, setPlans] = useState([]);
   const [deleteClick, setDeleteClick] = useState(false);
+  const [received, setReceived] = useState(false);
   const navigate = useNavigate();
 
   async function getPlans() {}
@@ -182,6 +183,7 @@ export default function Client() {
   }
 
   async function getClient() {
+    setReceived(false);
     try {
       const response = await getClientById(id);
       setClient(response.data);
@@ -198,6 +200,7 @@ export default function Client() {
           lista.push(plano.name);
         }
       });
+      setReceived(true);
       lista.reverse();
       lista.push(planName);
       lista.reverse();
@@ -288,12 +291,25 @@ export default function Client() {
               />
             </Link>
             <ProfileAvatar>
-              <img
-                src={client.logo ? client.logo : "/avatar-default.png"}
-                alt="avatar"
-                id="avatarImg"
-                draggable="false"
-              />
+              {received ? (
+                <a target="_blank" href={client.logo ? client.logo : undefined}>
+                  <img
+                    src={client.logo}
+                    alt="avatar"
+                    id="avatarImg"
+                    draggable="false"
+                  />
+                </a>
+              ) : (
+                <a>
+                  <img
+                    src={"/avatar-default.png"}
+                    alt="avatar"
+                    id="avatarImg"
+                    draggable="false"
+                  />
+                </a>
+              )}
               {(user.level == "Líder" || user.level == "Admin") && (
                 <UploadAvatar
                   onSubmit={handleUpdateAvatar}
@@ -321,8 +337,10 @@ export default function Client() {
               )}
             </ProfileAvatar>
             <ProfileData>
-              <h4>{plans[0] || <Skeleton width="200px" />}</h4>
-              <h2>{client.name || <Skeleton width="200px" />}</h2>
+              <div>
+                <h2>{client.name || <Skeleton width="200px" />}</h2>
+                <h4>{plans[0] || <Skeleton width="200px" />}</h4>
+              </div>
               {client.whatsapp ? (
                 <a
                 // target="_blank"

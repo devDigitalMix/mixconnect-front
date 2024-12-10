@@ -27,6 +27,7 @@ export const ClientBody = styled.div`
   justify-items: center;
   gap: 40px;
   align-items: center;
+  overflow-y: hidden;
   width: 100%;
   & > a {
     max-width: 370px;
@@ -41,7 +42,7 @@ export const ClientBody = styled.div`
   }
 `;
 export const AClient = styled.article`
-  background: var(--linear);
+  background: var(--cantoEsq);
   padding: 1px;
   border-radius: 12px;
   max-width: 370px;
@@ -53,7 +54,7 @@ export const ClientContent = styled.div`
   height: 100%;
   min-height: 267px;
   width: 100%;
-  background-color: var(--dark);
+  background-color: #111111e1;
   padding: 20px;
   border-radius: 12px;
   display: grid;
@@ -84,6 +85,27 @@ export const ClientHead = styled.div`
 
 export const AddClientModal = styled.form`
   width: 100%;
+  height: 0;
+  transform: translateY(-100%);
+  transition: all 0.5s;
+
+  & > * {
+    transform: scale(0);
+    transition: none;
+    transition-delay: 0;
+  }
+
+  &.active {
+    height: inherit;
+    transform: translateY(0);
+
+    & > * {
+      transform: scale(1);
+      transition: all 0.5s;
+      transition-delay: 0.1s;
+    }
+  }
+
   background-color: var(--dark);
   padding: 20px;
   border-radius: 12px;
