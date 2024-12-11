@@ -2,8 +2,8 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-// const baseURL = "http://localhost:3000";
-const baseURL = "https://mixconnect-back.onrender.com";
+const baseURL = "http://localhost:3000";
+// const baseURL = "https://mixconnect-back.onrender.com";
 
 export async function getChoreById(id) {
   const response = await axios.get(`${baseURL}/chore/${id}`, {
@@ -20,6 +20,19 @@ export async function createTaskService(id, data) {
       Authorization: `Bearer ${Cookies.get("token")}`,
     },
   });
+}
+
+export async function updateTasksListService(id, lista) {
+  const response = await axios.patch(
+    `${baseURL}/chore/updateTasks/${id}`,
+    lista,
+    {
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+    }
+  );
+  return response;
 }
 
 export async function updateTaskService(choreId, taskId, data) {

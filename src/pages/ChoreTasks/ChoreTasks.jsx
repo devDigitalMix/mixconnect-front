@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   changeTaskService,
@@ -7,6 +7,7 @@ import {
   getChoreById,
   updateChoreTitleService,
   updateTaskService,
+  updateTasksListService,
   //   updateTaskState,
 } from "../../services/choreService";
 import Cookies from "js-cookie";
@@ -29,16 +30,20 @@ import "react-loading-skeleton/dist/skeleton.css";
 export function ChoreTasks() {
   const { id } = useParams();
   const [chore, setChore] = useState({});
+  const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [createTaskModal, setCreateTaskModal] = useState(false);
   const [excludeModal, setExcludeModal] = useState(false);
+  const [articles, setArticles] = useState([]);
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
+  const choreTasksRef = useRef(null);
 
   async function getChore() {
     try {
       const response = await getChoreById(id);
       setChore(response.data);
+      setTasks(response.data.tasks);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -140,6 +145,93 @@ export function ChoreTasks() {
     }
   }
 
+  function handleTaskMove(umaTask) {
+    return (event) => {
+      const taskRect = umaTask.getBoundingClientRect();
+      const meio = (taskRect.bottom - taskRect.top) / 2;
+
+      umaTask.style = `position: fixed; max-width: 700px; z-index: 3; top: ${
+        event.clientY - meio
+      }px`;
+    };
+  }
+
+  function mover() {
+    const umaTask = event.target;
+
+    if (umaTask.classList.contains("task")) {
+      const articles = document.querySelectorAll("article");
+      const taskRect = umaTask.getBoundingClientRect().top;
+      let posicaoInicial = 0;
+
+      for (const task of articles) {
+        const taskTop = task.getBoundingClientRect().top;
+        if (taskRect > taskTop) {
+          posicaoInicial++;
+        }
+      }
+      umaTask.style = `position: relative; z-index: 0; top: inherit`;
+
+      // if (posicaoInicial > 0) {
+      //   articles[posicaoInicial - 1].style.marginBottom = "120px";
+      // }
+      const moveHandler = handleTaskMove(umaTask);
+
+      const mouseUpHandler = async () => {
+        document.removeEventListener("mousemove", moveHandler);
+        document.removeEventListener("mouseup", mouseUpHandler);
+        if (posicaoInicial > 0) {
+          articles[posicaoInicial - 1].style.marginBottom = "0";
+        }
+        const taskRect = umaTask.getBoundingClientRect().top;
+        umaTask.style = `position: relative; z-index: 0; top: inherit`;
+
+        let posicaoFinal = 0;
+        for (const task of articles) {
+          const taskTop = task.getBoundingClientRect().top;
+          if (taskRect > taskTop) {
+            posicaoFinal++;
+          }
+        }
+
+        console.log(posicaoInicial, posicaoFinal);
+
+        let lista = tasks;
+        for (let i = 0; i < lista.length; i++) {
+          if (posicaoInicial < posicaoFinal) {
+            if (
+              lista[i].position > posicaoInicial &&
+              lista[i].position <= posicaoFinal
+            ) {
+              lista[i].position = lista[i].position - 1;
+            }
+          } else if (posicaoInicial > posicaoFinal) {
+            if (
+              lista[i].position < posicaoInicial &&
+              lista[i].position >= posicaoFinal
+            ) {
+              lista[i].position = lista[i].position + 1;
+            }
+          }
+        }
+        lista[posicaoInicial].position = posicaoFinal;
+
+        const response = await updateTasksListService(chore._id, lista);
+        console.log(response);
+        setChore(response.data);
+      };
+
+      document.addEventListener("mousemove", moveHandler);
+      document.addEventListener("mouseup", mouseUpHandler);
+    }
+  }
+
+  useEffect(() => {
+    if (choreTasksRef.current && chore.tasks) {
+      setArticles(choreTasksRef.current.querySelectorAll("article"));
+    }
+  }, [chore.tasks]);
+
   useEffect(() => {
     if (Cookies.get("token")) findUserLogged();
     else navigate("/");
@@ -210,7 +302,7 @@ export function ChoreTasks() {
           />
         </ChoreTaskBtn2>
       </ChoreTasksHeader>
-      <ChoreTasksBody>
+      <ChoreTasksBody ref={choreTasksRef}>
         {chore.tasks
           ? chore.tasks.map((task) => (
               <Task
@@ -222,6 +314,7 @@ export function ChoreTasks() {
                 moverCima={() => moverCima(task)}
                 moverBaixo={() => moverBaixo(task)}
                 choreId={id}
+                move={() => mover()}
               />
             ))
           : null}

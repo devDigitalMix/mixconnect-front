@@ -6,6 +6,7 @@ export const TaskStyled = styled.article`
   box-shadow: 0 0 0 1px var(--main) inset;
   border-radius: 12px;
   width: 100%;
+  max-width: 1180px;
   padding: 15px;
   height: 120px;
   display: flex;

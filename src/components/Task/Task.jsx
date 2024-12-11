@@ -52,7 +52,7 @@ export function Task(props) {
   }
 
   return (
-    <TaskStyled className="task">
+    <TaskStyled className="task" onMouseDown={props.move}>
       <Arrows>
         <img
           src="/up-arrow.svg"
