@@ -8,6 +8,7 @@ export const Header = styled.header`
     max-width: 1200px;
     border-radius: 12px;
     padding: 1px;
+    background-color: var(--dark);
     position: relative;
     #navgradbottom {
       position: absolute;

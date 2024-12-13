@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const LabelSpace = styled.label`
-  color: var(--main);
-  font-family: Audiowide;
+  color: var(--light);
   font-size: 1.2rem;
+  font-weight: 700;
 `;

@@ -150,7 +150,7 @@ export function ChoreTasks() {
       const taskRect = umaTask.getBoundingClientRect();
       const meio = (taskRect.bottom - taskRect.top) / 2;
 
-      umaTask.style = `position: fixed; max-width: 700px; z-index: 3; top: ${
+      umaTask.style = `position: fixed; z-index: 3; top: ${
         event.clientY - meio
       }px`;
     };
@@ -172,9 +172,6 @@ export function ChoreTasks() {
       }
       umaTask.style = `position: relative; z-index: 0; top: inherit`;
 
-      // if (posicaoInicial > 0) {
-      //   articles[posicaoInicial - 1].style.marginBottom = "120px";
-      // }
       const moveHandler = handleTaskMove(umaTask);
 
       const mouseUpHandler = async () => {
@@ -193,8 +190,6 @@ export function ChoreTasks() {
             posicaoFinal++;
           }
         }
-
-        console.log(posicaoInicial, posicaoFinal);
 
         let lista = tasks;
         for (let i = 0; i < lista.length; i++) {
@@ -217,7 +212,6 @@ export function ChoreTasks() {
         lista[posicaoInicial].position = posicaoFinal;
 
         const response = await updateTasksListService(chore._id, lista);
-        console.log(response);
         setChore(response.data);
       };
 

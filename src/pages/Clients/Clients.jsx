@@ -83,6 +83,7 @@ export default function Clients() {
 
       setSearch(false);
       setClients(response.data.results);
+      console.log(response.data.results);
       setTotalClients(response.data.total);
       var c = 0;
       var tempList = [];
@@ -306,17 +307,23 @@ export default function Clients() {
         </FiltroModal>
       )}
       <ClientHeader>
-        {(user.level == "Líder" ||
-          user.level == "Admin" ||
-          user.role == "Comercial") && (
-          <img
-            src="/mais.svg"
-            className="img-effect prepareValue"
-            alt="novo cliente"
-            title="Novo Cliente"
-            onClick={clickAddClient}
-          />
-        )}
+        {
+          <div className="clientsOpt">
+            {(user.level == "Líder" ||
+              user.level == "Admin" ||
+              user.role == "Comercial") && (
+              <img
+                src="/mais.svg"
+                className="img-effect prepareValue"
+                alt="novo cliente"
+                title="Novo Cliente"
+                onClick={clickAddClient}
+              />
+            )}
+            <Link to="/home/deletedclients">Clientes Excluídos</Link>
+          </div>
+        }
+
         <form onSubmit={handleSubmit(onSearch)}>
           {search && (
             <img

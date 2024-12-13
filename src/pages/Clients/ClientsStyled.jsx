@@ -20,12 +20,28 @@ export const ClientHeader = styled.div`
     display: flex;
     gap: 10px;
   }
+
+  .clientsOpt {
+    a {
+      margin-left: 10px;
+      text-decoration: underline;
+      font-style: italic;
+      &:hover {
+        color: var(--main);
+      }
+    }
+  }
+  @media only screen and (max-width: 530px) {
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+  }
 `;
 export const ClientBody = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
-  gap: 40px;
+  gap: 10px 40px;
   align-items: center;
   overflow-y: hidden;
   width: 100%;
@@ -48,6 +64,7 @@ export const AClient = styled.article`
   max-width: 370px;
   width: 100%;
   min-height: 267px;
+  margin-bottom: 30px;
 `;
 
 export const ClientContent = styled.div`
@@ -96,13 +113,20 @@ export const AddClientModal = styled.form`
   }
 
   &.active {
-    height: inherit;
+    height: 420px;
     transform: translateY(0);
+    margin-bottom: 30px;
 
     & > * {
       transform: scale(1);
       transition: all 0.5s;
       transition-delay: 0.1s;
+    }
+    @media only screen and (max-width: 991px) {
+      height: 503px;
+    }
+    @media only screen and (max-width: 751px) {
+      height: 840px;
     }
   }
 
@@ -114,7 +138,7 @@ export const AddClientModal = styled.form`
   gap: 30px;
   grid-column: 1 / 4;
 
-  @media only screen and (max-width: 990px) {
+  @media only screen and (max-width: 1090px) {
     grid-column: 1 / 3;
   }
   @media only screen and (max-width: 750px) {

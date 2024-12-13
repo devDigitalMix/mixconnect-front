@@ -79,8 +79,9 @@ export async function findClients(data) {
   return response;
 }
 
-export async function deleteClient(id) {
+export async function deleteClient(id, motive) {
   const response = await axios.delete(`${baseURL}/client/delete/${id}`, {
+    data: { motive },
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,
     },

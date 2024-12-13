@@ -120,6 +120,12 @@ export default function Home() {
         "https://charts.mongodb.com/charts-mixconnect-swftspq/embed/charts?id=7f34005b-e41c-4558-862f-9e56cd54b661&maxDataAge=3600&theme=dark&autoRefresh=true"
       );
     }
+    if (string == "motive") {
+      setGraph("motive");
+      setGraphUrl(
+        "https://charts.mongodb.com/charts-mixconnect-swftspq/embed/charts?id=5301b39b-1d1f-4848-9824-712c4b3e09fc&maxDataAge=3600&theme=dark&autoRefresh=true"
+      );
+    }
   }
 
   useEffect(() => {
@@ -296,6 +302,15 @@ export default function Home() {
                   <span></span>
                 </span>
                 <p>Gestores</p>
+              </button>
+              <button
+                className={graph == "motive" ? "active" : ""}
+                onClick={() => handleGraph("motive")}
+              >
+                <span>
+                  <span></span>
+                </span>
+                <p>Saídas</p>
               </button>
             </GraphBtns>
           </GuardaGraph>

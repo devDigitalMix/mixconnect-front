@@ -14,7 +14,7 @@ export const DeleteClientStyled = styled.form`
   padding: 40px;
   display: grid;
   justify-items: center;
-  gap: 10px;
+  gap: 20px;
   text-align: center;
   h2 {
     font-size: 1.2rem;
@@ -26,6 +26,10 @@ export const DeleteClientStyled = styled.form`
     i {
       color: var(--main);
     }
+  }
+  div {
+    display: grid;
+    gap: 5px;
   }
   img:first-child {
     position: absolute;

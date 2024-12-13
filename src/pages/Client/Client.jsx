@@ -26,6 +26,7 @@ import { userLogged } from "../../services/employeeService";
 import { UserContext } from "../../Context/UserContent";
 import Skeleton from "react-loading-skeleton";
 import { getPlansService } from "../../services/planService";
+import { Label } from "../../components/Label/Label";
 
 export default function Client() {
   const { id } = useParams();
@@ -135,12 +136,19 @@ export default function Client() {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
+
     try {
       if (data.text == `excluir-${client.name}`) {
-        await deleteClient(client._id);
-        navigate("/home/clients");
+        if (data.motive.trim() == "") {
+          alert("Insira o Motivo");
+          setIsLoading(false);
+        } else {
+          await deleteClient(client._id, data.motive);
+          navigate("/home/clients");
+        }
       } else {
         alert("Insira o nome correto");
+        setIsLoading(false);
       }
     } catch (error) {
       console.error(error);
@@ -240,10 +248,16 @@ export default function Client() {
               <h2>
                 Tem certeza que deseja excluir <strong>{client.name}</strong>?
               </h2>
-              <h3>
-                Se sim, digite <i>excluir-{client.name}</i>
-              </h3>
-              <Input type="text" name="text" />
+              <div>
+                <h3>
+                  Se sim, digite <i>excluir-{client.name}</i>
+                </h3>
+                <Input type="text" name="text" />
+              </div>
+              <div>
+                <Label htmlFor="motive" text="Motivo:" />
+                <Input type="text" name="motive" placeholder="Motivo" />
+              </div>
               {!isLoading ? (
                 <button type="submit" className="btn">
                   Excluir
@@ -291,7 +305,7 @@ export default function Client() {
               />
             </Link>
             <ProfileAvatar>
-              {received ? (
+              {received && client.logo ? (
                 <a target="_blank" href={client.logo ? client.logo : undefined}>
                   <img
                     src={client.logo}
