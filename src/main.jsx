@@ -20,6 +20,7 @@ import Logins from "./pages/Logins/Logins.jsx";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import DeletedClients from "./pages/DeletedClients/DeletedClients.jsx";
+import DeletedClient from "./pages/DeletedClient/DeletedClient.jsx";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/home/deletedclients",
         element: <DeletedClients />,
+      },
+      {
+        path: "/home/deletedclient/:id",
+        element: <DeletedClient />,
       },
       {
         path: "/home/client/:id",

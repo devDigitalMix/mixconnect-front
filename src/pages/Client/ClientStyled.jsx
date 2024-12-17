@@ -30,6 +30,23 @@ export const DeleteClientStyled = styled.form`
   div {
     display: grid;
     gap: 5px;
+    width: 100%;
+    max-width: 300px;
+  }
+  select {
+    background-color: #f9f8fe !important;
+    color: var(--dark);
+    outline: none;
+    border: none;
+    padding: 8px 10px;
+    max-height: 37px;
+    font-weight: 600;
+    border-radius: 13px;
+    width: 100%;
+    max-width: 300px;
+    option {
+      padding: 5px;
+    }
   }
   img:first-child {
     position: absolute;

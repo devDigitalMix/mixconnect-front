@@ -8,11 +8,14 @@ import { getChoreById } from "../../services/choreService";
 import { UserContext } from "../../Context/UserContent";
 import Cookies from "js-cookie";
 import { ChoreTasksButtons } from "../ChoreTasks/ChoreTasksStyled";
+import Skeleton from "react-loading-skeleton";
+import { ChoreSkeleton } from "../../components/ChoreSkeleton/ChoreSkeleton";
 
 export function Chores() {
   const { user, setUser } = useContext(UserContext);
   const [chores, setChores] = useState([]);
   const [choreModal, setChoreModal] = useState(false);
+  const [received, setReceived] = useState(false);
   const navigate = useNavigate();
 
   async function findUserLogged() {
@@ -38,6 +41,7 @@ export function Chores() {
         })
       );
       setChores(choresList);
+      setReceived(true);
     } catch (error) {
       console.log("Error fetching chores", error);
     }
@@ -104,18 +108,22 @@ export function Chores() {
         </CreateChoreModal>
       )}
       <ChoresContent>
-        {chores.length > 0 && chores[0]._id ? (
+        {received ? (
           chores.map((chore) => (
             <Link
               key={chore._id}
               style={chore._id ? { display: "flex" } : { display: "none" }}
               to={"/home/chores/" + chore._id}
             >
-              <h2>{chore.title}</h2>
+              <img src="/normal-bottom.png" id="nb" />
+              <img src="/normal-top.png" id="nt" />
+              <div className="choreContent">
+                <h2>{chore.title}</h2>
+              </div>
             </Link>
           ))
         ) : (
-          <h3>Não há afazeres</h3>
+          <ChoreSkeleton cards={2}></ChoreSkeleton>
         )}
       </ChoresContent>
     </ChoresStyled>

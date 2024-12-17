@@ -83,7 +83,6 @@ export default function Clients() {
 
       setSearch(false);
       setClients(response.data.results);
-      console.log(response.data.results);
       setTotalClients(response.data.total);
       var c = 0;
       var tempList = [];
@@ -217,7 +216,6 @@ export default function Clients() {
 
   function formatValues() {
     const values = document.querySelectorAll(".formatValue");
-    console.log(values);
   }
 
   useEffect(() => {

@@ -5,6 +5,7 @@ import {
   Arrows,
   SelectState,
   TaskBtns,
+  TaskContent,
   TaskStyled,
   UpdateDescStyled,
 } from "./TaskStyled";
@@ -53,6 +54,8 @@ export function Task(props) {
 
   return (
     <TaskStyled className="task" onMouseDown={props.move}>
+      {/* <img src="/navgradbottom.png" id="nb" />
+      <img src="/navgradtop.png" id="nt" /> */}
       <Arrows>
         <img
           src="/up-arrow.svg"
@@ -110,6 +113,9 @@ export function Task(props) {
           />
         </button>
       </TaskBtns>
+      {/* <TaskContent>
+        
+      </TaskContent> */}
     </TaskStyled>
   );
 }

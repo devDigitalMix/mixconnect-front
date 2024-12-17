@@ -16,6 +16,10 @@ export const ChoreTasksHeader = styled.div`
   form {
     width: 100%;
     max-width: 400px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid var(--main);
   }
   #titleUpdate {
     width: 100%;
@@ -25,7 +29,6 @@ export const ChoreTasksHeader = styled.div`
     outline: none;
     font-size: 1.5rem;
     text-align: center;
-    border-bottom: 2px solid var(--main);
   }
   & > img:first-child {
     position: absolute;

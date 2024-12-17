@@ -26,6 +26,7 @@ import { excludeChore, userLogged } from "../../services/employeeService";
 import { UserContext } from "../../Context/UserContent";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { TaskSkeleton } from "../../components/TaskSkeleton/TaskSkeleton";
 
 export function ChoreTasks() {
   const { id } = useParams();
@@ -34,17 +35,20 @@ export function ChoreTasks() {
   const [isLoading, setIsLoading] = useState(true);
   const [createTaskModal, setCreateTaskModal] = useState(false);
   const [excludeModal, setExcludeModal] = useState(false);
+  const [received, setReceived] = useState(false);
   const [articles, setArticles] = useState([]);
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const choreTasksRef = useRef(null);
 
   async function getChore() {
+    setReceived(false);
     try {
       const response = await getChoreById(id);
       setChore(response.data);
       setTasks(response.data.tasks);
       setIsLoading(false);
+      setReceived(true);
     } catch (error) {
       console.log(error);
     }
@@ -213,6 +217,7 @@ export function ChoreTasks() {
 
         const response = await updateTasksListService(chore._id, lista);
         setChore(response.data);
+        setTasks(response.data.tasks);
       };
 
       document.addEventListener("mousemove", moveHandler);
@@ -230,7 +235,7 @@ export function ChoreTasks() {
     if (Cookies.get("token")) findUserLogged();
     else navigate("/");
     getChore();
-  }, [chore]);
+  }, []);
 
   return (
     <ChoreTasksStyled>
@@ -283,7 +288,9 @@ export function ChoreTasks() {
               id="titleUpdate"
               defaultValue={chore.title}
             />
-          ) : null}
+          ) : (
+            <Skeleton width="250px" height="25px" />
+          )}
         </form>
 
         <ChoreTaskBtn2>
@@ -297,21 +304,23 @@ export function ChoreTasks() {
         </ChoreTaskBtn2>
       </ChoreTasksHeader>
       <ChoreTasksBody ref={choreTasksRef}>
-        {chore.tasks
-          ? chore.tasks.map((task) => (
-              <Task
-                key={task._id}
-                taskId={task._id}
-                desc={task.desc}
-                state={task.state}
-                func={getChore}
-                moverCima={() => moverCima(task)}
-                moverBaixo={() => moverBaixo(task)}
-                choreId={id}
-                move={() => mover()}
-              />
-            ))
-          : null}
+        {received ? (
+          chore.tasks.map((task) => (
+            <Task
+              key={task._id}
+              taskId={task._id}
+              desc={task.desc}
+              state={task.state}
+              func={getChore}
+              moverCima={() => moverCima(task)}
+              moverBaixo={() => moverBaixo(task)}
+              choreId={id}
+              move={() => mover()}
+            />
+          ))
+        ) : (
+          <TaskSkeleton cards={4} />
+        )}
       </ChoreTasksBody>
     </ChoreTasksStyled>
   );

@@ -53,29 +53,35 @@ export default function DeletedClients() {
       <DeletedClientsBody>
         {received ? (
           deletedClients.map((client, index) => (
-            <AClientDeleted key={index}>
-              <ClientDeletedContent>
-                <ClientDeletedHead>
-                  {!client.logo ? (
-                    <img
-                      src="/avatar-default.png"
-                      className="clientLogo"
-                      alt="logo"
-                    />
-                  ) : (
-                    <img src={client.logo} className="clientLogo" alt="logo" />
-                  )}
-                  <div>
-                    <h2>{client.name}</h2>
-                    <p>{client.plan}</p>
-                  </div>
-                </ClientDeletedHead>
-                <p>Gestor: {client.gestor}</p>
-                <p>CS: {client.cs}</p>
-                <p>Valor Contrato: R$ {client.value}</p>
-                <p>Motivo Saída: {client.motive}</p>
-              </ClientDeletedContent>
-            </AClientDeleted>
+            <Link to={"/home/deletedClient/" + client.clientId} key={index}>
+              <AClientDeleted>
+                <ClientDeletedContent>
+                  <ClientDeletedHead>
+                    {!client.logo ? (
+                      <img
+                        src="/avatar-default.png"
+                        className="clientLogo"
+                        alt="logo"
+                      />
+                    ) : (
+                      <img
+                        src={client.logo}
+                        className="clientLogo"
+                        alt="logo"
+                      />
+                    )}
+                    <div>
+                      <h2>{client.name}</h2>
+                      <p>{client.plan}</p>
+                    </div>
+                  </ClientDeletedHead>
+                  <p>Gestor: {client.gestor}</p>
+                  <p>CS: {client.cs}</p>
+                  <p>Valor Contrato: R$ {client.value}</p>
+                  <p>Motivo Saída: {client.motive}</p>
+                </ClientDeletedContent>
+              </AClientDeleted>
+            </Link>
           ))
         ) : (
           <ClientSkeleton cards={12}></ClientSkeleton>

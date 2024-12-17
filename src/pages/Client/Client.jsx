@@ -45,6 +45,17 @@ export default function Client() {
 
   async function getPlans() {}
 
+  const motivos = [
+    "",
+    "Baixo Poder de Investimento",
+    "Desacordo Comercial",
+    "Inadimplência",
+    "Internalizando Marketing",
+    "Resultados",
+    "Fim de Contrato",
+    "Desalinhamento de Expectativa",
+  ];
+
   const textsToRemove = [
     "https://www.instagram.com/",
     "https://www.facebook.com/",
@@ -256,7 +267,13 @@ export default function Client() {
               </div>
               <div>
                 <Label htmlFor="motive" text="Motivo:" />
-                <Input type="text" name="motive" placeholder="Motivo" />
+                <select name="motive">
+                  {motivos.map((motive, index) => (
+                    <option key={index} value={motive}>
+                      {motive}
+                    </option>
+                  ))}
+                </select>
               </div>
               {!isLoading ? (
                 <button type="submit" className="btn">

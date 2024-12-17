@@ -3,15 +3,11 @@ import styled from "styled-components";
 export const TaskStyled = styled.article`
   position: relative;
   background-color: var(--dark);
-  box-shadow: 0 0 0 1px var(--main) inset;
   border-radius: 12px;
   width: 100%;
   max-width: 1180px;
-  padding: 15px;
+  padding: 1px;
   height: 120px;
-  display: flex;
-  gap: 15px;
-  align-items: center;
   span {
     display: block;
     width: 25px;
@@ -19,6 +15,21 @@ export const TaskStyled = styled.article`
     cursor: pointer;
     border-radius: 5px;
   }
+  box-shadow: 0 0 0 1px var(--main);
+  display: flex;
+  gap: 15px;
+  padding: 15px;
+  align-items: center;
+  /* #nb {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  #nt {
+    position: absolute;
+    right: 0;
+    top: 0;
+  } */
   .done {
     background-color: var(--sec);
   }
@@ -36,6 +47,16 @@ export const TaskStyled = styled.article`
       opacity: 1;
     }
   }
+`;
+
+export const TaskContent = styled.div`
+  background-color: var(--dark);
+  height: 118px;
+  width: 100%;
+  max-width: 1180px;
+  position: relative;
+  z-index: 3;
+  border-radius: 10px;
 `;
 
 export const SelectState = styled.form`

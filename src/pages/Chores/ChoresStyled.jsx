@@ -32,21 +32,39 @@ export const ChoresContent = styled.div`
   flex-wrap: wrap;
   gap: 40px;
   a {
-    background-color: var(--dark);
-    box-shadow: 0 0 0 1px var(--main) inset;
     height: 100px;
     max-width: 250px;
     width: 100%;
     border-radius: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-size: 1.2rem;
-    transition: all.5s ease-in-out;
     cursor: pointer;
-    &:hover {
-      box-shadow: 0 0 50px 60px var(--main) inset;
+    position: relative;
+    background-color: var(--dark);
+    padding: 1px;
+    #nb {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+    #nt {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .choreContent {
+      position: relative;
+      z-index: 4;
+      background-color: var(--dark);
+      width: 100%;
+      border-radius: 10px;
+      height: 98px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       transition: all.3s;
+    }
+    &:hover {
+      box-shadow: 0 0 10px 1px var(--main);
     }
   }
 `;
@@ -55,6 +73,8 @@ export const CreateChoreModal = styled.form`
   background-color: var(--dark);
   display: grid;
   justify-items: center;
+  position: relative;
+  z-index: 100;
   gap: 20px;
   border: 1px solid var(--main);
   padding: 30px;
