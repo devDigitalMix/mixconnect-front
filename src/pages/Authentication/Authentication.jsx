@@ -33,6 +33,9 @@ export function Authentication() {
       if (error.response.data == "Invalid password") {
         setErrorMessage("E-mail ou senha estão incorretos");
       }
+      if (error.response.data == "Login is not active") {
+        setErrorMessage("Funcionário Desativado");
+      }
       setIsLoading(false);
       console.log(error);
     }

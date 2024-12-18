@@ -137,7 +137,8 @@ export default function Employees() {
                   name={item.name}
                   desc={item.desc}
                   role={item.role}
-                  imgSrc={item.avatar}
+                  imgsrc={item.avatar}
+                  isactive={item.active}
                 />
               </EmployeeContainer>
             </Link>

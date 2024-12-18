@@ -38,7 +38,7 @@ export const AClientDeleted = styled.article`
   max-width: 370px;
   width: 100%;
   min-height: 267px;
-  filter: grayscale(40%);
+  filter: grayscale(60%);
 `;
 export const ClientDeletedContent = styled.div`
   height: 100%;

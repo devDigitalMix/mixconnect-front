@@ -12,6 +12,7 @@ import {
 } from "../Profile/ProfileStyled";
 import {
   UpdateEmployeeAvatar,
+  deactivateEmployeeService,
   getEmployeeById,
   updateEmployeeService,
   userLogged,
@@ -88,6 +89,11 @@ export function Employee() {
       setError(true);
       setErrorText(error.response.data);
     }
+  }
+
+  async function deactivateEmployee() {
+    await deactivateEmployeeService(employee.id);
+    getEmployee();
   }
 
   function updateAvatarClick(e) {
@@ -189,7 +195,7 @@ export function Employee() {
   }, [employee.music]);
 
   return (
-    <ProfileContainer>
+    <ProfileContainer $isactive={employee.active}>
       <ProfileStyled>
         {deleteClick && (
           <Delete
@@ -386,6 +392,16 @@ export function Employee() {
             )}
           </ProfileBody>
         )}
+        {(user.level === "Admin" || user.level === "Líder") &&
+          (employee.active ? (
+            <button onClick={deactivateEmployee} className="btn">
+              Desativar
+            </button>
+          ) : (
+            <button onClick={deactivateEmployee} className="btn">
+              Ativar
+            </button>
+          ))}
       </ProfileStyled>
     </ProfileContainer>
   );

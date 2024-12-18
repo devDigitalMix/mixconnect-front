@@ -247,7 +247,7 @@ export default function Client() {
 
   return (
     <>
-      <ProfileContainer>
+      <ProfileContainer $isactive={true}>
         <ProfileStyled>
           {deleteClick && (
             <DeleteClientStyled onSubmit={handleDelete}>

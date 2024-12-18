@@ -142,7 +142,7 @@ export default function Profile() {
 
   return (
     <>
-      <ProfileContainer>
+      <ProfileContainer $isactive={user.active}>
         {felipe && (
           <Felipe>
             <h2>O Felipe é calvo</h2>

@@ -2,8 +2,8 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-// const baseURL = "http://localhost:3000";
-const baseURL = "https://mixconnect-back.onrender.com";
+const baseURL = "http://localhost:3000";
+// const baseURL = "https://mixconnect-back.onrender.com";
 
 export function signin(data) {
   const response = axios.post(`${baseURL}/auth/login`, data);
@@ -95,6 +95,18 @@ export async function createchore(id, data) {
 export async function excludeChore(userId, choreId) {
   const response = await axios.patch(
     `${baseURL}/employee/deleteChore/${userId}/choreId/${choreId}`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+    }
+  );
+}
+
+export async function deactivateEmployeeService(id) {
+  await axios.patch(
+    `${baseURL}/employee/toggleActive/${id}`,
     {},
     {
       headers: {

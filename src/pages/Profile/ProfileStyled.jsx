@@ -1,7 +1,13 @@
 import styled from "styled-components";
 
 export const ProfileContainer = styled.section`
-  background: linear-gradient(to right, #c5c3ff 0%, #a3a0f8 50%, #4441c8 100%);
+  background: ${(props) => {
+    if (props.$isactive) {
+      return "linear-gradient(to right, #c5c3ff 0%, #a3a0f8 50%, #4441c8 100%)";
+    } else {
+      return "grey";
+    }
+  }};
   border-radius: 12px;
   padding: 1px;
   width: 100%;

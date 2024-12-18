@@ -1,12 +1,19 @@
 import styled from "styled-components";
 
 export const CardContainer = styled.article`
-  background: linear-gradient(to right, #c5c3ff 0%, #a3a0f8 50%, #4441c8 100%);
+  background: ${(props) => {
+    if (props.$isactive) {
+      return "linear-gradient(to right, #c5c3ff 0%, #a3a0f8 50%, #4441c8 100%)";
+    } else {
+      return "grey";
+    }
+  }};
   border-radius: 12px;
   padding: 1px;
   width: 100%;
   max-width: 1200px;
   transition: all.3s;
+  filter: grayscale(${(props) => (props.$isactive ? "0" : "100%")});
   &:hover {
     cursor: pointer;
     transform: scale(1.01) translateY(-2px);

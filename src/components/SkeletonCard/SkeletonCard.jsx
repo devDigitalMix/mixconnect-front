@@ -11,7 +11,7 @@ export function SkeletonCard({ cards }) {
   return Array(cards)
     .fill(0)
     .map((item, index) => (
-      <CardContainer key={index}>
+      <CardContainer key={index} $isactive={true}>
         <CardStyled>
           <img src="/avatar-default.png" draggable="false" />
           <div>
