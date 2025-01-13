@@ -282,7 +282,7 @@ export const PageButtons = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 30px;
+  gap: 15px;
   p {
     padding: 5px;
     cursor: pointer;

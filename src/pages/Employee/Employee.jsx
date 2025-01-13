@@ -166,8 +166,9 @@ export function Employee() {
   }
 
   function formatDate(data) {
-    const date = new Date(data);
-    const dia = String(date.getDate() + 1).padStart(2, "0");
+    var date = new Date(data);
+    date.setHours(date.getHours() + 3);
+    const dia = String(date.getDate()).padStart(2, "0");
     const mes = String(date.getMonth() + 1).padStart(2, "0");
     const ano = date.getFullYear();
     const dataAtt = `${dia}/${mes}/${ano}`;
@@ -230,12 +231,20 @@ export function Employee() {
                 onClick={updateForm}
               />
             )}
+
+            {/* style={update ? { transform: "scale(0)" } : undefined} */}
+            {!update && (
+              <Link to={"/home/employees"}>
+                <img
+                  src="/cancel.svg"
+                  alt="voltar"
+                  className="voltar img-effect"
+                />
+              </Link>
+            )}
           </TopButtons>
         )}
         <TopProfile>
-          <Link to={"/home/employees"}>
-            <img src="/cancel.svg" alt="voltar" className="voltar img-effect" />
-          </Link>
           <ProfileAvatar>
             <img
               src={employee.avatar ? employee.avatar : "/avatar-default.png"}
@@ -393,6 +402,7 @@ export function Employee() {
           </ProfileBody>
         )}
         {(user.level === "Admin" || user.level === "Líder") &&
+          !update &&
           (employee.active ? (
             <button onClick={deactivateEmployee} className="btn">
               Desativar

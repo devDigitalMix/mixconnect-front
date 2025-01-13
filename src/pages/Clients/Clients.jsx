@@ -482,51 +482,38 @@ export default function Clients() {
       </ClientBody>
       {!search && (
         <PageButtons>
-          {lista.map((n) => (
-            <p
-              key={n}
-              style={{ color: pages / 12 == n ? "#6d6d6d" : "var(--light)" }}
-              onClick={() => getClients(12, n * 12, 1)}
-            >
-              {n + 1}
-            </p>
-          ))}
-          {/* {pages > 0 && (
-            <div>
-              <a onClick={() => getClients(12, 0, 1)} href="#nav">
-                <img
-                  src="/skip-previous.svg"
-                  alt="Voltar"
-                  title="Página anterior"
-                />
-              </a>
-              <a
-                onClick={() =>
-                  getClients(12, pages - 12 > 0 ? pages - 12 : 0, 1)
-                }
-                href="#nav"
-              >
-                <img src="/back.svg" alt="Voltar" title="Página anterior" />
-              </a>
-            </div>
-          )}
-          {pages + 12 < totalClients && (
-            <div>
-              <a onClick={() => getClients(12, pages + 12, 2)} href="#nav">
-                <img src="/next.svg" alt="Próximo" title="Próxima página" />
-              </a>
-              <a
-                onClick={() => getClients(12, totalClients - 12, 2)}
-                href="#nav"
-              >
-                <img
-                  src="/skip-next.svg"
-                  alt="Próximo"
-                  title="Próxima página"
-                />
-              </a>
-            </div>
-          )} */}
+          {lista
+            .filter(
+              (n, _, arr) =>
+                n === 0 ||
+                n === arr[arr.length - 1] ||
+                (n >= pages / 12 - 2 && n <= pages / 12 + 2)
+            )
+            .reduce((acc, n, index, filtered) => {
+              const prev = filtered[index - 1];
+              if (prev !== undefined && n - prev > 1) {
+                acc.push("...");
+              }
+              acc.push(n);
+              return acc;
+            }, [])
+            .map((n, index) =>
+              n === "..." ? (
+                <span key={`ellipsis-${index}`} style={{ margin: "0 5px" }}>
+                  ...
+                </span>
+              ) : (
+                <p
+                  key={n}
+                  style={{
+                    color: pages / 12 == n ? "#6d6d6d" : "var(--light)",
+                  }}
+                  onClick={() => getClients(12, n * 12, 1)}
+                >
+                  {n + 1}
+                </p>
+              )
+            )}
         </PageButtons>
       )}
     </ClientsStyled>

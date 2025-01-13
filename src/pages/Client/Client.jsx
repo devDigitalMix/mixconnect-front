@@ -187,8 +187,9 @@ export default function Client() {
   }
 
   function formatDate(data) {
-    const date = new Date(data);
-    const dia = String(date.getDate() + 1).padStart(2, "0");
+    var date = new Date(data);
+    date.setHours(date.getHours() + 3);
+    const dia = String(date.getDate()).padStart(2, "0");
     const mes = String(date.getMonth() + 1).padStart(2, "0");
     const ano = date.getFullYear();
     const dataAtt = `${dia}/${mes}/${ano}`;
@@ -434,6 +435,26 @@ export default function Client() {
                   />
                 </div>
                 <div>
+                  <label htmlFor="acompanhamentoAds">Acompanhamento ADS:</label>
+                  <select name="acompanhamentoAds">
+                    {client.acompanhamentoAds != "Nenhum" ? (
+                      <option value={client.acompanhamentoAds}>
+                        {client.acompanhamentoAds}
+                      </option>
+                    ) : null}
+                    <option value="Nenhum">Nenhum</option>
+                    {client.acompanhamentoAds != "Leve" ? (
+                      <option value="Leve">Leve</option>
+                    ) : null}
+                    {client.acompanhamentoAds != "Moderado" ? (
+                      <option value="Moderado">Moderado</option>
+                    ) : null}
+                    {client.acompanhamentoAds != "Agressivo" ? (
+                      <option value="Agressivo">Agressivo</option>
+                    ) : null}
+                  </select>
+                </div>
+                <div>
                   <label htmlFor="gestor">Gestor:</label>
                   <Input
                     type="text"
@@ -448,6 +469,28 @@ export default function Client() {
                 <div>
                   <label htmlFor="posts">Criativos:</label>
                   <Input type="text" name="posts" defaultValue={client.posts} />
+                </div>
+                <div>
+                  <label htmlFor="acompanhamentoRedes">
+                    Acompanhamento Redes:
+                  </label>
+                  <select name="acompanhamentoRedes">
+                    {client.acompanhamentoRedes != "Nenhum" ? (
+                      <option value={client.acompanhamentoRedes}>
+                        {client.acompanhamentoRedes}
+                      </option>
+                    ) : null}
+                    <option value="Nenhum">Nenhum</option>
+                    {client.acompanhamentoRedes != "Leve" ? (
+                      <option value="Leve">Leve</option>
+                    ) : null}
+                    {client.acompanhamentoRedes != "Moderado" ? (
+                      <option value="Moderado">Moderado</option>
+                    ) : null}
+                    {client.acompanhamentoRedes != "Agressivo" ? (
+                      <option value="Agressivo">Agressivo</option>
+                    ) : null}
+                  </select>
                 </div>
                 <div>
                   <label htmlFor="email">E-mail:</label>
@@ -571,6 +614,18 @@ export default function Client() {
                     )}
                   </p>
                 </div>
+                {client.acompanhamentoAds ? (
+                  <div>
+                    <h4>Acompanhamento Ads:</h4>
+                    <p>
+                      {client.acompanhamentoAds ? (
+                        client.acompanhamentoAds
+                      ) : (
+                        <Skeleton width="200px" />
+                      )}
+                    </p>
+                  </div>
+                ) : null}
                 <div>
                   <h4>Gestor:</h4>
                   <p>{client.gestor || <Skeleton width="200px" />}</p>
@@ -589,6 +644,18 @@ export default function Client() {
                     )}
                   </p>
                 </div>
+                {client.acompanhamentoRedes ? (
+                  <div>
+                    <h4>Acompanhamento Redes:</h4>
+                    <p>
+                      {client.acompanhamentoRedes ? (
+                        client.acompanhamentoRedes
+                      ) : (
+                        <Skeleton width="200px" />
+                      )}
+                    </p>
+                  </div>
+                ) : null}
                 <div>
                   <h4>E-mail:</h4>
                   <p>{client.email || "email@gmail.com"}</p>

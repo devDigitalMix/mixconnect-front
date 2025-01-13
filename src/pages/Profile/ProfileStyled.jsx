@@ -44,6 +44,7 @@ export const TopProfile = styled.div`
   iframe {
     border-radius: 12px;
     max-width: 300px;
+    max-height: 100px;
     margin-left: auto;
     margin-right: 40px;
   }
@@ -162,10 +163,11 @@ export const ProfileBody = styled.div`
     p,
     a {
       background-color: #313131;
-      padding: 8px 10px 5px;
+      padding: 15px 10px 12px;
       border-radius: 5px;
       max-width: 300px;
       overflow: hidden;
+      font-size: 0.85rem;
     }
     p + p {
       /* margin-top: 10px; */

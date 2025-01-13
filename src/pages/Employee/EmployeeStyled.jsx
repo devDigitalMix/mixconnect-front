@@ -5,6 +5,5 @@ export const TopButtons = styled.div`
   right: 10px;
   top: 10px;
   display: flex;
-  flex-direction: column;
   gap: 10px;
 `;
