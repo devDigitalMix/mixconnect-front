@@ -14,11 +14,10 @@ import { UserContext } from "../../Context/UserContent";
 import Skeleton from "react-loading-skeleton";
 
 export function Navbar() {
-  const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
   const [nav, setNav] = useState("");
   const [findingUser, setFindingUser] = useState(true);
-
+  const navigate = useNavigate();
   const [activeButton, setActiveButton] = useState(null);
 
   async function findUserLogged() {
@@ -44,6 +43,11 @@ export function Navbar() {
   function handleButtonClick(buttonName) {
     setActiveButton(buttonName);
   }
+
+  useEffect(() => {
+    if (Cookies.get("token")) findUserLogged();
+    else navigate("/");
+  }, []);
 
   useEffect(() => {
     if (Cookies.get("token")) findUserLogged();
@@ -118,13 +122,20 @@ export function Navbar() {
               )}
             </NavMenu>
             <PerfilMenu>
-              <Link to={"/home/profile"} onClick={() => handleButtonClick("")}>
+              {!findingUser ? (
+                <Link
+                  to={"/home/profile"}
+                  onClick={() => handleButtonClick("")}
+                >
+                  <img src={user.avatar} id="perfil-img" draggable="false" />
+                </Link>
+              ) : (
                 <img
-                  src={user.avatar || "/avatar-default.png"}
+                  src="/avatar-default.png"
                   id="perfil-img"
                   draggable="false"
                 />
-              </Link>
+              )}
               <button onClick={signout}>
                 <img src="/logout.svg" alt="Sair" title="Sair" />
               </button>

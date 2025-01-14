@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from "react";
-
+import React, { useContext, useEffect, useState } from "react";
+import Cookies from "js-cookie";
 import {
   AData,
   BodyContent,
@@ -24,9 +24,12 @@ import {
 import Skeleton from "react-loading-skeleton";
 import { InfoSkeleton } from "../../components/InfoSkeleton/InfoSkeleton.jsx";
 import { useLocation, useNavigate } from "react-router-dom";
+import { UserContext } from "../../Context/UserContent.jsx";
+import { userLogged } from "../../services/employeeService.js";
 
 export default function Home() {
   const [ltv, setLtv] = useState();
+  const { user, setUser } = useContext(UserContext);
   const [clients, setClients] = useState();
   const [churn, setChurn] = useState();
   const [newClients, setNewClients] = useState();
@@ -38,10 +41,20 @@ export default function Home() {
   const [clock, setClock] = useState("");
   const [mostra, setMostra] = useState(false);
   const [cronometro, setCronometro] = useState();
+  const navigate = useNavigate();
 
   function isDiaUtil(data) {
     const diaSemana = data.getDay();
     return diaSemana >= 1 && diaSemana <= 5;
+  }
+
+  async function findUserLogged() {
+    try {
+      const response = await userLogged();
+      setUser(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function paintball() {
@@ -196,6 +209,11 @@ export default function Home() {
     }, 1000);
 
     return () => clearInterval(cronometroInterval);
+  }, []);
+
+  useEffect(() => {
+    if (Cookies.get("token")) findUserLogged();
+    else navigate("/");
   }, []);
 
   return (

@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   createLogin,
   deleteLoginService,
@@ -21,15 +21,35 @@ import { InputNav } from "../../components/Navbar/NavbarStyled";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { searchSchema } from "../../schemas/searchSchema";
+import { getAllClients } from "../../services/clientService";
+import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+import { userLogged } from "../../services/employeeService";
+import { UserContext } from "../../Context/UserContent";
 
 export default function Logins() {
   const [logins, setLogins] = useState([]);
-  const [viewPassword, setViewPassword] = useState(false);
+  const { user, setUser } = useContext(UserContext);
+  const [viewPassword, setViewPassword] = useState("");
   const [createModal, setCreateModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [updateModal, setUpdateModal] = useState(false);
   const [updatingLogin, setUpdatingLogin] = useState({});
   const [search, setSearch] = useState(false);
+  const navigate = useNavigate();
+
+  async function findUserLogged() {
+    try {
+      const response = await userLogged();
+      setUser(response.data);
+      console.log(response.data.level);
+      if (response.data.level == "Base") {
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const {
     register,
@@ -109,6 +129,11 @@ export default function Logins() {
     setCreateModal(false);
     getLogins();
   }
+
+  useEffect(() => {
+    if (Cookies.get("token")) findUserLogged();
+    else navigate("/");
+  }, []);
 
   useEffect(() => {
     getLogins();
@@ -213,21 +238,7 @@ export default function Logins() {
           className="img-effect"
           onClick={() => setCreateModal(!createModal)}
         />
-        {!viewPassword ? (
-          <img
-            src="/hide-password.svg"
-            className="hide"
-            title="Mostrar Senhas"
-            onClick={() => setViewPassword(!viewPassword)}
-          />
-        ) : (
-          <img
-            src="/view-password.svg"
-            className="hide"
-            title="Esconder Senhas"
-            onClick={() => setViewPassword(!viewPassword)}
-          />
-        )}
+
         <form onSubmit={handleSubmit(onSearch)}>
           {search && (
             <img
@@ -255,6 +266,19 @@ export default function Logins() {
           logins.map((login, index) => (
             <LoginItem key={index}>
               <div className="login-settings">
+                {viewPassword == login.id ? (
+                  <img
+                    src="/view-password.svg"
+                    className="img-effect"
+                    onClick={() => setViewPassword("")}
+                  />
+                ) : (
+                  <img
+                    src="/hide-password.svg"
+                    className="img-effect"
+                    onClick={() => setViewPassword(login.id)}
+                  />
+                )}
                 <img
                   src="/update-profile.svg"
                   className="img-effect"
@@ -269,7 +293,7 @@ export default function Logins() {
               <h2>{login.client}</h2>
               <h2>{login.platform}</h2>
               <h2>{login.clientLogin}</h2>
-              {viewPassword ? (
+              {viewPassword == login.id ? (
                 <h2>{login.clientPassword}</h2>
               ) : (
                 <h2>•••••••••••</h2>

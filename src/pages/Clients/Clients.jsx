@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import {
   createClientService,
   findClients,
@@ -55,6 +55,8 @@ export default function Clients() {
   const [search, setSearch] = useState(false);
   const [received, setReceived] = useState(false);
   const navigate = useNavigate();
+  const [query, setQuery] = useState("");
+  const debounceTimeout = useRef(null);
 
   const {
     register,
@@ -149,29 +151,72 @@ export default function Clients() {
     }
   }
 
-  async function onSearch(data) {
-    setReceived(false);
+  const handleSearch = (name) => {
     setIsLoading(true);
-    const { name } = data;
-    const response = await getClientsByName(name);
-    const plansResponse = await getPlansService();
-    const plansMap = plansResponse.data.results.reduce((map, plan) => {
-      map[plan.id] = plan.name;
-      return map;
-    }, {});
+    setReceived(false);
 
-    const clientList = response.data.results.map((client) => {
-      return {
+    getClientsByName(name).then(async (response) => {
+      const plansResponse = await getPlansService();
+      const plansMap = plansResponse.data.results.reduce((map, plan) => {
+        map[plan.id] = plan.name;
+        return map;
+      }, {});
+
+      const clientList = response.data.results.map((client) => {
+        return {
+          ...client,
+          plan: plansMap[client.plan] || "Plano desconhecido",
+        };
+      });
+
+      setClients(clientList);
+      setReceived(true);
+      setIsLoading(false);
+    });
+  };
+
+  const onInputChange = (e) => {
+    const value = e.target.value;
+    setQuery(value);
+
+    if (debounceTimeout.current) {
+      clearTimeout(debounceTimeout.current);
+    }
+
+    debounceTimeout.current = setTimeout(() => {
+      if (value.trim() === "") {
+        fetchAllClients();
+      } else {
+        handleSearch(value.trim());
+      }
+    }, 300);
+  };
+
+  const fetchAllClients = async () => {
+    setIsLoading(true);
+    setReceived(false);
+
+    try {
+      const response = await getClients(12, 0, 1);
+      const plansResponse = await getPlansService();
+      const plansMap = plansResponse.data.results.reduce((map, plan) => {
+        map[plan.id] = plan.name;
+        return map;
+      }, {});
+
+      const clientList = response.data.results.map((client) => ({
         ...client,
         plan: plansMap[client.plan] || "Plano desconhecido",
-      };
-    });
-    setClients(clientList);
-    setSearch(true);
-    reset();
-    setIsLoading(false);
-    setReceived(true);
-  }
+      }));
+
+      setClients(clientList);
+      setReceived(true);
+    } catch (err) {
+      console.error("Erro ao buscar todos os clientes:", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   async function createClient(event) {
     setIsLoading(true);
@@ -322,7 +367,7 @@ export default function Clients() {
           </div>
         }
 
-        <form onSubmit={handleSubmit(onSearch)}>
+        <form>
           {search && (
             <img
               src="/no-filter.svg"
@@ -340,6 +385,8 @@ export default function Clients() {
               {...register("name")}
               type="text"
               placeholder="Procurar Cliente"
+              value={query}
+              onChange={onInputChange}
             />
           </InputNav>
           {isLoading && <div className="custom-loader"></div>}
