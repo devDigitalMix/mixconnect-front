@@ -113,7 +113,7 @@ export const AddClientModal = styled.form`
   }
 
   &.active {
-    height: 420px;
+    height: 355px;
     transform: translateY(0);
     margin-bottom: 30px;
 
@@ -126,12 +126,12 @@ export const AddClientModal = styled.form`
       height: 503px;
     }
     @media only screen and (max-width: 751px) {
-      height: 840px;
+      height: 820px;
     }
   }
 
   background-color: var(--dark);
-  padding: 20px;
+  padding: 30px 20px;
   border-radius: 12px;
   border: 1px solid var(--main);
   display: grid;
@@ -172,54 +172,56 @@ export const AddClientModal = styled.form`
       grid-template-columns: 1fr;
     }
     div {
-      display: grid;
       max-width: 300px;
+      display: grid;
       width: 100%;
       label {
-        font-family: var(--font);
-        color: var(--main);
-        font-size: 1.2rem;
+        font-style: italic;
+        font-weight: 700;
       }
       select {
         background-color: #f9f8fe !important;
+        border-radius: 5px;
+        font-style: italic;
+        font-size: 0.75rem;
         color: var(--dark);
-        outline: none;
-        padding: 8px 10px 5px;
-        max-height: 37px;
-        font-weight: 600;
-        border-radius: 30px;
-        width: 100%;
+        padding: 8px 10px;
         max-width: 300px;
+        resize: vertical;
+        outline: none;
+        border: none;
+        height: 40px;
+        width: 100%;
       }
       option {
-        font-weight: 600;
+        font-style: normal;
       }
     }
   }
 `;
 
 export const FiltroModal = styled.form`
+  transform: translate(-50%, -50%);
   background-color: var(--dark);
   border: 1px solid var(--main);
+  justify-items: center;
+  border-radius: 12px;
+  max-width: 500px;
   position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  display: grid;
   padding: 20px;
   z-index: 10;
-  border-radius: 12px;
-  display: grid;
-  justify-items: center;
-  gap: 20px;
-  max-width: 500px;
   width: 100%;
+  left: 50%;
+  gap: 20px;
+  top: 50%;
   #close {
     position: absolute;
-    right: 15px;
-    top: 10px;
-    padding: 5px;
     transition: 0.3s;
     cursor: pointer;
+    padding: 5px;
+    right: 15px;
+    top: 10px;
     &:hover {
       color: var(--main);
     }

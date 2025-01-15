@@ -197,6 +197,8 @@ export function Employee() {
 
   return (
     <ProfileContainer $isactive={employee.active}>
+      <img src="/grande-bottom.png" id="grande-bottom" />
+      <img src="/grande-top.png" id="grande-top" />
       <ProfileStyled>
         {deleteClick && (
           <Delete

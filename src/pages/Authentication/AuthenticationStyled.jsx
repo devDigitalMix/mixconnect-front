@@ -43,6 +43,9 @@ export const AuthContainer = styled.div`
       width: 100%;
       max-width: none;
     }
+    img {
+      filter: invert(100%) hue-rotate(180deg);
+    }
   }
 `;
 

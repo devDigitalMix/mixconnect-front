@@ -54,6 +54,7 @@ export default function Client() {
     "Resultados",
     "Fim de Contrato",
     "Desalinhamento de Expectativa",
+    "Empresa Desativada",
   ];
 
   const textsToRemove = [
@@ -249,6 +250,8 @@ export default function Client() {
   return (
     <>
       <ProfileContainer $isactive={true}>
+        <img src="/grande-bottom.png" id="grande-bottom" />
+        <img src="/grande-top.png" id="grande-top" />
         <ProfileStyled>
           {deleteClick && (
             <DeleteClientStyled onSubmit={handleDelete}>
@@ -264,7 +267,7 @@ export default function Client() {
                 <h3>
                   Se sim, digite <i>excluir-{client.name}</i>
                 </h3>
-                <Input type="text" name="text" />
+                <Input type="text" name="text" placeholder="Nome" />
               </div>
               <div>
                 <Label htmlFor="motive" text="Motivo:" />
@@ -277,9 +280,14 @@ export default function Client() {
                 </select>
               </div>
               {!isLoading ? (
-                <button type="submit" className="btn">
-                  Excluir
-                </button>
+                <div className="deleteBtns">
+                  <button type="submit" className="btn neutral">
+                    Cancelar
+                  </button>
+                  <button type="submit" className="btn danger">
+                    Excluir
+                  </button>
+                </div>
               ) : (
                 <div className="custom-loader"></div>
               )}
@@ -312,16 +320,18 @@ export default function Client() {
                   onClick={updateForm}
                 />
               )}
+              {!update && (
+                <Link to={"/home/clients"}>
+                  <img
+                    src="/cancel.svg"
+                    alt="voltar"
+                    className="voltar img-effect"
+                  />
+                </Link>
+              )}
             </TopButtons>
           )}
           <TopProfile>
-            <Link to={"/home/clients"}>
-              <img
-                src="/cancel.svg"
-                alt="voltar"
-                className="voltar img-effect"
-              />
-            </Link>
             <ProfileAvatar>
               {received && client.logo ? (
                 <a target="_blank" href={client.logo ? client.logo : undefined}>
@@ -381,6 +391,7 @@ export default function Client() {
                 //   formatWhats(client.whatsapp)
                 // }
                 >
+                  <img src="/tel.svg" alt="whatsapp" />
                   {client.whatsapp}
                 </a>
               ) : (

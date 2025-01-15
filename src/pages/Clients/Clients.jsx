@@ -404,10 +404,13 @@ export default function Clients() {
           onSubmit={createClient}
           className={addClientModal ? "active" : undefined}
         >
-          <Input type="text" name="name" defaultValue="Novo Cliente"></Input>
           <div className="clientInfo">
             <div>
-              <label htmlFor="plan">PLANO:</label>
+              <label htmlFor="name">Nome do Cliente:</label>
+              <Input name="name" />
+            </div>
+            <div>
+              <label htmlFor="plan">Plano:</label>
               <select
                 name="plan"
                 onChange={(e) => setSelectedPlan(e.target.value)}
@@ -421,11 +424,11 @@ export default function Clients() {
               </select>
             </div>
             <div>
-              <label htmlFor="value">VALOR:</label>
+              <label htmlFor="value">Valor:</label>
               <Input name="value" type="number" />
             </div>
             <div>
-              <label htmlFor="gestor">GESTOR:</label>
+              <label htmlFor="gestor">Gestor:</label>
               <select name="gestor">
                 {employees.map(
                   (employee, index) =>
@@ -451,7 +454,7 @@ export default function Clients() {
               </select>
             </div>
             <div>
-              <label htmlFor="adsValue">VALOR ADS:</label>
+              <label htmlFor="adsValue">Valor ADs:</label>
               <Input
                 name="adsValue"
                 type="number"
@@ -464,7 +467,7 @@ export default function Clients() {
               />
             </div>
             <div>
-              <label htmlFor="posts">Nº CRIATIVOS:</label>
+              <label htmlFor="posts">Criativos:</label>
               <Input
                 name="posts"
                 type="number"
@@ -479,7 +482,7 @@ export default function Clients() {
               <Input name="cnpj" />
             </div>
             <div>
-              <label htmlFor="whatsapp">WHATSAPP:</label>
+              <label htmlFor="whatsapp">Whatsapp:</label>
               <Input name="whatsapp" />
             </div>
           </div>

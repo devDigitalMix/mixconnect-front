@@ -1,14 +1,19 @@
 import styled from "styled-components";
 
 export const ProfileContainer = styled.section`
-  background: ${(props) => {
-    if (props.$isactive) {
-      return "linear-gradient(to right, #c5c3ff 0%, #a3a0f8 50%, #4441c8 100%)";
-    } else {
-      return "grey";
-    }
-  }};
-  border-radius: 12px;
+  #grande-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  #grande-top {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  background-color: var(--dark);
+  position: relative;
+  border-radius: 10px;
   padding: 1px;
   width: 100%;
   max-width: 1200px;
@@ -24,7 +29,7 @@ export const ProfileStyled = styled.div`
     padding: 20px 10px;
   }
   background-color: var(--dark);
-  border-radius: 12px;
+  border-radius: 10px;
   width: 100%;
   position: relative;
   display: grid;
@@ -41,12 +46,15 @@ export const TopProfile = styled.div`
   display: flex;
   align-items: center;
   gap: 30px;
+  max-width: 1108px;
+  width: 100%;
+  margin: 0 auto;
   iframe {
     border-radius: 12px;
     max-width: 300px;
     max-height: 100px;
     margin-left: auto;
-    margin-right: 40px;
+    margin-right: 30px;
   }
   @media only screen and (max-width: 780px) {
     flex-direction: column;
@@ -61,7 +69,7 @@ export const TopProfile = styled.div`
     position: absolute;
     left: 6px;
     top: 6px;
-    max-width: 23px;
+    /* max-width: 23px; */
   }
 `;
 
@@ -131,8 +139,16 @@ export const ProfileData = styled.div`
   }
   h4 {
     font-size: 1.25rem;
+    font-weight: 500;
     text-transform: uppercase;
     color: var(--main);
+    font-family: var(--font2);
+  }
+  a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ffffffd6;
   }
 `;
 
@@ -190,12 +206,11 @@ export const ProfileUpdate = styled.form`
     grid-template-columns: 1fr;
   }
   align-items: start;
-  gap: 50px;
+  gap: 20px 50px;
 
   label {
-    color: var(--sec);
-    font-family: var(--font);
-    font-size: 1.2rem;
+    font-style: italic;
+    font-weight: 700;
   }
   & > div {
     width: 100%;
@@ -204,25 +219,41 @@ export const ProfileUpdate = styled.form`
     gap: 10px;
 
     textarea {
-      background-color: var(--light);
+      background-color: #f9f8fe !important;
       color: var(--dark);
       outline: none;
-      padding: 8px 10px 5px;
-      max-height: none;
-      font-weight: 600;
-      border-radius: 6px;
+      border: none;
+      font-size: 0.75rem;
+      font-style: normal;
+      padding: 10px 10px 8px;
+      min-height: 90px;
+      border-radius: 5px;
+      width: 100%;
       max-width: 300px;
       resize: vertical;
-      min-height: 90px;
+      &::placeholder {
+        font-size: 0.75rem;
+        font-style: italic;
+        color: #2f2e2f;
+      }
     }
   }
   select {
+    background-color: #f9f8fe !important;
     color: var(--dark);
-    background-color: var(--light);
+    outline: none;
+    border: none;
+    font-size: 0.75rem;
+    font-style: italic;
     padding: 8px 10px;
-    font-family: var(--font2);
-    font-weight: 600;
-    border-radius: 13px;
+    height: 40px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 300px;
+    resize: vertical;
+  }
+  option {
+    font-style: normal;
   }
   button.btn {
     position: absolute;

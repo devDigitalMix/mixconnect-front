@@ -143,6 +143,8 @@ export default function Profile() {
   return (
     <>
       <ProfileContainer $isactive={user.active}>
+        <img src="/grande-bottom.png" id="grande-bottom" />
+        <img src="/grande-top.png" id="grande-top" />
         {felipe && (
           <Felipe>
             <h2>O Felipe é calvo</h2>

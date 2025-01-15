@@ -1,14 +1,21 @@
 import styled from "styled-components";
 
 export const CardContainer = styled.article`
-  background: ${(props) => {
-    if (props.$isactive) {
-      return "linear-gradient(to right, #c5c3ff 0%, #a3a0f8 50%, #4441c8 100%)";
-    } else {
-      return "grey";
-    }
-  }};
-  border-radius: 12px;
+  #navgradbottom {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+  }
+  #navgradtop {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+  }
+  background-color: var(--dark);
+  position: relative;
+  border-radius: 10px;
   padding: 1px;
   width: 100%;
   max-width: 1200px;
@@ -28,7 +35,7 @@ export const CardStyled = styled.div`
   display: flex;
   padding: 20px;
   gap: 20px;
-  border-radius: 12px;
+  border-radius: 10px;
   div {
     display: flex;
     justify-content: center;

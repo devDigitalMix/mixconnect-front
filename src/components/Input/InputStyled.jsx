@@ -5,17 +5,17 @@ export const InputSpace = styled.input`
   color: var(--dark);
   outline: none;
   border: none;
-  padding: 8px 10px;
-  max-height: 37px;
-  font-weight: 600;
-  border-radius: 13px;
+  font-size: 0.75rem;
+  font-style: normal;
+  padding: 10px 10px 8px;
+  height: 40px;
+  border-radius: 5px;
   width: 100%;
   max-width: 300px;
   resize: vertical;
-  font-family: var(--font2);
   &::placeholder {
+    font-size: 0.75rem;
     font-style: italic;
-    color: var(--main);
-    font-weight: 400;
+    color: #2f2e2f;
   }
 `;

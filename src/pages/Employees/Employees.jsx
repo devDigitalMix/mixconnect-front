@@ -32,27 +32,27 @@ export default function Employees() {
   const [isLoading, setIsLoading] = useState(false);
   const [received, setReceived] = useState(false);
   const navigate = useNavigate();
+  const [query, setQuery] = useState("");
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({
-    resolver: zodResolver(searchSchema),
-  });
+  async function onSearchChange(event) {
+    const name = event.target.value;
+    setQuery(name);
 
-  async function onSearch(data) {
-    setIsLoading(true);
-    setReceived(false);
-    const { name } = data;
+    if (name.trim() === "") {
+      getEmployees();
+      return;
+    }
 
-    const response = await getEmployeesByName(name);
-    setEmployees(response.data.results);
-    setSearch(true);
-    setIsLoading(false);
-    setReceived(true);
-    reset();
+    try {
+      setIsLoading(true);
+      const response = await getEmployeesByName(name);
+      setEmployees(response.data.results);
+      setSearch(true);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
   }
 
   async function getEmployees() {
@@ -99,7 +99,7 @@ export default function Employees() {
             onClick={handleClickCreate}
           />
         )}
-        <form onSubmit={handleSubmit(onSearch)}>
+        <form>
           {search && (
             <img
               src="/no-filter.svg"
@@ -114,9 +114,10 @@ export default function Employees() {
               <i className="bi bi-search"></i>
             </button>
             <input
-              {...register("name")}
               type="text"
               placeholder="Procurar Funcionário"
+              value={query}
+              onChange={onSearchChange}
             />
             {isLoading && <div className="custom-loader"></div>}
           </InputNav>

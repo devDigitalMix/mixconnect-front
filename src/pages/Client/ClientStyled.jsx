@@ -27,26 +27,37 @@ export const DeleteClientStyled = styled.form`
       color: var(--main);
     }
   }
-  div {
+  & > div {
     display: grid;
     gap: 5px;
     width: 100%;
     max-width: 300px;
+  }
+  .deleteBtns {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    .btn {
+      margin: 0;
+    }
   }
   select {
     background-color: #f9f8fe !important;
     color: var(--dark);
     outline: none;
     border: none;
+    font-size: 0.75rem;
+    font-style: italic;
     padding: 8px 10px;
-    max-height: 37px;
-    font-weight: 600;
-    border-radius: 13px;
+    height: 40px;
+    border-radius: 5px;
     width: 100%;
     max-width: 300px;
-    option {
-      padding: 5px;
-    }
+    resize: vertical;
+  }
+  option {
+    font-style: normal;
   }
   img:first-child {
     position: absolute;

@@ -9,6 +9,8 @@ import "react-loading-skeleton/dist/skeleton.css";
 export function Card(props) {
   return (
     <CardContainer $isactive={props.isactive}>
+      <img src="/navgradbottom.png" id="navgradbottom" />
+      <img src="/navgradtop.png" id="navgradtop" />
       <CardStyled>
         <img src={props.imgsrc || "/avatar-default.png"} draggable="false" />
         <div>
