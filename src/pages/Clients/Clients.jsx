@@ -151,6 +151,30 @@ export default function Clients() {
     }
   }
 
+  async function onSearch(data) {
+    setReceived(false);
+    setIsLoading(true);
+    const { name } = data;
+    const response = await getClientsByName(name);
+    const plansResponse = await getPlansService();
+    const plansMap = plansResponse.data.results.reduce((map, plan) => {
+      map[plan.id] = plan.name;
+      return map;
+    }, {});
+
+    const clientList = response.data.results.map((client) => {
+      return {
+        ...client,
+        plan: plansMap[client.plan] || "Plano desconhecido",
+      };
+    });
+    setClients(clientList);
+    setSearch(true);
+    reset();
+    setIsLoading(false);
+    setReceived(true);
+  }
+
   const handleSearch = (name) => {
     setIsLoading(true);
     setReceived(false);
@@ -367,7 +391,7 @@ export default function Clients() {
           </div>
         }
 
-        <form>
+        <form onSubmit={handleSubmit(onSearch)}>
           {search && (
             <img
               src="/no-filter.svg"
