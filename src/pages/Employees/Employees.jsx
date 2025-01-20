@@ -34,6 +34,15 @@ export default function Employees() {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
 
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(searchSchema),
+  });
+
   async function onSearchChange(event) {
     const name = event.target.value;
     setQuery(name);
@@ -53,6 +62,19 @@ export default function Employees() {
       console.log(error);
       setIsLoading(false);
     }
+  }
+
+  async function onSearch(data) {
+    setIsLoading(true);
+    setReceived(false);
+    const { name } = data;
+
+    const response = await getEmployeesByName(name);
+    setEmployees(response.data.results);
+    setSearch(true);
+    setIsLoading(false);
+    setReceived(true);
+    reset();
   }
 
   async function getEmployees() {
@@ -99,13 +121,14 @@ export default function Employees() {
             onClick={handleClickCreate}
           />
         )}
-        <form>
+        <form onSubmit={handleSubmit(onSearch)}>
           {search && (
             <img
               src="/no-filter.svg"
               alt="desfazer filtro"
               title="Desfazer Filtro"
               className="img-effect"
+              {...register("name")}
               onClick={getEmployees}
             />
           )}
