@@ -5,7 +5,7 @@ export const InputSpace = styled.input`
   color: var(--dark);
   outline: none;
   border: none;
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-style: normal;
   padding: 10px 10px 8px;
   height: 40px;
@@ -14,7 +14,7 @@ export const InputSpace = styled.input`
   max-width: 300px;
   resize: vertical;
   &::placeholder {
-    font-size: 0.75rem;
+    font-size: 1rem;
     font-style: italic;
     color: #2f2e2f;
   }

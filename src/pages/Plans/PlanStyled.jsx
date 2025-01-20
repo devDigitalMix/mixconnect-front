@@ -63,7 +63,7 @@ export const PlanModal = styled.form`
   padding: 20px;
   border: 2px solid var(--main);
   min-height: 300px;
-  max-width: 400px;
+  max-width: 550px;
   border-radius: 12px;
   width: 100%;
   display: grid;
@@ -84,24 +84,17 @@ export const PlanModal = styled.form`
   h4 {
     margin: 10px auto 0;
     font-size: 1.25rem;
-    font-family: var(--font);
-    color: var(--sec);
+    font-weight: 700;
+    font-family: var(--font2);
   }
   div {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    font-weight: 700;
+    font-family: var(--font2);
     gap: 10px;
-    input {
-      background-color: var(--main);
-      padding: 5px;
-      border-radius: 3px;
-      max-width: fit-content;
-      padding: 5px;
-      height: 30px;
-      text-align: center;
-    }
   }
   #close {
     position: absolute;

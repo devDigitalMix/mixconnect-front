@@ -18,6 +18,7 @@ import {
   PlanStyled,
 } from "./PlanStyled";
 import { Input } from "../../components/Input/Input";
+import { Label } from "../../components/Label/Label";
 
 export default function Plans() {
   const [plans, setPlans] = useState([]);
@@ -161,23 +162,18 @@ export default function Plans() {
               style={{ maxWidth: 25 + "px" }}
             />
           </span>
-          <input type="text" name="name" defaultValue={plan.name} />
+          <Input type="text" name="name" defaultValue={plan.name} />
           <div>
-            <label htmlFor="adsValue">Valor ADS:</label>
-            <input
-              type="text"
-              name="adsValue"
-              defaultValue={plan.adsValue}
-              // onKeyDown={format}
-            />
+            <Label htmlFor="adsValue" text="Valor ADS:" />
+            <Input type="text" name="adsValue" defaultValue={plan.adsValue} />
           </div>
           <div>
-            <label htmlFor="report">Relatório:</label>
-            <input type="text" name="report" defaultValue={plan.report} />
+            <Label htmlFor="report" text="Relatório:" />
+            <Input type="text" name="report" defaultValue={plan.report} />
           </div>
           <div>
-            <label htmlFor="posts">Nº Criativos:</label>
-            <input type="text" name="posts" defaultValue={plan.posts} />
+            <Label htmlFor="posts" text="Nº Criativos:" />
+            <Input type="text" name="posts" defaultValue={plan.posts} />
           </div>
 
           <Pages>
@@ -186,7 +182,7 @@ export default function Plans() {
             </label>
             {page.map((item, index) => (
               <div key={index}>
-                <input
+                <Input
                   type="text"
                   name={`pages-${index}`}
                   defaultValue={item}
