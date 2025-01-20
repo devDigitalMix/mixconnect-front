@@ -93,7 +93,9 @@ export function Navbar() {
                   <Skeleton width="80px" />
                 </>
               ) : (
-                (user.level == "Líder" || user.level == "Admin") && (
+                (user.level == "Líder" ||
+                  user.level == "Admin" ||
+                  user.role == "Comercial") && (
                   <Link to={"/home/plans"}>
                     <button
                       className={nav.includes("plans") ? "active" : ""}
