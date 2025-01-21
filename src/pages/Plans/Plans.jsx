@@ -19,9 +19,14 @@ import {
 } from "./PlanStyled";
 import { Input } from "../../components/Input/Input";
 import { Label } from "../../components/Label/Label";
+import { PlanSkeleton } from "../../components/PlanSkeleton/PlanSkeleton";
 
 export default function Plans() {
   const [plans, setPlans] = useState([]);
+  const [nPlans, setNPlans] = useState(() => {
+    const savedNPlans = localStorage.getItem("nPlans");
+    return savedNPlans ? parseInt(savedNPlans, 10) : 0;
+  });
   const [planModal, setPlanModal] = useState(false);
   const [createPlanModal, setCreatePlanModal] = useState(false);
   const [excludeModal, setExcludeModal] = useState(false);
@@ -31,6 +36,7 @@ export default function Plans() {
   async function getPlans() {
     const response = await getPlansService();
     setPlans(response.data.results);
+    setNPlans(response.data.results.length);
   }
 
   async function excludePlan() {
@@ -98,6 +104,10 @@ export default function Plans() {
   }
 
   useEffect(() => {
+    localStorage.setItem("nPlans", nPlans);
+  }, [nPlans]);
+
+  useEffect(() => {
     getPlans();
   }, []);
 
@@ -119,7 +129,7 @@ export default function Plans() {
           </div>
           <div>
             <label htmlFor="posts">Nº Criativos:</label>
-            <Input type="text" defaultValue="15" name="posts" />
+            <Input type="text" defaultValue="5" name="posts" />
           </div>
           <button type="submit" className="btn">
             Enviar
@@ -216,14 +226,17 @@ export default function Plans() {
         </button>
       </PlanHeader>
       <PlanBody>
-        {plans &&
+        {plans.length > 0 ? (
           plans.map((plan) => (
             <PlanItem key={plan.id} onClick={() => clickPlanModal(plan.id)}>
               <div>
                 <h2>{plan.name}</h2>
               </div>
             </PlanItem>
-          ))}
+          ))
+        ) : (
+          <PlanSkeleton cards={nPlans || 9}></PlanSkeleton>
+        )}
       </PlanBody>
     </PlanStyled>
   );
