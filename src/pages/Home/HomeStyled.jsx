@@ -23,6 +23,26 @@ export const HomeBody = styled.section`
   }
 `;
 
+export const MessageForm = styled.form`
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  .btn {
+    position: absolute;
+    right: -10px;
+    top: 0;
+    transform: translate(100%);
+  }
+  input {
+    margin-bottom: 10px;
+    max-width: 500px;
+    width: 100%;
+  }
+`;
+
 export const MainHeader = styled.header`
   width: 100%;
   max-width: 1200px;
@@ -40,6 +60,7 @@ export const MainHeader = styled.header`
     opacity: 0;
     &:hover {
       color: var(--light);
+      box-shadow: 0 0 0 2px var(--main) inset;
     }
   }
   &:hover {

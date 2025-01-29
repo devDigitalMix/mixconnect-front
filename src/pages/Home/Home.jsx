@@ -15,6 +15,7 @@ import {
   MainBody,
   MainData,
   MainHeader,
+  MessageForm,
 } from "./HomeStyled.jsx";
 import {
   getCellService,
@@ -26,6 +27,11 @@ import { InfoSkeleton } from "../../components/InfoSkeleton/InfoSkeleton.jsx";
 import { useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../../Context/UserContent.jsx";
 import { userLogged } from "../../services/employeeService.js";
+import { Input } from "../../components/Input/Input.jsx";
+import {
+  createMessageService,
+  getMessageService,
+} from "../../services/messageService.js";
 
 export default function Home() {
   const [ltv, setLtv] = useState();
@@ -40,7 +46,9 @@ export default function Home() {
   const [texto2, setTexto2] = useState("");
   const [clock, setClock] = useState("");
   const [mostra, setMostra] = useState(false);
+  const [createMessage, setCreateMessage] = useState(false);
   const [cronometro, setCronometro] = useState();
+  const [message, setMessage] = useState({});
   const navigate = useNavigate();
 
   function isDiaUtil(data) {
@@ -141,6 +149,21 @@ export default function Home() {
     }
   }
 
+  async function handleMessage(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData.entries());
+    data.writer = user.name;
+    const response = await createMessageService(data);
+    setMessage(response.data);
+    setCreateMessage(false);
+  }
+
+  async function getMessage() {
+    const response = await getMessageService();
+    setMessage(response.data);
+  }
+
   useEffect(() => {
     getLtv();
     getClients();
@@ -158,6 +181,7 @@ export default function Home() {
       const hour = hours < 10 ? `0${hours}` : hours;
       const minute = minutes < 10 ? `0${minutes}` : minutes;
       setClock(`${hour}:${minute}`);
+      getMessage();
     }, 15000);
 
     return () => clearInterval(getHours);
@@ -214,17 +238,29 @@ export default function Home() {
   useEffect(() => {
     if (Cookies.get("token")) findUserLogged();
     else navigate("/");
+    getMessage();
   }, []);
 
   return (
     <>
+      {createMessage && (
+        <MessageForm onSubmit={handleMessage}>
+          <Input type="text" name="text" placeholder="Mensagem" />
+          <button className="btn">Enviar</button>
+        </MessageForm>
+      )}
       <MainHeader>
         {user.level == "Líder" ||
           (user.level == "Admin" && (
-            <button className="btn">Alterar Aviso</button>
+            <button
+              className="btn"
+              onClick={() => setCreateMessage(!createMessage)}
+            >
+              Alterar Aviso
+            </button>
           ))}
         <div className={mostra ? "metaTexto texto2" : "metaTexto"}>
-          <p id="texto1">{texto1 || "Bom dia!"}</p>
+          <p id="texto1">{message.text}</p>
           <p id="texto2">{texto2}</p>
           <div className="clock">{clock}</div>
         </div>
