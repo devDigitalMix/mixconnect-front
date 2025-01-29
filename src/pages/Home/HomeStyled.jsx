@@ -86,10 +86,12 @@ export const MainHeader = styled.header`
     height: 50px;
     text-align: center;
     p {
-      right: 50%;
       transition: 0.3s;
       top: 50%;
       position: absolute;
+      right: inherit;
+      text-align: left;
+      left: 0;
     }
     .clock {
       font-weight: 500;
@@ -97,20 +99,20 @@ export const MainHeader = styled.header`
     }
     #texto2 {
       opacity: 0;
-      transform: scale(0) translate(50%, -50%);
+      transform: scale(0) translate(20px, -50%);
     }
     #texto1 {
       opacity: 1;
-      transform: scale(1) translate(50%, -50%);
+      transform: scale(1) translate(20px, -50%);
     }
     &.texto2 {
       #texto1 {
         opacity: 0;
-        transform: scale(0) translate(50%, -50%);
+        transform: scale(0) translate(20px, -50%);
       }
       #texto2 {
         opacity: 1;
-        transform: scale(1) translate(50%, -50%);
+        transform: scale(1) translate(20px, -50%);
       }
     }
 
