@@ -250,15 +250,14 @@ export default function Home() {
         </MessageForm>
       )}
       <MainHeader>
-        {user.level == "Líder" ||
-          (user.level == "Admin" && (
-            <button
-              className="btn"
-              onClick={() => setCreateMessage(!createMessage)}
-            >
-              Alterar Aviso
-            </button>
-          ))}
+        {(user.level == "Líder" || user.level == "Admin") && (
+          <button
+            className="btn"
+            onClick={() => setCreateMessage(!createMessage)}
+          >
+            Alterar Aviso
+          </button>
+        )}
         <div className={mostra ? "metaTexto texto2" : "metaTexto"}>
           <p id="texto1">{message.text}</p>
           <p id="texto2">{texto2}</p>
