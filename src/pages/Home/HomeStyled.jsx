@@ -29,6 +29,24 @@ export const MainHeader = styled.header`
   margin: 0 auto;
   display: grid;
   justify-items: center;
+  position: relative;
+  .btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 150px 0 0 var(--light), -150px 0 0 var(--light);
+    z-index: 10;
+    opacity: 0;
+    &:hover {
+      color: var(--light);
+    }
+  }
+  &:hover {
+    .btn {
+      opacity: 1;
+    }
+  }
   .metaTexto {
     background-color: var(--light);
     color: var(--main);
@@ -36,6 +54,7 @@ export const MainHeader = styled.header`
     border-radius: 10px;
     font-weight: 600;
     font-size: 2rem;
+    line-height: 1.1em;
     position: relative;
     display: flex;
     justify-content: end;
@@ -71,6 +90,33 @@ export const MainHeader = styled.header`
       #texto2 {
         opacity: 1;
         transform: scale(1) translate(50%, -50%);
+      }
+    }
+
+    @media only screen and (max-width: 750px) {
+      font-size: 1.5rem;
+      text-align: left;
+      p {
+        right: inherit;
+        left: 0;
+      }
+      #texto2 {
+        opacity: 0;
+        transform: scale(0) translate(10px, -50%);
+      }
+      #texto1 {
+        opacity: 1;
+        transform: scale(1) translate(10px, -50%);
+      }
+      &.texto2 {
+        #texto1 {
+          opacity: 0;
+          transform: scale(0) translate(10px, -50%);
+        }
+        #texto2 {
+          opacity: 1;
+          transform: scale(1) translate(10px, -50%);
+        }
       }
     }
   }
@@ -165,7 +211,7 @@ export const GuardaGraph = styled.section`
 export const Graph = styled.div`
   max-width: fit-content;
   padding-bottom: 4px;
-  border-radius: 8px;
+  border-radius: 8px 0 0 8px;
   overflow-y: hidden;
   max-height: 268px;
   width: 100%;
@@ -184,7 +230,7 @@ export const Graph = styled.div`
 `;
 export const GraphBtns = styled.div`
   background: var(--dark);
-  border-radius: 8px;
+  border-radius: 0 8px 8px 0;
   padding: 10px;
   max-width: 200px;
   width: 100%;

@@ -219,6 +219,10 @@ export default function Home() {
   return (
     <>
       <MainHeader>
+        {user.level == "Líder" ||
+          (user.level == "Admin" && (
+            <button className="btn">Alterar Aviso</button>
+          ))}
         <div className={mostra ? "metaTexto texto2" : "metaTexto"}>
           <p id="texto1">{texto1 || "Bom dia!"}</p>
           <p id="texto2">{texto2}</p>

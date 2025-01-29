@@ -52,7 +52,7 @@ export const AuthContainer = styled.div`
 export const Section = styled.section`
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
   padding: 2rem 10px;
   gap: 1rem;
@@ -81,6 +81,6 @@ export const Section = styled.section`
     }
   }
   img {
-    margin-bottom: 60px;
+    margin-bottom: 10px;
   }
 `;

@@ -16,6 +16,6 @@ export const InputSpace = styled.input`
   &::placeholder {
     font-size: 1rem;
     font-style: italic;
-    color: #2f2e2f;
+    color: #2f2e2fb9;
   }
 `;

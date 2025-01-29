@@ -6,4 +6,8 @@ export const TopButtons = styled.div`
   top: 10px;
   display: flex;
   gap: 10px;
+  div {
+    display: flex;
+    gap: 10px;
+  }
 `;

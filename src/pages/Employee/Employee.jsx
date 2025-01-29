@@ -207,45 +207,46 @@ export function Employee() {
             func={handleDeleteClick}
           />
         )}
-        {((user.level == "Líder" && employee.level == "Base") ||
-          user.level == "Admin") && (
-          <TopButtons>
-            <img
-              src="/exclude.svg"
-              alt="excluir"
-              className="img-effect"
-              onClick={handleDeleteClick}
-            />
-            {!update ? (
+        <TopButtons>
+          {((user.level == "Líder" && employee.level == "Base") ||
+            user.level == "Admin") && (
+            <div>
               <img
-                src="/update-profile.svg"
-                alt="update"
-                draggable="false"
+                src="/exclude.svg"
+                alt="excluir"
                 className="img-effect"
-                onClick={updateForm}
+                onClick={handleDeleteClick}
               />
-            ) : (
-              <img
-                src="/cancel.svg"
-                alt="cancel"
-                draggable="false"
-                className="img-effect"
-                onClick={updateForm}
-              />
-            )}
-
-            {/* style={update ? { transform: "scale(0)" } : undefined} */}
-            {!update && (
-              <Link to={"/home/employees"}>
+              {!update ? (
+                <img
+                  src="/update-profile.svg"
+                  alt="update"
+                  draggable="false"
+                  className="img-effect"
+                  onClick={updateForm}
+                />
+              ) : (
                 <img
                   src="/cancel.svg"
-                  alt="voltar"
-                  className="voltar img-effect"
+                  alt="cancel"
+                  draggable="false"
+                  className="img-effect"
+                  onClick={updateForm}
                 />
-              </Link>
-            )}
-          </TopButtons>
-        )}
+              )}
+            </div>
+          )}
+          {/* style={update ? { transform: "scale(0)" } : undefined} */}
+          {!update && (
+            <Link to={"/home/employees"}>
+              <img
+                src="/cancel.svg"
+                alt="voltar"
+                className="voltar img-effect"
+              />
+            </Link>
+          )}
+        </TopButtons>
         <TopProfile>
           <ProfileAvatar>
             <img
