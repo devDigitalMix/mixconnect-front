@@ -80,7 +80,7 @@ export const MainHeader = styled.header`
     display: flex;
     justify-content: end;
     align-items: center;
-    padding: 5px 10px;
+    padding: 5px 60px;
     max-width: 1100px;
     width: 100%;
     height: 50px;
@@ -99,20 +99,20 @@ export const MainHeader = styled.header`
     }
     #texto2 {
       opacity: 0;
-      transform: scale(0) translate(20px, -50%);
+      transform: scale(0) translate(60px, -50%);
     }
     #texto1 {
       opacity: 1;
-      transform: scale(1) translate(20px, -50%);
+      transform: scale(1) translate(60px, -50%);
     }
     &.texto2 {
       #texto1 {
         opacity: 0;
-        transform: scale(0) translate(20px, -50%);
+        transform: scale(0) translate(60px, -50%);
       }
       #texto2 {
         opacity: 1;
-        transform: scale(1) translate(20px, -50%);
+        transform: scale(1) translate(60px, -50%);
       }
     }
 
