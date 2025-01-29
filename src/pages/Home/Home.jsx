@@ -49,6 +49,7 @@ export default function Home() {
   const [createMessage, setCreateMessage] = useState(false);
   const [cronometro, setCronometro] = useState();
   const [message, setMessage] = useState({});
+  const [findingUser, setFindingUser] = useState(true);
   const navigate = useNavigate();
 
   function isDiaUtil(data) {
@@ -60,6 +61,7 @@ export default function Home() {
     try {
       const response = await userLogged();
       setUser(response.data);
+      setFindingUser(false);
     } catch (error) {
       console.log(error);
     }
@@ -250,7 +252,7 @@ export default function Home() {
         </MessageForm>
       )}
       <MainHeader>
-        {(user.level == "Líder" || user.level == "Admin") && (
+        {!findingUser && (user.level == "Líder" || user.level == "Admin") && (
           <button
             className="btn"
             onClick={() => setCreateMessage(!createMessage)}
