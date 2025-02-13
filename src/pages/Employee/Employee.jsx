@@ -1,6 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import {
+  LabelImg,
   ProfileAvatar,
   ProfileBody,
   ProfileContainer,
@@ -8,7 +9,6 @@ import {
   ProfileStyled,
   ProfileUpdate,
   TopProfile,
-  UploadAvatar,
 } from "../Profile/ProfileStyled";
 import {
   UpdateEmployeeAvatar,
@@ -32,7 +32,6 @@ export function Employee() {
   const { user, setUser } = useContext(UserContext);
   const [employee, setEmployee] = useState({});
   const [update, setUpdate] = useState(false);
-  const [updateAvatar, setUpdateAvatar] = useState(false);
   const [socialMedia, setSocialMedia] = useState(employee.socialMedia || []);
   const [musicLink, setMusicLink] = useState(employee.music || "");
   const [deleteClick, setDeleteClick] = useState(false);
@@ -40,6 +39,7 @@ export function Employee() {
   const [errorText, setErrorText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const [selectedImage, setSelectedImage] = useState();
 
   function handleDeleteClick() {
     setDeleteClick(!deleteClick);
@@ -54,53 +54,9 @@ export function Employee() {
     }
   }
 
-  async function handleUpdateAvatar(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const file = formData.get("avatar"); // Obtém o arquivo de imagem diretamente do FormData
-
-    const allowedFormats = [
-      "image/png",
-      "image/jpeg",
-      "image/jpg",
-      "image/webp",
-      "image/svg+xml",
-    ];
-
-    if (!allowedFormats.includes(file.type)) {
-      alert("Formato de arquivo não permitido.");
-      return;
-    }
-
-    const maxSizeInBytes = 5 * 1024 * 1024;
-    if (file.size > maxSizeInBytes) {
-      alert("O arquivo é muito grande. O tamanho máximo permitido é 5 MB.");
-      return;
-    }
-
-    try {
-      const data = Object.fromEntries(formData.entries());
-      await UpdateEmployeeAvatar(data, employee.id);
-      setUpdateAvatar(!updateAvatar);
-      if (error) {
-        setError(false);
-      }
-    } catch (error) {
-      setError(true);
-      setErrorText(error.response.data);
-    }
-  }
-
   async function deactivateEmployee() {
     await deactivateEmployeeService(employee.id);
     getEmployee();
-  }
-
-  function updateAvatarClick(e) {
-    if (update && e.target == document.getElementById("cancelaAvatar")) {
-      setUpdateAvatar(!updateAvatar);
-    }
-    setUpdateAvatar(!updateAvatar);
   }
 
   const getSpotifyTrackId = (url) => {
@@ -180,6 +136,34 @@ export function Employee() {
     setEmployee(response.data);
   }
 
+  async function handleImageSelection(event) {
+    const file = event.target.files[0];
+    const fileReader = new FileReader();
+    fileReader.onloadend = function () {
+      setSelectedImage(fileReader.result);
+    };
+    fileReader.readAsDataURL(file);
+    const allowedFormats = [
+      "image/png",
+      "image/jpeg",
+      "image/jpg",
+      "image/webp",
+      "image/svg+xml",
+    ];
+    if (!allowedFormats.includes(file.type)) {
+      alert("Formato de arquivo não permitido.");
+      return;
+    }
+
+    const avatar = { avatar: file };
+
+    try {
+      await UpdateEmployeeAvatar(avatar, employee.id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     if (Cookies.get("token")) findUserLogged();
     else navigate("/");
@@ -187,7 +171,7 @@ export function Employee() {
 
   useEffect(() => {
     getEmployee();
-  }, [update, updateAvatar, id]);
+  }, [update, id]);
 
   useEffect(() => {
     if (employee.music) {
@@ -249,36 +233,23 @@ export function Employee() {
         </TopButtons>
         <TopProfile>
           <ProfileAvatar>
-            <img
-              src={employee.avatar ? employee.avatar : "/avatar-default.png"}
-              alt="avatar"
-              id="avatarImg"
-              draggable="false"
-            />
-            {(user.level == "Líder" || user.level == "Admin") && (
-              <UploadAvatar
-                onSubmit={handleUpdateAvatar}
-                encType="multipart/form-data"
+            {user.level == "Líder" || user.level == "Admin" ? (
+              <LabelImg
+                htmlFor=""
+                $avatar={
+                  selectedImage || employee.avatar || "/avatar-default.png"
+                }
               >
-                <label htmlFor="avatar" onClick={updateAvatarClick}>
-                  <img
-                    src="/upload-avatar.svg"
-                    alt="Upload"
-                    draggable="false"
-                    style={updateAvatar ? { opacity: 0 } : {}}
-                  />
-                </label>
-                {updateAvatar && (
-                  <>
-                    <button type="submit"></button>
-                    <button
-                      id="cancelaAvatar"
-                      onClick={updateAvatarClick}
-                    ></button>
-                  </>
-                )}
-                <Input type="file" name="avatar" id="avatar" />
-              </UploadAvatar>
+                <input type="file" onChange={handleImageSelection} />
+                <img src="/upload-avatar.svg" />
+              </LabelImg>
+            ) : (
+              <img
+                src={employee.avatar ? employee.avatar : "/avatar-default.png"}
+                alt="avatar"
+                id="avatarImg"
+                draggable="false"
+              />
             )}
           </ProfileAvatar>
           <ProfileData>

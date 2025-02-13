@@ -142,6 +142,9 @@ export const MainHeader = styled.header`
         }
       }
     }
+    @media only screen and (max-width: 500px) {
+      padding: 5px 20px;
+    }
   }
 `;
 

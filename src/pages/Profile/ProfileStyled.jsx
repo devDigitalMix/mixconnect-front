@@ -55,6 +55,7 @@ export const TopProfile = styled.div`
     max-height: 100px;
     margin-left: auto;
     margin-right: 30px;
+    margin-top: 30px;
   }
   @media only screen and (max-width: 780px) {
     flex-direction: column;
@@ -65,11 +66,57 @@ export const TopProfile = styled.div`
       margin-right: auto;
     }
   }
+
   .voltar {
     position: absolute;
     left: 6px;
     top: 6px;
     /* max-width: 23px; */
+  }
+`;
+
+export const LabelImg = styled.label`
+  background: url(${(props) => props.$avatar}) no-repeat center center;
+  background-size: cover;
+  width: 100%;
+  max-width: 100px;
+  min-width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  transition: 0.3s;
+  overflow: hidden;
+  position: relative;
+  &:hover {
+    /* backdrop-filter: brightness(30%); */
+    img {
+      opacity: 1;
+      filter: brightness(200%) saturate(900%);
+
+      box-shadow: 0 0 60px 60px #000000ca, 0 0 25px 1px #000 inset;
+    }
+  }
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25px;
+    transition: 0.3s;
+    opacity: 0;
+  }
+  input {
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+    width: 100%;
+    max-width: 100px;
+    min-width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    object-fit: cover;
+    opacity: 0;
   }
 `;
 
@@ -85,18 +132,6 @@ export const ProfileAvatar = styled.div`
     border-radius: 100%;
     object-fit: cover;
     /* box-shadow: 0 0 0 2px var(--main); */
-  }
-  img:not(#avatarImg) {
-    cursor: pointer;
-    transition: all.3s;
-    &:hover {
-      filter: hue-rotate(280deg);
-      filter: saturate(1000%) drop-shadow(0 0 5px #4441c8);
-    }
-    &:active {
-      transform: scale(0.9);
-      transition: transform 0.1s;
-    }
   }
 `;
 

@@ -42,6 +42,9 @@ export const AuthContainer = styled.div`
     input {
       width: 100%;
       max-width: none;
+      &::placeholder {
+        color: #0000006a;
+      }
     }
     img {
       filter: invert(100%) hue-rotate(180deg);

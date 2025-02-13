@@ -7,6 +7,7 @@ import {
 } from "../../services/employeeService";
 import Cookies from "js-cookie";
 import {
+  LabelImg,
   ProfileAvatar,
   ProfileBody,
   ProfileBottom,
@@ -29,6 +30,7 @@ export default function Profile() {
   const [socialMedia, setSocialMedia] = useState(user.socialMedia || []);
   const [musicLink, setMusicLink] = useState(user.music || "");
   const [felipe, setFelipe] = useState(false);
+  const [selectedImage, setSelectedImage] = useState();
   const navigate = useNavigate();
 
   var cont = 0;
@@ -48,7 +50,6 @@ export default function Profile() {
       alert("Formato de arquivo não permitido.");
       return;
     }
-
     try {
       await UpdateEmployeeAvatar(data, user._id);
       setUpdateAvatar(!updateAvatar);
@@ -119,6 +120,34 @@ export default function Profile() {
     return dataAtt;
   }
 
+  async function handleImageSelection(event) {
+    const file = event.target.files[0];
+    const fileReader = new FileReader();
+    fileReader.onloadend = function () {
+      setSelectedImage(fileReader.result);
+    };
+    fileReader.readAsDataURL(file);
+    const allowedFormats = [
+      "image/png",
+      "image/jpeg",
+      "image/jpg",
+      "image/webp",
+      "image/svg+xml",
+    ];
+    if (!allowedFormats.includes(file.type)) {
+      alert("Formato de arquivo não permitido.");
+      return;
+    }
+
+    const avatar = { avatar: file };
+
+    try {
+      await UpdateEmployeeAvatar(avatar, user._id);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function findUserLogged() {
     try {
       const response = await userLogged();
@@ -147,7 +176,7 @@ export default function Profile() {
         <img src="/grande-top.png" id="grande-top" />
         {felipe && (
           <Felipe>
-            <h2>O Felipe é calvo</h2>
+            {/* <h2>O Felipe é calvo</h2> */}
             <img src="/felipe.jpg" />
           </Felipe>
         )}
@@ -171,24 +200,20 @@ export default function Profile() {
           )}
           <TopProfile>
             <ProfileAvatar>
-              <img
+              {/* <img
                 src={user.avatar ? user.avatar : "/avatar-default.png"}
                 alt="avatar"
                 id="avatarImg"
                 draggable="false"
-              />
+              /> */}
+              <LabelImg htmlFor="" $avatar={selectedImage || user.avatar}>
+                <input type="file" onChange={handleImageSelection} />
+                <img src="/upload-avatar.svg" alt="" />
+              </LabelImg>
               <UploadAvatar
                 onSubmit={handleUpdateAvatar}
                 encType="multipart/form-data"
               >
-                <label htmlFor="avatar" onClick={updateAvatarClick}>
-                  <img
-                    src="/upload-avatar.svg"
-                    alt="Upload"
-                    draggable="false"
-                    style={updateAvatar ? { opacity: 0 } : {}}
-                  />
-                </label>
                 {updateAvatar && (
                   <>
                     <button type="submit"></button>

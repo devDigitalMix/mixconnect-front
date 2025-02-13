@@ -88,11 +88,7 @@ export function Navbar() {
               >
                 PLAYBOOK
               </button> */}
-              {findingUser ? (
-                <>
-                  <Skeleton width="80px" />
-                </>
-              ) : (
+              {!findingUser &&
                 (user.level == "Líder" ||
                   user.level == "Admin" ||
                   user.role == "Comercial") && (
@@ -104,13 +100,8 @@ export function Navbar() {
                       PLANOS
                     </button>
                   </Link>
-                )
-              )}
-              {findingUser ? (
-                <>
-                  <Skeleton width="90px" />
-                </>
-              ) : (
+                )}
+              {!findingUser &&
                 (user.level == "Líder" || user.level == "Admin") && (
                   <Link to={"/home/acessos"}>
                     <button
@@ -120,8 +111,7 @@ export function Navbar() {
                       ACESSOS
                     </button>
                   </Link>
-                )
-              )}
+                )}
             </NavMenu>
             <PerfilMenu>
               {!findingUser ? (

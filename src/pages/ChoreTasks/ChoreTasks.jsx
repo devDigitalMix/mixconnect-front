@@ -124,7 +124,7 @@ export function ChoreTasks() {
       );
 
       if (response.data) {
-        setChore(response.data);
+        getChore();
       }
     }
   }
@@ -144,7 +144,7 @@ export function ChoreTasks() {
       );
 
       if (response.data) {
-        setChore(response.data);
+        getChore();
       }
     }
   }

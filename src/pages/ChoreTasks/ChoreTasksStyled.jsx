@@ -7,6 +7,9 @@ export const ChoreTasksStyled = styled.section`
   display: grid;
   gap: 30px;
   justify-items: center;
+  @media only screen and (max-width: 700px) {
+    padding-left: 35px;
+  }
 `;
 export const ChoreTasksHeader = styled.div`
   position: relative;
