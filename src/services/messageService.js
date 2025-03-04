@@ -1,9 +1,7 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios";
 import Cookies from "js-cookie";
-
-// const baseURL = "http://localhost:3000";
-const baseURL = "https://mixconnect-back.onrender.com";
+import { baseURL } from "./choreService.js";
 
 export function getMessageService() {
   const response = axios.get(`${baseURL}/message/`, {

@@ -23,25 +23,7 @@ export const HomeBody = styled.section`
   }
 `;
 
-export const MessageForm = styled.form`
-  width: 100%;
-  max-width: 500px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  .btn {
-    position: absolute;
-    right: -10px;
-    top: 0;
-    transform: translate(100%);
-  }
-  input {
-    margin-bottom: 10px;
-    max-width: 500px;
-    width: 100%;
-  }
-`;
+export const MessageForm = styled.form``;
 
 export const MainHeader = styled.header`
   width: 100%;
@@ -50,51 +32,39 @@ export const MainHeader = styled.header`
   display: grid;
   justify-items: center;
   position: relative;
-  .btn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 150px 0 0 var(--light), -150px 0 0 var(--light);
-    z-index: 10;
-    opacity: 0;
-    &:hover {
-      color: var(--light);
-      box-shadow: 0 0 0 2px var(--main) inset;
-    }
-  }
-  &:hover {
-    .btn {
-      opacity: 1;
-    }
-  }
+
   .metaTexto {
     background-color: var(--light);
-    color: var(--main);
-    font-family: var(--font2);
     border-radius: 10px;
-    font-weight: 600;
-    font-size: 2rem;
-    line-height: 1.1em;
     position: relative;
     display: flex;
     justify-content: end;
     align-items: center;
-    padding: 5px 60px;
+    padding: 5px 20px;
     max-width: 1100px;
     width: 100%;
     height: 50px;
     text-align: center;
-    p {
+    p,
+    input {
       transition: 0.3s;
+      color: var(--main);
+      font-family: var(--font2);
+      font-weight: 600;
+      font-size: 2rem;
+      line-height: 1.1em;
       top: 50%;
       position: absolute;
       right: inherit;
       text-align: left;
-      left: 0;
+      left: -40px;
+      max-width: 1000px;
+      width: 100%;
     }
     .clock {
-      font-weight: 500;
+      font-weight: 600;
+      color: var(--main);
+      font-family: var(--font2);
       font-size: 1.2rem;
     }
     #texto2 {

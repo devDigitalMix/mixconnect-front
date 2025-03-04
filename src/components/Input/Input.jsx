@@ -17,6 +17,7 @@ export function Input({
   register,
   className,
   onKeyDown,
+  onClick,
 }) {
   const inputProps = {
     type,
@@ -32,6 +33,7 @@ export function Input({
     readOnly,
     className,
     onKeyDown,
+    onClick,
   };
 
   return <InputSpace {...inputProps} {...(register ? register(name) : {})} />;

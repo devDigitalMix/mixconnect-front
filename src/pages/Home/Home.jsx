@@ -50,6 +50,7 @@ export default function Home() {
   const [cronometro, setCronometro] = useState();
   const [message, setMessage] = useState({});
   const [findingUser, setFindingUser] = useState(true);
+  const [inputClicked, setInputClicked] = useState(false);
   const navigate = useNavigate();
 
   function isDiaUtil(data) {
@@ -151,6 +152,19 @@ export default function Home() {
     }
   }
 
+  function clickedInput() {
+    var c = !inputClicked ? false : true;
+    setInputClicked(true);
+    c = !c;
+    if (c) {
+      document.addEventListener("click", (e) => {
+        if (e.target.id != "texto1") {
+          setInputClicked(false);
+        }
+      });
+    }
+  }
+
   async function handleMessage(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -159,6 +173,7 @@ export default function Home() {
     const response = await createMessageService(data);
     setMessage(response.data);
     setCreateMessage(false);
+    setInputClicked(false);
   }
 
   async function getMessage() {
@@ -184,7 +199,7 @@ export default function Home() {
       const minute = minutes < 10 ? `0${minutes}` : minutes;
       setClock(`${hour}:${minute}`);
       getMessage();
-    }, 15000);
+    }, 8000);
 
     return () => clearInterval(getHours);
   }, []);
@@ -207,10 +222,13 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
+  function changeMostra() {
+    setMostra((prevMostra) => !prevMostra);
+  }
   useEffect(() => {
     const interval = setInterval(() => {
-      setMostra((prevMostra) => !prevMostra);
-    }, 8000);
+      changeMostra();
+    }, 7500);
 
     return () => clearInterval(interval);
   }, []);
@@ -247,24 +265,31 @@ export default function Home() {
     <>
       {createMessage && (
         <MessageForm onSubmit={handleMessage}>
-          <Input type="text" name="text" placeholder="Mensagem" />
+          <Input type="text" name="text" defaultValue={message.text} />
           <button className="btn">Enviar</button>
         </MessageForm>
       )}
       <MainHeader>
-        {!findingUser && (user.level == "Líder" || user.level == "Admin") && (
-          <button
-            className="btn"
-            onClick={() => setCreateMessage(!createMessage)}
-          >
-            Alterar Aviso
-          </button>
-        )}
-        <div className={mostra ? "metaTexto texto2" : "metaTexto"}>
-          <p id="texto1">{message.text}</p>
+        <MessageForm
+          onSubmit={handleMessage}
+          className={
+            inputClicked
+              ? "metaTexto"
+              : mostra
+              ? "metaTexto texto2"
+              : "metaTexto"
+          }
+        >
+          <Input
+            type="text"
+            name="text"
+            id="texto1"
+            onClick={clickedInput}
+            defaultValue={message.text}
+          />
           <p id="texto2">{texto2}</p>
           <div className="clock">{clock}</div>
-        </div>
+        </MessageForm>
       </MainHeader>
       <HomeBody>
         <div id="cronometro">{cronometro}</div>

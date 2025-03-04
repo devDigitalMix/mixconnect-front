@@ -1,8 +1,6 @@
 import axios from "axios";
+import { baseURL } from "./choreService.js";
 // import Cookies from "js-cookie";
-
-// const baseURL = "http://localhost:3000";
-const baseURL = "https://mixconnect-back.onrender.com";
 
 export async function getLtvService() {
   const response = await axios.get(`${baseURL}/ltv/ltv`);
