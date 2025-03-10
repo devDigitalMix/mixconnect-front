@@ -2,8 +2,8 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-// export const baseURL = "http://localhost:3000";
-export const baseURL = "https://mixconnect-back.onrender.com";
+export const baseURL = "http://localhost:3000";
+// export const baseURL = "https://mixconnect-back.onrender.com";
 
 export async function getChoreById(id) {
   const response = await axios.get(`${baseURL}/chore/${id}`, {

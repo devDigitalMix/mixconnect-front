@@ -29,6 +29,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { TaskSkeleton } from "../../components/TaskSkeleton/TaskSkeleton";
 
 export function ChoreTasks() {
+  const { choreId } = useParams();
   const { id } = useParams();
   const [chore, setChore] = useState({});
   const [tasks, setTasks] = useState([]);
@@ -44,8 +45,9 @@ export function ChoreTasks() {
   async function getChore() {
     setReceived(false);
     try {
-      const response = await getChoreById(id);
+      const response = await getChoreById(choreId || id);
       setChore(response.data);
+      console.log(response);
       setTasks(response.data.tasks);
       setIsLoading(false);
       setReceived(true);
@@ -74,7 +76,7 @@ export function ChoreTasks() {
       alert("O campo está vazio ou contém apenas espaços.");
       return;
     }
-    await updateChoreTitleService(id, data);
+    await updateChoreTitleService(choreId || id, data);
     getChore();
   }
 
@@ -92,7 +94,7 @@ export function ChoreTasks() {
     };
     const dataFinal = { ...data, ...state, ...position };
     try {
-      await createTaskService(id, dataFinal);
+      await createTaskService(choreId || id, dataFinal);
       setCreateTaskModal(false);
       getChore();
     } catch (error) {
@@ -264,7 +266,13 @@ export function ChoreTasks() {
       )}
       <ChoreTasksHeader>
         <ChoreTasksButtons>
-          <Link to="/home/chores/">
+          <Link
+            to={
+              window.location.href.includes("journey")
+                ? "/home/clients/"
+                : "/home/chores/"
+            }
+          >
             <img
               src="/voltar.svg"
               alt="voltar"
@@ -305,19 +313,21 @@ export function ChoreTasks() {
       </ChoreTasksHeader>
       <ChoreTasksBody ref={choreTasksRef}>
         {received ? (
-          chore.tasks.map((task) => (
-            <Task
-              key={task._id}
-              taskId={task._id}
-              desc={task.desc}
-              state={task.state}
-              func={getChore}
-              moverCima={() => moverCima(task)}
-              moverBaixo={() => moverBaixo(task)}
-              choreId={id}
-              move={() => mover()}
-            />
-          ))
+          chore.tasks ? (
+            chore.tasks.map((task) => (
+              <Task
+                key={task._id}
+                taskId={task._id}
+                desc={task.desc}
+                state={task.state}
+                func={getChore}
+                moverCima={() => moverCima(task)}
+                moverBaixo={() => moverBaixo(task)}
+                choreId={choreId || id}
+                move={() => mover()}
+              />
+            ))
+          ) : null
         ) : (
           <TaskSkeleton cards={4} />
         )}

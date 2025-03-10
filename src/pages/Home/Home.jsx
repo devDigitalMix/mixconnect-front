@@ -99,7 +99,11 @@ export default function Home() {
     if (Math.ceil(diferencaEmDias) == 0) {
       setTexto2("É hoje o pix! Vamo Andreza!");
     } else {
-      setTexto2(Math.ceil(diferencaEmDias) + " dias até o pix!");
+      setTexto2(
+        Math.ceil(diferencaEmDias) == 1
+          ? "Só mais " + Math.ceil(diferencaEmDias) + " dia até o pix!"
+          : Math.ceil(diferencaEmDias) + " dias até o pix!"
+      );
     }
   }
 

@@ -125,6 +125,7 @@ export default function Clients() {
     data.plano = data.plano == "Plano" ? null : data.plano;
     data.gestor = data.gestor == "Gestor" ? null : data.gestor;
     data.cs = data.cs == "CS" ? null : data.cs;
+    data.status = data.status ? "Start" : null;
     const response = await findClients(data);
     const plansResponse = await getPlansService();
     const plansMap = plansResponse.data.results.reduce((map, plan) => {
@@ -321,7 +322,11 @@ export default function Clients() {
             <span className="checkbox">
               <img src="/valor.svg" />
             </span>
-            <label htmlFor="value">value</label>
+            <label htmlFor="value">Valor</label>
+          </div>
+          <div>
+            <input type="checkbox" name="status" id="status" />
+            <label htmlFor="status">Start</label>
           </div>
           <div>
             <label htmlFor="plan">Plano</label>

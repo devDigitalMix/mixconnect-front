@@ -52,6 +52,10 @@ const router = createBrowserRouter([
         element: <Client />,
       },
       {
+        path: "/home/client/:id/journey/:choreId/",
+        element: <ChoreTasks />,
+      },
+      {
         path: "/home/employees",
         element: <Employees />,
       },

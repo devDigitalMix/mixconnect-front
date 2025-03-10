@@ -11,6 +11,7 @@ import {
 import {
   ProfileAvatar,
   ProfileBody,
+  ProfileBottom,
   ProfileContainer,
   ProfileData,
   ProfileStyled,
@@ -41,6 +42,8 @@ export default function Client() {
   const [plans, setPlans] = useState([]);
   const [deleteClick, setDeleteClick] = useState(false);
   const [received, setReceived] = useState(false);
+  const [file, setFile] = useState();
+  const [preview, setPreview] = useState("/avatar-default.png");
   const navigate = useNavigate();
 
   async function getPlans() {}
@@ -74,8 +77,6 @@ export default function Client() {
   async function handleUpdateAvatar(event) {
     setIsLoading(true);
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData.entries());
     const allowedFormats = [
       "image/png",
       "image/jpeg",
@@ -83,13 +84,15 @@ export default function Client() {
       "image/webp",
       "image/svg+xml",
     ];
-    if (!allowedFormats.includes(data.logo.type)) {
+    if (!allowedFormats.includes(file.type)) {
       alert("Formato de arquivo não permitido.");
       return;
     }
 
+    const logo = { logo: file };
+
     try {
-      await UpdateClientAvatar(data, client._id);
+      await UpdateClientAvatar(logo, client._id);
       setUpdateAvatar(!updateAvatar);
       getClient();
     } catch (error) {
@@ -98,8 +101,12 @@ export default function Client() {
   }
 
   function updateAvatarClick(e) {
-    if (update && e.target == document.getElementById("cancelaAvatar")) {
-      setUpdateAvatar(!updateAvatar);
+    if (updateAvatar && e.target == document.getElementById("cancelaAvatar")) {
+      if (client.logo) {
+        setPreview(client.logo);
+      } else {
+        setPreview("/avatar-default.png");
+      }
     }
     setUpdateAvatar(!updateAvatar);
   }
@@ -242,6 +249,41 @@ export default function Client() {
   }
 
   useEffect(() => {
+    function onEnter(a) {
+      a.classList.add("active");
+    }
+    function onLeave(a) {
+      a.classList.remove("active");
+    }
+    const aLabel = document.querySelector(".image-label");
+    aLabel.addEventListener("dragenter", () => onEnter(aLabel));
+    aLabel.addEventListener("drop", () => onLeave(aLabel));
+    aLabel.addEventListener("dragend", () => onLeave(aLabel));
+    aLabel.addEventListener("dragleave", () => onLeave(aLabel));
+    const input = document.getElementById("imageName");
+    const dropfile = document.getElementById("drop-file");
+    input.addEventListener("change", (event) => {
+      if (input.files.length > 0) {
+        const type = input.files[0].type;
+        const formats = ["image/jpeg", "image/png", "image/jpg", "image/webp"];
+        if (!formats.includes(type)) {
+          alert("Esse formato não é permitido!");
+          return;
+        }
+
+        const file = event.target.files[0];
+        setFile(file);
+        const fileReader = new FileReader();
+        fileReader.onloadend = function () {
+          setPreview(fileReader.result);
+        };
+        fileReader.readAsDataURL(file);
+        setUpdateAvatar(true);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     if (Cookies.get("token")) findUserLogged();
     else navigate("/");
     getClient();
@@ -343,28 +385,22 @@ export default function Client() {
                   />
                 </a>
               ) : (
-                <a>
-                  <img
-                    src={"/avatar-default.png"}
-                    alt="avatar"
-                    id="avatarImg"
-                    draggable="false"
-                  />
-                </a>
+                <label
+                  htmlFor="bannerName"
+                  style={{
+                    background: `url(${preview}) center center / cover no-repeat `,
+                  }}
+                  className="image-label"
+                >
+                  <div id="drop-file"></div>
+                  <input type="file" name="bannerName" id="imageName" />
+                </label>
               )}
               {(user.level == "Líder" || user.level == "Admin") && (
                 <UploadAvatar
                   onSubmit={handleUpdateAvatar}
                   encType="multipart/form-data"
                 >
-                  <label htmlFor="logo" onClick={updateAvatarClick}>
-                    <img
-                      src="/upload-avatar.svg"
-                      alt="Upload"
-                      draggable="false"
-                      style={updateAvatar ? { opacity: 0 } : {}}
-                    />
-                  </label>
                   {updateAvatar && (
                     <>
                       <button type="submit"></button>
@@ -382,6 +418,7 @@ export default function Client() {
               <div>
                 <h2>{client.name || <Skeleton width="200px" />}</h2>
                 <h4>{plans[0] || <Skeleton width="200px" />}</h4>
+                <h4>{client.status || <Skeleton width="200px" />}</h4>
               </div>
               {client.whatsapp ? (
                 <a
@@ -712,6 +749,15 @@ export default function Client() {
                   </div>
                 )}
               </ProfileBody>
+              <ProfileBottom>
+                <Link
+                  to={`/home/client/${id}/journey/${
+                    client.chores ? client.chores[0] : null
+                  }`}
+                >
+                  <button className="btn">JORNADA</button>
+                </Link>
+              </ProfileBottom>
             </>
           )}
         </ProfileStyled>

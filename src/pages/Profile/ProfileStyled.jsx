@@ -40,6 +40,38 @@ export const ProfileStyled = styled.div`
     top: 10px;
     cursor: pointer;
   }
+  .image-label {
+    z-index: 2;
+    width: 100px;
+    height: 100px;
+    display: grid;
+    grid-template-areas: "stack";
+    border-radius: 100px;
+    & > * {
+      grid-area: stack;
+    }
+    #drop-file {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 12px;
+      transition: all.3s;
+      border-radius: 100px;
+    }
+    input {
+      opacity: 0 !important;
+      max-width: 100px;
+      height: 100px;
+      border-radius: 100px;
+    }
+    transition: all.3s;
+    &.active {
+      background-color: #95b1ff;
+      #drop-file {
+        margin: 15px;
+      }
+    }
+  }
 `;
 
 export const TopProfile = styled.div`
@@ -137,15 +169,16 @@ export const ProfileAvatar = styled.div`
 
 export const UploadAvatar = styled.form`
   position: relative;
+  right: 3px;
   button {
     position: absolute;
-    bottom: 0px;
+    bottom: -15px;
     height: 20px;
     width: 20px;
     z-index: 10;
   }
   button:not(#cancelaAvatar) {
-    left: -17px;
+    left: -24px;
     background: url("/confirm-avatar.svg") no-repeat center center;
     background-size: contain;
   }
