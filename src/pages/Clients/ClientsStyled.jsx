@@ -75,6 +75,17 @@ export const ClientContent = styled.div`
   padding: 20px;
   border-radius: 12px;
   display: grid;
+  position: relative;
+  h6 {
+    color: var(--sec);
+    background-color: var(--dark);
+    position: absolute;
+    top: 0;
+    right: 10px;
+    transform: translateY(-50%);
+    padding: 3px 12px 0;
+    border-radius: 5px 5px 0 0;
+  }
 `;
 
 export const ClientHead = styled.div`

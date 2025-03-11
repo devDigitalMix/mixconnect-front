@@ -215,6 +215,9 @@ export default function Client() {
     try {
       const response = await getClientById(id);
       setClient(response.data);
+      setPreview(
+        response.data.logo ? response.data.logo : "/avatar-default.png"
+      );
       setSocialMedia(response.data.socialMedia || []);
       setPage(response.data.pages || []);
       setGmb(response.data.gmb || []);
@@ -375,27 +378,16 @@ export default function Client() {
           )}
           <TopProfile>
             <ProfileAvatar>
-              {received && client.logo ? (
-                <a target="_blank" href={client.logo ? client.logo : undefined}>
-                  <img
-                    src={client.logo}
-                    alt="avatar"
-                    id="avatarImg"
-                    draggable="false"
-                  />
-                </a>
-              ) : (
-                <label
-                  htmlFor="bannerName"
-                  style={{
-                    background: `url(${preview}) center center / cover no-repeat `,
-                  }}
-                  className="image-label"
-                >
-                  <div id="drop-file"></div>
-                  <input type="file" name="bannerName" id="imageName" />
-                </label>
-              )}
+              <label
+                htmlFor="bannerName"
+                style={{
+                  background: `url(${preview}) center center / cover no-repeat `,
+                }}
+                className="image-label"
+              >
+                <div id="drop-file"></div>
+                <input type="file" name="bannerName" id="imageName" />
+              </label>
               {(user.level == "Líder" || user.level == "Admin") && (
                 <UploadAvatar
                   onSubmit={handleUpdateAvatar}

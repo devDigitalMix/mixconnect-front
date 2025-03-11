@@ -6,7 +6,6 @@ import {
   createTaskService,
   getChoreById,
   updateChoreTitleService,
-  updateTaskService,
   updateTasksListService,
   //   updateTaskState,
 } from "../../services/choreService";

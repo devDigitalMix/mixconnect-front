@@ -551,6 +551,7 @@ export default function Clients() {
                   <p>Gestor: {client.gestor}</p>
                   <p>CS: {client.cs}</p>
                   <p>Valor Contrato: R$ {client.value}</p>
+                  {client.status == "Start" && <h6>Start</h6>}
                 </ClientContent>
               </AClient>
             </Link>
