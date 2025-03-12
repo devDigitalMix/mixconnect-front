@@ -36,6 +36,7 @@ export function ChoreTasks() {
   const [createTaskModal, setCreateTaskModal] = useState(false);
   const [excludeModal, setExcludeModal] = useState(false);
   const [received, setReceived] = useState(false);
+  const [locked, setLocked] = useState(true);
   const [articles, setArticles] = useState([]);
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
@@ -46,7 +47,6 @@ export function ChoreTasks() {
     try {
       const response = await getChoreById(choreId || id);
       setChore(response.data);
-      console.log(response);
       setTasks(response.data.tasks);
       setIsLoading(false);
       setReceived(true);
@@ -162,67 +162,69 @@ export function ChoreTasks() {
   }
 
   function mover() {
-    const umaTask = event.target;
+    if (!locked) {
+      const umaTask = event.target;
 
-    if (umaTask.classList.contains("task")) {
-      const articles = document.querySelectorAll("article");
-      const taskRect = umaTask.getBoundingClientRect().top;
-      let posicaoInicial = 0;
-
-      for (const task of articles) {
-        const taskTop = task.getBoundingClientRect().top;
-        if (taskRect > taskTop) {
-          posicaoInicial++;
-        }
-      }
-      umaTask.style = `position: relative; z-index: 0; top: inherit`;
-
-      const moveHandler = handleTaskMove(umaTask);
-
-      const mouseUpHandler = async () => {
-        document.removeEventListener("mousemove", moveHandler);
-        document.removeEventListener("mouseup", mouseUpHandler);
-        if (posicaoInicial > 0) {
-          articles[posicaoInicial - 1].style.marginBottom = "0";
-        }
+      if (umaTask.classList.contains("task")) {
+        const articles = document.querySelectorAll("article");
         const taskRect = umaTask.getBoundingClientRect().top;
-        umaTask.style = `position: relative; z-index: 0; top: inherit`;
+        let posicaoInicial = 0;
 
-        let posicaoFinal = 0;
         for (const task of articles) {
           const taskTop = task.getBoundingClientRect().top;
           if (taskRect > taskTop) {
-            posicaoFinal++;
+            posicaoInicial++;
           }
         }
+        umaTask.style = `position: relative; z-index: 0; top: inherit`;
 
-        let lista = tasks;
-        for (let i = 0; i < lista.length; i++) {
-          if (posicaoInicial < posicaoFinal) {
-            if (
-              lista[i].position > posicaoInicial &&
-              lista[i].position <= posicaoFinal
-            ) {
-              lista[i].position = lista[i].position - 1;
-            }
-          } else if (posicaoInicial > posicaoFinal) {
-            if (
-              lista[i].position < posicaoInicial &&
-              lista[i].position >= posicaoFinal
-            ) {
-              lista[i].position = lista[i].position + 1;
+        const moveHandler = handleTaskMove(umaTask);
+
+        const mouseUpHandler = async () => {
+          document.removeEventListener("mousemove", moveHandler);
+          document.removeEventListener("mouseup", mouseUpHandler);
+          if (posicaoInicial > 0) {
+            articles[posicaoInicial - 1].style.marginBottom = "0";
+          }
+          const taskRect = umaTask.getBoundingClientRect().top;
+          umaTask.style = `position: relative; z-index: 0; top: inherit`;
+
+          let posicaoFinal = 0;
+          for (const task of articles) {
+            const taskTop = task.getBoundingClientRect().top;
+            if (taskRect > taskTop) {
+              posicaoFinal++;
             }
           }
-        }
-        lista[posicaoInicial].position = posicaoFinal;
 
-        const response = await updateTasksListService(chore._id, lista);
-        setChore(response.data);
-        setTasks(response.data.tasks);
-      };
+          let lista = tasks;
+          for (let i = 0; i < lista.length; i++) {
+            if (posicaoInicial < posicaoFinal) {
+              if (
+                lista[i].position > posicaoInicial &&
+                lista[i].position <= posicaoFinal
+              ) {
+                lista[i].position = lista[i].position - 1;
+              }
+            } else if (posicaoInicial > posicaoFinal) {
+              if (
+                lista[i].position < posicaoInicial &&
+                lista[i].position >= posicaoFinal
+              ) {
+                lista[i].position = lista[i].position + 1;
+              }
+            }
+          }
+          lista[posicaoInicial].position = posicaoFinal;
 
-      document.addEventListener("mousemove", moveHandler);
-      document.addEventListener("mouseup", mouseUpHandler);
+          const response = await updateTasksListService(chore._id, lista);
+          setChore(response.data);
+          setTasks(response.data.tasks);
+        };
+
+        document.addEventListener("mousemove", moveHandler);
+        document.addEventListener("mouseup", mouseUpHandler);
+      }
     }
   }
 
@@ -231,6 +233,19 @@ export function ChoreTasks() {
       setArticles(choreTasksRef.current.querySelectorAll("article"));
     }
   }, [chore.tasks]);
+
+  useEffect(() => {
+    const handleContextMenu = (e) => {
+      e.preventDefault();
+      setLocked((prev) => !prev);
+    };
+
+    document.addEventListener("contextmenu", handleContextMenu);
+
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+    };
+  }, []);
 
   useEffect(() => {
     if (Cookies.get("token")) findUserLogged();
@@ -265,20 +280,6 @@ export function ChoreTasks() {
       )}
       <ChoreTasksHeader>
         <ChoreTasksButtons>
-          <Link
-            to={
-              window.location.href.includes("journey")
-                ? "/home/clients/"
-                : "/home/chores/"
-            }
-          >
-            <img
-              src="/voltar.svg"
-              alt="voltar"
-              title="Voltar"
-              className="img-effect"
-            />
-          </Link>
           <img
             src="/mais.svg"
             alt="Nova tarefa"
@@ -299,8 +300,20 @@ export function ChoreTasks() {
             <Skeleton width="250px" height="25px" />
           )}
         </form>
-
         <ChoreTaskBtn2>
+          {locked ? (
+            <img
+              src="/locked.svg"
+              className="lock"
+              onClick={() => setLocked(!locked)}
+            />
+          ) : (
+            <img
+              src="/unlocked.svg"
+              className="lock"
+              onClick={() => setLocked(!locked)}
+            />
+          )}
           <img
             src="/exclude.svg"
             alt="excluir"
@@ -308,6 +321,20 @@ export function ChoreTasks() {
             className="img-effect"
             onClick={excludeChoreClick}
           />
+          <Link
+            to={
+              window.location.href.includes("journey")
+                ? "/home/clients/"
+                : "/home/chores/"
+            }
+          >
+            <img
+              src="/cancel.svg"
+              alt="voltar"
+              title="Voltar"
+              className="img-effect"
+            />
+          </Link>
         </ChoreTaskBtn2>
       </ChoreTasksHeader>
       <ChoreTasksBody ref={choreTasksRef}>

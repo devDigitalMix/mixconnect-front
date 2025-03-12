@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Arrows,
   SelectState,
@@ -22,6 +22,26 @@ export function Task(props) {
   const [updateDesc, setUpdateDesc] = useState(false);
   const [taskState, setTaskState] = useState(props.state);
   const [taskDesc, setTaskDesc] = useState(props.desc);
+  const selectStateRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        selectStateRef.current &&
+        !selectStateRef.current.contains(event.target)
+      ) {
+        setUpdateStateModal(false);
+      }
+    }
+
+    if (updateStateModal) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [updateStateModal]);
 
   function clickUpdateState() {
     setUpdateStateModal(true);
@@ -71,7 +91,7 @@ export function Task(props) {
       {!updateStateModal ? (
         <span className={taskState} onClick={clickUpdateState}></span>
       ) : (
-        <SelectState>
+        <SelectState ref={selectStateRef}>
           <div>
             <input type="radio" value="open" onClick={setState} />
             <span className="customRadio open"></span>

@@ -24,6 +24,7 @@ export const ChoreTasksHeader = styled.div`
     justify-content: center;
     border-bottom: 2px solid var(--main);
   }
+
   #titleUpdate {
     width: 100%;
     min-width: 0;
@@ -43,6 +44,10 @@ export const ChoreTasksBody = styled.div`
   width: 100%;
   display: grid;
   gap: 15px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 `;
 
 export const CreateTaskModalStyled = styled.form`
@@ -106,4 +111,11 @@ export const ChoreTaskBtn2 = styled.div`
   top: 0;
   right: 0;
   gap: 10px;
+  .lock {
+    margin-right: 2px;
+    cursor: pointer;
+    &:hover {
+      filter: drop-shadow(0 0 3px var(--main));
+    }
+  }
 `;
