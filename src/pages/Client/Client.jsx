@@ -2,6 +2,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
+  changeStatusService,
   deleteClient,
   getClientById,
   UpdateClientAvatar,
@@ -36,6 +37,7 @@ export default function Client() {
   const [update, setUpdate] = useState(false);
   const [updateAvatar, setUpdateAvatar] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isStatusLoading, setIsStatusLoading] = useState(false);
   const [socialMedia, setSocialMedia] = useState(client.socialMedia || []);
   const [page, setPage] = useState(client.pages || []);
   const [gmb, setGmb] = useState(client.gmb || []);
@@ -47,6 +49,26 @@ export default function Client() {
   const navigate = useNavigate();
 
   async function getPlans() {}
+
+  async function changeStatus() {
+    if (isStatusLoading) return; // Evita cliques repetidos enquanto processa
+
+    setIsStatusLoading(true); // Ativa o estado de loading
+
+    try {
+      if (client.status === "Start") {
+        await changeStatusService(id, "Ativo");
+        getClient();
+      } else if (client.status === "Ativo") {
+        await changeStatusService(id, "Start");
+        getClient();
+      } else {
+        alert("Status Não Disponível");
+      }
+    } finally {
+      setTimeout(() => setIsStatusLoading(false), 1000); // Delay de 1s antes de permitir novo clique
+    }
+  }
 
   const motivos = [
     "",
@@ -409,23 +431,31 @@ export default function Client() {
             <ProfileData>
               <div>
                 <h2>{client.name || <Skeleton width="200px" />}</h2>
-                <h4>{plans[0] || <Skeleton width="200px" />}</h4>
-                <h4>{client.status || <Skeleton width="200px" />}</h4>
+                {client.whatsapp ? (
+                  <a
+                  // target="_blank"
+                  // href={
+                  //   "https://api.whatsapp.com/send?phone=55" +
+                  //   formatWhats(client.whatsapp)
+                  // }
+                  >
+                    <img src="/tel.svg" alt="whatsapp" />
+                    {client.whatsapp}
+                  </a>
+                ) : (
+                  <Skeleton width="150px" />
+                )}
               </div>
-              {client.whatsapp ? (
-                <a
-                // target="_blank"
-                // href={
-                //   "https://api.whatsapp.com/send?phone=55" +
-                //   formatWhats(client.whatsapp)
-                // }
+              <div>
+                <h4>{plans[0] || <Skeleton width="200px" />}</h4>
+                <h3
+                  onClick={changeStatus}
+                  style={{ opacity: isStatusLoading ? 0.5 : 1 }}
                 >
-                  <img src="/tel.svg" alt="whatsapp" />
-                  {client.whatsapp}
-                </a>
-              ) : (
-                <Skeleton width="150px" />
-              )}
+                  {client.status || <Skeleton width="200px" />}{" "}
+                  <img src="/change.svg" alt="" />
+                </h3>
+              </div>
             </ProfileData>
             {client.drive && (
               <Drive target="_blank" href={client.drive}>
@@ -741,15 +771,17 @@ export default function Client() {
                   </div>
                 )}
               </ProfileBody>
-              <ProfileBottom>
-                <Link
-                  to={`/home/client/${id}/journey/${
-                    client.chores ? client.chores[0] : null
-                  }`}
-                >
-                  <button className="btn">JORNADA</button>
-                </Link>
-              </ProfileBottom>
+              {received && client.status == "Start" && (
+                <ProfileBottom>
+                  <Link
+                    to={`/home/client/${id}/journey/${
+                      client.chores ? client.chores[0] : null
+                    }`}
+                  >
+                    <button className="btn">JORNADA</button>
+                  </Link>
+                </ProfileBottom>
+              )}
             </>
           )}
         </ProfileStyled>

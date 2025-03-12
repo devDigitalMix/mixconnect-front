@@ -227,9 +227,11 @@ export default function Profile() {
               </UploadAvatar>
             </ProfileAvatar>
             <ProfileData>
-              <h4 onClick={mamao}>{user.level}</h4>
-              <h2>{user.name}</h2>
-              <h3>{user.email}</h3>
+              <div>
+                <h4 onClick={mamao}>{user.level}</h4>
+                <h2>{user.name}</h2>
+                <h3>{user.email}</h3>
+              </div>
             </ProfileData>
             {musicLink != "" && (
               <iframe

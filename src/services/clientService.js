@@ -86,3 +86,16 @@ export async function deleteClient(id, motive) {
   });
   return response;
 }
+
+export async function changeStatusService(id, status) {
+  const response = await axios.patch(
+    `${baseURL}/client/changestatus/${id}`,
+    { status: status },
+    {
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+    }
+  );
+  return response;
+}
