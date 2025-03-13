@@ -292,6 +292,20 @@ export function ChoreTasks() {
       )}
       <ChoreTasksHeader>
         <ChoreTasksButtons>
+          <Link
+            to={
+              window.location.href.includes("journey")
+                ? "/home/clients/"
+                : "/home/chores/"
+            }
+          >
+            <img
+              src="/voltar.svg"
+              alt="voltar"
+              title="Voltar"
+              className="img-effect"
+            />
+          </Link>
           <img
             src="/mais.svg"
             alt="Nova tarefa"
