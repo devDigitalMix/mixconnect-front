@@ -103,12 +103,20 @@ export const SelectState = styled.form`
 export const TaskBtns = styled.div`
   position: absolute;
   right: 20px;
-  bottom: 20px;
+  bottom: 50%;
+  transform: translateY(50%);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
   button {
     opacity: 0;
+    img {
+      height: 20px;
+      width: 20px;
+    }
+    @media only screen and (max-width: 500px) {
+      opacity: 1;
+    }
   }
 `;
 
@@ -143,5 +151,8 @@ export const Arrows = styled.div`
       transition: all.1s;
       transform: scale(0.9);
     }
+  }
+  @media only screen and (max-width: 500px) {
+    opacity: 1;
   }
 `;

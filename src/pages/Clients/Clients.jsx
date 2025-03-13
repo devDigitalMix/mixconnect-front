@@ -324,8 +324,9 @@ export default function Clients() {
             </span>
             <label htmlFor="value">Valor</label>
           </div>
-          <div>
+          <div className="start">
             <input type="checkbox" name="status" id="status" />
+            <span className="custom-check"></span>
             <label htmlFor="status">Start</label>
           </div>
           <div>

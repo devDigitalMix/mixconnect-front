@@ -77,7 +77,7 @@ export function deleteEmployee(id) {
   return response;
 }
 
-export async function createchore(id, data) {
+export async function createChore(id, data) {
   const response = await axios.patch(
     `${baseURL}/employee/${id}/createChore/`,
     data,

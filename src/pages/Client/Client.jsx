@@ -360,10 +360,20 @@ export default function Client() {
               )}
             </DeleteClientStyled>
           )}
+
           {(user.level == "Líder" ||
             user.level == "Admin" ||
             user.role == "Comercial") && (
             <TopButtons>
+              {received && client.status == "Start" && (
+                <Link
+                  to={`/home/client/${id}/journey/${
+                    client.chores ? client.chores[0] : null
+                  }`}
+                >
+                  <button className="btn">JORNADA</button>
+                </Link>
+              )}
               <img
                 src="/exclude.svg"
                 alt="excluir"
@@ -771,17 +781,6 @@ export default function Client() {
                   </div>
                 )}
               </ProfileBody>
-              {received && client.status == "Start" && (
-                <ProfileBottom>
-                  <Link
-                    to={`/home/client/${id}/journey/${
-                      client.chores ? client.chores[0] : null
-                    }`}
-                  >
-                    <button className="btn">JORNADA</button>
-                  </Link>
-                </ProfileBottom>
-              )}
             </>
           )}
         </ProfileStyled>

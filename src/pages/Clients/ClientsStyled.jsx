@@ -238,10 +238,13 @@ export const FiltroModal = styled.form`
     }
   }
   .value {
-    display: flex;
+    display: flex !important;
     align-items: center;
+    justify-content: center;
+    max-width: fit-content !important;
     position: relative;
-    gap: 10px;
+    gap: 6px;
+    margin-left: 44px;
     font-size: 1.25rem;
     font-weight: 500;
     right: 25px;
@@ -264,7 +267,37 @@ export const FiltroModal = styled.form`
     transition: all.3s;
     left: 4px;
   }
-  div:not(.custom-loader, .value) {
+  .start {
+    position: relative;
+    display: flex !important;
+    max-width: fit-content !important;
+    gap: 10px;
+    justify-content: center;
+    input {
+      display: block;
+      position: absolute;
+      z-index: 3;
+      left: -4px;
+      top: -3px;
+      cursor: pointer;
+      opacity: 0;
+      height: 25px;
+      width: 25px;
+    }
+    input:checked + .custom-check {
+      box-shadow: 0 0 0 6px var(--main) inset;
+    }
+    .custom-check {
+      display: block;
+      transition: 0.3s;
+      height: 25px;
+      width: 25px;
+      border-radius: 30px;
+      border: 1px solid #000;
+      background-color: var(--light);
+    }
+  }
+  div:not(.custom-loader) {
     display: grid;
     text-align: center;
     width: 100%;

@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const ChoreTasksStyled = styled.section`
   max-width: 1200px;
   padding: 20px 10px 50px;
+  padding-left: 30px;
   width: 100%;
   display: grid;
   gap: 30px;
@@ -116,6 +117,9 @@ export const ChoreTaskBtn2 = styled.div`
     cursor: pointer;
     &:hover {
       filter: drop-shadow(0 0 3px var(--main));
+    }
+    @media only screen and (max-width: 500px) {
+      display: none;
     }
   }
 `;

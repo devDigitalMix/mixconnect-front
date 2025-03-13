@@ -25,8 +25,11 @@ export const ProfileContainer = styled.section`
 
 export const ProfileStyled = styled.div`
   padding: 20px;
+  @media only screen and (max-width: 780px) {
+    padding-top: 70px;
+  }
   @media only screen and (max-width: 390px) {
-    padding: 20px 10px;
+    padding: 70px 10px 20px;
   }
   background-color: var(--dark);
   border-radius: 10px;
@@ -227,12 +230,25 @@ export const ProfileData = styled.div`
         opacity: 1;
       }
     }
+    @media only screen and (max-width: 500px) {
+      img {
+        opacity: 1;
+      }
+    }
   }
   a {
     display: flex;
     align-items: center;
     gap: 10px;
     color: #ffffffd6;
+  }
+  @media only screen and (max-width: 500px) {
+    flex-direction: column-reverse;
+    align-items: center;
+    text-align: center;
+    div {
+      justify-items: center;
+    }
   }
 `;
 

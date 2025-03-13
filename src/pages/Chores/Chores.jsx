@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { createchore, userLogged } from "../../services/employeeService";
+import { createChore, userLogged } from "../../services/employeeService";
 import { useContext, useEffect, useState } from "react";
 import { ChoresContent, ChoresStyled, CreateChoreModal } from "./ChoresStyled";
 import { Input } from "../../components/Input/Input";
@@ -17,6 +17,10 @@ export function Chores() {
   const [choreModal, setChoreModal] = useState(false);
   const [received, setReceived] = useState(false);
   const navigate = useNavigate();
+  const [nChores, setNChores] = useState(() => {
+    const savedNChores = localStorage.getItem("nChores");
+    return savedNChores ? parseInt(savedNChores, 10) : 0;
+  });
 
   async function findUserLogged() {
     try {
@@ -41,6 +45,7 @@ export function Chores() {
         })
       );
       setChores(choresList);
+      setNChores(choresList.length);
       setReceived(true);
     } catch (error) {
       console.log("Error fetching chores", error);
@@ -56,7 +61,7 @@ export function Chores() {
       return;
     }
     try {
-      const response = await createchore(user._id, data);
+      const response = await createChore(user._id, data);
       setChoreModal(false);
       chores.push(response.data);
     } catch (error) {
@@ -67,6 +72,10 @@ export function Chores() {
   function clickCreateChore() {
     setChoreModal(!choreModal);
   }
+
+  useEffect(() => {
+    localStorage.setItem("nChores", nChores);
+  }, [nChores]);
 
   useEffect(() => {
     if (Cookies.get("token")) findUserLogged();
@@ -123,7 +132,7 @@ export function Chores() {
             </Link>
           ))
         ) : (
-          <ChoreSkeleton cards={2}></ChoreSkeleton>
+          <ChoreSkeleton cards={nChores || 1}></ChoreSkeleton>
         )}
       </ChoresContent>
     </ChoresStyled>

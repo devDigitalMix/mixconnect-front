@@ -10,4 +10,11 @@ export const TopButtons = styled.div`
     display: flex;
     gap: 10px;
   }
+  a:first-child {
+    margin-right: 10px;
+  }
+  a {
+    display: flex;
+    align-items: center;
+  }
 `;
