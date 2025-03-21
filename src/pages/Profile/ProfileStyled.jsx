@@ -76,7 +76,26 @@ export const ProfileStyled = styled.div`
     }
   }
 `;
-
+export const ClientButtons = styled.div`
+  display: flex;
+  gap: 15px;
+  padding-left: 26px;
+  margin-top: 10px;
+  align-items: center;
+  .btn-nps {
+    background-color: var(--sec);
+    color: var(--dark);
+    padding: 10px 15px 5px;
+    font-weight: 700;
+    border-radius: 5px;
+    text-transform: uppercase;
+    &:hover {
+      box-shadow: 0 0 0 2px var(--sec) inset;
+      background-color: var(--dark);
+      color: var(--sec);
+    }
+  }
+`;
 export const TopProfile = styled.div`
   display: flex;
   align-items: center;

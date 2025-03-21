@@ -112,6 +112,17 @@ export function Navbar() {
                     </button>
                   </Link>
                 )}
+              {!findingUser &&
+                (user.level == "Líder" || user.level == "Admin") && (
+                  <Link to={"/home/nps"}>
+                    <button
+                      className={nav.includes("nps") ? "active" : ""}
+                      onClick={() => handleButtonClick("nps")}
+                    >
+                      NPS
+                    </button>
+                  </Link>
+                )}
             </NavMenu>
             <PerfilMenu>
               {!findingUser ? (

@@ -10,6 +10,7 @@ import {
 } from "../../services/clientService";
 // import { ClientStyled, ClientStyledContent } from "./ClientStyled";
 import {
+  ClientButtons,
   ProfileAvatar,
   ProfileBody,
   ProfileBottom,
@@ -23,12 +24,13 @@ import {
 import Cookies from "js-cookie";
 import { Input } from "../../components/Input/Input";
 import { TopButtons } from "../Employee/EmployeeStyled";
-import { DeleteClientStyled, Drive } from "./ClientStyled";
+import { CreateNpsContainer, DeleteClientStyled, Drive } from "./ClientStyled";
 import { userLogged } from "../../services/employeeService";
 import { UserContext } from "../../Context/UserContent";
 import Skeleton from "react-loading-skeleton";
 import { getPlansService } from "../../services/planService";
 import { Label } from "../../components/Label/Label";
+import { createNpsService } from "../../services/npsService";
 
 export default function Client() {
   const { id } = useParams();
@@ -44,6 +46,7 @@ export default function Client() {
   const [plans, setPlans] = useState([]);
   const [deleteClick, setDeleteClick] = useState(false);
   const [received, setReceived] = useState(false);
+  const [createNps, setCreateNps] = useState(false);
   const [file, setFile] = useState();
   const [preview, setPreview] = useState("/avatar-default.png");
   const navigate = useNavigate();
@@ -70,6 +73,25 @@ export default function Client() {
     }
   }
 
+  async function createNpsFunction(name) {
+    let response;
+    var data = {
+      name: name,
+      clientId: id,
+      clientName: client.name,
+    };
+    try {
+      response = await createNpsService(data);
+      console.log(response.data._id);
+      window.open(`/sendnps/${response.data._id}`, "_blank");
+      setCreateNps(!createNps);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      console.log(response);
+    }
+  }
+
   const motivos = [
     "",
     "Baixo Poder de Investimento",
@@ -80,6 +102,17 @@ export default function Client() {
     "Fim de Contrato",
     "Desalinhamento de Expectativa",
     "Empresa Desativada",
+  ];
+  const categorias = [
+    "Pós Briefing",
+    "Fim de Projeto",
+    "45 Dias Tráfego",
+    "100 Dias Tráfego",
+    "45 Dias Social",
+    "100 Dias Social",
+    "Sugestões",
+    "Satisfação",
+    "Período 30/45",
   ];
 
   const textsToRemove = [
@@ -320,6 +353,15 @@ export default function Client() {
         <img src="/grande-bottom.png" id="grande-bottom" />
         <img src="/grande-top.png" id="grande-top" />
         <ProfileStyled>
+          {createNps && (
+            <CreateNpsContainer>
+              {categorias.map((c, index) => (
+                <h3 key={index} onClick={() => createNpsFunction(c)}>
+                  {c}
+                </h3>
+              ))}
+            </CreateNpsContainer>
+          )}
           {deleteClick && (
             <DeleteClientStyled onSubmit={handleDelete}>
               <img
@@ -365,15 +407,6 @@ export default function Client() {
             user.level == "Admin" ||
             user.role == "Comercial") && (
             <TopButtons>
-              {received && client.status == "Start" && (
-                <Link
-                  to={`/home/client/${id}/journey/${
-                    client.chores ? client.chores[0] : null
-                  }`}
-                >
-                  <button className="btn">JORNADA</button>
-                </Link>
-              )}
               <img
                 src="/exclude.svg"
                 alt="excluir"
@@ -462,7 +495,7 @@ export default function Client() {
                   onClick={changeStatus}
                   style={{ opacity: isStatusLoading ? 0.5 : 1 }}
                 >
-                  {client.status || <Skeleton width="200px" />}{" "}
+                  {client.status || <Skeleton width="80px" />}{" "}
                   <img src="/change.svg" alt="" />
                 </h3>
               </div>
@@ -473,6 +506,31 @@ export default function Client() {
               </Drive>
             )}
           </TopProfile>
+          {received && client.level != "Base" && (
+            <ClientButtons>
+              <button
+                className="btn-nps"
+                onClick={() => setCreateNps(!createNps)}
+              >
+                Criar NPS
+              </button>
+              <button
+                className="btn-nps"
+                onClick={() => navigate(`/home/client/${id}/nps`)}
+              >
+                ver nps
+              </button>
+              {received && client.status == "Start" && (
+                <Link
+                  to={`/home/client/${id}/journey/${
+                    client.chores ? client.chores[0] : null
+                  }`}
+                >
+                  <button className="btn">JORNADA</button>
+                </Link>
+              )}
+            </ClientButtons>
+          )}
           {update ? (
             <>
               <ProfileUpdate onSubmit={handleUpdate}>

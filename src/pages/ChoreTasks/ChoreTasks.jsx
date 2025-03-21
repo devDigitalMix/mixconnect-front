@@ -37,7 +37,6 @@ export function ChoreTasks() {
   const [excludeModal, setExcludeModal] = useState(false);
   const [received, setReceived] = useState(false);
   const [locked, setLocked] = useState(true);
-  const [allDone, setAllDone] = useState(false);
   const [articles, setArticles] = useState([]);
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
@@ -49,13 +48,7 @@ export function ChoreTasks() {
       const response = await getChoreById(choreId || id);
       setChore(response.data);
       setTasks(response.data.tasks);
-      var all = true;
-      response.data.tasks.forEach((task) => {
-        if (task.state != "done") {
-          all = false;
-        }
-      });
-      console.log(all);
+
       setIsLoading(false);
       setReceived(true);
     } catch (error) {
@@ -136,10 +129,6 @@ export function ChoreTasks() {
         getChore();
       }
     }
-  }
-
-  function taskList(task) {
-    console.log(task);
   }
 
   async function moverBaixo(task) {
@@ -384,7 +373,6 @@ export function ChoreTasks() {
           <TaskSkeleton cards={4} />
         )}
       </ChoreTasksBody>
-      {allDone && <button>Concluir</button>}
     </ChoreTasksStyled>
   );
 }

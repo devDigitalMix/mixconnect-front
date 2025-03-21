@@ -81,3 +81,25 @@ export const Drive = styled.a`
   margin-right: 100px;
   color: #a3a0f8;
 `;
+
+export const CreateNpsContainer = styled.section`
+  max-width: 500px;
+  position: fixed;
+  top: 50%;
+  background-color: var(--dark);
+  right: 50%;
+  padding: 30px 20px;
+  border: 2px solid var(--main);
+  border-radius: 10px;
+  transform: translate(50%, -50%);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  max-width: 800px;
+  h3 {
+    background-color: var(--main);
+    padding: 6px 15px 2px;
+    border-radius: 6px;
+  }
+`;

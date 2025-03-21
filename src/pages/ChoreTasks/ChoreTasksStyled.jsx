@@ -45,7 +45,6 @@ export const ChoreTasksBody = styled.div`
   width: 100%;
   display: grid;
   gap: 15px;
-  user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;

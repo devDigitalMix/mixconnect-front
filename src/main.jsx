@@ -21,6 +21,9 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import DeletedClients from "./pages/DeletedClients/DeletedClients.jsx";
 import DeletedClient from "./pages/DeletedClient/DeletedClient.jsx";
+import { AllNps } from "./pages/AllNps/AllNps.jsx";
+import { SendNps } from "./pages/SendNps/SendNps.jsx";
+import Nps from "./pages/Nps/Nps.jsx";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +53,18 @@ const router = createBrowserRouter([
       {
         path: "/home/client/:id",
         element: <Client />,
+      },
+      {
+        path: "/home/client/:id/nps",
+        element: <AllNps />,
+      },
+      {
+        path: "/home/viewnps/:id",
+        element: <Nps />,
+      },
+      {
+        path: "/home/nps",
+        element: <AllNps />,
       },
       {
         path: "/home/client/:id/journey/:choreId/",
@@ -84,6 +99,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Authentication />,
+  },
+  {
+    path: "/sendnps/:id",
+    element: <SendNps />,
   },
 ]);
 
