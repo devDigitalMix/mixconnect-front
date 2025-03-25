@@ -306,6 +306,22 @@ export default function Client() {
     }
   }
 
+  function baixarImg() {
+    if (!client.logo) {
+      alert("Nenhuma imagem disponível para download.");
+      return;
+    }
+
+    // Cria um link temporário para forçar o download
+    const link = document.createElement("a");
+    link.href = client.logo; // URL da logo do cliente
+    link.download = "logo-cliente.png"; // Nome sugerido para o arquivo baixado
+    link.target = "_blank"; // Garante que o link seja aberto em uma nova guia, caso o download falhe
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
   useEffect(() => {
     function onEnter(a) {
       a.classList.add("active");
@@ -470,6 +486,7 @@ export default function Client() {
                   <input type="file" name="logo" id="logo" />
                 </UploadAvatar>
               )}
+              <button onClick={baixarImg}>Baixar Imagem</button>
             </ProfileAvatar>
             <ProfileData>
               <div>

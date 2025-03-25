@@ -121,6 +121,20 @@ export function Employee() {
     setIsLoading(false);
   }
 
+  function baixarImg() {
+    if (!employee.avatar) {
+      alert("Nenhuma imagem disponível para download.");
+      return;
+    }
+
+    const link = document.createElement("a");
+    link.href = employee.avatar;
+    link.target = "_blank";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
   function formatDate(data) {
     var date = new Date(data);
     date.setHours(date.getHours() + 3);
@@ -251,6 +265,7 @@ export function Employee() {
                 draggable="false"
               />
             )}
+            <button onClick={baixarImg}>Baixar Imagem</button>
           </ProfileAvatar>
           <ProfileData>
             <h4>{employee.level || <Skeleton width="70px" />}</h4>
