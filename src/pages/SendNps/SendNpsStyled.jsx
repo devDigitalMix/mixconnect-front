@@ -9,14 +9,25 @@ export const SendNpsContent = styled.form`
   gap: 20px;
   & > div:not(.guarda-rating) {
     display: grid;
+    justify-items: center;
+    width: 100%;
     textarea {
       background-color: var(--dark);
       border: 1px solid var(--main);
-      width: 500px;
+      max-width: 500px;
+      width: 100%;
       height: 100px;
       border-radius: 5px;
       padding: 7px 5px;
     }
+  }
+  & > h2 {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+  & > h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
   }
   & > div {
     margin-top: 45px;

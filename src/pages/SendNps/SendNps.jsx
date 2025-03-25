@@ -59,8 +59,8 @@ export function SendNps() {
           </div>
         ) : (
           <SendNpsContent onSubmit={handleNps}>
-            <p>{nps.name}</p>
-            <p>{nps.clientName}</p>
+            <h2>{nps.clientName}</h2>
+            <h3>{nps.name}</h3>
             {nps.ratings.map((rating, index) => (
               <div key={index} className="guarda-rating">
                 <label htmlFor={"pontuacao" + index}>{rating.desc}</label>
