@@ -486,7 +486,9 @@ export default function Client() {
                   <input type="file" name="logo" id="logo" />
                 </UploadAvatar>
               )}
-              <button onClick={baixarImg}>Baixar Imagem</button>
+              <button onClick={baixarImg}>
+                <img src="/open.svg" alt="" />
+              </button>
             </ProfileAvatar>
             <ProfileData>
               <div>

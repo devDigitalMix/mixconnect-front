@@ -265,12 +265,16 @@ export function Employee() {
                 draggable="false"
               />
             )}
-            <button onClick={baixarImg}>Baixar Imagem</button>
+            <button onClick={baixarImg}>
+              <img src="/open.svg" alt="" />
+            </button>
           </ProfileAvatar>
           <ProfileData>
-            <h4>{employee.level || <Skeleton width="70px" />}</h4>
-            <h2>{employee.name || <Skeleton width="200px" />}</h2>
-            <h3>{employee.email || <Skeleton width="200px" />}</h3>
+            <div>
+              <h4>{employee.level || <Skeleton width="70px" />}</h4>
+              <h2>{employee.name || <Skeleton width="200px" />}</h2>
+              <h3>{employee.email || <Skeleton width="200px" />}</h3>
+            </div>
           </ProfileData>
           {musicLink != "" && (
             <iframe
