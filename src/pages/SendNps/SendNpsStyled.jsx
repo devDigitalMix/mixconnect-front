@@ -1,7 +1,19 @@
 import styled from "styled-components";
 
 export const SendNpsContainer = styled.section`
-  padding: 30px 10px;
+  padding: 30px;
+  margin-top: 30px;
+  background-color: #00000036;
+  border: 1px solid var(--main);
+  border-radius: 10px;
+  &:has(.respondido) {
+    margin-top: 0;
+    position: fixed;
+    top: 50%;
+    right: 50%;
+    text-align: center;
+    transform: translate(50%, -50%);
+  }
 `;
 export const SendNpsContent = styled.form`
   display: grid;
@@ -48,6 +60,7 @@ export const SendNpsContent = styled.form`
     & > label {
       text-align: center;
       margin: 0 auto;
+      max-width: 850px;
     }
   }
   .custom-radio {

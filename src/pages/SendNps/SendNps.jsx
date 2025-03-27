@@ -54,7 +54,7 @@ export function SendNps() {
     <SendNpsContainer>
       {received ? (
         nps.ok ? (
-          <div>
+          <div className="respondido">
             <h2>Obrigado por responder!</h2>
           </div>
         ) : (

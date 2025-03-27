@@ -23,8 +23,6 @@ export const HomeBody = styled.section`
   }
 `;
 
-export const MessageForm = styled.form``;
-
 export const MainHeader = styled.header`
   width: 100%;
   max-width: 1200px;
@@ -36,18 +34,19 @@ export const MainHeader = styled.header`
   .metaTexto {
     background-color: var(--light);
     border-radius: 10px;
-    position: relative;
     display: flex;
     justify-content: end;
     align-items: center;
     padding: 5px 20px;
     max-width: 1100px;
     width: 100%;
+    position: relative;
     height: 50px;
     text-align: center;
     p,
     input {
       transition: 0.3s;
+      max-width: fit-content;
       color: var(--main);
       font-family: var(--font2);
       font-weight: 600;
@@ -57,32 +56,40 @@ export const MainHeader = styled.header`
       position: absolute;
       right: inherit;
       text-align: left;
-      left: -40px;
+      left: 0;
       max-width: 1000px;
+      min-width: 200px;
       width: 100%;
+      @media only screen and (max-width: 850px) {
+        font-weight: 600;
+        font-size: 1.5rem;
+        padding-right: 80px;
+      }
     }
     .clock {
       font-weight: 600;
       color: var(--main);
       font-family: var(--font2);
       font-size: 1.2rem;
+      position: relative;
+      z-index: 10;
     }
     #texto2 {
       opacity: 0;
-      transform: scale(0) translate(60px, -50%);
+      transform: scale(0) translate(10px, -50%);
     }
     #texto1 {
       opacity: 1;
-      transform: scale(1) translate(60px, -50%);
+      transform: scale(1) translate(0, -50%);
     }
     &.texto2 {
       #texto1 {
         opacity: 0;
-        transform: scale(0) translate(60px, -50%);
+        transform: scale(0) translate(00px, -50%);
       }
       #texto2 {
         opacity: 1;
-        transform: scale(1) translate(60px, -50%);
+        transform: scale(1) translate(10px, -50%);
       }
     }
 
@@ -99,12 +106,12 @@ export const MainHeader = styled.header`
       }
       #texto1 {
         opacity: 1;
-        transform: scale(1) translate(10px, -50%);
+        transform: scale(1) translate(0, -50%);
       }
       &.texto2 {
         #texto1 {
           opacity: 0;
-          transform: scale(0) translate(10px, -50%);
+          transform: scale(0) translate(0, -50%);
         }
         #texto2 {
           opacity: 1;
@@ -118,12 +125,19 @@ export const MainHeader = styled.header`
   }
 `;
 
+export const MessageForm = styled.form``;
+
 export const MainBody = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   gap: 30px 20px;
   justify-content: center;
+  @media only screen and (min-width: 380px) and (max-width: 500px) {
+    gap: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 export const GuardaMainData = styled.article`
   background: var(--cantoEsq);
@@ -134,8 +148,8 @@ export const GuardaMainData = styled.article`
   @media only screen and (max-width: 1110px) {
     max-width: 225px;
   }
-  @media only screen and (max-width: 450px) {
-    max-width: 425px;
+  @media only screen and (max-width: 500px) {
+    max-width: 200px;
   }
 `;
 export const MainData = styled.div`
@@ -174,10 +188,12 @@ export const MainData = styled.div`
       font-weight: 500;
     }
   }
-  @media only screen and (max-width: 450px) {
-    max-width: 425px;
+  @media only screen and (max-width: 500px) {
+    max-width: 200px;
+    height: 150px;
+    padding: 10px;
     h3 {
-      font-size: 4.3rem;
+      font-size: 2.5rem;
     }
   }
 `;

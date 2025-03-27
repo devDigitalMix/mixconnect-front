@@ -327,6 +327,14 @@ export function Employee() {
                 <Label htmlFor="music" text="Link da Música:" />
                 <Input type="text" name="music" defaultValue={employee.music} />
               </div>
+              <div>
+                <label htmlFor="discordId">Id Discord:</label>
+                <Input
+                  type="text"
+                  name="discordId"
+                  defaultValue={employee.discordId}
+                />
+              </div>
               {user.level == "Admin" && (
                 <div>
                   <Label htmlFor="password" text="Senha:" />

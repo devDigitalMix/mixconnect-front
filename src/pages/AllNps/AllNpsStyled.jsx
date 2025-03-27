@@ -46,13 +46,24 @@ export const NpsUnit = styled.div`
     position: absolute;
     height: 103%;
     width: 101.5%;
-    background: ${(props) =>
-      `conic-gradient(from ${props.angle}deg, transparent 95%, var(--main))`};
+    z-index: -1;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: -1;
     border-radius: 10px;
+    opacity: 0;
+    background: ${(props) =>
+      `conic-gradient(from ${props.angle}deg, transparent 70%, var(--main))`};
+    transition: opacity 1s ease;
+  }
+  &:hover {
+    &::after,
+    &::before {
+      transition: opacity 0.6s ease;
+      opacity: 1;
+      background: ${(props) =>
+        `conic-gradient(from ${props.angle}deg, transparent 70%, var(--main))`};
+    }
   }
 
   &::before {
@@ -60,9 +71,6 @@ export const NpsUnit = styled.div`
   }
   cursor: pointer;
   transition: all.3s;
-  &:hover {
-    box-shadow: 0 0 10px var(--main);
-  }
 
   .respondido {
     color: var(--sec);

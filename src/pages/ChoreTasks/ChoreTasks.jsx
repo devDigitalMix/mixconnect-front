@@ -281,20 +281,13 @@ export function ChoreTasks() {
       )}
       <ChoreTasksHeader>
         <ChoreTasksButtons>
-          <Link
-            to={
-              window.location.href.includes("journey")
-                ? "/home/clients/"
-                : "/home/chores/"
-            }
-          >
-            <img
-              src="/voltar.svg"
-              alt="voltar"
-              title="Voltar"
-              className="img-effect"
-            />
-          </Link>
+          <img
+            src="/voltar.svg"
+            alt="voltar"
+            title="Voltar"
+            className="img-effect"
+            onClick={() => navigate(-1)}
+          />
           <img
             src="/mais.svg"
             alt="Nova tarefa"
@@ -336,20 +329,13 @@ export function ChoreTasks() {
             className="img-effect"
             onClick={excludeChoreClick}
           />
-          <Link
-            to={
-              window.location.href.includes("journey")
-                ? "/home/clients/"
-                : "/home/chores/"
-            }
-          >
-            <img
-              src="/cancel.svg"
-              alt="voltar"
-              title="Voltar"
-              className="img-effect"
-            />
-          </Link>
+          <img
+            src="/cancel.svg"
+            alt="voltar"
+            title="Voltar"
+            className="img-effect"
+            onClick={() => navigate(-1)}
+          />
         </ChoreTaskBtn2>
       </ChoreTasksHeader>
       <ChoreTasksBody ref={choreTasksRef}>

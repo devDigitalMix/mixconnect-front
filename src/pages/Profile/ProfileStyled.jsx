@@ -78,10 +78,16 @@ export const ProfileStyled = styled.div`
 `;
 export const ClientButtons = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: fit-content;
   gap: 15px;
   padding-left: 26px;
   margin-top: 10px;
   align-items: center;
+  @media only screen and (max-width: 480px) {
+    padding-left: 0px;
+  }
   .btn-nps {
     background-color: var(--sec);
     color: var(--dark);

@@ -83,7 +83,6 @@ export const Drive = styled.a`
 `;
 
 export const CreateNpsContainer = styled.section`
-  max-width: 500px;
   position: fixed;
   top: 50%;
   background-color: var(--dark);
@@ -94,12 +93,31 @@ export const CreateNpsContainer = styled.section`
   transform: translate(50%, -50%);
   display: flex;
   flex-wrap: wrap;
+  z-index: 10;
   gap: 20px;
   justify-content: center;
-  max-width: 800px;
+  max-width: 570px;
+  #fechaNps {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    max-width: 25px;
+  }
   h3 {
     background-color: var(--main);
-    padding: 6px 15px 2px;
+    cursor: pointer;
+    max-width: 150px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 10px 2px;
+    transition: all.3s;
     border-radius: 6px;
+    &:hover {
+      background-color: #f2f2f2;
+      color: var(--main);
+    }
   }
 `;

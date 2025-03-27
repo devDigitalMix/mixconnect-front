@@ -284,6 +284,14 @@ export default function Profile() {
                   <Input type="text" name="music" defaultValue={user.music} />
                 </div>
                 <div>
+                  <label htmlFor="discordId">Id Discord:</label>
+                  <Input
+                    type="text"
+                    name="discordId"
+                    defaultValue={user.discordId}
+                  />
+                </div>
+                <div>
                   <label htmlFor="socialMedia">Redes Sociais:</label>
                   {socialMedia.map((item, index) => (
                     <div

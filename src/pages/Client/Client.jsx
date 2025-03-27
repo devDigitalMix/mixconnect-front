@@ -371,6 +371,13 @@ export default function Client() {
         <ProfileStyled>
           {createNps && (
             <CreateNpsContainer>
+              <img
+                src="/cancel.svg"
+                alt="cancelar"
+                id="fechaNps"
+                className="img-effect"
+                onClick={() => setCreateNps(!createNps)}
+              />
               {categorias.map((c, index) => (
                 <h3 key={index} onClick={() => createNpsFunction(c)}>
                   {c}
@@ -755,7 +762,16 @@ export default function Client() {
                 </div>
                 <div>
                   <h4>Valor Contrato:</h4>
-                  <p>R$ {client.value || <Skeleton width="200px" />}</p>
+                  <p>
+                    R${" "}
+                    {client.value && client.value != 0 ? (
+                      client.value
+                    ) : client.value == 0 ? (
+                      "0"
+                    ) : (
+                      <Skeleton width="200px" />
+                    )}
+                  </p>
                 </div>
                 <div>
                   <h4>CNPJ:</h4>
