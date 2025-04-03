@@ -19,6 +19,7 @@ export const SendApprovalStyled = styled.section`
     align-items: start;
     img {
       max-width: 350px;
+      width: 100%;
     }
   }
 `;
@@ -50,9 +51,13 @@ export const ApprovalForm = styled.form`
     padding: 5px;
     padding-left: 8px;
     border-radius: 6px;
+    width: 100%;
+    min-width: 0;
   }
   .approvalBtns {
     display: flex;
+    flex-wrap: wrap-reverse;
+    gap: 10px 5px;
   }
 `;
 

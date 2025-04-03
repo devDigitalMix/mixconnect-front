@@ -22,6 +22,7 @@ export function ClientApproval() {
   const [createApproval, setCreateApproval] = useState(false);
   const [files, setFiles] = useState([{ id: Date.now(), preview: null }]);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   async function getApproval() {
     const response = await getApprovalByClient(id);
@@ -30,6 +31,7 @@ export function ClientApproval() {
 
   async function handleCreateApproval(event) {
     event.preventDefault();
+    setLoading(true);
 
     const formdata = new FormData();
 
@@ -56,6 +58,7 @@ export function ClientApproval() {
       console.error("Erro ao criar aprovação:", error);
       alert("Erro ao criar aprovação. Tente novamente.");
     }
+    setLoading(false);
   }
 
   function handleFileChange(event, fileId) {
@@ -166,9 +169,13 @@ export function ClientApproval() {
             title="Adicionar Arquivo"
           />
         </button>
-        <button type="submit" className="btn">
-          Enviar
-        </button>
+        {!loading ? (
+          <button type="submit" className="btn">
+            Enviar
+          </button>
+        ) : (
+          <p className="btn">Enviando...</p>
+        )}
       </CreateApprovalModal>
       <ClientApprovalBody>
         {clientApproval.length > 0 ? (

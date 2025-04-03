@@ -39,6 +39,12 @@ export default function Nps() {
           className="img-effect"
         />
       </button>
+      <button
+        id="linkNps"
+        onClick={() => window.open(`/sendnps/${id}`, "_blank")}
+      >
+        Link
+      </button>
       {received && (
         <NpsItem>
           <div>

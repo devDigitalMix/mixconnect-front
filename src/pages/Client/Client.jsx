@@ -40,6 +40,7 @@ export default function Client() {
   const [updateAvatar, setUpdateAvatar] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isStatusLoading, setIsStatusLoading] = useState(false);
+  const [isNpsLoading, setIsNpsLoading] = useState(false);
   const [socialMedia, setSocialMedia] = useState(client.socialMedia || []);
   const [page, setPage] = useState(client.pages || []);
   const [gmb, setGmb] = useState(client.gmb || []);
@@ -74,6 +75,7 @@ export default function Client() {
   }
 
   async function createNpsFunction(name) {
+    setIsNpsLoading(true);
     let response;
     var data = {
       name: name,
@@ -89,6 +91,7 @@ export default function Client() {
     } finally {
       // console.log(response);
     }
+    setIsNpsLoading(false);
   }
 
   const motivos = [
@@ -370,18 +373,24 @@ export default function Client() {
         <ProfileStyled>
           {createNps && (
             <CreateNpsContainer>
-              <img
-                src="/cancel.svg"
-                alt="cancelar"
-                id="fechaNps"
-                className="img-effect"
-                onClick={() => setCreateNps(!createNps)}
-              />
-              {categorias.map((c, index) => (
-                <h3 key={index} onClick={() => createNpsFunction(c)}>
-                  {c}
-                </h3>
-              ))}
+              {isNpsLoading ? (
+                <div className="custom-loader"></div>
+              ) : (
+                <>
+                  <img
+                    src="/cancel.svg"
+                    alt="cancelar"
+                    id="fechaNps"
+                    className="img-effect"
+                    onClick={() => setCreateNps(!createNps)}
+                  />
+                  {categorias.map((c, index) => (
+                    <h3 key={index} onClick={() => createNpsFunction(c)}>
+                      {c}
+                    </h3>
+                  ))}
+                </>
+              )}
             </CreateNpsContainer>
           )}
           {deleteClick && (

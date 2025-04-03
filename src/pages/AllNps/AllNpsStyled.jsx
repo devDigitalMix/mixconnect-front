@@ -48,9 +48,9 @@ export const NpsUnit = styled.div`
   /* border: 1px solid var(--main); */
   .client-logo {
     width: 100%;
-    max-width: 100px;
-    min-width: 100px;
-    height: 100px;
+    max-width: 80px;
+    min-width: 80px;
+    height: 80px;
     border-radius: 100%;
     object-fit: cover;
   }

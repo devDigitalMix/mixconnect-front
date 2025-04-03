@@ -81,6 +81,12 @@ export const CreateApprovalModal = styled.form`
       }
     }
   }
+  p {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const FileContainer = styled.div`

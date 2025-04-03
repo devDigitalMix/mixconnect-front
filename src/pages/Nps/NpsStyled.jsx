@@ -14,6 +14,15 @@ export const NpsContainer = styled.section`
     top: 10px;
     left: 10px;
   }
+  #linkNps {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: var(--main);
+    &:hover {
+      color: var(--sec);
+    }
+  }
 `;
 
 export const NpsItem = styled.div`

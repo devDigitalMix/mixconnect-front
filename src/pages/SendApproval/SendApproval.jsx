@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -17,6 +18,7 @@ export function SendApproval() {
   const [received, setReceived] = useState(false);
   const [denied, setDenied] = useState(false);
   const [approved, setApproved] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   async function findApproval() {
     setReceived(false);
@@ -27,6 +29,7 @@ export function SendApproval() {
 
   async function handleForm(event) {
     event.preventDefault();
+    setLoading(true);
     const formdata = new FormData(event.target);
     const data = Object.fromEntries(formdata.entries());
     if (denied && data.feedback.trim() == "") {
@@ -41,10 +44,11 @@ export function SendApproval() {
     data.approved = approved;
     try {
       const response = await answerApproval(id, data);
-      console.log(response);
+      findApproval();
     } catch (error) {
       console.log(error);
     }
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -69,28 +73,32 @@ export function SendApproval() {
             id="feedback"
             placeholder="FeedBack"
           ></textarea>
-          <div className="approvalBtns">
-            <button
-              type="submit"
-              onClick={() => {
-                setDenied(true);
-                setApproved(false);
-              }}
-              className="btn danger"
-            >
-              Rejeitar
-            </button>
-            <button
-              type="submit"
-              onClick={() => {
-                setApproved(true);
-                setDenied(false);
-              }}
-              className="btn"
-            >
-              Aprovar
-            </button>
-          </div>
+          {!loading ? (
+            <div className="approvalBtns">
+              <button
+                type="submit"
+                onClick={() => {
+                  setDenied(true);
+                  setApproved(false);
+                }}
+                className="btn danger"
+              >
+                Rejeitar
+              </button>
+              <button
+                type="submit"
+                onClick={() => {
+                  setApproved(true);
+                  setDenied(false);
+                }}
+                className="btn"
+              >
+                Aprovar
+              </button>
+            </div>
+          ) : (
+            <p className="btn">Enviando...</p>
+          )}
         </ApprovalForm>
       </SendApprovalStyled>
     ) : (

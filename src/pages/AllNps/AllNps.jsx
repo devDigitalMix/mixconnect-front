@@ -8,6 +8,7 @@ import {
 import { AllNpsContainer, NpsContent, NpsUnit } from "./AllNpsStyled";
 import { Input } from "../../components/Input/Input";
 import { getClientsByIdList } from "../../services/clientService";
+import { NpsItemSkeleton } from "../../components/NpsItemSkeleton/NpsItemSkeleton";
 
 export function AllNps() {
   const { id } = useParams();
@@ -22,18 +23,40 @@ export function AllNps() {
     setReceived(false);
     try {
       if (id) {
+        // Busca os NPS de um cliente específico
         const response = await getNpsByClient(id);
-        setNps(response.data.results);
-      } else {
-        const response = await getAllNps();
-        const listaIds = [
-          ...new Set(response.data.results.map((npsItem) => npsItem.clientId)),
+        const npsResults = response.data.results;
+
+        // Extrai o clientId único dos NPS
+        const clientIds = [
+          ...new Set(npsResults.map((npsItem) => npsItem.clientId)),
         ];
-        const responseClients = await getClientsByIdList(listaIds);
-        setNps(response.data.results);
+
+        // Faz uma requisição para buscar o cliente correspondente
+        const responseClients = await getClientsByIdList(clientIds);
         const clientsInvolved = responseClients.data.results.filter((client) =>
-          listaIds.includes(client.id)
+          clientIds.includes(client.id)
         );
+
+        setNps(npsResults);
+        setClients(clientsInvolved);
+      } else {
+        // Busca todos os NPS
+        const response = await getAllNps();
+        const npsResults = response.data.results;
+
+        // Extrai os clientId únicos dos NPS
+        const clientIds = [
+          ...new Set(npsResults.map((npsItem) => npsItem.clientId)),
+        ];
+
+        // Faz uma requisição para buscar apenas os clientes necessários
+        const responseClients = await getClientsByIdList(clientIds);
+        const clientsInvolved = responseClients.data.results.filter((client) =>
+          clientIds.includes(client.id)
+        );
+
+        setNps(npsResults);
         setClients(clientsInvolved);
       }
     } catch (error) {
@@ -102,7 +125,7 @@ export function AllNps() {
         />
       )}
       <NpsContent>
-        {received &&
+        {received ? (
           nps.map((aNps, index) => {
             const client = clients.find(
               (client) => client.id === aNps.clientId
@@ -130,7 +153,10 @@ export function AllNps() {
                 </div>
               </NpsUnit>
             );
-          })}
+          })
+        ) : (
+          <NpsItemSkeleton cards={12} />
+        )}
       </NpsContent>
     </AllNpsContainer>
   );
