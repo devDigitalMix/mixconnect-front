@@ -24,6 +24,9 @@ import DeletedClient from "./pages/DeletedClient/DeletedClient.jsx";
 import { AllNps } from "./pages/AllNps/AllNps.jsx";
 import { SendNps } from "./pages/SendNps/SendNps.jsx";
 import Nps from "./pages/Nps/Nps.jsx";
+import { ClientApproval } from "./pages/ClientApproval/ClientApproval.jsx";
+import { Approval } from "./pages/Approval/Approval.jsx";
+import { SendApproval } from "./pages/SendApproval/SendApproval.jsx";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +57,15 @@ const router = createBrowserRouter([
         path: "/home/client/:id",
         element: <Client />,
       },
+      {
+        path: "/home/client/:id/approval",
+        element: <ClientApproval />,
+      },
+      {
+        path: "/home/approval/:id",
+        element: <Approval />,
+      },
+
       {
         path: "/home/client/:id/nps",
         element: <AllNps />,
@@ -103,6 +115,10 @@ const router = createBrowserRouter([
   {
     path: "/sendnps/:id",
     element: <SendNps />,
+  },
+  {
+    path: "/sendapproval/:id",
+    element: <SendApproval />,
   },
 ]);
 

@@ -38,8 +38,22 @@ export const NpsUnit = styled.div`
   background: var(--dark);
   border-radius: 10px;
   position: relative;
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  & > div {
+    display: grid;
+    justify-items: center;
+  }
   /* border: 1px solid var(--main); */
-
+  .client-logo {
+    width: 100%;
+    max-width: 100px;
+    min-width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    object-fit: cover;
+  }
   &::after,
   &::before {
     content: "";

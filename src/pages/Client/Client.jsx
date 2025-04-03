@@ -82,13 +82,12 @@ export default function Client() {
     };
     try {
       response = await createNpsService(data);
-      console.log(response.data._id);
       window.open(`/sendnps/${response.data._id}`, "_blank");
       setCreateNps(!createNps);
     } catch (error) {
       console.log(error);
     } finally {
-      console.log(response);
+      // console.log(response);
     }
   }
 
@@ -430,6 +429,7 @@ export default function Client() {
             user.level == "Admin" ||
             user.role == "Comercial") && (
             <TopButtons>
+              <Link to={"approval"}>Aprovações</Link>
               <img
                 src="/exclude.svg"
                 alt="excluir"

@@ -22,7 +22,6 @@ export default function Nps() {
     setReceived(false);
     const response = await findNpsById(id);
     setNps(response.data);
-    console.log(response.data);
     setReceived(true);
   }
 

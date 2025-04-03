@@ -14,6 +14,19 @@ export async function getAllClients(limit, offset) {
   return response;
 }
 
+export async function getClientsByIdList(lista) {
+  const response = await axios.post(
+    `${baseURL}/client/byIdList`,
+    { listaIds: lista },
+    {
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+    }
+  );
+  return response;
+}
+
 export async function createClientService(data) {
   const response = await axios.post(`${baseURL}/client/create`, data, {
     headers: {
