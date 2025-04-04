@@ -7,6 +7,11 @@ export const ClientApprovalContainer = styled.section`
   width: 100%;
   max-width: 1200px;
   margin-bottom: 50px;
+  #default-criativo {
+    margin: 0 auto;
+    max-width: 300px;
+    border-radius: 10px;
+  }
   @media only screen and (max-width: 560px) {
     padding: 30px 10px;
   }
@@ -105,6 +110,7 @@ export const ClientApprovalBody = styled.div`
     display: grid;
     gap: 10px;
     max-width: 300px;
+    width: 100%;
     border: 2px solid grey;
     position: relative;
     filter: grayscale(100%);

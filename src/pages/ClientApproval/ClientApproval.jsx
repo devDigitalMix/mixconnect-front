@@ -14,6 +14,7 @@ import {
   createApprovalService,
   getApprovalByClient,
 } from "../../services/approvalService";
+import Skeleton from "react-loading-skeleton";
 
 export function ClientApproval() {
   const { id } = useParams();
@@ -23,10 +24,12 @@ export function ClientApproval() {
   const [files, setFiles] = useState([{ id: Date.now(), preview: null }]);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [received, setReceived] = useState(false);
 
   async function getApproval() {
     const response = await getApprovalByClient(id);
     setClientApproval(response.data.results);
+    setReceived(true);
   }
 
   async function handleCreateApproval(event) {
@@ -111,7 +114,7 @@ export function ClientApproval() {
           id="voltar"
           onClick={() => navigate(-1)}
         />
-        <h1>{client.name}</h1>
+        <h1>{client.name || <Skeleton width="200px" />}</h1>
         <img
           src="/mais.svg"
           className="img-effect"
@@ -177,25 +180,33 @@ export function ClientApproval() {
           <p className="btn">Enviando...</p>
         )}
       </CreateApprovalModal>
-      <ClientApprovalBody>
-        {clientApproval.length > 0 ? (
-          clientApproval.map((approval, index) => (
-            <Link
-              key={index}
-              to={"/home/approval/" + approval.id}
-              className={
-                approval.approved ? "approved" : approval.denied ? "denied" : ""
-              }
-            >
-              <div>
-                <img src={approval.item[0]} alt={approval.name} />
-              </div>
-            </Link>
-          ))
-        ) : (
-          <p>Nenhuma aprovação encontrada.</p>
-        )}
-      </ClientApprovalBody>
+      {received ? (
+        <ClientApprovalBody>
+          {clientApproval.length > 0 ? (
+            clientApproval.map((approval, index) => (
+              <Link
+                key={index}
+                to={"/home/approval/" + approval.id}
+                className={
+                  approval.approved
+                    ? "approved"
+                    : approval.denied
+                    ? "denied"
+                    : ""
+                }
+              >
+                <div>
+                  <img src={approval.item[0]} alt={approval.name} />
+                </div>
+              </Link>
+            ))
+          ) : (
+            <p>Nenhuma aprovação encontrada.</p>
+          )}
+        </ClientApprovalBody>
+      ) : (
+        <img src="/criativo-default.jpg" id="default-criativo" />
+      )}
     </ClientApprovalContainer>
   );
 }

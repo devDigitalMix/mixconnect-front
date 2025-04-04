@@ -314,11 +314,10 @@ export default function Client() {
       return;
     }
 
-    // Cria um link temporário para forçar o download
     const link = document.createElement("a");
-    link.href = client.logo; // URL da logo do cliente
-    link.download = "logo-cliente.png"; // Nome sugerido para o arquivo baixado
-    link.target = "_blank"; // Garante que o link seja aberto em uma nova guia, caso o download falhe
+    link.href = client.logo;
+    link.download = "logo-cliente.png";
+    link.target = "_blank";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

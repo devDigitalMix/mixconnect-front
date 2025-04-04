@@ -1,0 +1,54 @@
+Date : 2025-04-04 11:04:19
+Directory : c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src
+Total : 17 files,  813 codes, 12 comments, 61 blanks, all 886 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| JavaScript JSX |         15 |        761 |         12 |         55 |        828 |
+| JavaScript     |          2 |         52 |          0 |          6 |         58 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                             | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                |         17 |        813 |         12 |         61 |        886 |
+| . (Files)                                                                                                        |          1 |         15 |          0 |          1 |         16 |
+| components                                                                                                       |          2 |         41 |          0 |          4 |         45 |
+| components\NpsItemSkeleton                                                                                       |          2 |         41 |          0 |          4 |         45 |
+| pages                                                                                                            |         12 |        705 |         12 |         50 |        767 |
+| pages\AllNps                                                                                                     |          2 |         48 |          7 |          9 |         64 |
+| pages\Approval                                                                                                   |          2 |        129 |          2 |          9 |        140 |
+| pages\Client                                                                                                     |          1 |          8 |          0 |          0 |          8 |
+| pages\ClientApproval                                                                                             |          2 |        331 |          2 |         21 |        354 |
+| pages\Logins                                                                                                     |          1 |         -1 |          0 |          0 |         -1 |
+| pages\Nps                                                                                                        |          2 |         14 |          0 |          0 |         14 |
+| pages\SendApproval                                                                                               |          2 |        176 |          1 |         11 |        188 |
+| services                                                                                                         |          2 |         52 |          0 |          6 |         58 |
++------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                                                         | language       | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\NpsItemSkeleton\NpsItemSkeleton.jsx       | JavaScript JSX |         17 |          0 |          2 |         19 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\NpsItemSkeleton\NpsItemSkeletonStyled.jsx | JavaScript JSX |         24 |          0 |          2 |         26 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\main.jsx                                             | JavaScript JSX |         15 |          0 |          1 |         16 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\AllNps\AllNps.jsx                              | JavaScript JSX |         34 |          7 |          9 |         50 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\AllNps\AllNpsStyled.jsx                        | JavaScript JSX |         14 |          0 |          0 |         14 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Approval\Approval.jsx                          | JavaScript JSX |         55 |          2 |          6 |         63 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Approval\ApprovalStyled.jsx                    | JavaScript JSX |         74 |          0 |          3 |         77 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\ClientApproval\ClientApproval.jsx              | JavaScript JSX |        185 |          2 |         15 |        202 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\ClientApproval\ClientApprovalStyled.jsx        | JavaScript JSX |        146 |          0 |          6 |        152 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Client\Client.jsx                              | JavaScript JSX |          8 |          0 |          0 |          8 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Logins\Logins.jsx                              | JavaScript JSX |         -1 |          0 |          0 |         -1 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Nps\Nps.jsx                                    | JavaScript JSX |          5 |          0 |          0 |          5 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Nps\NpsStyled.jsx                              | JavaScript JSX |          9 |          0 |          0 |          9 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\SendApproval\SendApproval.jsx                  | JavaScript JSX |        104 |          1 |          6 |        111 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\SendApproval\SendApprovalStyled.jsx            | JavaScript JSX |         72 |          0 |          5 |         77 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\services\approvalService.js                          | JavaScript     |         40 |          0 |          5 |         45 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\services\clientService.js                            | JavaScript     |         12 |          0 |          1 |         13 |
+| Total                                                                                                            |                |        813 |         12 |         61 |        886 |
++------------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+

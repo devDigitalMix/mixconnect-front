@@ -1,0 +1,19 @@
+"filename", "language", "JavaScript", "JavaScript JSX", "comment", "blank", "total"
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\NpsItemSkeleton\NpsItemSkeleton.jsx", "JavaScript JSX", 0, 17, 0, 2, 19
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\NpsItemSkeleton\NpsItemSkeletonStyled.jsx", "JavaScript JSX", 0, 24, 0, 2, 26
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\main.jsx", "JavaScript JSX", 0, 15, 0, 1, 16
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\AllNps\AllNps.jsx", "JavaScript JSX", 0, 34, 7, 9, 50
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\AllNps\AllNpsStyled.jsx", "JavaScript JSX", 0, 14, 0, 0, 14
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Approval\Approval.jsx", "JavaScript JSX", 0, 55, 2, 6, 63
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Approval\ApprovalStyled.jsx", "JavaScript JSX", 0, 74, 0, 3, 77
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\ClientApproval\ClientApproval.jsx", "JavaScript JSX", 0, 185, 2, 15, 202
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\ClientApproval\ClientApprovalStyled.jsx", "JavaScript JSX", 0, 146, 0, 6, 152
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Client\Client.jsx", "JavaScript JSX", 0, 8, 0, 0, 8
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Logins\Logins.jsx", "JavaScript JSX", 0, -1, 0, 0, -1
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Nps\Nps.jsx", "JavaScript JSX", 0, 5, 0, 0, 5
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Nps\NpsStyled.jsx", "JavaScript JSX", 0, 9, 0, 0, 9
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\SendApproval\SendApproval.jsx", "JavaScript JSX", 0, 104, 1, 6, 111
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\SendApproval\SendApprovalStyled.jsx", "JavaScript JSX", 0, 72, 0, 5, 77
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\services\approvalService.js", "JavaScript", 40, 0, 0, 5, 45
+"c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\services\clientService.js", "JavaScript", 12, 0, 0, 1, 13
+"Total", "-", 52, 761, 12, 61, 886
