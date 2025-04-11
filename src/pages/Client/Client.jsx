@@ -48,6 +48,7 @@ export default function Client() {
   const [deleteClick, setDeleteClick] = useState(false);
   const [received, setReceived] = useState(false);
   const [createNps, setCreateNps] = useState(false);
+  const [copiado, setCopiado] = useState(false);
   const [file, setFile] = useState();
   const [preview, setPreview] = useState("/avatar-default.png");
   const navigate = useNavigate();
@@ -84,14 +85,16 @@ export default function Client() {
     };
     try {
       response = await createNpsService(data);
-      window.open(`/sendnps/${response.data._id}`, "_blank");
-      setCreateNps(!createNps);
+      await navigator.clipboard.writeText(
+        `https://mixconnect.tech/sendnps/${response.data._id}`
+      );
+      setTimeout(() => setCreateNps(false), 3000);
     } catch (error) {
       console.log(error);
     } finally {
       // console.log(response);
     }
-    setIsNpsLoading(false);
+    setTimeout(() => setIsNpsLoading(false), 3000);
   }
 
   const motivos = [
@@ -363,7 +366,6 @@ export default function Client() {
     else navigate("/");
     getClient();
   }, [id]);
-
   return (
     <>
       <ProfileContainer $isactive={true}>
@@ -373,7 +375,7 @@ export default function Client() {
           {createNps && (
             <CreateNpsContainer>
               {isNpsLoading ? (
-                <div className="custom-loader"></div>
+                <p>Copiado!</p>
               ) : (
                 <>
                   <img

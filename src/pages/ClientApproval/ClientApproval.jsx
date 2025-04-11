@@ -27,6 +27,7 @@ export function ClientApproval() {
   const [received, setReceived] = useState(false);
 
   async function getApproval() {
+    setReceived(false);
     const response = await getApprovalByClient(id);
     setClientApproval(response.data.results);
     setReceived(true);
