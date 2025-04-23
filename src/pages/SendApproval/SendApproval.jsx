@@ -29,7 +29,6 @@ export function SendApproval() {
 
   async function handleForm(event) {
     event.preventDefault();
-    setLoading(true);
     const formdata = new FormData(event.target);
     const data = Object.fromEntries(formdata.entries());
     if (denied && data.feedback.trim() == "") {
@@ -40,6 +39,7 @@ export function SendApproval() {
       alert("Escreva um motivo válido. ex: Não gostei da foto!");
       return;
     }
+    setLoading(true);
     data.denied = denied;
     data.approved = approved;
     try {

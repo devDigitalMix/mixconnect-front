@@ -458,6 +458,10 @@ export default function Clients() {
               <Input name="value" type="number" />
             </div>
             <div>
+              <label htmlFor="vencimento">Vencimento:</label>
+              <Input name="vencimento" type="date" />
+            </div>
+            <div>
               <label htmlFor="gestor">Gestor:</label>
               <select name="gestor">
                 {employees.map(

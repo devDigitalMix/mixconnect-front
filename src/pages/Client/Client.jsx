@@ -56,9 +56,9 @@ export default function Client() {
   async function getPlans() {}
 
   async function changeStatus() {
-    if (isStatusLoading) return; // Evita cliques repetidos enquanto processa
+    if (isStatusLoading) return;
 
-    setIsStatusLoading(true); // Ativa o estado de loading
+    setIsStatusLoading(true);
 
     try {
       if (client.status === "Start") {
@@ -71,7 +71,7 @@ export default function Client() {
         alert("Status Não Disponível");
       }
     } finally {
-      setTimeout(() => setIsStatusLoading(false), 1000); // Delay de 1s antes de permitir novo clique
+      setTimeout(() => setIsStatusLoading(false), 1000);
     }
   }
 
@@ -597,6 +597,38 @@ export default function Client() {
                   <Input type="text" name="value" defaultValue={client.value} />
                 </div>
                 <div>
+                  <label htmlFor="vencimento">Vencimento:</label>
+                  <Input
+                    type="date"
+                    name="vencimento"
+                    defaultValue={client.vencimento}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="formaPagamento">Forma de Pagamento:</label>
+                  <Input
+                    type="text"
+                    name="formaPagamento"
+                    defaultValue={client.formaPagamento}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="contrato">Contrato:</label>
+                  <Input
+                    type="text"
+                    name="contrato"
+                    defaultValue={client.contrato}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="proposta">Proposta:</label>
+                  <Input
+                    type="text"
+                    name="proposta"
+                    defaultValue={client.proposta}
+                  />
+                </div>
+                <div>
                   <label htmlFor="cnpj">CNPJ:</label>
                   <Input type="text" name="cnpj" defaultValue={client.cnpj} />
                 </div>
@@ -783,50 +815,115 @@ export default function Client() {
                     )}
                   </p>
                 </div>
-                <div>
-                  <h4>CNPJ:</h4>
-                  <p>{client.cnpj || <Skeleton width="200px" />}</p>
-                </div>
-                <div>
-                  <h4>Valor ADS:</h4>
-                  <p>
-                    {client.adsValue >= 0 ? (
-                      client.adsValue
-                    ) : (
-                      <Skeleton width="200px" />
-                    )}
-                  </p>
-                </div>
-                {client.acompanhamentoAds ? (
+
+                {!received ? (
                   <div>
-                    <h4>Acompanhamento Ads:</h4>
+                    <h4>Vencimento:</h4>
                     <p>
-                      {client.acompanhamentoAds ? (
-                        client.acompanhamentoAds
-                      ) : (
-                        <Skeleton width="200px" />
-                      )}
+                      <Skeleton width="200px" />
                     </p>
                   </div>
+                ) : client.vencimento ? (
+                  <div>
+                    <h4>Vencimento:</h4>
+                    <p>{client.vencimento}</p>
+                  </div>
                 ) : null}
-                <div>
-                  <h4>Gestor:</h4>
-                  <p>{client.gestor || <Skeleton width="200px" />}</p>
-                </div>
-                <div>
-                  <h4>CS:</h4>
-                  <p>{client.cs || <Skeleton width="200px" />}</p>
-                </div>
-                <div>
-                  <h4>Criativos:</h4>
-                  <p>
-                    {client.posts >= 0 ? (
-                      client.posts
-                    ) : (
+                {!received ? (
+                  <div>
+                    <h4>Forma de Pagamento:</h4>
+                    <p>
                       <Skeleton width="200px" />
-                    )}
-                  </p>
-                </div>
+                    </p>
+                  </div>
+                ) : client.formaPagamento ? (
+                  <div>
+                    <h4>Forma de Pagamento:</h4>
+                    <p>{client.formaPagamento}</p>
+                  </div>
+                ) : null}
+                {!received ? (
+                  <div>
+                    <h4>Contrato:</h4>
+                    <p>
+                      <Skeleton width="200px" />
+                    </p>
+                  </div>
+                ) : client.contrato ? (
+                  <div>
+                    <h4>Contrato:</h4>
+                    <p>{client.contrato}</p>
+                  </div>
+                ) : null}
+
+                {!received ? (
+                  <div>
+                    <h4>Proposta:</h4>
+                    <p>
+                      <Skeleton width="200px" />
+                    </p>
+                  </div>
+                ) : client.proposta ? (
+                  <div>
+                    <h4>Proposta:</h4>
+                    <p>{client.proposta}</p>
+                  </div>
+                ) : null}
+                {!received ? (
+                  <div>
+                    <h4>Valor ADS:</h4>
+                    <p>
+                      <Skeleton width="200px" />
+                    </p>
+                  </div>
+                ) : client.adsValue >= 0 ? (
+                  <div>
+                    <h4>Valor ADS:</h4>
+                    <p>{client.adsValue}</p>
+                  </div>
+                ) : null}
+
+                {!received ? (
+                  <div>
+                    <h4>Gestor:</h4>
+                    <p>
+                      <Skeleton width="200px" />
+                    </p>
+                  </div>
+                ) : client.gestor ? (
+                  <div>
+                    <h4>Gestor:</h4>
+                    <p>{client.gestor}</p>
+                  </div>
+                ) : null}
+
+                {!received ? (
+                  <div>
+                    <h4>CS:</h4>
+                    <p>
+                      <Skeleton width="200px" />
+                    </p>
+                  </div>
+                ) : client.cs ? (
+                  <div>
+                    <h4>CS:</h4>
+                    <p>{client.cs}</p>
+                  </div>
+                ) : null}
+
+                {!received ? (
+                  <div>
+                    <h4>Criativos:</h4>
+                    <p>
+                      <Skeleton width="200px" />
+                    </p>
+                  </div>
+                ) : client.posts >= 0 ? (
+                  <div>
+                    <h4>Criativos:</h4>
+                    <p>{client.posts}</p>
+                  </div>
+                ) : null}
                 {client.acompanhamentoRedes ? (
                   <div>
                     <h4>Acompanhamento Redes:</h4>

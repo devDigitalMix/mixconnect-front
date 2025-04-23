@@ -124,7 +124,7 @@ export const AddClientModal = styled.form`
   }
 
   &.active {
-    height: 355px;
+    height: inherit;
     transform: translateY(0);
     margin-bottom: 30px;
 
@@ -132,12 +132,6 @@ export const AddClientModal = styled.form`
       transform: scale(1);
       transition: all 0.5s;
       transition-delay: 0.1s;
-    }
-    @media only screen and (max-width: 991px) {
-      height: 503px;
-    }
-    @media only screen and (max-width: 751px) {
-      height: 820px;
     }
   }
 

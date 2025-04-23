@@ -297,6 +297,9 @@ export const ProfileBody = styled.div`
     max-width: 300px;
     display: grid;
     gap: 10px;
+    .hidden {
+      display: none;
+    }
     h4 {
       font-weight: 700;
     }
