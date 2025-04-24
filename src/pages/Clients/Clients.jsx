@@ -253,10 +253,7 @@ export default function Clients() {
       !data.adsValue ||
       !data.value ||
       !data.plan ||
-      !data.gestor ||
-      !data.cs ||
       !data.cnpj ||
-      !data.posts ||
       !data.whatsapp
     ) {
       alert("Preencha os campos necessários");
@@ -457,7 +454,7 @@ export default function Clients() {
               <label htmlFor="value">Valor:</label>
               <Input name="value" type="number" />
             </div>
-            <div>
+            {/* <div>
               <label htmlFor="vencimento">Vencimento:</label>
               <Input name="vencimento" type="date" />
             </div>
@@ -486,7 +483,7 @@ export default function Clients() {
                     )
                 )}
               </select>
-            </div>
+            </div> */}
             <div>
               <label htmlFor="adsValue">Valor ADs:</label>
               <Input

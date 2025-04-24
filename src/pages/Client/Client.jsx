@@ -245,6 +245,7 @@ export default function Client() {
     if (!data.dateStart) {
       data.dateStart = client.dateStart;
     }
+    data.contrato = { contrato: file };
     try {
       await updateClientService(data, client._id);
       setUpdate(!update);
@@ -569,7 +570,10 @@ export default function Client() {
           )}
           {update ? (
             <>
-              <ProfileUpdate onSubmit={handleUpdate}>
+              <ProfileUpdate
+                onSubmit={handleUpdate}
+                encType="multipart/form-data"
+              >
                 <div>
                   <label htmlFor="name">Nome:</label>
                   <Input type="text" name="name" defaultValue={client.name} />
@@ -612,14 +616,12 @@ export default function Client() {
                     defaultValue={client.formaPagamento}
                   />
                 </div>
-                <div>
-                  <label htmlFor="contrato">Contrato:</label>
-                  <Input
-                    type="text"
-                    name="contrato"
-                    defaultValue={client.contrato}
-                  />
-                </div>
+                {!client.contrato && (
+                  <div>
+                    <label htmlFor="contrato">Contrato:</label>
+                    <Input type="file" name="contrato" />
+                  </div>
+                )}
                 <div>
                   <label htmlFor="proposta">Proposta:</label>
                   <Input
@@ -852,7 +854,13 @@ export default function Client() {
                 ) : client.contrato ? (
                   <div>
                     <h4>Contrato:</h4>
-                    <p>{client.contrato}</p>
+                    <a
+                      target="_blank"
+                      href={client.contrato}
+                      className="btn-nps"
+                    >
+                      Ver contrato
+                    </a>
                   </div>
                 ) : null}
 

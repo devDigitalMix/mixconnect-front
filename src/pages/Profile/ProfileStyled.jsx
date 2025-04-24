@@ -267,6 +267,7 @@ export const ProfileData = styled.div`
     gap: 10px;
     color: #ffffffd6;
   }
+
   @media only screen and (max-width: 500px) {
     flex-direction: column-reverse;
     align-items: center;
@@ -292,6 +293,19 @@ export const ProfileBody = styled.div`
   }
   align-items: start;
   gap: 50px;
+  .btn-nps {
+    background-color: var(--light);
+    color: var(--dark);
+    padding: 15px 10px 12px;
+    font-weight: 700;
+    border-radius: 5px;
+    text-transform: uppercase;
+    &:hover {
+      box-shadow: 0 0 0 2px var(--sec) inset;
+      background-color: var(--dark);
+      color: var(--sec);
+    }
+  }
   & > div {
     width: 100%;
     max-width: 300px;

@@ -66,6 +66,7 @@ export async function updateClientService(formData, id) {
     {
       headers: {
         Authorization: `Bearer ${Cookies.get("token")}`,
+        "Content-Type": "multipart/form-data",
       },
     }
   );
