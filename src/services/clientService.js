@@ -72,6 +72,7 @@ export async function updateClientService(formData, id) {
   );
   return response;
 }
+
 export async function getClientsByName(name) {
   const response = await axios.get(`${baseURL}/client/search?name=${name}`, {
     headers: {

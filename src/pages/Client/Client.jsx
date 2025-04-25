@@ -245,7 +245,8 @@ export default function Client() {
     if (!data.dateStart) {
       data.dateStart = client.dateStart;
     }
-    data.contrato = { contrato: file };
+    console.log(file);
+    // data.contrato = { contrato: file };
     try {
       await updateClientService(data, client._id);
       setUpdate(!update);
@@ -916,6 +917,20 @@ export default function Client() {
                   <div>
                     <h4>CS:</h4>
                     <p>{client.cs}</p>
+                  </div>
+                ) : null}
+
+                {!received ? (
+                  <div>
+                    <h4>CPF/CNPJ:</h4>
+                    <p>
+                      <Skeleton width="200px" />
+                    </p>
+                  </div>
+                ) : client.cnpj ? (
+                  <div>
+                    <h4>CPF/CNPJ:</h4>
+                    <p>{client.cnpj}</p>
                   </div>
                 ) : null}
 
