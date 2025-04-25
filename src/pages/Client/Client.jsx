@@ -49,6 +49,7 @@ export default function Client() {
   const [received, setReceived] = useState(false);
   const [createNps, setCreateNps] = useState(false);
   const [copiado, setCopiado] = useState(false);
+  const [selectedFile, setSelectedFile] = useState();
   const [file, setFile] = useState();
   const [preview, setPreview] = useState("/avatar-default.png");
   const navigate = useNavigate();
@@ -245,7 +246,15 @@ export default function Client() {
     if (!data.dateStart) {
       data.dateStart = client.dateStart;
     }
-    console.log(file);
+    if (event.target.files) {
+      const file = event.target.files[0];
+      const fileReader = new FileReader();
+      fileReader.onloadend = function () {
+        setSelectedFile(fileReader.result);
+      };
+      fileReader.readAsDataURL(file);
+      console.log(file);
+    }
     // data.contrato = { contrato: file };
     try {
       await updateClientService(data, client._id);
@@ -506,7 +515,7 @@ export default function Client() {
                 </UploadAvatar>
               )}
               <button onClick={baixarImg}>
-                <img src="/open.svg" alt="" />
+                <img src="/open.svg" />
               </button>
             </ProfileAvatar>
             <ProfileData>
@@ -534,7 +543,7 @@ export default function Client() {
                   style={{ opacity: isStatusLoading ? 0.5 : 1 }}
                 >
                   {client.status || <Skeleton width="80px" />}{" "}
-                  <img src="/change.svg" alt="" />
+                  <img src="/change.svg" />
                 </h3>
               </div>
             </ProfileData>
