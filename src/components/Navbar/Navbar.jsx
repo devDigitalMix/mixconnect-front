@@ -65,6 +65,7 @@ export function Navbar() {
             <Link to={"/home"} onClick={() => handleButtonClick("")}>
               <img src="/logo.svg" alt="MixConnect" draggable="false" />
             </Link>
+
             <NavMenu>
               <Link to={"/home/clients"}>
                 <button
@@ -123,6 +124,13 @@ export function Navbar() {
                     </button>
                   </Link>
                 )}
+              <Link
+                to={"https://studiomix.tech/home"}
+                onClick={() => handleButtonClick("")}
+                className="logoStudio"
+              >
+                <img src="/studio.svg" alt="MixConnect" draggable="false" />
+              </Link>
             </NavMenu>
             <PerfilMenu>
               {!findingUser ? (

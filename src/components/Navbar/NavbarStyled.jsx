@@ -59,10 +59,20 @@ export const NavMenu = styled.div`
   flex-wrap: wrap;
   align-items: center;
   gap: 5px 30px;
+
+  .logoStudio {
+    img {
+      height: 33px;
+    }
+  }
   button {
     font-size: 1.25rem;
     letter-spacing: 1px;
     font-weight: 500;
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 3px;
     &::after {
       height: 2px;
       margin: 0 auto;
@@ -71,6 +81,8 @@ export const NavMenu = styled.div`
       content: "";
       display: block;
       transition: 0.3s;
+      position: absolute;
+      bottom: 0;
     }
     &:hover,
     &.active {

@@ -448,6 +448,7 @@ export default function Client() {
 
           {(user.level == "Líder" ||
             user.level == "Admin" ||
+            user.role == "Desenvolvedor" ||
             user.role == "Comercial") && (
             <TopButtons>
               <Link to={"approval"}>Aprovações</Link>
