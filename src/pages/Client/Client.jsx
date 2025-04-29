@@ -498,7 +498,9 @@ export default function Client() {
                 <div id="drop-file"></div>
                 <input type="file" name="bannerName" id="imageName" />
               </label>
-              {(user.level == "Líder" || user.level == "Admin") && (
+              {(user.level == "Líder" ||
+                user.level == "Admin" ||
+                user.role == "Desenvolvedor") && (
                 <UploadAvatar
                   onSubmit={handleUpdateAvatar}
                   encType="multipart/form-data"
@@ -554,7 +556,7 @@ export default function Client() {
               </Drive>
             )}
           </TopProfile>
-          {received && client.level != "Base" && (
+          {received && user.level != "Base" && (
             <ClientButtons>
               <button
                 className="btn-nps"
