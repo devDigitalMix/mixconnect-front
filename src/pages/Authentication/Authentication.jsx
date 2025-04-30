@@ -68,7 +68,7 @@ export function Authentication() {
               )}
             </div>
             <div>
-              <label htmlFor="password">Senha</label>
+              <label htmlFor="password">Senha Testes</label>
               <article>
                 <Input
                   type={pass ? "password" : "text"}
