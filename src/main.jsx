@@ -27,6 +27,8 @@ import Nps from "./pages/Nps/Nps.jsx";
 import { ClientApproval } from "./pages/ClientApproval/ClientApproval.jsx";
 import { Approval } from "./pages/Approval/Approval.jsx";
 import { SendApproval } from "./pages/SendApproval/SendApproval.jsx";
+import { PropostaCreate } from "./pages/PropostaCreate/PropostaCreate.jsx";
+import { SendProposta } from "./pages/SendProposta/SendProposta.jsx";
 
 const router = createBrowserRouter([
   {
@@ -106,6 +108,10 @@ const router = createBrowserRouter([
         path: "/home/acessos",
         element: <Logins />,
       },
+      {
+        path: "/home/criarProposta",
+        element: <PropostaCreate />,
+      },
     ],
   },
   {
@@ -115,6 +121,10 @@ const router = createBrowserRouter([
   {
     path: "/sendnps/:id",
     element: <SendNps />,
+  },
+  {
+    path: "/sendproposta/:id",
+    element: <SendProposta />,
   },
   {
     path: "/sendapproval/:id",
