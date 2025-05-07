@@ -8,6 +8,7 @@ import {
 } from "../../services/propostaService";
 import { SendPropostaContainer } from "./SendPropostaStyled";
 import { useParams } from "react-router-dom";
+import { createClientService } from "../../services/clientService";
 
 export function SendProposta() {
   const { id } = useParams();
@@ -34,8 +35,26 @@ export function SendProposta() {
   async function answer(op) {
     const answer = { answer: op };
     const propostaAtt = await answerProposta(id, answer);
+    // if (op) {
+    //   const data = {};
+    //   data.name = proposta.name;
+    // data.status = "Start";
+    // data.plan = proposta.plan;
+    // data.posts = proposta.posts;
+    // data.value = 1000;
+    // data.startValue = 1000;
+    // vencimento,
+    // formaPagamento,
+    // proposta,
+    // plataformasTrafego,
+    // tempoContrato,
+    // nVideos,
+    // nVisitas,
+    // tempoCap,
 
-    console.log(propostaAtt.data);
+    //   // const response = await createClientService(proposta);
+    //   console.log(response.data);
+    // }
   }
 
   useEffect(() => {
