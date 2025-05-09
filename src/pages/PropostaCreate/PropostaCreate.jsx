@@ -162,6 +162,7 @@ export function PropostaCreate() {
           name="tempoContrato"
         />
       </div>
+      <Input type="number" placeholder="Valor" name="value" />
       {!loading ? (
         <button type="submit" className="btn">
           Criar
