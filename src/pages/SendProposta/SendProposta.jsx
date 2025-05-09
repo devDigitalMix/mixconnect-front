@@ -19,7 +19,6 @@ import {
 } from "./SendPropostaStyled";
 import { useParams } from "react-router-dom";
 import { createClientService } from "../../services/clientService";
-import { set } from "mongoose";
 
 export function SendProposta() {
   const { id } = useParams();
