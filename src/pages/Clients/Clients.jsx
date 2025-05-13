@@ -248,14 +248,7 @@ export default function Clients() {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
-    if (
-      !data.name ||
-      !data.adsValue ||
-      !data.value ||
-      !data.plan ||
-      !data.cnpj ||
-      !data.whatsapp
-    ) {
+    if (!data.name || !data.value || !data.plan || !data.whatsapp) {
       alert("Preencha os campos necessários");
     } else {
       await createClientService(data);
@@ -485,7 +478,7 @@ export default function Clients() {
                 )}
               </select>
             </div> */}
-            <div>
+            {/*<div>
               <label htmlFor="adsValue">Valor ADs:</label>
               <Input
                 name="adsValue"
@@ -497,7 +490,7 @@ export default function Clients() {
                   setFormValues({ ...formValues, adsValue: e.target.value })
                 }
               />
-            </div>
+            </div>*/}
             <div>
               <label htmlFor="posts">Criativos:</label>
               <Input
@@ -509,10 +502,10 @@ export default function Clients() {
                 }
               />
             </div>
-            <div>
+            {/* <div>
               <label htmlFor="cnpj">CNPJ:</label>
               <Input name="cnpj" />
-            </div>
+            </div> */}
             <div>
               <label htmlFor="whatsapp">Whatsapp:</label>
               <Input name="whatsapp" />
