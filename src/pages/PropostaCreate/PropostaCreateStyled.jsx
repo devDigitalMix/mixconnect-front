@@ -12,19 +12,36 @@ export const PropostaContainer = styled.form`
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    .mainLabel {
+      font-size: 18px;
+      text-transform: uppercase;
+      span {
+        color: var(--sec);
+      }
+    }
     .inputQuant {
       border: none;
       padding: 5px 5px 2px;
-      max-width: 100px;
-      border-radius: 10px;
+      padding-left: 15px;
+      max-width: 70px;
+      border-radius: 5px;
       color: var(--dark);
+      font-family: var(--font2);
+      text-align: center;
+    }
+    input {
+      font-family: var(--font2);
+    }
+    label {
+      font-size: 15px;
+      font-weight: 500;
     }
     .guardaInput {
       display: flex;
       gap: 6px;
     }
     & + h3 {
-      margin-top: 20px;
+      margin-top: 30px;
     }
     .guardaGrupo {
       div {
@@ -32,11 +49,20 @@ export const PropostaContainer = styled.form`
         display: flex;
       }
     }
+    &.redesSection {
+      margin-top: 30px;
+      gap: 20px 60px;
+      h3 {
+        font-size: 18px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+    }
   }
   & > h3 {
-    font-size: 20px;
-    font-weight: 600;
-    font-family: var(--font2);
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
   & > button {
     margin: 0 auto;

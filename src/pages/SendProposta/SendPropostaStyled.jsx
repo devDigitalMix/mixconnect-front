@@ -69,6 +69,7 @@ export const SendPropostaHeader = styled.header`
   display: grid;
   justify-items: center;
   gap: 20px;
+  padding: 0 10px;
   & > img {
     margin-top: 15px;
   }
@@ -338,7 +339,7 @@ export const Entregaveis = styled.section`
         img {
           position: absolute;
           left: 50%;
-          top: -150px;
+          top: -120px;
           transform: translateX(-50%);
         }
         div {
@@ -443,6 +444,7 @@ export const Depoimentos = styled.section`
   margin: 0 auto;
   margin-top: 200px;
   position: relative;
+  padding: 0 10px;
   & > img {
     position: absolute;
     left: 0px;

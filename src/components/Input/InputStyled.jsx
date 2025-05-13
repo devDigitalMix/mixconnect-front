@@ -18,4 +18,11 @@ export const InputSpace = styled.input`
     font-style: italic;
     color: #2f2e2fb9;
   }
+  &.invalidInput {
+    background-color: #686769 !important;
+    color: var(--light);
+    &::placeholder {
+      color: var(--light);
+    }
+  }
 `;

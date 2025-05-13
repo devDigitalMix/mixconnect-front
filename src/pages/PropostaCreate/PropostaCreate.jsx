@@ -1,13 +1,17 @@
 /* eslint-disable no-unused-vars */
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Input } from "../../components/Input/Input";
 import { createPropostaService } from "../../services/propostaService";
 import { PropostaContainer } from "./PropostaCreateStyled";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 import { getPlansService } from "../../services/planService";
+import { userLogged } from "../../services/employeeService";
+import { UserContext } from "../../Context/UserContent";
 
 export function PropostaCreate() {
   const [loading, setLoading] = useState(false);
+  const { user, setUser } = useContext(UserContext);
   const [plans, setPlans] = useState([]);
   const [site, setSite] = useState(0);
   const [mixtree, setMixtree] = useState(0);
@@ -27,6 +31,7 @@ export function PropostaCreate() {
   const [gpPremium, setGpPremium] = useState(false);
   const [tempoContrato, setTempoContrato] = useState("");
   const [selectedPlan, setSelectedPlan] = useState(null);
+  const [findingUser, setFindingUser] = useState(true);
   const navigate = useNavigate();
 
   async function handleCreateProposta(event) {
@@ -35,11 +40,28 @@ export function PropostaCreate() {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
     data.plan = selectedPlan;
-    console.log(data);
-    const response = await createPropostaService(data);
-    console.log(response.data);
-    navigate("/sendproposta/" + response.data._id);
-    setLoading(false);
+    if (checarFormatoTelefone(data.whatsapp)) {
+      console.log(data);
+      const response = await createPropostaService(data);
+      console.log(response.data);
+      navigate("/sendproposta/" + response.data._id);
+      setLoading(false);
+    } else {
+      setLoading(false);
+      alert(
+        "Preencha o Whatsapp no formato correto: 47999999999 ou (47) 99999-9999"
+      );
+    }
+  }
+
+  async function findUserLogged() {
+    try {
+      const response = await userLogged();
+      setUser(response.data);
+      setFindingUser(false);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async function getPlans() {
@@ -47,7 +69,24 @@ export function PropostaCreate() {
     setPlans(response.data.results);
   }
 
+  function changePlan(e) {
+    setSelectedPlan(e);
+    plans.map((plan) => {
+      if (plan.name == e) {
+        console.log(plan);
+      }
+    });
+  }
+
+  function checarFormatoTelefone(numero) {
+    const formato1 = /^[1-9]{2}[0-9]{8,9}$/;
+    const formato2 = /^\(\d{2}\)\s?\d{4,5}-\d{4}$/;
+    return formato1.test(numero) || formato2.test(numero);
+  }
+
   useEffect(() => {
+    if (Cookies.get("token")) findUserLogged();
+    else navigate("/");
     getPlans();
   }, []);
 
@@ -55,112 +94,261 @@ export function PropostaCreate() {
     <PropostaContainer onSubmit={handleCreateProposta}>
       <h3>Geral</h3>
       <div className="formSection">
-        <Input type="text" placeholder="Nome" name="name" />
-        <select name="plan" onChange={(e) => setSelectedPlan(e.target.value)}>
-          <option value="">Selecione um plano</option>
-          {plans.map((plan, index) => (
-            <option value={plan.name} key={index}>
-              {plan.name}
-            </option>
-          ))}
-        </select>
+        <div>
+          <label htmlFor="name" className="mainLabel">
+            Empresa<span>*</span>
+          </label>
+          <Input
+            type="text"
+            placeholder="Nome da Empresa"
+            name="name"
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="whatsapp" className="mainLabel">
+            Whatsapp<span>*</span>
+          </label>
+          <Input
+            type="text"
+            placeholder="Número do Whatsapp"
+            name="whatsapp"
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="whatsapp" className="mainLabel">
+            Plano<span>*</span>
+          </label>
+          <select name="plan" onChange={(e) => changePlan(e.target.value)}>
+            <option value="">Selecione um plano</option>
+            {plans.map((plan, index) => (
+              <option value={plan.name} key={index}>
+                {plan.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="consultor" className="mainLabel">
+            CONSULTOR(A)
+          </label>
+          <Input
+            type="text"
+            className="invalidInput"
+            value={user.name}
+            name="consultor"
+          />
+        </div>
       </div>
-      <h3>Sites</h3>
+      <h3>Páginas</h3>
       <div className="formSection">
-        <div className="guardaInput">
-          <input
-            type="number"
-            className="inputQuant"
-            placeholder="Site"
-            name="site"
-            value={site}
-            onChange={(e) =>
-              setSite(e.target.value == "" ? "" : Number(e.target.value))
-            }
-          />
-          <img src="/mais.svg" onClick={() => setSite(site + 1)} />
+        <div className="InputContainer">
+          <label htmlFor="site">Site Completo</label>
+          <div className="guardaInput">
+            <input
+              type="number"
+              className="inputQuant"
+              placeholder="Site"
+              name="site"
+              value={site}
+              onChange={(e) =>
+                setSite(e.target.value == "" ? "" : Number(e.target.value))
+              }
+            />
+            <img src="/mais.svg" onClick={() => setSite(site + 1)} />
+          </div>
         </div>
-        <div className="guardaInput">
-          <input
-            type="number"
-            className="inputQuant"
-            placeholder="Mixtree"
-            name="mixtree"
-            value={mixtree}
-            onChange={(e) =>
-              setMixtree(e.target.value == "" ? "" : Number(e.target.value))
-            }
-          />
-          <img src="/mais.svg" onClick={() => setMixtree(mixtree + 1)} />
+        <div className="InputContainer">
+          <label htmlFor="mixtree">Mixtree</label>
+          <div className="guardaInput">
+            <input
+              type="number"
+              className="inputQuant"
+              placeholder="Mixtree"
+              name="mixtree"
+              value={mixtree}
+              onChange={(e) =>
+                setMixtree(e.target.value == "" ? "" : Number(e.target.value))
+              }
+            />
+            <img src="/mais.svg" onClick={() => setMixtree(mixtree + 1)} />
+          </div>
         </div>
-        <input
-          type="number"
-          className="inputQuant"
-          placeholder="Catalogo"
-          name="catalogo"
-        />
-        <input
-          type="number"
-          className="inputQuant"
-          placeholder="Smart"
-          name="smart"
-        />
-        <input
-          type="number"
-          className="inputQuant"
-          placeholder="LP"
-          name="lp"
-        />
+        <div className="InputContainer">
+          <label htmlFor="catalogo">Catálogo</label>
+          <div className="guardaInput">
+            <input
+              type="number"
+              className="inputQuant"
+              placeholder="Catalogo"
+              name="catalogo"
+              value={catalogo}
+              onChange={(e) =>
+                setCatalogo(e.target.value == "" ? "" : Number(e.target.value))
+              }
+            />
+            <img src="/mais.svg" onClick={() => setCatalogo(catalogo + 1)} />
+          </div>
+        </div>
+        <div className="InputContainer">
+          <label htmlFor="smart">Page Smart</label>
+          <div className="guardaInput">
+            <input
+              type="number"
+              className="inputQuant"
+              placeholder="Smart"
+              name="smart"
+              value={smart}
+              onChange={(e) =>
+                setSmart(e.target.value == "" ? "" : Number(e.target.value))
+              }
+            />
+            <img src="/mais.svg" onClick={() => setSmart(smart + 1)} />
+          </div>
+        </div>
+        <div className="InputContainer">
+          <label htmlFor="lp">LP</label>
+          <div className="guardaInput">
+            <input
+              type="number"
+              className="inputQuant"
+              placeholder="LP"
+              name="lp"
+              value={lp}
+              onChange={(e) =>
+                setLp(e.target.value == "" ? "" : Number(e.target.value))
+              }
+            />
+            <img src="/mais.svg" onClick={() => setLp(lp + 1)} />
+          </div>
+        </div>
       </div>
       <h3>Tráfego</h3>
       <div className="formSection">
-        <Input
-          type="number"
-          placeholder="TikTok"
-          name="tikTok"
-          value={tikTok}
-        />
-        <Input type="number" placeholder="Google" name="google" />
-        <Input type="number" placeholder="Linkedin" name="linkedin" />
-        <Input type="number" placeholder="Meta" name="meta" />
-        <Input type="number" placeholder="GMB" name="gmb" />
+        <div>
+          <label htmlFor="google">Google ADS</label>
+          <Input
+            type="number"
+            placeholder="Google"
+            name="google"
+            value={google}
+            onChange={(e) =>
+              setGoogle(e.target.value == "" ? "" : Number(e.target.value))
+            }
+          />
+        </div>
+        <div>
+          <label htmlFor="tikTok">Tik Tok ADS</label>
+          <Input
+            type="number"
+            placeholder="TikTok"
+            name="tikTok"
+            value={tikTok}
+            onChange={(e) =>
+              setTikTok(e.target.value == "" ? "" : Number(e.target.value))
+            }
+          />
+        </div>
+        <div>
+          <label htmlFor="linkedin">LinkedIn ADS</label>
+          <Input
+            type="number"
+            placeholder="Linkedin"
+            name="linkedin"
+            value={linkedin}
+            onChange={(e) =>
+              setLinkedin(e.target.value == "" ? "" : Number(e.target.value))
+            }
+          />
+        </div>
+        <div>
+          <label htmlFor="meta">Meta ADS</label>
+          <Input
+            type="number"
+            placeholder="Meta"
+            name="meta"
+            value={meta}
+            onChange={(e) =>
+              setMeta(e.target.value == "" ? "" : Number(e.target.value))
+            }
+          />
+        </div>
       </div>
-      <h3>Sociais</h3>
-      <div className="formSection">
-        <Input type="number" placeholder="Criativos" name="posts" />
-        <Input type="number" placeholder="Tempo de Captação" name="tempoCap" />
-        <Input type="number" placeholder="Número de Videos" name="nVideos" />
-        <Input type="number" placeholder="Número de Visitas" name="nVisitas" />
-      </div>
-      <h3>Detalhes</h3>
-      <div className="formSection">
-        <Input type="text" placeholder="Reunião" name="report" />
-        <div className="guardaGrupo">
-          <h3>Grupo?</h3>
-          <div>
-            <Input
-              type="radio"
-              placeholder="Grupo Premium"
-              name="gpPremium"
-              value={false}
+      <div className="formSection redesSection">
+        <div className="InputContainer">
+          <h3>Google Meu Negócio</h3>
+          <label htmlFor="gmb">Perfil(s)</label>
+          <div className="guardaInput">
+            <input
+              type="number"
+              className="inputQuant"
+              placeholder="Gmb"
+              name="gmb"
+              value={gmb}
+              onChange={(e) =>
+                setGmb(e.target.value == "" ? "" : Number(e.target.value))
+              }
             />
-            <label htmlFor="gpPremium">Não</label>
-          </div>
-          <div>
-            <Input
-              type="radio"
-              placeholder="Grupo Premium"
-              name="gpPremium"
-              value={true}
-            />
-            <label htmlFor="gpPremium">Sim</label>
+            <img src="/mais.svg" onClick={() => setGmb(gmb + 1)} />
           </div>
         </div>
-        <Input
-          type="text"
-          placeholder="Tempo de Contrato"
-          name="tempoContrato"
-        />
+        <div className="InputContainer">
+          <h3>Social Media</h3>
+          <label htmlFor="posts">Criativos</label>
+          <div className="guardaInput">
+            <input
+              type="number"
+              className="inputQuant"
+              placeholder="Posts"
+              name="posts"
+              value={posts}
+              onChange={(e) =>
+                setPosts(e.target.value == "" ? "" : Number(e.target.value))
+              }
+            />
+            <img src="/mais.svg" onClick={() => setPosts(posts + 1)} />
+          </div>
+        </div>
+      </div>
+      <h3>Áudio & Video</h3>
+      <div className="formSection">
+        <div className="InputContainer">
+          <label htmlFor="nVisitas">Visitas ao Mês</label>
+          <div className="guardaInput">
+            <input
+              type="number"
+              className="inputQuant"
+              placeholder="Visitas ao Mês"
+              name="nVisitas"
+              value={nVisitas}
+              onChange={(e) =>
+                setNVisitas(e.target.value == "" ? "" : Number(e.target.value))
+              }
+            />
+            <img src="/mais.svg" onClick={() => setNVisitas(nVisitas + 1)} />
+          </div>
+        </div>
+        <Input type="number" placeholder="Tempo de Captação" name="tempoCap" />
+        <Input type="number" placeholder="Número de Videos" name="nVideos" />
+      </div>
+      <h3>Outras informações</h3>
+      <div className="formSection">
+        <select name="report" id="">
+          <option value="Semanais">Semanais</option>
+          <option value="Mensais">Mensais</option>
+          <option value="Trimestrais">Trimestrais</option>
+        </select>
+        <select name="gpPremium" id="">
+          <option value={false}>Não</option>
+          <option value={true}>Sim</option>
+        </select>
+        <select name="tempoContrato" id="">
+          <option value="3 Meses">3 Meses</option>
+          <option value="6 Meses">6 Meses</option>
+          <option value="12 Meses">12 Meses</option>
+          <option value="24 Meses">24 Meses</option>
+        </select>
       </div>
       <Input type="number" placeholder="Valor" name="value" />
       {!loading ? (

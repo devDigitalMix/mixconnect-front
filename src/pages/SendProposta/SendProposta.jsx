@@ -186,7 +186,7 @@ export function SendProposta() {
               return (
                 <>
                   <li>
-                    <img src="/onboarding.png" /> <h3>{c++}.</h3>{" "}
+                    <img src="/onboarding.png" /> <h3>{c++}</h3>{" "}
                     <div>
                       <h4>ONBOARDING</h4>{" "}
                       <p>
@@ -197,7 +197,7 @@ export function SendProposta() {
                   </li>
                   {temSite && (
                     <li>
-                      <img src="/paginas.png" /> <h3>{c++}.</h3>{" "}
+                      <img src="/paginas.png" /> <h3>{c++}</h3>{" "}
                       <div>
                         <h4>PÁGINAS</h4>{" "}
                         <p>
@@ -216,7 +216,7 @@ export function SendProposta() {
                   )}
                   {temTrafego && (
                     <li>
-                      <img src="/trafegopago.png" /> <h3>{c++}.</h3>{" "}
+                      <img src="/trafegopago.png" /> <h3>{c++}</h3>{" "}
                       <div>
                         <h4>TRÁFEGO PAGO</h4>{" "}
                         <p>
@@ -237,7 +237,7 @@ export function SendProposta() {
                   )}
                   {gmb && (
                     <li>
-                      <img src="/gmb.png" /> <h3>{c++}.</h3>{" "}
+                      <img src="/gmb.png" /> <h3>{c++}</h3>{" "}
                       <div>
                         <h4>GOOGLE MEU NEGÓCIO</h4>{" "}
                         <p>
@@ -248,14 +248,14 @@ export function SendProposta() {
                     </li>
                   )}
                   <li>
-                    <img src="/dashboard.png" /> <h3>{c++}.</h3>{" "}
+                    <img src="/dashboard.png" /> <h3>{c++}</h3>{" "}
                     <div>
                       <h4>DASHBOARD</h4>{" "}
                       <p>Dashboard de resultados com as principais métricas.</p>
                     </div>
                   </li>
                   <li>
-                    <img src="/reunioes.png" /> <h3>{c++}.</h3>{" "}
+                    <img src="/reunioes.png" /> <h3>{c++}</h3>{" "}
                     <div>
                       <h4>REUNIÕES</h4>{" "}
                       <p>
@@ -266,7 +266,7 @@ export function SendProposta() {
                   </li>
                   {grupoPremium && (
                     <li>
-                      <img src="/atendimento-premium.png" /> <h3>{c++}.</h3>{" "}
+                      <img src="/atendimento-premium.png" /> <h3>{c++}</h3>{" "}
                       <div>
                         <h4>ATENDIMENTO PREMIUM</h4>{" "}
                         <p>
@@ -278,20 +278,19 @@ export function SendProposta() {
                   )}
                   {criativos && (
                     <li>
-                      <img src="/criativos.png" /> <h3>{c++}.</h3>{" "}
+                      <img src="/criativos.png" /> <h3>{c++}</h3>{" "}
                       <div>
                         <h4>CRIATIVOS REDES ({proposta.posts})</h4>{" "}
                         <p>
                           Confecção de {proposta.posts} criativos para as redes
-                          sociais, sendo 2 criativos no formato carrossel e 4
-                          criativos básicos.
+                          sociais.
                         </p>
                       </div>
                     </li>
                   )}
                   {captacao && (
                     <li>
-                      <img src="/captacao.png" /> <h3>{c++}.</h3>{" "}
+                      <img src="/captacao.png" /> <h3>{c++}</h3>{" "}
                       <div>
                         <h4>CAPTAÇÃO ÁUDIO & VIDEO E EDIÇÃO</h4>{" "}
                         <p>
@@ -302,8 +301,8 @@ export function SendProposta() {
                       </div>
                     </li>
                   )}
-                  <li>
-                    <img src="/ferramentas.png" /> <h3>{c++}.</h3>{" "}
+                  {/* <li>
+                    <img src="/ferramentas.png" /> <h3>{c++}</h3>{" "}
                     <div>
                       <h4>FERRAMENTAS</h4>{" "}
                       <p>
@@ -311,9 +310,9 @@ export function SendProposta() {
                         acessos. Até 3 chaves de um CRM (Agendor ou Moskit).
                       </p>
                     </div>
-                  </li>
+                  </li> */}
                   <li>
-                    <img src="/material-offline.png" /> <h3>{c++}.</h3>{" "}
+                    <img src="/material-offline.png" /> <h3>{c++}</h3>{" "}
                     <div>
                       <h4>MATERIAL OFFLINE</h4>{" "}
                       <p>
