@@ -157,6 +157,22 @@ export function PropostaCreate() {
               }
             />
             <img src="/mais.svg" onClick={() => setSite(site + 1)} />
+            {site > 0 && (
+              <div className="dobras">
+                <input
+                  type="text"
+                  placeholder="Dobras"
+                  name="dobraSite"
+                  className="inputQuant"
+                />
+                <input
+                  type="text"
+                  placeholder="Seções"
+                  name="secoesSite"
+                  className="inputQuant"
+                />
+              </div>
+            )}
           </div>
         </div>
         <div className="InputContainer">
@@ -189,6 +205,16 @@ export function PropostaCreate() {
               }
             />
             <img src="/mais.svg" onClick={() => setCatalogo(catalogo + 1)} />
+            {catalogo > 0 && (
+              <div className="dobras">
+                <input
+                  type="text"
+                  placeholder="Dobras"
+                  name="dobraCatalogo"
+                  className="inputQuant"
+                />
+              </div>
+            )}
           </div>
         </div>
         <div className="InputContainer">
@@ -205,6 +231,16 @@ export function PropostaCreate() {
               }
             />
             <img src="/mais.svg" onClick={() => setSmart(smart + 1)} />
+            {smart > 0 && (
+              <div className="dobras">
+                <input
+                  type="text"
+                  placeholder="Seções"
+                  name="secoesSmart"
+                  className="inputQuant"
+                />
+              </div>
+            )}
           </div>
         </div>
         <div className="InputContainer">
@@ -221,6 +257,16 @@ export function PropostaCreate() {
               }
             />
             <img src="/mais.svg" onClick={() => setLp(lp + 1)} />
+            {lp > 0 && (
+              <div className="dobras">
+                <input
+                  type="text"
+                  placeholder="Seções"
+                  name="secoesLp"
+                  className="inputQuant"
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -329,28 +375,56 @@ export function PropostaCreate() {
             <img src="/mais.svg" onClick={() => setNVisitas(nVisitas + 1)} />
           </div>
         </div>
-        <Input type="number" placeholder="Tempo de Captação" name="tempoCap" />
-        <Input type="number" placeholder="Número de Videos" name="nVideos" />
+        {nVisitas > 0 && (
+          <>
+            <Input
+              type="number"
+              placeholder="Tempo Captação em Horas"
+              name="tempoCap"
+              style={{ maxWidth: 260 + "px" }}
+            />
+            <Input
+              type="number"
+              placeholder="Nº Edições"
+              name="nVideos"
+              style={{ maxWidth: 130 + "px" }}
+            />
+          </>
+        )}
       </div>
       <h3>Outras informações</h3>
       <div className="formSection">
-        <select name="report" id="">
-          <option value="Semanais">Semanais</option>
-          <option value="Mensais">Mensais</option>
-          <option value="Trimestrais">Trimestrais</option>
-        </select>
-        <select name="gpPremium" id="">
-          <option value={false}>Não</option>
-          <option value={true}>Sim</option>
-        </select>
-        <select name="tempoContrato" id="">
-          <option value="3 Meses">3 Meses</option>
-          <option value="6 Meses">6 Meses</option>
-          <option value="12 Meses">12 Meses</option>
-          <option value="24 Meses">24 Meses</option>
-        </select>
+        <div>
+          <label htmlFor="report">Reunião</label>
+          <select name="report">
+            <option value="Semanais">Semanais</option>
+            <option value="Mensais">Mensais</option>
+            <option value="Trimestrais">Trimestrais</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="gpPremium">Grupo Premium</label>
+          <select name="gpPremium">
+            <option value={false}>Não</option>
+            <option value={true}>Sim</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="tempoContrato">Tempo de Contrato</label>
+          <select name="tempoContrato">
+            <option value="3 Meses">3 Meses</option>
+            <option value="6 Meses">6 Meses</option>
+            <option value="12 Meses">12 Meses</option>
+            <option value="24 Meses">24 Meses</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="value" className="mainLabel">
+            Valor<span>*</span>
+          </label>
+          <Input type="number" placeholder="Valor da Proposta" name="value" />
+        </div>
       </div>
-      <Input type="number" placeholder="Valor" name="value" />
       {!loading ? (
         <button type="submit" className="btn">
           Criar

@@ -45,6 +45,7 @@ export function SendProposta() {
           : dataVencimento.getMonth() + 1),
       dataVencimento.getFullYear(),
     ]);
+    console.log(response.data);
 
     if (
       response.data.site > 0 ||

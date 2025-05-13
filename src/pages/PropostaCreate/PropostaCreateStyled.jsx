@@ -11,7 +11,8 @@ export const PropostaContainer = styled.form`
   .formSection {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 25px;
+    align-items: end;
     .mainLabel {
       font-size: 18px;
       text-transform: uppercase;
@@ -21,13 +22,20 @@ export const PropostaContainer = styled.form`
     }
     .inputQuant {
       border: none;
-      padding: 5px 5px 2px;
+      padding: 5px 5px 5px;
       padding-left: 15px;
       max-width: 70px;
       border-radius: 5px;
       color: var(--dark);
       font-family: var(--font2);
       text-align: center;
+    }
+    .dobras {
+      display: flex;
+      gap: 3px;
+      .inputQuant {
+        padding-left: 5px;
+      }
     }
     input {
       font-family: var(--font2);
@@ -38,7 +46,7 @@ export const PropostaContainer = styled.form`
     }
     .guardaInput {
       display: flex;
-      gap: 6px;
+      gap: 3px;
     }
     & + h3 {
       margin-top: 30px;
@@ -57,6 +65,11 @@ export const PropostaContainer = styled.form`
         letter-spacing: 1px;
         text-transform: uppercase;
       }
+    }
+    select {
+      font-size: 18px;
+      font: var(--font2);
+      font-style: italic;
     }
   }
   & > h3 {
