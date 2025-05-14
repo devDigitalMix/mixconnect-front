@@ -88,7 +88,7 @@ export function PropostaCreate() {
     if (Cookies.get("token")) findUserLogged();
     else navigate("/");
     getPlans();
-  }, []);
+  });
 
   return (
     <PropostaContainer onSubmit={handleCreateProposta}>
