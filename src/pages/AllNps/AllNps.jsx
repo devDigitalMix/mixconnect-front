@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
@@ -9,6 +10,7 @@ import { AllNpsContainer, NpsContent, NpsUnit } from "./AllNpsStyled";
 import { Input } from "../../components/Input/Input";
 import { getClientsByIdList } from "../../services/clientService";
 import { NpsItemSkeleton } from "../../components/NpsItemSkeleton/NpsItemSkeleton";
+import { PageButtons } from "../Clients/ClientsStyled";
 
 export function AllNps() {
   const { id } = useParams();
@@ -18,47 +20,42 @@ export function AllNps() {
   const [query, setQuery] = useState("");
   const debounceTimeout = useRef(null);
   const navigate = useNavigate();
+  const [page, setPage] = useState(0);
+  const [totalNps, setTotalNps] = useState(0);
+  const [lista, setLista] = useState([]);
+  const limit = 24;
 
-  async function getNps() {
+  async function getNps(limit = 24, offset = 0) {
     setReceived(false);
     try {
+      let response;
       if (id) {
-        // Busca os NPS de um cliente específico
-        const response = await getNpsByClient(id);
-        const npsResults = response.data.results;
-
-        // Extrai o clientId único dos NPS
-        const clientIds = [
-          ...new Set(npsResults.map((npsItem) => npsItem.clientId)),
-        ];
-
-        // Faz uma requisição para buscar o cliente correspondente
-        const responseClients = await getClientsByIdList(clientIds);
-        const clientsInvolved = responseClients.data.results.filter((client) =>
-          clientIds.includes(client.id)
-        );
-
-        setNps(npsResults);
-        setClients(clientsInvolved);
+        response = await getNpsByClient(id, limit, offset);
       } else {
-        // Busca todos os NPS
-        const response = await getAllNps();
-        const npsResults = response.data.results;
-
-        // Extrai os clientId únicos dos NPS
-        const clientIds = [
-          ...new Set(npsResults.map((npsItem) => npsItem.clientId)),
-        ];
-
-        // Faz uma requisição para buscar apenas os clientes necessários
-        const responseClients = await getClientsByIdList(clientIds);
-        const clientsInvolved = responseClients.data.results.filter((client) =>
-          clientIds.includes(client.id)
-        );
-
-        setNps(npsResults);
-        setClients(clientsInvolved);
+        response = await getAllNps(limit, offset);
       }
+      const npsResults = response.data.results;
+      setNps(npsResults);
+      setTotalNps(response.data.total || npsResults.length);
+
+      // Extrai os clientId únicos dos NPS
+      const clientIds = [
+        ...new Set(npsResults.map((npsItem) => npsItem.clientId)),
+      ];
+      const responseClients = await getClientsByIdList(clientIds);
+      const clientsInvolved = responseClients.data.results.filter((client) =>
+        clientIds.includes(client.id)
+      );
+      setClients(clientsInvolved);
+
+      // Atualiza lista de páginas
+      let c = 0;
+      let tempList = [];
+      while (c <= (response.data.total || npsResults.length) / limit) {
+        tempList.push(c);
+        c++;
+      }
+      setLista(tempList);
     } catch (error) {
       console.error("Error fetching NPS data:", error);
     }
@@ -102,6 +99,10 @@ export function AllNps() {
   }, []);
 
   useEffect(() => {
+    getNps(limit, page * limit);
+  }, [page]);
+
+  useEffect(() => {
     getNps();
   }, []);
 
@@ -131,8 +132,9 @@ export function AllNps() {
               (client) => client.id === aNps.clientId
             );
 
-            // Verifica se logoClient existe antes de acessar suas propriedades
-            const logo = client.logo ? client.logo : "/avatar-default.png";
+            // Corrigido: só acessa logo se client existir
+            const logo =
+              client && client.logo ? client.logo : "/avatar-default.png";
 
             return (
               <NpsUnit
@@ -144,7 +146,6 @@ export function AllNps() {
                 <div className="npsBackGround">
                   {!id && <h3>{aNps.clientName}</h3>}
                   <h3>{aNps.name}</h3>
-
                   {aNps.ok ? (
                     <p className="respondido">Respondido</p>
                   ) : (
@@ -158,6 +159,42 @@ export function AllNps() {
           <NpsItemSkeleton cards={12} />
         )}
       </NpsContent>
+      {!query && lista.length > 1 && (
+        <PageButtons>
+          {lista
+            .filter(
+              (n, _, arr) =>
+                n === 0 ||
+                n === arr[arr.length - 1] ||
+                (n >= page - 2 && n <= page + 2)
+            )
+            .reduce((acc, n, index, filtered) => {
+              const prev = filtered[index - 1];
+              if (prev !== undefined && n - prev > 1) {
+                acc.push("...");
+              }
+              acc.push(n);
+              return acc;
+            }, [])
+            .map((n, index) =>
+              n === "..." ? (
+                <span key={`ellipsis-${index}`} style={{ margin: "0 5px" }}>
+                  ...
+                </span>
+              ) : (
+                <p
+                  key={n}
+                  style={{
+                    color: page === n ? "#6d6d6d" : "var(--light)",
+                  }}
+                  onClick={() => setPage(n)}
+                >
+                  {n + 1}
+                </p>
+              )
+            )}
+        </PageButtons>
+      )}
     </AllNpsContainer>
   );
 }

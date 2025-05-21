@@ -30,12 +30,15 @@ export async function getNpsByClient(id) {
   });
   return response;
 }
-export async function getAllNps() {
-  const response = await axios.get(`${baseURL}/nps/getNps/`, {
-    headers: {
-      Authorization: `Bearer ${Cookies.get("token")}`,
-    },
-  });
+export async function getAllNps(limit, offset) {
+  const response = await axios.get(
+    `${baseURL}/nps/?limit=${limit}&offset=${offset}`,
+    {
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+    }
+  );
   return response;
 }
 

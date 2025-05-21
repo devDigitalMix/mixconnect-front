@@ -166,7 +166,7 @@ export function SendProposta() {
             <div>
               <img src="/contrato.png" /> <h2>Contrato:</h2>
             </div>{" "}
-            <h3>6 meses</h3>
+            <h3>{proposta.tempoContrato}</h3>
           </li>
         </PropostaDetails>
         <Entregaveis>
@@ -202,13 +202,32 @@ export function SendProposta() {
                       <div>
                         <h4>PÁGINAS</h4>{" "}
                         <p>
-                          {proposta.site > 0 && proposta.site + " Site(s), "}{" "}
+                          {proposta.site > 0 &&
+                            `${proposta.site} Site(s)${
+                              proposta.dobrasSite > 0
+                                ? ` ${proposta.dobrasSite} dobras`
+                                : ``
+                            }${
+                              proposta.secoesSite > 0
+                                ? ` ${proposta.secoesSite} seções`
+                                : ``
+                            }, `}{" "}
                           {proposta.mixtree > 0 &&
                             proposta.mixtree + " Mixtree(s), "}{" "}
                           {proposta.lp > 0 &&
-                            proposta.lp + " Landing Page(s), "}{" "}
+                            proposta.lp +
+                              ` Landing Page(s)${
+                                proposta.secoesLp > 0
+                                  ? ` ${proposta.secoesLp} seções`
+                                  : ``
+                              }, `}{" "}
                           {proposta.catalogo > 0 &&
-                            proposta.catalogo + " Catálogo(s), "}{" "}
+                            proposta.catalogo +
+                              ` Catálogo(s)${
+                                proposta.dobrasCatalogo > 0
+                                  ? ` ${proposta.dobrasCatalogo} dobras`
+                                  : ``
+                              }, `}{" "}
                           para captação de leads e/ou apresentação de produto,
                           serviço ou marca.
                         </p>
@@ -296,8 +315,8 @@ export function SendProposta() {
                         <h4>CAPTAÇÃO ÁUDIO & VIDEO E EDIÇÃO</h4>{" "}
                         <p>
                           {proposta.nVisitas} Visita(s) por mês /{" "}
-                          {proposta.tempoCap} h (atendimento exclusivo para
-                          Joinville)
+                          {proposta.tempoCap} h com {proposta.nVideos} edições
+                          (atendimento exclusivo para Joinville)
                         </p>
                       </div>
                     </li>
@@ -312,7 +331,7 @@ export function SendProposta() {
                       </p>
                     </div>
                   </li> */}
-                  <li>
+                  {/* <li>
                     <img src="/material-offline.png" /> <h3>{c++}</h3>{" "}
                     <div>
                       <h4>MATERIAL OFFLINE</h4>{" "}
@@ -321,7 +340,7 @@ export function SendProposta() {
                         (cartão de visitas, folder, outdoor e etc.)
                       </p>
                     </div>
-                  </li>
+                  </li> */}
                 </>
               );
             })()}
