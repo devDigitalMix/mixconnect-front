@@ -333,7 +333,7 @@ export default function Clients() {
           <div>
             <label htmlFor="plan">Plano</label>
             <select name="plan">
-              <option value="Plano">Plano</option>
+              <option value="">Plano</option>
               {plans.map((plan, index) => (
                 <option key={index} value={plan.id}>
                   {plan.name}
