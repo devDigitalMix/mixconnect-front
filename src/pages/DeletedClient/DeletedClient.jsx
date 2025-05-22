@@ -104,8 +104,18 @@ export default function DeletedClient() {
   }
 
   useEffect(() => {
-    if (Cookies.get("token")) findUserLogged();
-    else navigate("/");
+    if (Cookies.get("token")) {
+      userLogged()
+        .then((response) => {
+          setUser(response.data);
+        })
+        .catch(() => {
+          Cookies.remove("token");
+          navigate("/");
+        });
+    } else {
+      navigate("/");
+    }
     getClient();
   }, [id]);
 

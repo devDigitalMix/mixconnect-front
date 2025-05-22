@@ -126,6 +126,7 @@ export default function Clients() {
     data.gestor = data.gestor == "Gestor" ? null : data.gestor;
     data.cs = data.cs == "CS" ? null : data.cs;
     data.status = data.status ? "Start" : null;
+    console.log(data);
     const response = await findClients(data);
     const plansResponse = await getPlansService();
     const plansMap = plansResponse.data.results.reduce((map, plan) => {
@@ -279,8 +280,18 @@ export default function Clients() {
   }
 
   useEffect(() => {
-    if (Cookies.get("token")) findUserLogged();
-    else navigate("/");
+    if (Cookies.get("token")) {
+      userLogged()
+        .then((response) => {
+          setUser(response.data);
+        })
+        .catch(() => {
+          Cookies.remove("token");
+          navigate("/");
+        });
+    } else {
+      navigate("/");
+    }
     getClients();
   }, []);
 
@@ -322,7 +333,7 @@ export default function Clients() {
           <div>
             <label htmlFor="plan">Plano</label>
             <select name="plan">
-              <option value="">Plano</option>
+              <option value="Plano">Plano</option>
               {plans.map((plan, index) => (
                 <option key={index} value={plan.id}>
                   {plan.name}
