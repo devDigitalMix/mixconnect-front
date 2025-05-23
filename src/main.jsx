@@ -29,6 +29,7 @@ import { Approval } from "./pages/Approval/Approval.jsx";
 import { SendApproval } from "./pages/SendApproval/SendApproval.jsx";
 import { PropostaCreate } from "./pages/PropostaCreate/PropostaCreate.jsx";
 import { SendProposta } from "./pages/SendProposta/SendProposta.jsx";
+import { Propostas } from "./pages/Propostas/Propostas.jsx";
 
 const router = createBrowserRouter([
   {
@@ -91,6 +92,10 @@ const router = createBrowserRouter([
       {
         path: "/home/employee/:id",
         element: <Employee />,
+      },
+      {
+        path: "/home/propostas",
+        element: <Propostas />,
       },
       {
         path: "/home/chores/",

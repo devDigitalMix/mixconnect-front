@@ -86,7 +86,7 @@ export function PropostaCreate() {
 
   useEffect(() => {
     if (Cookies.get("token")) {
-      userLogged()
+      findUserLogged()
         .then((response) => {
           setUser(response.data);
         })
@@ -98,7 +98,7 @@ export function PropostaCreate() {
       navigate("/");
     }
     getPlans();
-  });
+  }, []);
 
   return (
     <PropostaContainer onSubmit={handleCreateProposta}>
@@ -162,8 +162,14 @@ export function PropostaCreate() {
               placeholder="Site"
               name="site"
               value={site}
+              max={10}
+              min={0}
               onChange={(e) =>
-                setSite(e.target.value == "" ? "" : Number(e.target.value))
+                setSite(
+                  e.target.value === ""
+                    ? ""
+                    : Math.min(Number(e.target.value), 10)
+                )
               }
             />
             <img src="/mais.svg" onClick={() => setSite(site + 1)} />
@@ -174,6 +180,12 @@ export function PropostaCreate() {
                   placeholder="Dobras"
                   name="dobraSite"
                   className="inputQuant"
+                  maxLength={20}
+                  onInput={(e) => {
+                    if (e.target.value.length > 20) {
+                      e.target.value = e.target.value.slice(0, 20);
+                    }
+                  }}
                 />
                 <input
                   type="text"
@@ -342,8 +354,14 @@ export function PropostaCreate() {
               placeholder="Gmb"
               name="gmb"
               value={gmb}
+              max={10}
+              min={0}
               onChange={(e) =>
-                setGmb(e.target.value == "" ? "" : Number(e.target.value))
+                setGmb(
+                  e.target.value === ""
+                    ? ""
+                    : Math.min(Number(e.target.value), 10)
+                )
               }
             />
             <img src="/mais.svg" onClick={() => setGmb(gmb + 1)} />
@@ -359,8 +377,14 @@ export function PropostaCreate() {
               placeholder="Posts"
               name="posts"
               value={posts}
+              max={50}
+              min={0}
               onChange={(e) =>
-                setPosts(e.target.value == "" ? "" : Number(e.target.value))
+                setPosts(
+                  e.target.value === ""
+                    ? ""
+                    : Math.min(Number(e.target.value), 50)
+                )
               }
             />
             <img src="/mais.svg" onClick={() => setPosts(posts + 1)} />
@@ -372,14 +396,19 @@ export function PropostaCreate() {
         <div className="InputContainer">
           <label htmlFor="nVisitas">Visitas ao Mês</label>
           <div className="guardaInput">
-            <input
+            <Input
               type="number"
-              className="inputQuant"
               placeholder="Visitas ao Mês"
               name="nVisitas"
               value={nVisitas}
+              max={10}
+              min={0}
               onChange={(e) =>
-                setNVisitas(e.target.value == "" ? "" : Number(e.target.value))
+                setNVisitas(
+                  e.target.value === ""
+                    ? ""
+                    : Math.min(Number(e.target.value), 10)
+                )
               }
             />
             <img src="/mais.svg" onClick={() => setNVisitas(nVisitas + 1)} />
@@ -432,7 +461,17 @@ export function PropostaCreate() {
           <label htmlFor="value" className="mainLabel">
             Valor<span>*</span>
           </label>
-          <Input type="number" placeholder="Valor da Proposta" name="value" />
+          <Input
+            type="number"
+            placeholder="Valor da Proposta"
+            name="value"
+            maxLength={6}
+            onInput={(e) => {
+              if (e.target.value.length > 6) {
+                e.target.value = e.target.value.slice(0, 6);
+              }
+            }}
+          />
         </div>
       </div>
       {!loading ? (

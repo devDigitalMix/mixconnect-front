@@ -36,9 +36,9 @@ export function SendProposta() {
   async function getPropostaById() {
     const response = await findPropostaById(id);
     const dataVencimento = new Date(response.data.createdAt);
+    dataVencimento.setDate(dataVencimento.getDate() + 10);
     setValidaAte([
       dataVencimento.getDate() +
-        10 +
         "/" +
         (dataVencimento.getMonth() + 1 < 10
           ? "0" + (dataVencimento.getMonth() + 1)
@@ -85,9 +85,8 @@ export function SendProposta() {
     setReceived(true);
   }
 
-  async function answer(op) {
-    const answer = { answer: op };
-    const propostaAtt = await answerProposta(id, answer);
+  async function answer() {
+    const propostaAtt = await answerProposta(id);
     // if (op) {
     //   const data = {};
     //   data.name = proposta.name;
@@ -108,6 +107,13 @@ export function SendProposta() {
     //   // const response = await createClientService(proposta);
     //   console.log(response.data);
     // }
+    if (propostaAtt && propostaAtt.status) {
+      // sucesso: faça algo, por exemplo, mostrar mensagem ou redirecionar
+      console.log("Proposta respondida com sucesso!");
+    } else {
+      // erro: trate o erro, por exemplo, mostrar mensagem de erro
+      console.error("Erro ao responder proposta.");
+    }
   }
 
   useEffect(() => {
@@ -441,7 +447,7 @@ export function SendProposta() {
               Assim que você aceitar a proposta o consultor responsável entrará
               em contato para seguir com o seu projeto
             </p>
-            <button className="btn">
+            <button className="btn" onClick={() => answer()}>
               <strong>ACEITAR</strong> PROPOSTA
             </button>
             <a target="_blank" href="https://digitalmix.tech/">

@@ -29,3 +29,12 @@ export function answerProposta(id, data) {
   });
   return response;
 }
+
+export function getAllPropostas() {
+  const response = axios.get(`${baseURL}/proposta/`, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
+  return response;
+}
