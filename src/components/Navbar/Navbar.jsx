@@ -134,6 +134,19 @@ export function Navbar() {
                     </button>
                   </Link>
                 )}
+              {!findingUser &&
+                (user.level == "Líder" ||
+                  user.level == "Admin" ||
+                  user.role == "Comercial") && (
+                  <Link to={"/home/propostas"}>
+                    <button
+                      className={nav.includes("propostas") ? "active" : ""}
+                      onClick={() => handleButtonClick("propostas")}
+                    >
+                      PROPOSTAS
+                    </button>
+                  </Link>
+                )}
               <Link
                 to={"https://studiomix.tech/home"}
                 onClick={() => handleButtonClick("")}

@@ -117,6 +117,14 @@ const router = createBrowserRouter([
         path: "/home/criarProposta",
         element: <PropostaCreate />,
       },
+      {
+        path: "/home/criarProposta/:id",
+        element: <PropostaCreate />,
+      },
+      {
+        path: "/home/criarProposta/",
+        element: <PropostaCreate />,
+      },
     ],
   },
   {

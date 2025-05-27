@@ -394,7 +394,6 @@ export default function Clients() {
                 onClick={clickAddClient}
               />
             )}
-            <Link to="/home/criarProposta">proposta</Link>
             <Link to="/home/deletedclients">Clientes Excluídos</Link>
           </div>
         }

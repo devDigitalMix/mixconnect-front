@@ -38,3 +38,12 @@ export function getAllPropostas() {
   });
   return response;
 }
+
+export function updatePropostaService(id, data) {
+  const response = axios.patch(`${baseURL}/proposta/update/${id}`, data, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
+  return response;
+}

@@ -1,9 +1,13 @@
 /* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from "react";
 import { Input } from "../../components/Input/Input";
-import { createPropostaService } from "../../services/propostaService";
+import {
+  createPropostaService,
+  findPropostaById,
+  updatePropostaService,
+} from "../../services/propostaService";
 import { PropostaContainer } from "./PropostaCreateStyled";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import { getPlansService } from "../../services/planService";
 import { userLogged } from "../../services/employeeService";
@@ -29,9 +33,12 @@ export function PropostaCreate() {
   const [nVisitas, setNVisitas] = useState(0);
   const [report, setReport] = useState("");
   const [gpPremium, setGpPremium] = useState(false);
+  const [received, setReceived] = useState(false);
   const [tempoContrato, setTempoContrato] = useState("");
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [findingUser, setFindingUser] = useState(true);
+  const [proposta, setProposta] = useState(null);
+  const { id } = useParams();
   const navigate = useNavigate();
 
   async function handleCreateProposta(event) {
@@ -40,12 +47,28 @@ export function PropostaCreate() {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
     data.plan = selectedPlan;
+
     if (checarFormatoTelefone(data.whatsapp)) {
-      console.log(data);
-      const response = await createPropostaService(data);
-      console.log(response.data);
-      navigate("/sendproposta/" + response.data._id);
-      setLoading(false);
+      if (id) {
+        // UPDATE
+        try {
+          await updatePropostaService(id, data);
+          alert("Proposta atualizada com sucesso!");
+          navigate("/sendproposta/" + id);
+        } catch (error) {
+          alert("Erro ao atualizar proposta.");
+        }
+        setLoading(false);
+      } else {
+        // CREATE (original)
+        try {
+          const response = await createPropostaService(data);
+          navigate("/sendproposta/" + response.data._id);
+        } catch (error) {
+          alert("Erro ao criar proposta.");
+        }
+        setLoading(false);
+      }
     } else {
       setLoading(false);
       alert(
@@ -86,7 +109,7 @@ export function PropostaCreate() {
 
   useEffect(() => {
     if (Cookies.get("token")) {
-      findUserLogged()
+      userLogged()
         .then((response) => {
           setUser(response.data);
         })
@@ -100,7 +123,45 @@ export function PropostaCreate() {
     getPlans();
   }, []);
 
-  return (
+  // Preencher formulário se houver id
+  useEffect(() => {
+    if (id) {
+      (async () => {
+        setLoading(true);
+        try {
+          const response = await findPropostaById(id);
+          const data = response.data;
+          setProposta(data);
+          setSite(data.site || 0);
+          setMixtree(data.mixtree || 0);
+          setCatalogo(data.catalogo || 0);
+          setSmart(data.smart || 0);
+          setLp(data.lp || 0);
+          setTikTok(data.tikTok || 0);
+          setGoogle(data.google || 0);
+          setLinkedin(data.linkedin || 0);
+          setMeta(data.meta || 0);
+          setGmb(data.gmb || 0);
+          setPosts(data.posts || 0);
+          setTempoCap(data.tempoCap || 0);
+          setNVideos(data.nVideos || 0);
+          setNVisitas(data.nVisitas || 0);
+          setReport(data.report || "");
+          setGpPremium(data.gpPremium || false);
+          setTempoContrato(data.tempoContrato || "");
+          setSelectedPlan(data.plan || null);
+          setReceived(true);
+        } catch (error) {
+          alert("Erro ao buscar proposta.");
+        }
+        setLoading(false);
+      })();
+    } else {
+      setReceived(true);
+    }
+  }, [id]);
+
+  return received ? (
     <PropostaContainer onSubmit={handleCreateProposta}>
       <h3>Geral</h3>
       <div className="formSection">
@@ -113,6 +174,7 @@ export function PropostaCreate() {
             placeholder="Nome da Empresa"
             name="name"
             required
+            defaultValue={proposta?.name || ""}
           />
         </div>
         <div>
@@ -124,13 +186,18 @@ export function PropostaCreate() {
             placeholder="Número do Whatsapp"
             name="whatsapp"
             required
+            defaultValue={proposta?.whatsapp || ""}
           />
         </div>
         <div>
           <label htmlFor="whatsapp" className="mainLabel">
             Plano<span>*</span>
           </label>
-          <select name="plan" onChange={(e) => changePlan(e.target.value)}>
+          <select
+            name="plan"
+            onChange={(e) => changePlan(e.target.value)}
+            value={selectedPlan || ""}
+          >
             <option value="">Selecione um plano</option>
             {plans.map((plan, index) => (
               <option value={plan.name} key={index}>
@@ -148,6 +215,7 @@ export function PropostaCreate() {
             className="invalidInput"
             value={user.name}
             name="consultor"
+            readOnly
           />
         </div>
       </div>
@@ -178,9 +246,10 @@ export function PropostaCreate() {
                 <input
                   type="text"
                   placeholder="Dobras"
-                  name="dobraSite"
+                  name="dobrasSite"
                   className="inputQuant"
                   maxLength={20}
+                  defaultValue={proposta?.dobrasSite || ""}
                   onInput={(e) => {
                     if (e.target.value.length > 20) {
                       e.target.value = e.target.value.slice(0, 20);
@@ -192,6 +261,7 @@ export function PropostaCreate() {
                   placeholder="Seções"
                   name="secoesSite"
                   className="inputQuant"
+                  defaultValue={proposta?.secoesSite || ""}
                 />
               </div>
             )}
@@ -233,6 +303,7 @@ export function PropostaCreate() {
                   type="text"
                   placeholder="Dobras"
                   name="dobraCatalogo"
+                  defaultValue={proposta?.dobraCatalogo || ""}
                   className="inputQuant"
                 />
               </div>
@@ -259,6 +330,7 @@ export function PropostaCreate() {
                   type="text"
                   placeholder="Seções"
                   name="secoesSmart"
+                  defaultValue={proposta?.secoesSmart || ""}
                   className="inputQuant"
                 />
               </div>
@@ -285,6 +357,7 @@ export function PropostaCreate() {
                   type="text"
                   placeholder="Seções"
                   name="secoesLp"
+                  defaultValue={proposta?.secoesLp || ""}
                   className="inputQuant"
                 />
               </div>
@@ -420,12 +493,14 @@ export function PropostaCreate() {
               type="number"
               placeholder="Tempo Captação em Horas"
               name="tempoCap"
+              defaultValue={proposta?.tempoCap || ""}
               style={{ maxWidth: 260 + "px" }}
             />
             <Input
               type="number"
               placeholder="Nº Edições"
               name="nVideos"
+              defaultValue={proposta?.nVideos || ""}
               style={{ maxWidth: 130 + "px" }}
             />
           </>
@@ -436,6 +511,9 @@ export function PropostaCreate() {
         <div>
           <label htmlFor="report">Reunião</label>
           <select name="report">
+            {proposta?.report && (
+              <option value={proposta.report}>{proposta.report}</option>
+            )}
             <option value="Semanais">Semanais</option>
             <option value="Mensais">Mensais</option>
             <option value="Trimestrais">Trimestrais</option>
@@ -444,6 +522,11 @@ export function PropostaCreate() {
         <div>
           <label htmlFor="gpPremium">Grupo Premium</label>
           <select name="gpPremium">
+            {proposta?.gpPremium && (
+              <option value={proposta.gpPremium}>
+                {proposta.gpPremium == false ? "Não" : "Sim"}
+              </option>
+            )}
             <option value={false}>Não</option>
             <option value={true}>Sim</option>
           </select>
@@ -451,6 +534,11 @@ export function PropostaCreate() {
         <div>
           <label htmlFor="tempoContrato">Tempo de Contrato</label>
           <select name="tempoContrato">
+            {proposta?.tempoContrato && (
+              <option value={proposta.tempoContrato}>
+                {proposta.tempoContrato}
+              </option>
+            )}
             <option value="3 Meses">3 Meses</option>
             <option value="6 Meses">6 Meses</option>
             <option value="12 Meses">12 Meses</option>
@@ -466,6 +554,7 @@ export function PropostaCreate() {
             placeholder="Valor da Proposta"
             name="value"
             maxLength={6}
+            defaultValue={proposta?.value || ""}
             onInput={(e) => {
               if (e.target.value.length > 6) {
                 e.target.value = e.target.value.slice(0, 6);
@@ -476,11 +565,11 @@ export function PropostaCreate() {
       </div>
       {!loading ? (
         <button type="submit" className="btn">
-          Criar
+          {id ? "Atualizar" : "Criar"}
         </button>
       ) : (
         <p className="btn">Enviando...</p>
       )}
     </PropostaContainer>
-  );
+  ) : null;
 }

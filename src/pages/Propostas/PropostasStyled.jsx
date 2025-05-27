@@ -103,10 +103,25 @@ export const PropostaCard = styled.article`
   .propostaBtns {
     display: flex;
     gap: 10px;
+    position: relative;
     button {
       width: 40px;
       height: 40px;
-      background-color: var(--sec);
+      position: relative;
+      z-index: 2;
+      border-radius: 30px;
+      &::before {
+        content: "";
+        background-color: #000;
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 30px;
+        transition: 0.3s;
+        left: 3px;
+        top: 3px;
+        z-index: -1;
+      }
     }
   }
 `;

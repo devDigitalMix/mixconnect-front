@@ -7,14 +7,17 @@ import {
   PropostasHeader,
 } from "./PropostasStyled";
 import { getAllPropostas } from "../../services/propostaService";
+import { Link, useNavigate } from "react-router-dom";
 
 export function Propostas() {
   const [propostas, setPropostas] = useState([]);
   const [todas, setTodas] = useState([]);
   const [aprovadas, setAprovadas] = useState([]);
   const [expiradas, setExpiradas] = useState([]);
+  const [copied, setCopied] = useState("");
   const [abertas, setAbertas] = useState([]);
   const [received, setReceived] = useState(false);
+  const navigate = useNavigate();
 
   async function getPropostas() {
     setReceived(false);
@@ -24,6 +27,16 @@ export function Propostas() {
     setExpiradas(response.data.vencidas);
     setAbertas(response.data.restantes);
     setReceived(true);
+  }
+
+  async function copyLink(id) {
+    await navigator.clipboard.writeText(
+      `https://mixconnect.tech/sendproposta/${id}`
+    );
+    setCopied(id);
+    setTimeout(() => {
+      setCopied("");
+    }, 2000);
   }
 
   function dateFormatter(date) {
@@ -78,6 +91,14 @@ export function Propostas() {
       </PropostasHeader>
       <PropostasBody>
         <h3>Propostas</h3>
+        <Link to="/home/criarProposta">
+          <img
+            src="/mais.svg"
+            alt="mais"
+            title="Criar novo"
+            className="img-effect"
+          />
+        </Link>
         {received
           ? propostas.map((proposta, index) => (
               <PropostaCard key={index}>
@@ -90,9 +111,23 @@ export function Propostas() {
                   <p>{dateFormatter(proposta.createdAt)}</p>
                 </div>
                 <div className="propostaBtns">
-                  <button></button>
-                  <button></button>
-                  <button></button>
+                  <button onClick={() => copyLink(proposta._id)}>
+                    {copied === proposta._id ? (
+                      <img src="/check.svg" alt="link" title="link" />
+                    ) : (
+                      <img src="/link.svg" alt="link" title="link" />
+                    )}
+                  </button>
+                  <button
+                    onClick={() =>
+                      navigate("/home/criarProposta/" + proposta._id)
+                    }
+                  >
+                    <img src="/consultar.svg" alt="consulta" title="consulta" />
+                  </button>
+                  <button>
+                    <img src="/exportar.svg" alt="exportar" title="exportar" />
+                  </button>
                 </div>
               </PropostaCard>
             ))

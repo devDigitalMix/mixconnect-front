@@ -19,6 +19,8 @@ import {
 } from "./SendPropostaStyled";
 import { useParams } from "react-router-dom";
 import { createClientService } from "../../services/clientService";
+import Cookies from "js-cookie";
+import { userLogged } from "../../services/employeeService";
 
 export function SendProposta() {
   const { id } = useParams();
@@ -32,6 +34,8 @@ export function SendProposta() {
   const [captacao, setCaptacao] = useState(false);
   const [validaAte, setValidaAte] = useState();
   const [proposta, setProposta] = useState({});
+  const [user, setUser] = useState(null);
+  const [showThanks, setShowThanks] = useState(false);
 
   async function getPropostaById() {
     const response = await findPropostaById(id);
@@ -45,8 +49,6 @@ export function SendProposta() {
           : dataVencimento.getMonth() + 1),
       dataVencimento.getFullYear(),
     ]);
-    console.log(response.data);
-
     if (
       response.data.site > 0 ||
       response.data.mixtree > 0 ||
@@ -86,40 +88,70 @@ export function SendProposta() {
   }
 
   async function answer() {
-    const propostaAtt = await answerProposta(id);
-    // if (op) {
-    //   const data = {};
-    //   data.name = proposta.name;
-    // data.status = "Start";
-    // data.plan = proposta.plan;
-    // data.posts = proposta.posts;
-    // data.value = 1000;
-    // data.startValue = 1000;
-    // vencimento,
-    // formaPagamento,
-    // proposta,
-    // plataformasTrafego,
-    // tempoContrato,
-    // nVideos,
-    // nVisitas,
-    // tempoCap,
-
-    //   // const response = await createClientService(proposta);
-    //   console.log(response.data);
-    // }
-    if (propostaAtt && propostaAtt.status) {
-      // sucesso: faça algo, por exemplo, mostrar mensagem ou redirecionar
-      console.log("Proposta respondida com sucesso!");
-    } else {
-      // erro: trate o erro, por exemplo, mostrar mensagem de erro
-      console.error("Erro ao responder proposta.");
-    }
+    setLoading(true);
+    await answerProposta(id);
+    setShowThanks(true);
+    setLoading(false);
   }
 
   useEffect(() => {
+    // Busca usuário logado, se existir
+    if (Cookies.get("token")) {
+      userLogged()
+        .then((response) => {
+          setUser(response.data);
+        })
+        .catch(() => {
+          Cookies.remove("token");
+          setUser(null);
+        });
+    } else {
+      setUser(null);
+    }
     getPropostaById();
   }, []);
 
+  // Se não houver usuário logado e proposta aprovada, mostra card de agradecimento
+  if (received && !user && proposta && proposta.approved === true) {
+    return (
+      <SendPropostaContainer style={{ height: "100vh" }}>
+        <SendPropostaHeader>
+          <img src="/digitalmix.svg" alt="Digitalmix" />
+          <div className="headerInfo">
+            <h2>Obrigado por responder!</h2>
+            <h1 style={{ textAlign: "center" }}>
+              Sua resposta foi registrada com sucesso.
+            </h1>
+            <h2>
+              <span>Equipe Digitalmix</span>
+            </h2>
+          </div>
+        </SendPropostaHeader>
+      </SendPropostaContainer>
+    );
+  }
+
+  // Após clicar em "ACEITAR PROPOSTA", mostra card de agradecimento
+  if (showThanks) {
+    return (
+      <SendPropostaContainer style={{ height: "100vh" }}>
+        <SendPropostaHeader>
+          <img src="/digitalmix.svg" alt="Digitalmix" />
+          <div className="headerInfo">
+            <h2>Obrigado por responder!</h2>
+            <h1 style={{ textAlign: "center" }}>
+              Sua resposta foi registrada com sucesso.
+            </h1>
+            <h2>
+              <span>Equipe Digitalmix</span>
+            </h2>
+          </div>
+        </SendPropostaHeader>
+      </SendPropostaContainer>
+    );
+  }
+
+  // Página normal
   return (
     received && (
       <SendPropostaContainer>
@@ -227,11 +259,18 @@ export function SendProposta() {
                                   ? ` ${proposta.secoesLp} seções`
                                   : ``
                               }, `}{" "}
+                          {proposta.smart > 0 &&
+                            proposta.smart +
+                              ` Smart Page(s)${
+                                proposta.smart > 0
+                                  ? ` ${proposta.secoesSmart} seções`
+                                  : ``
+                              }, `}{" "}
                           {proposta.catalogo > 0 &&
                             proposta.catalogo +
                               ` Catálogo(s)${
-                                proposta.dobrasCatalogo > 0
-                                  ? ` ${proposta.dobrasCatalogo} dobras`
+                                proposta.dobraCatalogo > 0
+                                  ? ` ${proposta.dobraCatalogo} dobras`
                                   : ``
                               }, `}{" "}
                           para captação de leads e/ou apresentação de produto,
@@ -447,9 +486,14 @@ export function SendProposta() {
               Assim que você aceitar a proposta o consultor responsável entrará
               em contato para seguir com o seu projeto
             </p>
-            <button className="btn" onClick={() => answer()}>
-              <strong>ACEITAR</strong> PROPOSTA
-            </button>
+            {!proposta.approved &&
+              (!loading ? (
+                <button className="btn" onClick={() => answer()}>
+                  <strong>ACEITAR</strong> PROPOSTA
+                </button>
+              ) : (
+                <p className="btn">Enviando...</p>
+              ))}
             <a target="_blank" href="https://digitalmix.tech/">
               www.digitalmix.tech
             </a>
