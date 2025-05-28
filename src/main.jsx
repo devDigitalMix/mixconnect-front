@@ -30,6 +30,7 @@ import { SendApproval } from "./pages/SendApproval/SendApproval.jsx";
 import { PropostaCreate } from "./pages/PropostaCreate/PropostaCreate.jsx";
 import { SendProposta } from "./pages/SendProposta/SendProposta.jsx";
 import { Propostas } from "./pages/Propostas/Propostas.jsx";
+import { CreateClient } from "./pages/CreateClient/CreateClient.jsx";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
       {
         path: "/home/client/:id/approval",
         element: <ClientApproval />,
+      },
+      {
+        path: "/home/createClient/:id/",
+        element: <CreateClient />,
       },
       {
         path: "/home/approval/:id",

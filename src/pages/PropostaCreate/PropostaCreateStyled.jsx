@@ -11,8 +11,11 @@ export const PropostaContainer = styled.form`
   .formSection {
     display: flex;
     flex-wrap: wrap;
-    gap: 25px;
+    gap: 20px;
     align-items: end;
+    & > div {
+      max-width: 300px;
+    }
     .mainLabel {
       font-size: 18px;
       text-transform: uppercase;

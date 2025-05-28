@@ -125,9 +125,28 @@ export function Propostas() {
                   >
                     <img src="/consultar.svg" alt="consulta" title="consulta" />
                   </button>
-                  <button>
-                    <img src="/exportar.svg" alt="exportar" title="exportar" />
-                  </button>
+                  {proposta.approved && (
+                    <button
+                      onClick={() =>
+                        navigate("/home/createClient/" + proposta._id)
+                      }
+                    >
+                      <img
+                        src="/exportar.svg"
+                        alt="exportar"
+                        title="exportar"
+                      />
+                    </button>
+                  )}
+                  {proposta.approved && (
+                    <button>
+                      <img
+                        src="/exportar.svg"
+                        alt="exportar"
+                        title="exportar"
+                      />
+                    </button>
+                  )}
                 </div>
               </PropostaCard>
             ))
