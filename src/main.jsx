@@ -73,7 +73,6 @@ const router = createBrowserRouter([
         path: "/home/approval/:id",
         element: <Approval />,
       },
-
       {
         path: "/home/client/:id/nps",
         element: <AllNps />,

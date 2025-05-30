@@ -12,6 +12,7 @@ import { getPlansService } from "../../services/planService";
 import { userLogged } from "../../services/employeeService";
 import { UserContext } from "../../Context/UserContent";
 import { PropostaContainer } from "../PropostaCreate/PropostaCreateStyled";
+import { createClientService } from "../../services/clientService";
 
 export function CreateClient() {
   const [loading, setLoading] = useState(false);
@@ -31,6 +32,7 @@ export function CreateClient() {
   const [tempoCap, setTempoCap] = useState(0);
   const [nVideos, setNVideos] = useState(0);
   const [nVisitas, setNVisitas] = useState(0);
+  const [value, setValue] = useState(0);
   const [report, setReport] = useState("");
   const [gpPremium, setGpPremium] = useState(false);
   const [received, setReceived] = useState(false);
@@ -46,10 +48,40 @@ export function CreateClient() {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
-    data.plan = selectedPlan;
+    // Procurar o plano pelo nome e pegar o id
+    const planoSelecionado = plans.find((plan) => plan.name === selectedPlan);
+    data.plan = planoSelecionado ? planoSelecionado.id : null;
     data.post = posts;
-    console.log(data);
+    data.tempoContrato = tempoContrato;
+    data.nVisitas = nVisitas;
+    data.nVideos = nVideos;
+    data.tempoCap = tempoCap;
+    data.tempoContrato = tempoContrato;
+    data.tikTok = tikTok;
+    data.google = google;
+    data.linkedin = linkedin;
+    data.meta = meta;
+    data.value = value;
+    data.proposta = `https://mixconnect.tech/sendproposta/${id}`;
+    data.report = report;
+    if (data.vencimento) {
+      const vencimentoDate = new Date(data.vencimento);
+      vencimentoDate.setHours(vencimentoDate.getHours() + 3); // Zera horas, minutos, segundos e milissegundos
+      data.vencimento = vencimentoDate.getDate();
+    }
+    if (data.dateStart) {
+      const startDate = new Date(data.dateStart);
+      startDate.setHours(startDate.getHours() + 3); // Zera horas, minutos, segundos e milissegundos
+      data.dateStart = startDate;
+    }
+    const response = await createClientService(data);
+    console.log(response.data);
     setLoading(false);
+  }
+
+  async function getPlans() {
+    const response = await getPlansService();
+    setPlans(response.data.results);
   }
 
   async function findUserLogged() {
@@ -60,11 +92,6 @@ export function CreateClient() {
     } catch (error) {
       console.log(error);
     }
-  }
-
-  async function getPlans() {
-    const response = await getPlansService();
-    setPlans(response.data.results);
   }
 
   function changePlan(e) {
@@ -116,6 +143,7 @@ export function CreateClient() {
           setGoogle(data.google || 0);
           setLinkedin(data.linkedin || 0);
           setMeta(data.meta || 0);
+          setValue(data.value || 0);
           setGmb(data.gmb || 0);
           setPosts(data.posts || 0);
           setTempoCap(data.tempoCap || 0);
