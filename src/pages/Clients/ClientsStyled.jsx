@@ -37,7 +37,7 @@ export const ClientHeader = styled.div`
     gap: 25px;
   }
 `;
-export const ClientBody = styled.div`
+export const ClientsBody = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;

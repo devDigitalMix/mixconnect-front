@@ -84,7 +84,7 @@ export default function Profile() {
 
   function updateForm() {
     setUpdate(!update);
-    setSocialMedia(user.socialMedia || []); // Atualiza o estado quando o formulário é aberto
+    setSocialMedia(user.socialMedia || []);
   }
 
   function mamao() {
@@ -350,14 +350,14 @@ export default function Profile() {
                   <h4>Whatsapp:</h4>
                   <p>{user.whatsapp}</p>
                 </div>
-                <div>
-                  <h4>Redes Sociais:</h4>
-                  {user.socialMedia
-                    ? user.socialMedia.map((item, index) => (
-                        <p key={index}>{item}</p>
-                      ))
-                    : null}
-                </div>
+                {user.socialMedia.length > 0 && (
+                  <div>
+                    <h4>Redes Sociais:</h4>
+                    {user.socialMedia.map((item, index) => (
+                      <p key={index}>{item}</p>
+                    ))}
+                  </div>
+                )}
               </ProfileBody>
               <ProfileBottom>
                 <Link to={`/home/chores/`}>

@@ -114,3 +114,67 @@ export async function changeStatusService(id, status) {
   );
   return response;
 }
+
+export async function updateSitesCLient(id, dados) {
+  const response = await axios.patch(
+    `${baseURL}/client/updateSite/${id}`,
+    dados,
+    {
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+    }
+  );
+  return response;
+}
+
+export async function deleteSitesCLient(id, idSite) {
+  const response = await axios.patch(
+    `${baseURL}/client/deleteSite/${id}/${idSite}`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+    }
+  );
+  return response;
+}
+
+export async function updatePlataformasClient(id, dados) {
+  const response = await axios.patch(
+    `${baseURL}/client/updatePlataforma/${id}/`,
+    dados,
+    {
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+    }
+  );
+  return response;
+}
+export async function deletePlataformasClient(id, idPlataforma) {
+  const response = await axios.patch(
+    `${baseURL}/client/deletePlataforma/${id}/${idPlataforma}`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+    }
+  );
+  return response;
+}
+
+export async function updateClientContatos(id, dados) {
+  const response = await axios.patch(
+    `${baseURL}/client/updateContatos/${id}`,
+    dados,
+    {
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+    }
+  );
+  return response;
+}

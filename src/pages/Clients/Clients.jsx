@@ -10,7 +10,7 @@ import {
 import {
   AClient,
   AddClientModal,
-  ClientBody,
+  ClientsBody,
   ClientContent,
   ClientHead,
   ClientHeader,
@@ -430,7 +430,7 @@ export default function Clients() {
           />
         </form>
       </ClientHeader>
-      <ClientBody>
+      <ClientsBody>
         <AddClientModal
           onSubmit={createClient}
           className={addClientModal ? "active" : undefined}
@@ -565,7 +565,7 @@ export default function Clients() {
         ) : (
           <ClientSkeleton cards={12}></ClientSkeleton>
         )}
-      </ClientBody>
+      </ClientsBody>
       {!search && (
         <PageButtons>
           {lista

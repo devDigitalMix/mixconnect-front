@@ -95,7 +95,6 @@ export function SendProposta() {
   }
 
   useEffect(() => {
-    // Busca usuário logado, se existir
     if (Cookies.get("token")) {
       userLogged()
         .then((response) => {

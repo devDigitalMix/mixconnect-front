@@ -35,6 +35,7 @@ export function CreateClient() {
   const [value, setValue] = useState(0);
   const [report, setReport] = useState("");
   const [gpPremium, setGpPremium] = useState(false);
+  const [consultor, setConsultor] = useState("false");
   const [received, setReceived] = useState(false);
   const [tempoContrato, setTempoContrato] = useState("");
   const [selectedPlan, setSelectedPlan] = useState(null);
@@ -48,10 +49,9 @@ export function CreateClient() {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
-    // Procurar o plano pelo nome e pegar o id
     const planoSelecionado = plans.find((plan) => plan.name === selectedPlan);
     data.plan = planoSelecionado ? planoSelecionado.id : null;
-    data.post = posts;
+    data.posts = posts;
     data.tempoContrato = tempoContrato;
     data.nVisitas = nVisitas;
     data.nVideos = nVideos;
@@ -62,16 +62,17 @@ export function CreateClient() {
     data.linkedin = linkedin;
     data.meta = meta;
     data.value = value;
+    data.consultor = consultor;
     data.proposta = `https://mixconnect.tech/sendproposta/${id}`;
     data.report = report;
     if (data.vencimento) {
       const vencimentoDate = new Date(data.vencimento);
-      vencimentoDate.setHours(vencimentoDate.getHours() + 3); // Zera horas, minutos, segundos e milissegundos
+      vencimentoDate.setHours(vencimentoDate.getHours() + 3);
       data.vencimento = vencimentoDate.getDate();
     }
     if (data.dateStart) {
       const startDate = new Date(data.dateStart);
-      startDate.setHours(startDate.getHours() + 3); // Zera horas, minutos, segundos e milissegundos
+      startDate.setHours(startDate.getHours() + 3);
       data.dateStart = startDate;
     }
     const response = await createClientService(data);
@@ -150,6 +151,7 @@ export function CreateClient() {
           setNVideos(data.nVideos || 0);
           setNVisitas(data.nVisitas || 0);
           setReport(data.report || "");
+          setConsultor(data.consultor || "");
           setGpPremium(data.gpPremium || false);
           setTempoContrato(data.tempoContrato || "");
           setSelectedPlan(data.plan || null);
