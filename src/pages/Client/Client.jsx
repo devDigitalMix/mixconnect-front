@@ -879,18 +879,29 @@ export default function Client() {
                       <button>{formatDate(client.dateStart)}</button>
                     </div>
                   ) : null}
+                  {!received ? (
+                    <div className="campo">
+                      <h2>Dia da vigência do contrato</h2>
+                      <button>
+                        <Skeleton width="200px" />
+                      </button>
+                    </div>
+                  ) : client.dateStart && client.tempoContrato ? (
+                    <div className="campo">
+                      <h2>Dia da vigência do contrato</h2>
+                      <button>
+                        {client.dateStart && client.tempoContrato
+                          ? getVigenciaFinal(
+                              client.dateStart,
+                              client.tempoContrato
+                            )
+                          : ""}
+                      </button>
+                    </div>
+                  ) : null}
+
                   <div className="campo">
-                    <h2>Dia da vigência do contrato</h2>
-                    <button>
-                      {client.dateStart && client.tempoContrato
-                        ? getVigenciaFinal(
-                            client.dateStart,
-                            client.tempoContrato
-                          )
-                        : ""}
-                    </button>
-                  </div>
-                  <div className="campo">
+                    <h2>Contatos</h2>
                     <button onClick={() => setShowContatosModal(true)}>
                       Contatos
                     </button>
