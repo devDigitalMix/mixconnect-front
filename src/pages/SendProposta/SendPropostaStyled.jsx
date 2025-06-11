@@ -69,6 +69,8 @@ export const SendPropostaHeader = styled.header`
   display: grid;
   justify-items: center;
   gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 0 10px;
   & > img {
     margin-top: 15px;

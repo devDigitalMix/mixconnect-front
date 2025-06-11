@@ -33,6 +33,7 @@ export function PropostaCreate() {
   const [nVisitas, setNVisitas] = useState(0);
   const [report, setReport] = useState("");
   const [gpPremium, setGpPremium] = useState(false);
+  const [drone, setDrone] = useState(false);
   const [received, setReceived] = useState(false);
   const [tempoContrato, setTempoContrato] = useState("");
   const [selectedPlan, setSelectedPlan] = useState(null);
@@ -503,6 +504,18 @@ export function PropostaCreate() {
               defaultValue={proposta?.nVideos || ""}
               style={{ maxWidth: 130 + "px" }}
             />
+            <div>
+              <label htmlFor="drone">Drone</label>
+              <select name="drone">
+                {proposta?.drone && (
+                  <option value={proposta.drone}>
+                    {proposta.drone == false ? "Não" : "Sim"}
+                  </option>
+                )}
+                <option value={false}>Não</option>
+                <option value={true}>Sim</option>
+              </select>
+            </div>
           </>
         )}
       </div>
@@ -539,6 +552,7 @@ export function PropostaCreate() {
                 {proposta.tempoContrato}
               </option>
             )}
+            <option value="Avulso">Avulso</option>
             <option value="3 Meses">3 Meses</option>
             <option value="6 Meses">6 Meses</option>
             <option value="12 Meses">12 Meses</option>

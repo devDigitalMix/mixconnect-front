@@ -110,7 +110,6 @@ export function SendProposta() {
     getPropostaById();
   }, []);
 
-  // Se não houver usuário logado e proposta aprovada, mostra card de agradecimento
   if (received && !user && proposta && proposta.approved === true) {
     return (
       <SendPropostaContainer style={{ height: "100vh" }}>
@@ -130,7 +129,6 @@ export function SendProposta() {
     );
   }
 
-  // Após clicar em "ACEITAR PROPOSTA", mostra card de agradecimento
   if (showThanks) {
     return (
       <SendPropostaContainer style={{ height: "100vh" }}>
@@ -150,7 +148,6 @@ export function SendProposta() {
     );
   }
 
-  // Página normal
   return (
     received && (
       <SendPropostaContainer>
@@ -359,7 +356,8 @@ export function SendProposta() {
                         <h4>CAPTAÇÃO ÁUDIO & VIDEO E EDIÇÃO</h4>{" "}
                         <p>
                           {proposta.nVisitas} Visita(s) por mês /{" "}
-                          {proposta.tempoCap} h com {proposta.nVideos} edições
+                          {proposta.tempoCap} h com {proposta.nVideos} edições{" "}
+                          {proposta.drone && "com drone. "}
                           (atendimento exclusivo para Joinville)
                         </p>
                       </div>

@@ -138,7 +138,7 @@ export function Propostas() {
                       />
                     </button>
                   )}
-                  {proposta.approved && (
+                  {/* {proposta.approved && (
                     <button>
                       <img
                         src="/exportar.svg"
@@ -146,7 +146,7 @@ export function Propostas() {
                         title="exportar"
                       />
                     </button>
-                  )}
+                  )} */}
                 </div>
               </PropostaCard>
             ))
