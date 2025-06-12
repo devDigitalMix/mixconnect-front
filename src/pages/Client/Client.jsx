@@ -60,6 +60,7 @@ export default function Client() {
   const [isStatusLoading, setIsStatusLoading] = useState(false);
   const [isNpsLoading, setIsNpsLoading] = useState(false);
   const [socialMedia, setSocialMedia] = useState(client.socialMedia || []);
+  const [drives, setDrives] = useState(client.drives || []);
   const [canaisContato, setCanaisContato] = useState([]);
   const [page, setPage] = useState(client.pages || []);
   const [gmb, setGmb] = useState(client.gmb || []);
@@ -217,6 +218,16 @@ export default function Client() {
     setPage(newPage);
   };
 
+  const handleAddDrives = () => {
+    setDrives([...drives, ""]);
+  };
+
+  const handleDrivesChange = (index, event) => {
+    const newDrives = [...drives];
+    newDrives[index] = event.target.value;
+    setDrives(newDrives);
+  };
+
   const handleAddSocialMedia = () => {
     setSocialMedia([...socialMedia, ""]);
   };
@@ -282,6 +293,7 @@ export default function Client() {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
     data.socialMedia = socialMedia.filter((item) => item.trim() !== "");
+    data.drives = drives.filter((item) => item.trim() !== "");
     data.canaisContato = canaisContato.filter((item) => item.trim() !== "");
     data.pages = page.filter((item) => item.trim() !== "");
     data.gmb = gmb.filter((item) => item.trim() !== "");
@@ -310,13 +322,34 @@ export default function Client() {
   }
 
   function formatDate(data) {
-    var date = new Date(data);
-    date.setHours(date.getHours() + 3);
-    const dia = String(date.getDate()).padStart(2, "0");
-    const mes = String(date.getMonth() + 1).padStart(2, "0");
-    const ano = date.getFullYear();
-    const dataAtt = `${dia}/${mes}/${ano}`;
-    return dataAtt;
+    if (data) {
+      var date = new Date(data);
+      date.setHours(date.getHours() + 3);
+      const dia = String(date.getDate()).padStart(2, "0");
+      const mes = String(date.getMonth() + 1).padStart(2, "0");
+      const ano = date.getFullYear();
+      const dataAtt = `${dia}/${mes}/${ano}`;
+      return dataAtt;
+    }
+  }
+
+  function formatDateInput(data) {
+    if (data) {
+      var date = new Date(data);
+      date.setHours(date.getHours() + 3);
+      const dia = String(date.getDate()).padStart(2, "0");
+      const mes = String(date.getMonth() + 1).padStart(2, "0");
+      const ano = date.getFullYear();
+      const dataAtt = `${ano}-${mes}-${dia}`;
+      return dataAtt;
+    }
+  }
+  function formatDay(data) {
+    console.log(data);
+    if (data) {
+      data.slice(data.length - 2, data.length);
+      return data;
+    }
   }
 
   function formatWhats(numero) {
@@ -334,6 +367,7 @@ export default function Client() {
         response.data.logo ? response.data.logo : "/avatar-default.png"
       );
       setSocialMedia(response.data.socialMedia || []);
+      setDrives(response.data.drives || []);
       setCanaisContato(response.data.canaisContato || []);
       setPage(response.data.pages || []);
       setGmb(response.data.gmb || []);
@@ -1035,12 +1069,7 @@ export default function Client() {
                   ) : client.value ? (
                     <div className="campo">
                       <h2>Data de Pagamento</h2>
-                      <button>
-                        {client.vencimento.slice(
-                          client.vencimento.length - 2,
-                          client.vencimento.length
-                        )}
-                      </button>
+                      <button>{formatDay(client.vencimento)}</button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -1300,6 +1329,32 @@ export default function Client() {
                       })}
                     </div>
                   ) : null}
+                  {!received ? (
+                    <div className="campo">
+                      <h2>Drives:</h2>
+                      <button>
+                        <Skeleton width="200px" />
+                      </button>
+                    </div>
+                  ) : client.drives.length > 0 ? (
+                    <div className="campo">
+                      <h2>Drives:</h2>
+                      {client.drives.map((item, index) => {
+                        if (!item) return null;
+                        return (
+                          <a
+                            key={index}
+                            href={item}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ textDecoration: "none" }}
+                          >
+                            <button type="button">Drive {index + 1}</button>
+                          </a>
+                        );
+                      })}
+                    </div>
+                  ) : null}
                 </ClientSection>
               ) : (
                 <ClientSectionForm onSubmit={handleUpdate}>
@@ -1345,24 +1400,24 @@ export default function Client() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="socialMedia">Redes Sociais:</label>
-                    {socialMedia.map((item, index) => (
+                    <label htmlFor="drives">Drives:</label>
+                    {drives.map((item, index) => (
                       <div
                         key={index}
                         style={{ display: "flex", alignItems: "center" }}
                       >
                         <Input
                           type="text"
-                          name={`socialMedia-${index}`}
+                          name={`drives-${index}`}
                           value={item}
-                          onChange={(e) => handleSocialMediaChange(index, e)}
+                          onChange={(e) => handleDrivesChange(index, e)}
                         />
                       </div>
                     ))}
                     <button
                       type="button"
                       className="addInput"
-                      onClick={handleAddSocialMedia}
+                      onClick={handleAddDrives}
                     >
                       <img src="/mais.svg" alt="" />
                     </button>
@@ -1428,7 +1483,9 @@ export default function Client() {
                         <input
                           type="date"
                           name="dataVencimento"
-                          defaultValue={chosenDomain.dataVencimento || ""}
+                          defaultValue={formatDateInput(
+                            chosenDomain.dataVencimento
+                          )}
                           placeholder="Data de Vencimento"
                         />
                       </div>
@@ -1881,6 +1938,32 @@ export default function Client() {
                       })}
                     </div>
                   ) : null}
+                  {!received ? (
+                    <div className="campo">
+                      <h2>Drives:</h2>
+                      <button>
+                        <Skeleton width="200px" />
+                      </button>
+                    </div>
+                  ) : client.drives.length > 0 ? (
+                    <div className="campo">
+                      <h2>Drives:</h2>
+                      {client.drives.map((item, index) => {
+                        if (!item) return null;
+                        return (
+                          <a
+                            key={index}
+                            href={item}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ textDecoration: "none" }}
+                          >
+                            <button type="button">Drive {index + 1}</button>
+                          </a>
+                        );
+                      })}
+                    </div>
+                  ) : null}
                 </ClientSection>
               ) : (
                 <ClientSectionForm onSubmit={handleUpdate}>
@@ -1951,6 +2034,29 @@ export default function Client() {
                       type="button"
                       className="addInput"
                       onClick={handleAddSocialMedia}
+                    >
+                      <img src="/mais.svg" alt="" />
+                    </button>
+                  </div>
+                  <div>
+                    <label htmlFor="drives">Drives:</label>
+                    {drives.map((item, index) => (
+                      <div
+                        key={index}
+                        style={{ display: "flex", alignItems: "center" }}
+                      >
+                        <Input
+                          type="text"
+                          name={`drives-${index}`}
+                          value={item}
+                          onChange={(e) => handleDrivesChange(index, e)}
+                        />
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      className="addInput"
+                      onClick={handleAddDrives}
                     >
                       <img src="/mais.svg" alt="" />
                     </button>
