@@ -33,15 +33,18 @@ export const ClientStyled = styled.section`
     transform: translateY(-50%);
     button {
       background-color: #333;
-      box-shadow: 0 -18px 0 var(--dark) inset;
+      box-shadow: 0 -20px 0 var(--dark) inset;
       &.active {
         background-color: var(--dark);
       }
       border-radius: 5px 5px 0 0;
-      padding: 8px 10px 14px;
+      padding: 8px 10px 18px;
       &:hover {
         background-color: var(--main);
       }
+    }
+    @media only screen and (max-width: 560px) {
+      gap: 0px;
     }
   }
   padding: 20px;
@@ -142,6 +145,7 @@ export const ClientSectionForm = styled.form`
   gap: 30px;
   margin-top: 40px;
   padding-bottom: 60px;
+
   .campo {
     h2 {
       font-weight: 600;
@@ -170,6 +174,9 @@ export const ClientSection = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   gap: 30px;
   margin-top: 40px;
+  @media only screen and (max-width: 700px) {
+    grid-template-columns: 1fr 1fr;
+  }
   .campo {
     h2 {
       font-weight: 600;
