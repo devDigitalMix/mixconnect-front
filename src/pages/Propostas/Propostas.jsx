@@ -118,35 +118,27 @@ export function Propostas() {
                       <img src="/link.svg" alt="link" title="link" />
                     )}
                   </button>
-                  <button
-                    onClick={() =>
-                      navigate("/home/criarProposta/" + proposta._id)
-                    }
-                  >
+                  <Link to={`/home/criarProposta/${proposta._id}`}>
                     <img src="/consultar.svg" alt="consulta" title="consulta" />
-                  </button>
+                  </Link>
                   {proposta.approved && (
-                    <button
-                      onClick={() =>
-                        navigate("/home/createClient/" + proposta._id)
-                      }
-                    >
+                    <Link to={`/home/createClient/${proposta._id}`}>
                       <img
                         src="/exportar.svg"
                         alt="exportar"
                         title="exportar"
                       />
-                    </button>
+                    </Link>
                   )}
-                  {/* {proposta.approved && (
-                    <button>
+                  {proposta.approved && (
+                    <Link to={`/home/createBriefing/${proposta._id}`}>
                       <img
                         src="/exportar.svg"
                         alt="exportar"
                         title="exportar"
                       />
-                    </button>
-                  )} */}
+                    </Link>
+                  )}
                 </div>
               </PropostaCard>
             ))

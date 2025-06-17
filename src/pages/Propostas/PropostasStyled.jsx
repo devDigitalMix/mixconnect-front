@@ -104,7 +104,8 @@ export const PropostaCard = styled.article`
     display: flex;
     gap: 10px;
     position: relative;
-    button {
+    button,
+    a {
       width: 40px;
       height: 40px;
       position: relative;

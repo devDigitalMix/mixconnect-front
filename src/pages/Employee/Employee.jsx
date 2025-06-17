@@ -45,14 +45,14 @@ export function Employee() {
     setDeleteClick(!deleteClick);
   }
 
-  async function findUserLogged() {
-    try {
-      const response = await userLogged();
-      setUser(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  // async function findUserLogged() {
+  //   try {
+  //     const response = await userLogged();
+  //     setUser(response.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   async function deactivateEmployee() {
     await deactivateEmployeeService(employee.id);
@@ -304,6 +304,10 @@ export function Employee() {
               <div>
                 <Label htmlFor="name" text="Nome:" />
                 <Input type="text" name="name" defaultValue={employee.name} />
+              </div>
+              <div>
+                <Label htmlFor="gmail" text="Gmail:" />
+                <Input type="text" name="gmail" defaultValue={employee.gmail} />
               </div>
               <div>
                 <Label htmlFor="role" text="Cargo:" />

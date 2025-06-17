@@ -355,9 +355,9 @@ export function SendProposta() {
                       <div>
                         <h4>CAPTAÇÃO ÁUDIO & VIDEO E EDIÇÃO</h4>{" "}
                         <p>
-                          {proposta.nVisitas} Visita(s) por mês com{" "}
-                          {proposta.drone && " drone, "}
-                          {proposta.tempoCap} h com {proposta.nVideos} edições{" "}
+                          {proposta.nVisitas} Visita(s) por mês{" "}
+                          {proposta.drone && "com drone, por "}
+                          {proposta.tempoCap} h e {proposta.nVideos} edições{" "}
                           (atendimento exclusivo para Joinville)
                         </p>
                       </div>
