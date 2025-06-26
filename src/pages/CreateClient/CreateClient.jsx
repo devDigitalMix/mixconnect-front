@@ -76,7 +76,7 @@ export function CreateClient() {
       data.dateStart = startDate;
     }
     const response = await createClientService(data);
-    console.log(response.data);
+    navigate(`/home/client/${response.data._id}`);
     setLoading(false);
   }
 

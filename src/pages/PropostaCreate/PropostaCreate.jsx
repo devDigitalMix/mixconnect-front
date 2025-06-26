@@ -561,7 +561,7 @@ export function PropostaCreate() {
         </div>
         <div>
           <label htmlFor="value" className="mainLabel">
-            Valor<span>*</span>
+            Valor Mensal<span>*</span>
           </label>
           <Input
             type="number"
@@ -569,6 +569,23 @@ export function PropostaCreate() {
             name="value"
             maxLength={6}
             defaultValue={proposta?.value || ""}
+            onInput={(e) => {
+              if (e.target.value.length > 6) {
+                e.target.value = e.target.value.slice(0, 6);
+              }
+            }}
+          />
+        </div>
+        <div>
+          <label htmlFor="value" className="mainLabel">
+            Valor Start<span>*</span>
+          </label>
+          <Input
+            type="number"
+            placeholder="Valor da Proposta"
+            name="startValue"
+            maxLength={6}
+            defaultValue={proposta?.startValue || ""}
             onInput={(e) => {
               if (e.target.value.length > 6) {
                 e.target.value = e.target.value.slice(0, 6);

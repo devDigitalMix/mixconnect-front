@@ -1,36 +1,40 @@
 import styled from "styled-components";
 
 export const PreBriefingContainer = styled.form`
-  display: flex;
-  align-items: end;
+  display: grid;
   padding: 20px 10px 50px;
-  justify-content: start;
+  justify-items: start;
   flex-wrap: wrap;
   max-width: 1200px;
   width: 100%;
-  gap: 15px;
+  gap: 35px;
   .ligados {
     display: flex;
     gap: 0;
     align-items: end;
     position: relative;
+    &.active {
+      max-width: 470px;
+      width: 100%;
+    }
   }
   .campo {
     display: grid;
     gap: 2px;
-    max-width: 327px;
-    width: 100%;
+    label {
+    }
     input {
       max-width: 327px;
       width: 100%;
     }
     textarea {
-      max-width: 452px;
-      width: 100%;
+      min-width: 452px;
+      min-height: 98px;
       background-color: #f9f8fe;
       border: none;
       border-radius: 5px;
       padding: 10px;
+      color: var(--dark);
     }
     select {
       background-color: #f9f8fe !important;
@@ -63,6 +67,27 @@ export const PreBriefingContainer = styled.form`
     gap: 10px;
     a {
       display: inline;
+    }
+  }
+
+  .section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+    .infos {
+      display: flex;
+      width: 100%;
+      flex-wrap: wrap;
+      gap: 27px;
+      .campo:nth-child(odd):last-child {
+        max-width: 935px;
+        width: 100%;
+        & textarea {
+          max-width: 935px;
+          width: 100%;
+        }
+      }
     }
   }
 `;
