@@ -186,12 +186,11 @@ Responda com uma única frase curta o que está sendo comemorado hoje (${hoje}) 
 - é necessário utilizar a internet para garantir que a informação esteja correta e atualizada.
 - Responda apenas com a comemoração, sem explicações, sem introduções e sem saudações.
 `;
-
+    const apiKey = import.meta.env.OPENAI_API_KEY;
     fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
-        Authorization:
-          "Bearer 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",
+        Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
