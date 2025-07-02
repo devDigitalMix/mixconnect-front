@@ -451,6 +451,7 @@ export default function Client() {
 
   async function handleNewPlatform(event) {
     event.preventDefault();
+    setIsLoading(true);
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
     if (chosenPlatform._id) {
@@ -460,6 +461,7 @@ export default function Client() {
     await updatePlataformasClient(id, data);
     setNewSiteModal(false);
     setChosenPlatform({});
+    setIsLoading(false);
     getClient();
   }
 
@@ -485,6 +487,7 @@ export default function Client() {
   }
 
   async function handleDeleteSite() {
+    setIsLoading(true);
     if (!chosenDomain._id) {
       alert("Selecione um site para excluir.");
       setNewSiteModal(false);
@@ -493,10 +496,12 @@ export default function Client() {
     await deleteSitesCLient(id, chosenDomain._id);
     setNewSiteModal(false);
     setDeleteSiteModal(false);
+    setIsLoading(false);
   }
 
   async function handleNewSite(event) {
     event.preventDefault();
+    setIsLoading(true);
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
     if (chosenDomain._id) {
@@ -508,6 +513,7 @@ export default function Client() {
     await updateSitesCLient(id, data);
     setNewSiteModal(false);
     setChosenDomain({});
+    setIsLoading(false);
     getClient();
   }
 
@@ -1436,18 +1442,24 @@ export default function Client() {
                         <DeleteSiteModal>
                           <h2>Tem certeza?</h2>
                           <div className="btns">
-                            <button
-                              className="btn danger"
-                              onClick={handleDeleteSite}
-                            >
-                              Excluir
-                            </button>
-                            <button
-                              className="btn"
-                              onClick={() => setDeleteSiteModal(false)}
-                            >
-                              Cancelar
-                            </button>
+                            {!isLoading ? (
+                              <>
+                                <button
+                                  className="btn danger"
+                                  onClick={handleDeleteSite}
+                                >
+                                  Excluir
+                                </button>
+                                <button
+                                  className="btn"
+                                  onClick={() => setDeleteSiteModal(false)}
+                                >
+                                  Cancelar
+                                </button>
+                              </>
+                            ) : (
+                              <div className="custom-loader"></div>
+                            )}
                           </div>
                         </DeleteSiteModal>
                       )}
@@ -1552,9 +1564,13 @@ export default function Client() {
                           placeholder="Senha Hospedagem"
                         />
                       </div>
-                      <button type="submit" className="btn">
-                        Salvar
-                      </button>
+                      {!isLoading ? (
+                        <button type="submit" className="btn">
+                          Salvar
+                        </button>
+                      ) : (
+                        <div className="custom-loader"></div>
+                      )}
                     </DominioModal>
                   )}
                   {!received ? (
@@ -1601,23 +1617,32 @@ export default function Client() {
               (!update ? (
                 <ClientSection>
                   {newSiteModal && (
-                    <DominioModal onSubmit={() => handleNewPlatform(event)}>
+                    <DominioModal
+                      onSubmit={() => handleNewPlatform(event)}
+                      className="modalTrafego"
+                    >
                       {deleteSiteModal && (
                         <DeleteSiteModal>
                           <h2>Tem certeza?</h2>
                           <div className="btns">
-                            <button
-                              className="btn danger"
-                              onClick={handleDeletePlataforma}
-                            >
-                              Excluir
-                            </button>
-                            <button
-                              className="btn"
-                              onClick={() => setDeleteSiteModal(false)}
-                            >
-                              Cancelar
-                            </button>
+                            {!isLoading ? (
+                              <>
+                                <button
+                                  className="btn danger"
+                                  onClick={handleDeleteSite}
+                                >
+                                  Excluir
+                                </button>
+                                <button
+                                  className="btn"
+                                  onClick={() => setDeleteSiteModal(false)}
+                                >
+                                  Cancelar
+                                </button>
+                              </>
+                            ) : (
+                              <div className="custom-loader"></div>
+                            )}
                           </div>
                         </DeleteSiteModal>
                       )}
@@ -1625,11 +1650,20 @@ export default function Client() {
                         id="exclude"
                         onClick={() => setDeleteSiteModal(true)}
                       >
-                        <img src="/exclude.svg" alt="" />
+                        <img src="/exclude.svg" alt="excluir" />
                       </span>
                       <span id="cancel" onClick={() => setNewSiteModal(false)}>
-                        <img src="/cancel.svg" alt="" />
+                        <img src="/cancel.svg" alt="fechar" />
                       </span>
+                      <div>
+                        <label htmlFor="">Gestor Responsável</label>
+                        <Input
+                          type="text"
+                          name="gestor"
+                          defaultValue={chosenPlatform.gestor || ""}
+                          placeholder="Gestor Responsável"
+                        />
+                      </div>
                       <div>
                         <label htmlFor="">Plataforma</label>
                         <Input
@@ -1684,9 +1718,13 @@ export default function Client() {
                           placeholder="Pontos"
                         />
                       </div>
-                      <button type="submit" className="btn">
-                        Salvar
-                      </button>
+                      {!isLoading ? (
+                        <button type="submit" className="btn">
+                          Salvar
+                        </button>
+                      ) : (
+                        <div className="custom-loader"></div>
+                      )}
                     </DominioModal>
                   )}
                   {!received ? (

@@ -216,6 +216,11 @@ export const DominioModal = styled.form`
     border-radius: 5px;
     background-color: var(--light);
   }
+  .custom-loader {
+    position: absolute;
+    bottom: 30px;
+    left: calc(50% - 10px);
+  }
   & > .btn {
     position: absolute;
     bottom: 30px;
@@ -258,6 +263,10 @@ export const DeleteSiteModal = styled.div`
     align-items: center;
     gap: 10px;
     margin-top: 10px;
+    .custom-loader {
+      position: inherit;
+      left: inherit;
+    }
   }
 `;
 export const DeleteClientStyled = styled.form`
