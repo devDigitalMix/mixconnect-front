@@ -198,25 +198,25 @@ export default function Client() {
     setUpdateAvatar(!updateAvatar);
   }
 
-  const handleAddGmb = () => {
-    setGmb([...gmb, ""]);
-  };
+  // const handleAddGmb = () => {
+  //   setGmb([...gmb, ""]);
+  // };
 
-  const handleGmbChange = (index, event) => {
-    const newGmb = [...gmb];
-    newGmb[index] = event.target.value;
-    setGmb(newGmb);
-  };
+  // const handleGmbChange = (index, event) => {
+  //   const newGmb = [...gmb];
+  //   newGmb[index] = event.target.value;
+  //   setGmb(newGmb);
+  // };
 
-  const handleAddPage = () => {
-    setPage([...page, ""]);
-  };
+  // const handleAddPage = () => {
+  //   setPage([...page, ""]);
+  // };
 
-  const handlePageChange = (index, event) => {
-    const newPage = [...page];
-    newPage[index] = event.target.value;
-    setPage(newPage);
-  };
+  // const handlePageChange = (index, event) => {
+  //   const newPage = [...page];
+  //   newPage[index] = event.target.value;
+  //   setPage(newPage);
+  // };
 
   const handleAddDrives = () => {
     setDrives([...drives, ""]);
@@ -238,15 +238,15 @@ export default function Client() {
     setSocialMedia(newSocialMedia);
   };
 
-  const handleAddCanaisContato = () => {
-    setCanaisContato([...canaisContato, ""]);
-  };
+  // const handleAddCanaisContato = () => {
+  //   setCanaisContato([...canaisContato, ""]);
+  // };
 
-  const handleCanaisContatoChange = (index, event) => {
-    const newCanaisContato = [...canaisContato];
-    newCanaisContato[index] = event.target.value;
-    setCanaisContato(newCanaisContato);
-  };
+  // const handleCanaisContatoChange = (index, event) => {
+  //   const newCanaisContato = [...canaisContato];
+  //   newCanaisContato[index] = event.target.value;
+  //   setCanaisContato(newCanaisContato);
+  // };
 
   function updateForm() {
     setUpdate(!update);
@@ -352,11 +352,11 @@ export default function Client() {
     }
   }
 
-  function formatWhats(numero) {
-    let numeroLimpo = numero.toString().replace(/[()\-\s]/g, "");
+  // function formatWhats(numero) {
+  //   let numeroLimpo = numero.toString().replace(/[()\-\s]/g, "");
 
-    return numeroLimpo;
-  }
+  //   return numeroLimpo;
+  // }
 
   async function getClient() {
     setReceived(false);
@@ -392,14 +392,14 @@ export default function Client() {
     setIsLoading(false);
   }
 
-  async function findUserLogged() {
-    try {
-      const response = await userLogged();
-      setUser(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  // async function findUserLogged() {
+  //   try {
+  //     const response = await userLogged();
+  //     setUser(response.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   function baixarImg() {
     if (!client.logo) {
@@ -465,16 +465,16 @@ export default function Client() {
     getClient();
   }
 
-  async function handleDeletePlataforma() {
-    if (!chosenPlatform._id) {
-      alert("Selecione uma plataforma para excluir.");
-      setNewSiteModal(false);
-      setDeleteSiteModal(false);
-    }
-    await deletePlataformasClient(id, chosenPlatform._id);
-    setNewSiteModal(false);
-    setDeleteSiteModal(false);
-  }
+  // async function handleDeletePlataforma() {
+  //   if (!chosenPlatform._id) {
+  //     alert("Selecione uma plataforma para excluir.");
+  //     setNewSiteModal(false);
+  //     setDeleteSiteModal(false);
+  //   }
+  //   await deletePlataformasClient(id, chosenPlatform._id);
+  //   setNewSiteModal(false);
+  //   setDeleteSiteModal(false);
+  // }
 
   function newSite() {
     setNewSiteModal(true);
@@ -815,6 +815,38 @@ export default function Client() {
                 <ClientSection>
                   {!received ? (
                     <div className="campo">
+                      <h2>Pré Briefing</h2>
+                      <button>
+                        <Skeleton width="200px" />
+                      </button>
+                    </div>
+                  ) : client.preBriefing ? (
+                    <div className="campo">
+                      <h2>Pré Briefing</h2>
+                      <button
+                        onClick={() =>
+                          navigate("/home/preBriefing/" + client.preBriefing)
+                        }
+                      >
+                        Ver Pré Briefing
+                      </button>
+                    </div>
+                  ) : null}
+                  {!received ? (
+                    <div className="campo">
+                      <h2>Email</h2>
+                      <button>
+                        <Skeleton width="200px" />
+                      </button>
+                    </div>
+                  ) : client.email ? (
+                    <div className="campo">
+                      <h2>Email</h2>
+                      <button>{client.email}</button>
+                    </div>
+                  ) : null}
+                  {!received ? (
+                    <div className="campo">
                       <h2>Observação</h2>
                       <button>
                         <Skeleton width="200px" />
@@ -939,6 +971,25 @@ export default function Client() {
                       </button>
                     </div>
                   ) : null}
+                  {!received ? (
+                    <div className="campo">
+                      <h2>Pré-Briefing</h2>
+                      <button>
+                        <Skeleton width="200px" />
+                      </button>
+                    </div>
+                  ) : client.preBriefing ? (
+                    <div className="campo">
+                      <h2>Pré-Briefing</h2>
+                      <button
+                        onClick={() =>
+                          navigate(`/home/preBriefing/${client.preBriefing}`)
+                        }
+                      >
+                        Ver Proposta
+                      </button>
+                    </div>
+                  ) : null}
 
                   <div className="campo">
                     <h2>Contatos</h2>
@@ -992,6 +1043,22 @@ export default function Client() {
                   <div className="campo">
                     <h2>Contrato</h2>
                     <Input type="file" name="contrato" />
+                  </div>
+                  <div className="campo">
+                    <h2>Telefone</h2>
+                    <Input
+                      type="text"
+                      name="whatsapp"
+                      defaultValue={client.whatsapp}
+                    />
+                  </div>
+                  <div className="campo">
+                    <h2>E-mail</h2>
+                    <Input
+                      type="email"
+                      name="email"
+                      defaultValue={client.email}
+                    />
                   </div>
                   <div className="campo">
                     <h2>Tempo de Contrato</h2>

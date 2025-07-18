@@ -130,12 +130,12 @@ export function Propostas() {
                       />
                     </Link>
                   )}
-                  {proposta.approved && (
+                  {proposta.approved && proposta.clientId && (
                     <Link to={`/home/createBriefing/${proposta._id}`}>
                       <img
-                        src="/exportar.svg"
-                        alt="exportar"
-                        title="exportar"
+                        src="/prebriefing.svg"
+                        alt="Pré Briefing"
+                        title="Pré Briefing"
                       />
                     </Link>
                   )}

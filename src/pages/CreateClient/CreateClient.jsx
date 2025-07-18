@@ -65,6 +65,7 @@ export function CreateClient() {
     data.consultor = consultor;
     data.proposta = `https://mixconnect.tech/sendproposta/${id}`;
     data.report = report;
+
     if (data.vencimento) {
       const vencimentoDate = new Date(data.vencimento);
       vencimentoDate.setHours(vencimentoDate.getHours() + 3);
@@ -76,6 +77,7 @@ export function CreateClient() {
       data.dateStart = startDate;
     }
     const response = await createClientService(data);
+    await updatePropostaService(id, { clientId: response.data._id });
     navigate(`/home/client/${response.data._id}`);
     setLoading(false);
   }

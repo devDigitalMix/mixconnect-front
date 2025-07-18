@@ -90,4 +90,71 @@ export const PreBriefingContainer = styled.form`
       }
     }
   }
+
+  transition: all.8s;
+
+  &.esconde {
+    transform: translate(-110%) scale(0.1);
+    height: 1px;
+  }
+`;
+
+export const TelaCarregamento = styled.section`
+  display: none;
+  &.active {
+    display: inherit;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    transform: translateY(-100px);
+    & > h3 {
+      margin: 0 auto;
+      /* margin-top: 60px; */
+      /* position: relative;
+      top: 130px; */
+      text-align: center;
+      font-size: 20px;
+      font-weight: 500;
+      background-color: #eee;
+      color: #151515;
+      padding: 10px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+    }
+    #light {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100px;
+      height: 100px;
+      background: #151515;
+      border-radius: 50%;
+      box-shadow: 0 0 180px 90px var(--main);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      transition: all 0.1s ease;
+      animation: light 4s infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: var(--font);
+    }
+    @keyframes light {
+      50% {
+        box-shadow: 0 0 40px 20px var(--main);
+      }
+    }
+
+    .guarda-response {
+      max-width: 1200px;
+      margin: 30px auto;
+      background-color: var(--dark);
+      padding: 30px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+    }
+  }
 `;

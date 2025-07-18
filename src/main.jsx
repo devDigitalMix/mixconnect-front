@@ -32,6 +32,7 @@ import { SendProposta } from "./pages/SendProposta/SendProposta.jsx";
 import { Propostas } from "./pages/Propostas/Propostas.jsx";
 import { CreateClient } from "./pages/CreateClient/CreateClient.jsx";
 import { CreatePreBriefing } from "./pages/CreatePreBriefing/CreatePreBriefing.jsx";
+import { PreBriefing } from "./pages/PreBriefing/PreBriefing.jsx";
 
 const router = createBrowserRouter([
   {
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
       {
         path: "/home/approval/:id",
         element: <Approval />,
+      },
+      {
+        path: "/home/preBriefing/:id",
+        element: <PreBriefing />,
       },
       {
         path: "/home/client/:id/nps",
