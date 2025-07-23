@@ -3,8 +3,8 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { baseURL } from "./choreService.js";
 
-export function signin(data) {
-  const response = axios.post(`${baseURL}/auth/login`, data);
+export async function signin(data) {
+  const response = await axios.post(`${baseURL}/auth/login`, data);
   return response;
 }
 

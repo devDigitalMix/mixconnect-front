@@ -358,6 +358,27 @@ export default function Client() {
   //   return numeroLimpo;
   // }
 
+  function copiarTexto(e) {
+    const botao = e.currentTarget;
+    const texto = botao.innerText;
+
+    // Cria um input temporário
+    const inputTemp = document.createElement("input");
+    inputTemp.value = texto;
+    document.body.appendChild(inputTemp);
+
+    // Seleciona e copia o conteúdo
+    inputTemp.select();
+    document.execCommand("copy");
+
+    // Remove o input temporário
+    document.body.removeChild(inputTemp);
+
+    // Feedback visual
+    botao.innerText = "Copiado!";
+    setTimeout(() => (botao.innerText = texto), 1000);
+  }
+
   async function getClient() {
     setReceived(false);
     try {
@@ -896,7 +917,9 @@ export default function Client() {
                   ) : client.tempoContrato ? (
                     <div className="campo">
                       <h2>Tempo de Contrato</h2>
-                      <button>{client.tempoContrato}</button>
+                      <button onClick={copiarTexto}>
+                        {client.tempoContrato}
+                      </button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -909,7 +932,7 @@ export default function Client() {
                   ) : client.value ? (
                     <div className="campo">
                       <h2>Valor da Mensalidade</h2>
-                      <button>{client.value}</button>
+                      <button onClick={copiarTexto}>{client.value}</button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -922,7 +945,7 @@ export default function Client() {
                   ) : client.cnpj ? (
                     <div className="campo">
                       <h2>CPF/CNPJ</h2>
-                      <button>{client.cnpj}</button>
+                      <button onClick={copiarTexto}>{client.cnpj}</button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -935,7 +958,7 @@ export default function Client() {
                   ) : client.consultor ? (
                     <div className="campo">
                       <h2>Consultor</h2>
-                      <button>{client.consultor}</button>
+                      <button onClick={copiarTexto}>{client.consultor}</button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -948,7 +971,9 @@ export default function Client() {
                   ) : client.dateStart ? (
                     <div className="campo">
                       <h2>Dia do Start</h2>
-                      <button>{formatDate(client.dateStart)}</button>
+                      <button onClick={copiarTexto}>
+                        {formatDate(client.dateStart)}
+                      </button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -1129,7 +1154,7 @@ export default function Client() {
                   ) : client.value ? (
                     <div className="campo">
                       <h2>Valor para Pagamento</h2>
-                      <button>{client.value}</button>
+                      <button onClick={copiarTexto}>{client.value}</button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -1142,7 +1167,9 @@ export default function Client() {
                   ) : client.value ? (
                     <div className="campo">
                       <h2>Data de Pagamento</h2>
-                      <button>{formatDay(client.vencimento)}</button>
+                      <button onClick={copiarTexto}>
+                        {formatDay(client.vencimento)}
+                      </button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -1155,7 +1182,9 @@ export default function Client() {
                   ) : client.formaPagamento ? (
                     <div className="campo">
                       <h2>Método de Pagamento</h2>
-                      <button>{client.formaPagamento}</button>
+                      <button onClick={copiarTexto}>
+                        {client.formaPagamento}
+                      </button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -1168,7 +1197,7 @@ export default function Client() {
                   ) : client.value ? (
                     <div className="campo">
                       <h2>Valor da Mensalidade</h2>
-                      <button>{client.value}</button>
+                      <button onClick={copiarTexto}>{client.value}</button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -1181,7 +1210,7 @@ export default function Client() {
                   ) : client.cnpj ? (
                     <div className="campo">
                       <h2>CPF/CNPJ</h2>
-                      <button>{client.cnpj}</button>
+                      <button onClick={copiarTexto}>{client.cnpj}</button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -1194,7 +1223,9 @@ export default function Client() {
                   ) : client.gereNF !== undefined ? (
                     <div className="campo">
                       <h2>Gere NF</h2>
-                      <button>{client.gereNF === true ? "Sim" : "Não"}</button>
+                      <button onClick={copiarTexto}>
+                        {client.gereNF === true ? "Sim" : "Não"}
+                      </button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -1207,7 +1238,9 @@ export default function Client() {
                   ) : client.observacaoFinanceiro ? (
                     <div className="campo">
                       <h2>Observação</h2>
-                      <button>{client.observacaoFinanceiro}</button>
+                      <button onClick={copiarTexto}>
+                        {client.observacaoFinanceiro}
+                      </button>
                     </div>
                   ) : null}
                 </ClientSection>
@@ -1304,7 +1337,7 @@ export default function Client() {
                   ) : client.posts ? (
                     <div className="campo">
                       <h2>Quantidade de Criativos</h2>
-                      <button>{client.posts}</button>
+                      <button onClick={copiarTexto}>{client.posts}</button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -1317,7 +1350,9 @@ export default function Client() {
                   ) : client.formatoCriativos ? (
                     <div className="campo">
                       <h2>Formato dos Criativos</h2>
-                      <button>{client.formatoCriativos}</button>
+                      <button onClick={copiarTexto}>
+                        {client.formatoCriativos}
+                      </button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -1330,7 +1365,9 @@ export default function Client() {
                   ) : client.acompanhamentoRedes ? (
                     <div className="campo">
                       <h2>Nível de Acompanhamento</h2>
-                      <button>{client.acompanhamentoRedes}</button>
+                      <button onClick={copiarTexto}>
+                        {client.acompanhamentoRedes}
+                      </button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -1343,7 +1380,9 @@ export default function Client() {
                   ) : client.briefingCriativo ? (
                     <div className="campo">
                       <h2>Briefing</h2>
-                      <button>{client.briefingCriativo}</button>
+                      <button onClick={copiarTexto}>
+                        {client.briefingCriativo}
+                      </button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -1356,7 +1395,9 @@ export default function Client() {
                   ) : client.observacaoSocial ? (
                     <div className="campo">
                       <h2>Observação</h2>
-                      <button>{client.observacaoSocial}</button>
+                      <button onClick={copiarTexto}>
+                        {client.observacaoSocial}
+                      </button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -1650,7 +1691,9 @@ export default function Client() {
                   ) : client.observacaoDev ? (
                     <div className="campo">
                       <h2>Observação</h2>
-                      <button>{client.observacaoDev}</button>
+                      <button onClick={copiarTexto}>
+                        {client.observacaoDev}
+                      </button>
                     </div>
                   ) : null}
                   {client.dominio.map((dominio, index) => (
@@ -1804,7 +1847,9 @@ export default function Client() {
                   ) : client.observacaoTrafego ? (
                     <div className="campo">
                       <h2>Observação</h2>
-                      <button>{client.observacaoTrafego}</button>
+                      <button onClick={copiarTexto}>
+                        {client.observacaoTrafego}
+                      </button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -1817,7 +1862,9 @@ export default function Client() {
                   ) : client.linkDashboard ? (
                     <div className="campo">
                       <h2>DashBoard</h2>
-                      <button>{client.linkDashboard}</button>
+                      <button onClick={copiarTexto}>
+                        {client.linkDashboard}
+                      </button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -1830,7 +1877,9 @@ export default function Client() {
                   ) : client.linkMetaAds ? (
                     <div className="campo">
                       <h2>Meta ADS</h2>
-                      <button>{client.linkMetaAds}</button>
+                      <button onClick={copiarTexto}>
+                        {client.linkMetaAds}
+                      </button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -1843,7 +1892,9 @@ export default function Client() {
                   ) : client.linkOperand ? (
                     <div className="campo">
                       <h2>Operand</h2>
-                      <button>{client.linkOperand}</button>
+                      <button onClick={copiarTexto}>
+                        {client.linkOperand}
+                      </button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -1856,7 +1907,9 @@ export default function Client() {
                   ) : client.linkGoogleAds ? (
                     <div className="campo">
                       <h2>Google ADS</h2>
-                      <button>{client.linkGoogleAds}</button>
+                      <button onClick={copiarTexto}>
+                        {client.linkGoogleAds}
+                      </button>
                     </div>
                   ) : null}
                   {client.plataformasTrafego.map((plataforma, index) => (
@@ -1931,7 +1984,9 @@ export default function Client() {
                   ) : client.observacaoAV ? (
                     <div className="campo">
                       <h2>Observação</h2>
-                      <button>{client.observacaoAV}</button>
+                      <button onClick={copiarTexto}>
+                        {client.observacaoAV}
+                      </button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -1944,7 +1999,7 @@ export default function Client() {
                   ) : client.nVideos ? (
                     <div className="campo">
                       <h2>Quantidade de Vídeos</h2>
-                      <button>{client.nVideos}</button>
+                      <button onClick={copiarTexto}>{client.nVideos}</button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -1957,7 +2012,7 @@ export default function Client() {
                   ) : client.nVisitas ? (
                     <div className="campo">
                       <h2>Quantidade de Captações Mensal</h2>
-                      <button>{client.nVisitas}</button>
+                      <button onClick={copiarTexto}>{client.nVisitas}</button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -1970,7 +2025,7 @@ export default function Client() {
                   ) : client.tempoCap ? (
                     <div className="campo">
                       <h2>Tempo de Captação</h2>
-                      <button>{client.tempoCap}</button>
+                      <button onClick={copiarTexto}>{client.tempoCap}</button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -1983,7 +2038,9 @@ export default function Client() {
                   ) : client.briefingVideo ? (
                     <div className="campo">
                       <h2>Briefing Vídeo</h2>
-                      <button>{client.briefingVideo}</button>
+                      <button onClick={copiarTexto}>
+                        {client.briefingVideo}
+                      </button>
                     </div>
                   ) : null}
                   {!received ? (
@@ -1996,7 +2053,9 @@ export default function Client() {
                   ) : client.formatoVideos ? (
                     <div className="campo">
                       <h2>Formato dos Vídeos</h2>
-                      <button>{client.formatoVideos}</button>
+                      <button onClick={copiarTexto}>
+                        {client.formatoVideos}
+                      </button>
                     </div>
                   ) : null}
                   {!received ? (
