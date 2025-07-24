@@ -231,7 +231,7 @@ export function PropostaCreate() {
               placeholder="Site"
               name="site"
               value={site}
-              max={10}
+              max={99}
               min={0}
               onChange={(e) =>
                 setSite(
@@ -428,7 +428,7 @@ export function PropostaCreate() {
               placeholder="Gmb"
               name="gmb"
               value={gmb}
-              max={10}
+              max={99}
               min={0}
               onChange={(e) =>
                 setGmb(
@@ -451,7 +451,7 @@ export function PropostaCreate() {
               placeholder="Posts"
               name="posts"
               value={posts}
-              max={50}
+              max={999}
               min={0}
               onChange={(e) =>
                 setPosts(
@@ -475,7 +475,7 @@ export function PropostaCreate() {
               placeholder="Visitas ao Mês"
               name="nVisitas"
               value={nVisitas}
-              max={10}
+              max={99}
               min={0}
               onChange={(e) =>
                 setNVisitas(
