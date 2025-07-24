@@ -457,7 +457,7 @@ export function PropostaCreate() {
                 setPosts(
                   e.target.value === ""
                     ? ""
-                    : Math.min(Number(e.target.value), 50)
+                    : Math.min(Number(e.target.value), 999)
                 )
               }
             />
