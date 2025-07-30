@@ -129,6 +129,9 @@ export const PropostaCards = styled.section`
       margin-left: auto;
       text-align: right;
       margin-right: 15px;
+      span {
+        color: var(--sec);
+      }
       @media only screen and (max-width: 500px) {
         font-size: 20px;
       }

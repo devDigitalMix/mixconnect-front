@@ -51,6 +51,12 @@ export const PropostaContainer = styled.form`
       display: flex;
       gap: 3px;
     }
+    .inputContainer {
+      display: grid;
+      .guardaInput + label {
+        margin-top: 15px;
+      }
+    }
     & + h3 {
       margin-top: 30px;
     }
@@ -63,6 +69,7 @@ export const PropostaContainer = styled.form`
     &.redesSection {
       margin-top: 30px;
       gap: 20px 60px;
+      align-items: start;
       h3 {
         font-size: 18px;
         letter-spacing: 1px;

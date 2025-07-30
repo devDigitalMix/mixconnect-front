@@ -32,6 +32,7 @@ export function SendProposta() {
   const [grupoPremium, setGrupoPremium] = useState(false);
   const [criativos, setCriativos] = useState(false);
   const [captacao, setCaptacao] = useState(false);
+  const [logotipo, setLogotipo] = useState(false);
   const [validaAte, setValidaAte] = useState();
   const [proposta, setProposta] = useState({});
   const [user, setUser] = useState(null);
@@ -74,6 +75,9 @@ export function SendProposta() {
     }
     if (response.data.gpPremium) {
       setGrupoPremium(true);
+    }
+    if (response.data.logotipo) {
+      setLogotipo(true);
     }
     if (
       response.data.tempoCap > 0 ||
@@ -181,8 +185,10 @@ export function SendProposta() {
               </h3>
             </div>
             <p>
-              {proposta.starValue && `+ R$${proposta.value},00 por mês`} <br />{" "}
-              plano pré-pago
+              <span>
+                {proposta.startValue && `+ R$${proposta.value},00 por mês`}
+              </span>{" "}
+              <br /> plano pré-pago
             </p>
           </div>
         </PropostaCards>
@@ -363,6 +369,23 @@ export function SendProposta() {
                           {proposta.drone && "com drone, por "}
                           {proposta.tempoCap} h e {proposta.nVideos} edições{" "}
                           (atendimento exclusivo para Joinville)
+                        </p>
+                      </div>
+                    </li>
+                  )}
+                  {logotipo && (
+                    <li>
+                      <img src="/logotipo.png" /> <h3>{c++}</h3>{" "}
+                      <div>
+                        <h4>LOGOTIPO</h4>{" "}
+                        <p>
+                          Criação de logotipo para a empresa,{" "}
+                          {proposta.presentation &&
+                            "incluso apresentação do logotipo, "}
+                          {proposta.manualIdVisual &&
+                            "fabricação de manual de identidade visual, "}
+                          {proposta.materiaisPapelaria > 0 &&
+                            `e confecção de ${proposta.materiaisPapelaria} materiais de papelaria.`}
                         </p>
                       </div>
                     </li>

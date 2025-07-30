@@ -39,6 +39,8 @@ export function PropostaCreate() {
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [findingUser, setFindingUser] = useState(true);
   const [proposta, setProposta] = useState(null);
+  const [logotipo, setLogotipo] = useState();
+  const [materiaisPapelaria, setMateriaisPapelaria] = useState();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -418,7 +420,7 @@ export function PropostaCreate() {
         </div>
       </div>
       <div className="formSection redesSection">
-        <div className="InputContainer">
+        <div className="inputContainer">
           <h3>Google Meu Negócio</h3>
           <label htmlFor="gmb">Perfil(s)</label>
           <div className="guardaInput">
@@ -439,6 +441,18 @@ export function PropostaCreate() {
               }
             />
             <img src="/mais.svg" onClick={() => setGmb(gmb + 1)} />
+          </div>
+          <label htmlFor="foto360">Fotos 360º</label>
+          <div className="guardaInput">
+            <select name="foto360">
+              {proposta?.foto360 && (
+                <option value={proposta.foto360}>
+                  {proposta.foto360 == false ? "Não" : "Sim"}
+                </option>
+              )}
+              <option value={true}>Sim</option>
+              <option value={false}>Não</option>
+            </select>
           </div>
         </div>
         <div className="InputContainer">
@@ -516,6 +530,81 @@ export function PropostaCreate() {
                 <option value={true}>Sim</option>
               </select>
             </div>
+          </>
+        )}
+      </div>
+      <h3>Logotipo</h3>
+      <div className="formSection">
+        <div className="InputContainer">
+          <label htmlFor="logotipo">Logotipo</label>
+          <div className="guardaInput">
+            <select
+              name="logotipo"
+              onChange={(e) => {
+                const value = e.target.value === "true"; // converte string para boolean
+                setLogotipo(value);
+                console.log(typeof value); // agora será boolean
+              }}
+            >
+              {proposta?.logotipo && (
+                <option value={proposta.logotipo}>
+                  {proposta.logotipo == false ? "Não" : "Sim"}
+                </option>
+              )}
+              <option value={false}>Não</option>
+              <option value={true}>Sim</option>
+            </select>
+          </div>
+        </div>
+        {logotipo && (
+          <>
+            <div className="InputContainer">
+              <label htmlFor="presentation">Apresentação</label>
+              <div className="guardaInput">
+                <select name="presentation">
+                  {proposta?.presentation && (
+                    <option value={proposta.presentation}>
+                      {proposta.presentation == false ? "Não" : "Sim"}
+                    </option>
+                  )}
+                  <option value={false}>Não</option>
+                  <option value={true}>Sim</option>
+                </select>
+              </div>
+            </div>
+            <div className="InputContainer">
+              <label htmlFor="manualIdVisual">
+                Manual de Identidade Visual
+              </label>
+              <div className="guardaInput">
+                <select name="manualIdVisual">
+                  {proposta?.manualIdVisual && (
+                    <option value={proposta.manualIdVisual}>
+                      {proposta.manualIdVisual == false ? "Não" : "Sim"}
+                    </option>
+                  )}
+                  <option value={false}>Não</option>
+                  <option value={true}>Sim</option>
+                </select>
+              </div>
+            </div>
+            <Input
+              type="number"
+              placeholder="Materiais de Papelaria"
+              name="materiaisPapelaria"
+              defaultValue={proposta?.materiaisPapelaria || ""}
+              style={{ maxWidth: 250 + "px" }}
+              max={10}
+              min={0}
+              value={materiaisPapelaria}
+              onChange={(e) =>
+                setMateriaisPapelaria(
+                  e.target.value === ""
+                    ? ""
+                    : Math.min(Number(e.target.value), 10)
+                )
+              }
+            />
           </>
         )}
       </div>
