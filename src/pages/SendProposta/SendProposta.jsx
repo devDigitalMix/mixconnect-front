@@ -186,7 +186,7 @@ export function SendProposta() {
             </div>
             <p>
               <span>
-                {proposta.startValue && `+ R$${proposta.value},00 por mês`}
+                {proposta.value && `+ R$${proposta.value},00 por mês`}
               </span>{" "}
               <br /> plano pré-pago
             </p>
