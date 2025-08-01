@@ -185,10 +185,13 @@ export function SendProposta() {
               </h3>
             </div>
             <p>
-              <span>
-                {proposta.value && `+ R$${proposta.value},00 por mês`}
-              </span>{" "}
-              <br /> plano pré-pago
+              {proposta.value > 0 && (
+                <>
+                  <span>R${proposta.value},00 por mês</span>
+                  <br />
+                </>
+              )}
+              plano pré-pago
             </p>
           </div>
         </PropostaCards>
