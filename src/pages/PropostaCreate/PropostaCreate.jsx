@@ -642,6 +642,7 @@ export function PropostaCreate() {
               </option>
             )}
             <option value="Avulso">Avulso</option>
+            <option value="2 Meses">2 Meses</option>
             <option value="3 Meses">3 Meses</option>
             <option value="6 Meses">6 Meses</option>
             <option value="12 Meses">12 Meses</option>
