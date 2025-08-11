@@ -31,7 +31,7 @@ export function Propostas() {
 
   async function copyLink(id) {
     await navigator.clipboard.writeText(
-      `https://mixconnect.tech/sendproposta/${id}`
+      `https://mixconnect.digitalmix.tech/sendproposta/${id}`
     );
     setCopied(id);
     setTimeout(() => {

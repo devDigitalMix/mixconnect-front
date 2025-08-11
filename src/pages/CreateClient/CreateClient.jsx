@@ -63,7 +63,7 @@ export function CreateClient() {
     data.meta = meta;
     data.value = value;
     data.consultor = consultor;
-    data.proposta = `https://mixconnect.tech/sendproposta/${id}`;
+    data.proposta = `https://mixconnect.digitalmix.tech/sendproposta/${id}`;
     data.report = report;
 
     if (data.vencimento) {

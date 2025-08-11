@@ -113,7 +113,7 @@ export default function Client() {
     try {
       response = await createNpsService(data);
       await navigator.clipboard.writeText(
-        `https://mixconnect.tech/sendnps/${response.data._id}`
+        `https://mixconnect.digitalmix.tech/sendnps/${response.data._id}`
       );
       setTimeout(() => setCreateNps(false), 3000);
     } catch (error) {
