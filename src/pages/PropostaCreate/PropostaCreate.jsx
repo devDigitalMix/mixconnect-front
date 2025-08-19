@@ -616,6 +616,7 @@ export function PropostaCreate() {
             {proposta?.report && (
               <option value={proposta.report}>{proposta.report}</option>
             )}
+            <option value={false}>Não</option>
             <option value="Semanais">Semanais</option>
             <option value="Mensais">Mensais</option>
             <option value="Trimestrais">Trimestrais</option>

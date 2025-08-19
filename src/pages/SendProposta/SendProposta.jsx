@@ -328,16 +328,18 @@ export function SendProposta() {
                       <p>Dashboard de resultados com as principais métricas.</p>
                     </div>
                   </li>
-                  <li>
-                    <img src="/reunioes.png" /> <h3>{c++}</h3>{" "}
-                    <div>
-                      <h4>REUNIÕES</h4>{" "}
-                      <p>
-                        Reuniões {proposta.report} presenciais (sede da
-                        Digital_Mix) ou via meet.
-                      </p>
-                    </div>
-                  </li>
+                  {proposta.report && proposta.report != "false" && (
+                    <li>
+                      <img src="/reunioes.png" /> <h3>{c++}</h3>{" "}
+                      <div>
+                        <h4>REUNIÕES</h4>{" "}
+                        <p>
+                          Reuniões {proposta.report} presenciais (sede da
+                          Digital_Mix) ou via meet.
+                        </p>
+                      </div>
+                    </li>
+                  )}
                   {grupoPremium && (
                     <li>
                       <img src="/atendimento-premium.png" /> <h3>{c++}</h3>{" "}
