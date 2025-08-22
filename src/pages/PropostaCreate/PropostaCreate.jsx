@@ -31,6 +31,7 @@ export function PropostaCreate() {
   const [tempoCap, setTempoCap] = useState(0);
   const [nVideos, setNVideos] = useState(0);
   const [nVisitas, setNVisitas] = useState(0);
+  const [prazo, setPrazo] = useState(30);
   const [report, setReport] = useState("");
   const [gpPremium, setGpPremium] = useState(false);
   const [drone, setDrone] = useState(false);
@@ -149,6 +150,7 @@ export function PropostaCreate() {
           setTempoCap(data.tempoCap || 0);
           setNVideos(data.nVideos || 0);
           setNVisitas(data.nVisitas || 0);
+          setPrazo(data.prazo || 0);
           setReport(data.report || "");
           setGpPremium(data.gpPremium || false);
           setTempoContrato(data.tempoContrato || "");
@@ -239,7 +241,7 @@ export function PropostaCreate() {
                 setSite(
                   e.target.value === ""
                     ? ""
-                    : Math.min(Number(e.target.value), 10)
+                    : Math.min(Number(e.target.value), 99)
                 )
               }
             />
@@ -436,7 +438,7 @@ export function PropostaCreate() {
                 setGmb(
                   e.target.value === ""
                     ? ""
-                    : Math.min(Number(e.target.value), 10)
+                    : Math.min(Number(e.target.value), 99)
                 )
               }
             />
@@ -495,7 +497,7 @@ export function PropostaCreate() {
                 setNVisitas(
                   e.target.value === ""
                     ? ""
-                    : Math.min(Number(e.target.value), 10)
+                    : Math.min(Number(e.target.value), 99)
                 )
               }
             />
@@ -543,7 +545,6 @@ export function PropostaCreate() {
               onChange={(e) => {
                 const value = e.target.value === "true"; // converte string para boolean
                 setLogotipo(value);
-                console.log(typeof value); // agora será boolean
               }}
             >
               {proposta?.logotipo && (
@@ -594,14 +595,14 @@ export function PropostaCreate() {
               name="materiaisPapelaria"
               defaultValue={proposta?.materiaisPapelaria || ""}
               style={{ maxWidth: 250 + "px" }}
-              max={10}
+              max={999}
               min={0}
               value={materiaisPapelaria}
               onChange={(e) =>
                 setMateriaisPapelaria(
                   e.target.value === ""
                     ? ""
-                    : Math.min(Number(e.target.value), 10)
+                    : Math.min(Number(e.target.value), 999)
                 )
               }
             />
@@ -610,6 +611,16 @@ export function PropostaCreate() {
       </div>
       <h3>Outras informações</h3>
       <div className="formSection">
+        <div>
+          <label htmlFor="dashboard">Dashboard</label>
+          <select name="dashboard">
+            {proposta?.report && (
+              <option value={proposta.report}>{proposta.report}</option>
+            )}
+            <option value={true}>Sim</option>
+            <option value={false}>Não</option>
+          </select>
+        </div>
         <div>
           <label htmlFor="report">Reunião</label>
           <select name="report">
@@ -649,6 +660,30 @@ export function PropostaCreate() {
             <option value="12 Meses">12 Meses</option>
             <option value="24 Meses">24 Meses</option>
           </select>
+        </div>
+        <div>
+          <label htmlFor="prazo">Prazo</label>
+          <div className="guardaInput" id="prazo">
+            <img
+              src="/menos.svg"
+              onClick={() => setPrazo(prazo - 1 > 0 ? prazo - 1 : 0)}
+            />
+            <Input
+              type="number"
+              name="prazo"
+              value={prazo}
+              max={999}
+              min={0}
+              onChange={(e) =>
+                setPrazo(
+                  e.target.value === ""
+                    ? ""
+                    : Math.min(Number(e.target.value), 999)
+                )
+              }
+            />
+            <img src="/mais.svg" onClick={() => setPrazo(prazo + 1)} />
+          </div>
         </div>
         <div>
           <label htmlFor="value" className="mainLabel">

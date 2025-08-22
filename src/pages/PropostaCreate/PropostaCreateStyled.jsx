@@ -23,6 +23,11 @@ export const PropostaContainer = styled.form`
         color: var(--sec);
       }
     }
+    #prazo {
+      input {
+        max-width: 70px;
+      }
+    }
     .inputQuant {
       border: none;
       padding: 5px 5px 5px;
@@ -50,6 +55,9 @@ export const PropostaContainer = styled.form`
     .guardaInput {
       display: flex;
       gap: 3px;
+      img {
+        cursor: pointer;
+      }
     }
     .inputContainer {
       display: grid;

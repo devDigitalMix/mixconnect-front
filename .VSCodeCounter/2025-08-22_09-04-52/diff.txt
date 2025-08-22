@@ -1,0 +1,84 @@
+Date : 2025-08-22 09:04:52
+Directory : c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src
+Total : 35 files,  5463 codes, 138 comments, 127 blanks, all 5728 lines
+
+Languages
++----------------+------------+------------+------------+------------+------------+
+| language       | files      | code       | comment    | blank      | total      |
++----------------+------------+------------+------------+------------+------------+
+| JavaScript JSX |         30 |      5,327 |        138 |        109 |      5,574 |
+| JavaScript     |          5 |        136 |          0 |         18 |        154 |
++----------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                            | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                               |         35 |      5,463 |        138 |        127 |      5,728 |
+| . (Files)                                                                                                       |          1 |         38 |          0 |         -1 |         37 |
+| components                                                                                                      |          3 |         49 |          0 |          1 |         50 |
+| components\Input                                                                                                |          1 |          7 |          0 |          0 |          7 |
+| components\Navbar                                                                                               |          2 |         42 |          0 |          1 |         43 |
+| pages                                                                                                           |         26 |      5,240 |        138 |        109 |      5,487 |
+| pages\AllNps                                                                                                    |          1 |         44 |         -3 |         -4 |         37 |
+| pages\ChoreTasks                                                                                                |          1 |         10 |          0 |          0 |         10 |
+| pages\Chores                                                                                                    |          1 |         10 |          0 |          0 |         10 |
+| pages\Client                                                                                                    |          2 |      1,445 |         53 |         19 |      1,517 |
+| pages\Clients                                                                                                   |          1 |        -46 |         47 |          0 |          1 |
+| pages\CreateClient                                                                                              |          2 |        259 |          2 |         15 |        276 |
+| pages\CreatePreBriefing                                                                                         |          2 |        850 |          4 |         24 |        878 |
+| pages\DeletedClient                                                                                             |          1 |         10 |          0 |          0 |         10 |
+| pages\DeletedClients                                                                                            |          1 |         10 |          0 |          0 |         10 |
+| pages\Employee                                                                                                  |          1 |          6 |          8 |          0 |         14 |
+| pages\Employees                                                                                                 |          1 |         10 |          0 |          0 |         10 |
+| pages\Home                                                                                                      |          1 |         10 |          0 |          0 |         10 |
+| pages\Logins                                                                                                    |          1 |         10 |          0 |          0 |         10 |
+| pages\PreBriefing                                                                                               |          2 |        523 |          1 |         10 |        534 |
+| pages\Profile                                                                                                   |          2 |         24 |          0 |          0 |         24 |
+| pages\PropostaCreate                                                                                            |          2 |        790 |          4 |         13 |        807 |
+| pages\Propostas                                                                                                 |          2 |        269 |          1 |          9 |        279 |
+| pages\SendProposta                                                                                              |          2 |      1,006 |         21 |         23 |      1,050 |
+| services                                                                                                        |          5 |        136 |          0 |         18 |        154 |
++-----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| filename                                                                                                        | language       | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Input\InputStyled.jsx                    | JavaScript JSX |          7 |          0 |          0 |          7 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Navbar\Navbar.jsx                        | JavaScript JSX |         30 |          0 |          1 |         31 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\components\Navbar\NavbarStyled.jsx                  | JavaScript JSX |         12 |          0 |          0 |         12 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\main.jsx                                            | JavaScript JSX |         38 |          0 |         -1 |         37 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\AllNps\AllNps.jsx                             | JavaScript JSX |         44 |         -3 |         -4 |         37 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\ChoreTasks\ChoreTasks.jsx                     | JavaScript JSX |         10 |          0 |          0 |         10 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Chores\Chores.jsx                             | JavaScript JSX |         10 |          0 |          0 |         10 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Client\Client.jsx                             | JavaScript JSX |      1,180 |         53 |         15 |      1,248 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Client\ClientStyled.jsx                       | JavaScript JSX |        265 |          0 |          4 |        269 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Clients\Clients.jsx                           | JavaScript JSX |        -46 |         47 |          0 |          1 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\CreateClient\CreateClient.jsx                 | JavaScript JSX |        259 |          2 |         14 |        275 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\CreateClient\CreateClientStyled.jsx           | JavaScript JSX |          0 |          0 |          1 |          1 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\CreatePreBriefing\CreatePreBriefing.jsx       | JavaScript JSX |        692 |          4 |         21 |        717 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\CreatePreBriefing\CreatePreBriefingStyled.jsx | JavaScript JSX |        158 |          0 |          3 |        161 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\DeletedClient\DeletedClient.jsx               | JavaScript JSX |         10 |          0 |          0 |         10 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\DeletedClients\DeletedClients.jsx             | JavaScript JSX |         10 |          0 |          0 |         10 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Employee\Employee.jsx                         | JavaScript JSX |          6 |          8 |          0 |         14 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Employees\Employees.jsx                       | JavaScript JSX |         10 |          0 |          0 |         10 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Home\Home.jsx                                 | JavaScript JSX |         10 |          0 |          0 |         10 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Logins\Logins.jsx                             | JavaScript JSX |         10 |          0 |          0 |         10 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\PreBriefing\PreBriefing.jsx                   | JavaScript JSX |        434 |          1 |          5 |        440 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\PreBriefing\PreBriefingStyled.jsx             | JavaScript JSX |         89 |          0 |          5 |         94 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Profile\Profile.jsx                           | JavaScript JSX |         10 |          0 |          0 |         10 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Profile\ProfileStyled.jsx                     | JavaScript JSX |         14 |          0 |          0 |         14 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\PropostaCreate\PropostaCreate.jsx             | JavaScript JSX |        683 |          4 |         11 |        698 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\PropostaCreate\PropostaCreateStyled.jsx       | JavaScript JSX |        107 |          0 |          2 |        109 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Propostas\Propostas.jsx                       | JavaScript JSX |        142 |          1 |          7 |        150 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\Propostas\PropostasStyled.jsx                 | JavaScript JSX |        127 |          0 |          2 |        129 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\SendProposta\SendProposta.jsx                 | JavaScript JSX |        501 |         21 |         13 |        535 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\pages\SendProposta\SendPropostaStyled.jsx           | JavaScript JSX |        505 |          0 |         10 |        515 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\services\choreService.js                            | JavaScript     |          2 |         -1 |          0 |          1 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\services\clientService.js                           | JavaScript     |         61 |          0 |          5 |         66 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\services\npsService.js                              | JavaScript     |          3 |          0 |          0 |          3 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\services\preBriefingService.js                      | JavaScript     |         27 |          0 |          7 |         34 |
+| c:\Users\DigitalMix3\Desktop\apis\mixconnect-front-text\src\services\propostaService.js                         | JavaScript     |         43 |          1 |          6 |         50 |
+| Total                                                                                                           |                |      5,463 |        138 |        127 |      5,728 |
++-----------------------------------------------------------------------------------------------------------------+----------------+------------+------------+------------+------------+

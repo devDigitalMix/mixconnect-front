@@ -3,11 +3,13 @@ import styled from "styled-components";
 export const PropostasContainer = styled.section`
   width: 100%;
   max-width: 1200px;
+  padding: 30px 10px 60px;
 `;
 export const PropostasHeader = styled.header`
   display: flex;
   justify-content: space-between;
   max-width: 1088px;
+  margin: 0 auto;
   margin-bottom: 40px;
   div {
     button {
@@ -51,6 +53,7 @@ export const PropostasBody = styled.div`
   background-color: #2f2f34;
   border-radius: 10px;
   max-width: 1092px;
+  margin: 0 auto;
   width: 100%;
   padding: 20px;
   display: grid;

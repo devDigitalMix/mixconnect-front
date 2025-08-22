@@ -6,8 +6,15 @@ import {
   PropostasContainer,
   PropostasHeader,
 } from "./PropostasStyled";
-import { getAllPropostas } from "../../services/propostaService";
+import {
+  getAllPropostas,
+  getPropostasAbertas,
+  getPropostasAprovadas,
+  getPropostasVencidas,
+} from "../../services/propostaService";
 import { Link, useNavigate } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export function Propostas() {
   const [propostas, setPropostas] = useState([]);
@@ -21,12 +28,15 @@ export function Propostas() {
 
   async function getPropostas() {
     setReceived(false);
-    const response = await getAllPropostas();
-    setPropostas(response.data.todas);
-    setAprovadas(response.data.aprovadas);
-    setExpiradas(response.data.vencidas);
-    setAbertas(response.data.restantes);
+    const response = await getPropostasAbertas();
+    setAbertas(response.data);
+    setPropostas(response.data);
     setReceived(true);
+    const responseAprovadas = await getPropostasAprovadas();
+    setAprovadas(responseAprovadas.data);
+    const responseVencidas = await getPropostasVencidas();
+    setExpiradas(responseVencidas.data);
+    console.log(response.data);
   }
 
   async function copyLink(id) {
@@ -142,7 +152,14 @@ export function Propostas() {
                 </div>
               </PropostaCard>
             ))
-          : null}
+          : [1, 2, 3, 4, 5, 6].map((i) => (
+              <PropostaCard key={i}>
+                <Skeleton width="70px" height="25px" />
+                <Skeleton width="200px" height="35px" />
+                <Skeleton width="180px" height="35px" />
+                <Skeleton width="100px" height="40px" />
+              </PropostaCard>
+            ))}
       </PropostasBody>
     </PropostasContainer>
   );

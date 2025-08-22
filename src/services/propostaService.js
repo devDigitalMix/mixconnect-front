@@ -39,6 +39,33 @@ export function getAllPropostas() {
   return response;
 }
 
+export function getPropostasAbertas() {
+  const response = axios.get(`${baseURL}/proposta/abertas/`, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
+  return response;
+}
+
+export function getPropostasAprovadas() {
+  const response = axios.get(`${baseURL}/proposta/aprovadas/`, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
+  return response;
+}
+
+export function getPropostasVencidas() {
+  const response = axios.get(`${baseURL}/proposta/vencidas/`, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
+  return response;
+}
+
 export function updatePropostaService(id, data) {
   const response = axios.patch(`${baseURL}/proposta/update/${id}`, data, {
     headers: {

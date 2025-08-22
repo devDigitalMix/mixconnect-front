@@ -201,7 +201,7 @@ export function SendProposta() {
               <img src="/prazo.png" />{" "}
               <h2>Prazo máximo de execução do serviço após onboarding:</h2>
             </div>{" "}
-            <h3>30 dias</h3>
+            <h3>{proposta.prazo} dias</h3>
           </li>
           <li>
             <div>
@@ -321,13 +321,17 @@ export function SendProposta() {
                       </div>
                     </li>
                   )}
-                  <li>
-                    <img src="/dashboard.png" /> <h3>{c++}</h3>{" "}
-                    <div>
-                      <h4>DASHBOARD</h4>{" "}
-                      <p>Dashboard de resultados com as principais métricas.</p>
-                    </div>
-                  </li>
+                  {proposta.dashboard && (
+                    <li>
+                      <img src="/dashboard.png" /> <h3>{c++}</h3>{" "}
+                      <div>
+                        <h4>DASHBOARD</h4>{" "}
+                        <p>
+                          Dashboard de resultados com as principais métricas.
+                        </p>
+                      </div>
+                    </li>
+                  )}
                   {proposta.report && proposta.report != "false" && (
                     <li>
                       <img src="/reunioes.png" /> <h3>{c++}</h3>{" "}
