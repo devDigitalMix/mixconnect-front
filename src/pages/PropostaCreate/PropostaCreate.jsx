@@ -268,6 +268,13 @@ export function PropostaCreate() {
                   className="inputQuant"
                   defaultValue={proposta?.secoesSite || ""}
                 />
+                <input
+                  type="text"
+                  placeholder="h/alt"
+                  name="alteracoesSite"
+                  className="inputQuant"
+                  defaultValue={proposta?.alteracoesSite || ""}
+                />
               </div>
             )}
           </div>
@@ -286,6 +293,15 @@ export function PropostaCreate() {
               }
             />
             <img src="/mais.svg" onClick={() => setMixtree(mixtree + 1)} />
+            {mixtree > 0 && (
+              <input
+                type="text"
+                placeholder="h/alt"
+                name="alteracoesMixtree"
+                className="inputQuant"
+                defaultValue={proposta?.alteracoesMixtree || ""}
+              />
+            )}
           </div>
         </div>
         <div className="InputContainer">
@@ -310,6 +326,13 @@ export function PropostaCreate() {
                   name="dobraCatalogo"
                   defaultValue={proposta?.dobraCatalogo || ""}
                   className="inputQuant"
+                />
+                <input
+                  type="text"
+                  placeholder="h/alt"
+                  name="alteracoesCatalogo"
+                  className="inputQuant"
+                  defaultValue={proposta?.alteracoesCatalogo || ""}
                 />
               </div>
             )}
@@ -338,6 +361,13 @@ export function PropostaCreate() {
                   defaultValue={proposta?.secoesSmart || ""}
                   className="inputQuant"
                 />
+                <input
+                  type="text"
+                  placeholder="h/alt"
+                  name="alteracoesSmart"
+                  className="inputQuant"
+                  defaultValue={proposta?.alteracoesSmart || ""}
+                />
               </div>
             )}
           </div>
@@ -364,6 +394,13 @@ export function PropostaCreate() {
                   name="secoesLp"
                   defaultValue={proposta?.secoesLp || ""}
                   className="inputQuant"
+                />
+                <input
+                  type="text"
+                  placeholder="h/alt"
+                  name="alteracoesLp"
+                  className="inputQuant"
+                  defaultValue={proposta?.alteracoesLp || ""}
                 />
               </div>
             )}

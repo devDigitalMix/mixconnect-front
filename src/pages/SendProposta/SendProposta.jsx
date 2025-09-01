@@ -258,14 +258,26 @@ export function SendProposta() {
                               proposta.secoesSite > 0
                                 ? ` ${proposta.secoesSite} seções`
                                 : ``
+                            }${
+                              proposta.alteracoesSite > 0
+                                ? ` ${proposta.alteracoesSite} hora(s) de alterações`
+                                : ``
                             }, `}{" "}
                           {proposta.mixtree > 0 &&
-                            proposta.mixtree + " Mixtree(s), "}{" "}
+                            `${proposta.mixtree}  Mixtree(s)${
+                              proposta.alteracoesMixtree > 0
+                                ? ` ${proposta.alteracoesMixtree} hora(s) de alterações`
+                                : ``
+                            }, `}{" "}
                           {proposta.lp > 0 &&
                             proposta.lp +
                               ` Landing Page(s)${
                                 proposta.secoesLp > 0
                                   ? ` ${proposta.secoesLp} seções`
+                                  : ``
+                              }${
+                                proposta.alteracoesLp > 0
+                                  ? ` ${proposta.alteracoesLp} hora(s) de alterações`
                                   : ``
                               }, `}{" "}
                           {proposta.smart > 0 &&
@@ -274,12 +286,20 @@ export function SendProposta() {
                                 proposta.smart > 0
                                   ? ` ${proposta.secoesSmart} seções`
                                   : ``
+                              }${
+                                proposta.alteracoesSmart > 0
+                                  ? ` ${proposta.alteracoesSmart} hora(s) de alterações`
+                                  : ``
                               }, `}{" "}
                           {proposta.catalogo > 0 &&
                             proposta.catalogo +
                               ` Catálogo(s)${
                                 proposta.dobraCatalogo > 0
                                   ? ` ${proposta.dobraCatalogo} dobras`
+                                  : ``
+                              }${
+                                proposta.alteracoesCatalogo > 0
+                                  ? ` ${proposta.alteracoesCatalogo} hora(s) de alterações`
                                   : ``
                               }, `}{" "}
                           para captação de leads e/ou apresentação de produto,
