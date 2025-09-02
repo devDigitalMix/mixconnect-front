@@ -336,7 +336,9 @@ export function SendProposta() {
                         <h4>GOOGLE MEU NEGÓCIO</h4>{" "}
                         <p>
                           Gestão e otimização de {proposta.gmb}x página(s)
-                          local(is) da empresa no Google meu Negócio.
+                          local(is) da empresa no Google meu Negócio
+                          {proposta.fotos360 ? " e captação de fotos 360º" : ""}
+                          .
                         </p>
                       </div>
                     </li>
