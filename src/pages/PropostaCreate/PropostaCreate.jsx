@@ -481,12 +481,12 @@ export function PropostaCreate() {
             />
             <img src="/mais.svg" onClick={() => setGmb(gmb + 1)} />
           </div>
-          <label htmlFor="foto360">Fotos 360º</label>
+          <label htmlFor="fotos360">Fotos 360º</label>
           <div className="guardaInput">
-            <select name="foto360">
-              {proposta?.foto360 && (
-                <option value={proposta.foto360}>
-                  {proposta.foto360 == false ? "Não" : "Sim"}
+            <select name="fotos360">
+              {proposta?.fotos360 && (
+                <option value={proposta.fotos360}>
+                  {proposta.fotos360 == false ? "Não" : "Sim"}
                 </option>
               )}
               <option value={true}>Sim</option>
