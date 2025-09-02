@@ -60,6 +60,7 @@ export function PropostaCreate() {
           alert("Proposta atualizada com sucesso!");
           navigate("/sendproposta/" + id);
         } catch (error) {
+          console.log(error);
           alert("Erro ao atualizar proposta.");
         }
         setLoading(false);
@@ -651,8 +652,8 @@ export function PropostaCreate() {
         <div>
           <label htmlFor="dashboard">Dashboard</label>
           <select name="dashboard">
-            {proposta?.report && (
-              <option value={proposta.report}>{proposta.report}</option>
+            {proposta?.dashboard && (
+              <option value={proposta.dashboard}>{proposta.dashboard}</option>
             )}
             <option value={true}>Sim</option>
             <option value={false}>Não</option>
