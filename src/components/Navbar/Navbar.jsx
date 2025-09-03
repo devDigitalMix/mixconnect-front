@@ -1,7 +1,14 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import { ErrorSpan, Header, Nav, NavMenu, PerfilMenu } from "./NavbarStyled";
+import {
+  ErrorSpan,
+  Hamburger,
+  Header,
+  Nav,
+  NavMenu,
+  PerfilMenu,
+} from "./NavbarStyled";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,6 +25,7 @@ export function Navbar() {
   const [nav, setNav] = useState("");
   const [findingUser, setFindingUser] = useState(true);
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
   const [activeButton, setActiveButton] = useState(null);
 
   async function findUserLogged() {
@@ -75,8 +83,7 @@ export function Navbar() {
             <Link to={"/home"} onClick={() => handleButtonClick("")}>
               <img src="/logo.svg" alt="MixConnect" draggable="false" />
             </Link>
-
-            <NavMenu>
+            <NavMenu open={menuOpen}>
               <Link to={"/home/clients"}>
                 <button
                   className={nav.includes("clients") ? "active" : ""}
@@ -174,6 +181,11 @@ export function Navbar() {
                 <img src="/logout.svg" alt="Sair" title="Sair" />
               </button>
             </PerfilMenu>
+            <Hamburger onClick={() => setMenuOpen(!menuOpen)} open={menuOpen}>
+              <span />
+              <span />
+              <span />
+            </Hamburger>
           </Nav>
         </div>
       </Header>

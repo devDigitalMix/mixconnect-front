@@ -11,6 +11,11 @@ export const PropostasHeader = styled.header`
   max-width: 1088px;
   margin: 0 auto;
   margin-bottom: 40px;
+  gap: 30px 20px;
+  flex-wrap: wrap;
+  @media only screen and (max-width: 1095px) {
+    justify-content: center;
+  }
   div {
     button {
       min-height: 86px;
@@ -46,6 +51,14 @@ export const PropostasHeader = styled.header`
       &.btnexpiradas {
         background: #686769;
       }
+      @media only screen and (max-width: 450px) {
+        min-width: 250px;
+        &.active {
+          box-shadow: 0 0 0 2px #fff;
+          max-width: 375px;
+          min-width: 305px;
+        }
+      }
     }
   }
 `;
@@ -75,6 +88,12 @@ export const PropostaCard = styled.article`
   padding: 10px 25px;
   width: 100%;
   gap: 40px;
+  @media only screen and (max-width: 765px) {
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 20px;
+  }
   h4 {
     font-size: 25px;
     font-weight: 500;
@@ -101,6 +120,17 @@ export const PropostaCard = styled.article`
     }
     span {
       font-size: 15px;
+    }
+  }
+  @media only screen and (max-width: 450px) {
+    grid-template-columns: 1fr;
+    h2 {
+      padding-top: 0;
+    }
+    .time {
+      p {
+        padding-left: 0;
+      }
     }
   }
   .propostaBtns {

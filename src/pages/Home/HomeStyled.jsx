@@ -89,7 +89,8 @@ export const MainHeader = styled.header`
       }
       #texto2 {
         opacity: 1;
-        transform: scale(1) translate(10px, -50%);
+        transform: scale(1) translate(0px, -50%);
+        padding-left: 10px;
       }
     }
 
@@ -102,7 +103,7 @@ export const MainHeader = styled.header`
       }
       #texto2 {
         opacity: 0;
-        transform: scale(0) translate(10px, -50%);
+        transform: scale(0) translate(0, -50%);
       }
       #texto1 {
         opacity: 1;
@@ -115,12 +116,19 @@ export const MainHeader = styled.header`
         }
         #texto2 {
           opacity: 1;
-          transform: scale(1) translate(10px, -50%);
+          transform: scale(1) translate(0, -50%);
         }
       }
     }
     @media only screen and (max-width: 500px) {
       padding: 5px 20px;
+    }
+    @media only screen and (max-width: 450px) {
+      height: 80px;
+      p,
+      input {
+        max-width: 400px;
+      }
     }
   }
 `;

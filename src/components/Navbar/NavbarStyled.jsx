@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 export const Header = styled.header`
   width: 100%;
+  position: relative;
+  z-index: 20;
   #nav {
     margin: 30px auto;
     max-width: 1200px;
@@ -45,20 +47,59 @@ export const Nav = styled.nav`
   z-index: 1;
   border-radius: 11px;
   color: var(--light);
+`;
 
-  @media only screen and (max-width: 875px) {
-    padding-bottom: 90px;
+export const Hamburger = styled.div`
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  z-index: 1001;
+
+  span {
+    width: 30px;
+    height: 4px;
+    background: var(--light);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px var(--main);
   }
-  @media only screen and (max-width: 360px) {
-    padding-bottom: 120px;
+
+  ${({ open }) =>
+    open &&
+    `
+    span:nth-child(1) {
+      transform: rotate(45deg) translate(8px, 8px);
+    }
+    span:nth-child(2) {
+      transform: rotate(45deg) translate(1.2px, 1.2px);
+      opacity: 0;
+    }
+    span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+    span {
+    background: var(--light);
+  }
+  `}
+
+  @media (max-width: 1111px) {
+    display: flex;
   }
 `;
+
 export const NavMenu = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   align-items: center;
   gap: 5px 30px;
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  overflow: hidden;
 
   .logoStudio {
     img {
@@ -92,29 +133,23 @@ export const NavMenu = styled.div`
       }
     }
   }
-  @media only screen and (max-width: 875px) {
-    padding: 10px 5px;
-    position: absolute;
+  @media (max-width: 1111px) {
+    max-height: ${({ open }) => (open ? "420px" : "0")};
+    padding-top: ${({ open }) => (open ? "50px" : "0")};
+    padding-bottom: ${({ open }) => (open ? "50px" : "0")};
+    opacity: ${({ open }) => (open ? "1" : "0")};
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    gap: 10px;
     width: 100%;
-    bottom: 10px;
-    left: 50%;
-    transform: translate(-50%);
-  }
-  @media only screen and (max-width: 545px) {
-    padding: 10px 15px;
-    position: absolute;
-    width: 100%;
-    bottom: -10px;
-    left: 50%;
-    transform: translate(-50%);
-  }
-  @media only screen and (max-width: 365px) {
-    padding: 10px 5px;
-    position: absolute;
-    width: 100%;
-    bottom: 0px;
-    left: 50%;
-    transform: translate(-50%);
+    z-index: 10;
+    transition: all.3s;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    background-color: var(--dark);
+    box-shadow: 0 -2px 0 0 var(--main) inset;
   }
 `;
 
@@ -167,5 +202,8 @@ export const PerfilMenu = styled.div`
   button:hover {
     filter: drop-shadow(0 0 2px var(--main)) drop-shadow(0 0 2px var(--main))
       brightness(110%);
+  }
+  @media only screen and (max-width: 1111px) {
+    padding-right: 60px;
   }
 `;
