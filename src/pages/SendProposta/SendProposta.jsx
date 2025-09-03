@@ -70,7 +70,7 @@ export function SendProposta() {
     if (response.data.gmb > 0) {
       setGmb(true);
     }
-    if (response.data.posts > 0) {
+    if (response.data.posts > 0 || response.data.setupRedes) {
       setCriativos(true);
     }
     if (response.data.gpPremium) {
@@ -382,10 +382,26 @@ export function SendProposta() {
                     <li>
                       <img src="/criativos.png" /> <h3>{c++}</h3>{" "}
                       <div>
-                        <h4>CRIATIVOS REDES ({proposta.posts})</h4>{" "}
+                        <h4>
+                          CRIATIVOS REDES{" "}
+                          {proposta.posts > 0 && `(${proposta.posts})`}
+                        </h4>{" "}
                         <p>
-                          Confecção de {proposta.posts} criativos para as redes
-                          sociais.
+                          {proposta.setupRedes && proposta.posts > 0
+                            ? `Setup das redes sociais com pins, até 3 destaques e 3 criativos para ficarem fixados no perfil + confecção de ${
+                                proposta.posts
+                              } criativos${
+                                proposta.postMensal
+                                  ? " por mês para as redes sociais."
+                                  : " para as redes sociais."
+                              }`
+                            : proposta.posts > 0
+                            ? `Confecção de ${
+                                proposta.posts
+                              } criativos para as redes
+                          sociais${proposta.postMensal ? " por mês." : "."}`
+                            : proposta.setupRedes &&
+                              `Setup das redes sociais com pins, até 3 destaques e 3 criativos para ficarem fixados no perfil.`}
                         </p>
                       </div>
                     </li>

@@ -39,6 +39,8 @@ export function PropostaCreate() {
   const [tempoContrato, setTempoContrato] = useState("");
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [findingUser, setFindingUser] = useState(true);
+  const [setupRedes, setSetupRedes] = useState(false);
+  const [postMensal, setPostMensal] = useState(false);
   const [proposta, setProposta] = useState(null);
   const [logotipo, setLogotipo] = useState();
   const [materiaisPapelaria, setMateriaisPapelaria] = useState();
@@ -287,6 +289,8 @@ export function PropostaCreate() {
           setSelectedPlan(data.plan || null);
           setExtrasList(data.extras || []);
           setDefaultExtras(data.extras || []);
+          setSetupRedes(data.setupRedes || false);
+          setPostMensal(data.postMensal || false);
           setReceived(true);
         } catch (error) {
           alert("Erro ao buscar proposta.");
@@ -649,6 +653,48 @@ export function PropostaCreate() {
             <img src="/mais.svg" onClick={() => setPosts(posts + 1)} />
           </div>
         </div>
+        <div className="InputContainer">
+          <br />
+          <label htmlFor="postMensal">Mensal?</label>
+          <div className="guardaInput">
+            <select
+              name="postMensal"
+              onChange={(e) => {
+                const value = e.target.value === "true";
+                setPostMensal(value);
+              }}
+            >
+              {proposta?.postMensal && (
+                <option value={proposta.postMensal}>
+                  {proposta.postMensal == false ? "Não" : "Sim"}
+                </option>
+              )}
+              <option value={false}>Não</option>
+              <option value={true}>Sim</option>
+            </select>
+          </div>
+        </div>
+        <div className="InputContainer">
+          <br />
+          <label htmlFor="setupRedes">Setup</label>
+          <div className="guardaInput">
+            <select
+              name="setupRedes"
+              onChange={(e) => {
+                const value = e.target.value === "true";
+                setSetupRedes(value);
+              }}
+            >
+              {proposta?.setupRedes && (
+                <option value={proposta.setupRedes}>
+                  {proposta.setupRedes == false ? "Não" : "Sim"}
+                </option>
+              )}
+              <option value={false}>Não</option>
+              <option value={true}>Sim</option>
+            </select>
+          </div>
+        </div>
       </div>
       <h3>Áudio & Video</h3>
       <div className="formSection">
@@ -712,7 +758,7 @@ export function PropostaCreate() {
             <select
               name="logotipo"
               onChange={(e) => {
-                const value = e.target.value === "true"; // converte string para boolean
+                const value = e.target.value === "true";
                 setLogotipo(value);
               }}
             >
