@@ -16,6 +16,68 @@ export const PropostaContainer = styled.form`
     & > div {
       max-width: 300px;
     }
+    .extraDiv {
+      display: grid;
+      gap: 5px;
+      transition: 0.3s;
+      position: relative;
+      z-index: 2;
+      margin-bottom: 15px;
+      .remove {
+        position: absolute;
+        z-index: -1;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%) scale(0);
+        background-color: red;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        font-weight: 700;
+        padding-top: 2px;
+        justify-content: center;
+        font-family: var(--font);
+        border-radius: 50px;
+        &:hover {
+          background-color: #fff;
+          box-shadow: 0 0 0 2px red inset;
+          color: red;
+        }
+      }
+      textarea {
+        border: none;
+        color: var(--dark);
+        font-family: var(--font2);
+        max-width: 300px;
+        width: 100%;
+        border-radius: 5px;
+        padding: 5px 10px;
+        outline: none;
+      }
+      .extraImage {
+        margin-top: 10px;
+        label {
+          transition: 0.3s;
+          cursor: pointer;
+          padding: 10px 15px;
+        }
+        input {
+          max-width: 300px;
+          width: 100%;
+          opacity: 0;
+          transform: scale(0);
+          height: 0;
+          width: 0;
+        }
+      }
+      &:hover {
+        padding-right: 45px;
+        .remove {
+          transform: translateY(-50%) scale(1);
+        }
+      }
+    }
     .mainLabel {
       font-size: 18px;
       text-transform: uppercase;

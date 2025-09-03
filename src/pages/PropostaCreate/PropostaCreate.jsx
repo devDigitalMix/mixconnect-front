@@ -42,44 +42,148 @@ export function PropostaCreate() {
   const [proposta, setProposta] = useState(null);
   const [logotipo, setLogotipo] = useState();
   const [materiaisPapelaria, setMateriaisPapelaria] = useState();
+  const [extrasList, setExtrasList] = useState([]);
+  const [defaultExtras, setDefaultExtras] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
 
   async function handleCreateProposta(event) {
     setLoading(true);
     event.preventDefault();
+
     const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData.entries());
+    let data = Object.fromEntries(formData.entries());
+
+    // adiciona o plano
     data.plan = selectedPlan;
 
-    if (checarFormatoTelefone(data.whatsapp)) {
-      if (id) {
-        // UPDATE
-        try {
-          await updatePropostaService(id, data);
-          alert("Proposta atualizada com sucesso!");
-          navigate("/sendproposta/" + id);
-        } catch (error) {
-          console.log(error);
-          alert("Erro ao atualizar proposta.");
-        }
-        setLoading(false);
-      } else {
-        // CREATE (original)
-        try {
-          const response = await createPropostaService(data);
-          navigate("/sendproposta/" + response.data._id);
-        } catch (error) {
-          alert("Erro ao criar proposta.");
-        }
-        setLoading(false);
+    // agrupa os extras
+    const extras = {};
+
+    for (const [key, value] of Object.entries(data)) {
+      const match = key.match(/^itemextra(\d+)-(\w+)$/);
+      if (match) {
+        const index = parseInt(match[1], 10);
+        const field = match[2]; // title, desc, image, etc.
+
+        if (!extras[index]) extras[index] = {};
+        extras[index][field] = value;
+
+        // apaga o campo original
+        delete data[key];
       }
-    } else {
-      setLoading(false);
-      alert(
-        "Preencha o Whatsapp no formato correto: 47999999999 ou (47) 99999-9999"
-      );
     }
+
+    // transforma em lista
+    data.extras = Object.values(extras);
+
+    console.log(data);
+
+    //     const formData = new FormData(event.target);
+    // let data = Object.fromEntries(formData.entries());
+
+    // // adiciona o plano
+    // data.plan = selectedPlan;
+
+    // // agrupa os extras
+    // const extras = {};
+
+    // for (const [key, value] of Object.entries(data)) {
+    //   const match = key.match(/^itemextra(\d+)-(\w+)$/);
+    //   if (match) {
+    //     const index = parseInt(match[1], 10);
+    //     const field = match[2]; // title, desc, image, etc.
+
+    //     if (!extras[index]) extras[index] = {};
+    //     extras[index][field] = value;
+
+    //     // apaga o campo original
+    //     delete data[key];
+    //   }
+    // }
+
+    // // transforma em lista e adiciona ID único a cada extra
+    // data.extras = Object.values(extras).map(extra => ({
+    //   id: crypto.randomUUID(), // gera um ID único
+    //   ...extra
+    // }));
+
+    // console.log(data);
+
+    if (id) {
+      // UPDATE
+      try {
+        data.extras = restaurarImagens(data.extras, defaultExtras);
+        await updatePropostaService(id, data);
+        alert("Proposta atualizada com sucesso!");
+        navigate("/sendproposta/" + id);
+      } catch (error) {
+        console.log(error);
+        alert("Erro ao atualizar proposta.");
+      }
+      setLoading(false);
+    } else {
+      // CREATE (original)
+      try {
+        data.extras = Object.values(extras).map((extra) => ({
+          id: crypto.randomUUID(), // gera um ID único
+          ...extra,
+        }));
+
+        console.log(data);
+
+        const response = await createPropostaService(data);
+        navigate("/sendproposta/" + response.data._id);
+      } catch (error) {
+        console.log(error);
+        alert("Erro ao criar proposta.");
+      }
+      setLoading(false);
+    }
+
+    // if (checarFormatoTelefone(data.whatsapp)) {
+    //   if (id) {
+    //     // UPDATE
+    //     try {
+    //       await updatePropostaService(id, data);
+    //       alert("Proposta atualizada com sucesso!");
+    //       navigate("/sendproposta/" + id);
+    //     } catch (error) {
+    //       console.log(error);
+    //       alert("Erro ao atualizar proposta.");
+    //     }
+    //     setLoading(false);
+    //   } else {
+    //     // CREATE (original)
+    //     try {
+    //       const response = await createPropostaService(data);
+    //       navigate("/sendproposta/" + response.data._id);
+    //     } catch (error) {
+    //       alert("Erro ao criar proposta.");
+    //     }
+    //     setLoading(false);
+    //   }
+    // } else {
+    //   setLoading(false);
+    //   alert(
+    //     "Preencha o Whatsapp no formato correto: 47999999999 ou (47) 99999-9999"
+    //   );
+    // }
+  }
+
+  function restaurarImagens(dataExtras, defaultExtras) {
+    return dataExtras.map((item) => {
+      const defaultItem = defaultExtras.find((def) => def.id === item.id);
+
+      if (!defaultItem) return item; // não achou correspondente no backup
+
+      // se mudou e está no valor inválido → restaura
+      if (item.image.size == 0 && item.image !== defaultItem.image) {
+        return { ...item, image: getFileNameFromUrl(defaultItem.image) };
+      }
+
+      return item;
+    });
   }
 
   async function findUserLogged() {
@@ -90,6 +194,31 @@ export function PropostaCreate() {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  function getFileNameFromUrl(url) {
+    try {
+      const pathname = new URL(url).pathname; // /6b80b3a4320d5be46931fdc0a1417a2b3b50b971f1c0606c22df5d729930f5c9
+      const parts = pathname.split("/"); // quebra em partes
+      return parts.pop(); // pega a última parte
+    } catch (error) {
+      console.error("URL inválida:", error);
+      return null;
+    }
+  }
+
+  function handleExtraChange({ i, title, desc, image }) {
+    const lista = [...extrasList];
+    lista[i].title = title;
+    lista[i].desc = desc;
+    lista[i].image = image;
+    setExtrasList(lista);
+  }
+
+  function handleRemoveExtra(extra) {
+    let lista = [...extrasList];
+    lista = lista.filter((item) => item !== extra);
+    setExtrasList(lista);
   }
 
   async function getPlans() {
@@ -151,11 +280,13 @@ export function PropostaCreate() {
           setTempoCap(data.tempoCap || 0);
           setNVideos(data.nVideos || 0);
           setNVisitas(data.nVisitas || 0);
-          setPrazo(data.prazo || 0);
+          setPrazo(data.prazo || 30);
           setReport(data.report || "");
           setGpPremium(data.gpPremium || false);
           setTempoContrato(data.tempoContrato || "");
           setSelectedPlan(data.plan || null);
+          setExtrasList(data.extras || []);
+          setDefaultExtras(data.extras || []);
           setReceived(true);
         } catch (error) {
           alert("Erro ao buscar proposta.");
@@ -490,8 +621,8 @@ export function PropostaCreate() {
                   {proposta.fotos360 == false ? "Não" : "Sim"}
                 </option>
               )}
-              <option value={true}>Sim</option>
               <option value={false}>Não</option>
+              <option value={true}>Sim</option>
             </select>
           </div>
         </div>
@@ -653,10 +784,12 @@ export function PropostaCreate() {
           <label htmlFor="dashboard">Dashboard</label>
           <select name="dashboard">
             {proposta?.dashboard && (
-              <option value={proposta.dashboard}>{proposta.dashboard}</option>
+              <option value={proposta.dashboard}>
+                {proposta.dashboard ? "Sim" : "Não"}
+              </option>
             )}
-            <option value={true}>Sim</option>
             <option value={false}>Não</option>
+            <option value={true}>Sim</option>
           </select>
         </div>
         <div>
@@ -757,6 +890,81 @@ export function PropostaCreate() {
             }}
           />
         </div>
+      </div>
+      <h3>Adicionar Entregável</h3>
+      <div className="formSection">
+        {extrasList.map((extra, index) => (
+          <div key={index} className="extraDiv">
+            {id && (
+              <input
+                type="text"
+                name={"itemextra" + index + "-id"}
+                value={extra.id}
+                hidden
+              />
+            )}
+            <Input
+              placeholder="Título"
+              type="text"
+              name={"itemextra" + index + "-title"}
+              value={extra.title}
+              onChange={(e) =>
+                handleExtraChange({
+                  i: index,
+                  title: e.target.value,
+                  desc: extra.desc,
+                  image: extra.image,
+                })
+              }
+            />
+            <textarea
+              name={"itemextra" + index + "-desc"}
+              value={extra.desc}
+              onChange={(e) =>
+                handleExtraChange({
+                  i: index,
+                  desc: e.target.value,
+                  title: extra.title,
+                  image: extra.image,
+                })
+              }
+            ></textarea>
+            <div className="extraImage">
+              <label htmlFor={"itemextra" + index + "-image"} className="btn">
+                {!extra.image ? "Adicionar Imagem" : "Imagem Adicionada"}
+              </label>
+              <input
+                type="file"
+                name={"itemextra" + index + "-image"}
+                id={"itemextra" + index + "-image"}
+                onChange={(e) =>
+                  handleExtraChange({
+                    i: index,
+                    desc: extra.desc,
+                    title: extra.title,
+                    image: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <button
+              title="Remover"
+              type="button"
+              className="remove"
+              onClick={() => handleRemoveExtra(extra)}
+            >
+              X
+            </button>
+          </div>
+        ))}
+        <img
+          src="/mais.svg"
+          title="Adicionar"
+          className="img-effect"
+          onClick={() => {
+            setExtrasList([...extrasList, {}]);
+          }}
+        />
       </div>
       {!loading ? (
         <button type="submit" className="btn">

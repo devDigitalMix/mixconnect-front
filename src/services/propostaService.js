@@ -7,6 +7,7 @@ export function createPropostaService(data) {
   const response = axios.post(`${baseURL}/proposta/create`, data, {
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,
+      "Content-Type": "multipart/form-data",
     },
   });
   return response;
@@ -70,6 +71,7 @@ export function updatePropostaService(id, data) {
   const response = axios.patch(`${baseURL}/proposta/update/${id}`, data, {
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,
+      "Content-Type": "multipart/form-data",
     },
   });
   return response;

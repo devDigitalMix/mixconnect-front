@@ -421,6 +421,15 @@ export function SendProposta() {
                       </div>
                     </li>
                   )}
+                  {proposta.extras.length > 0 &&
+                    proposta.extras.map((extra, index) => (
+                      <li key={c++}>
+                        <img src={extra.image} /> <h3>{c}</h3>{" "}
+                        <div>
+                          <h4>{extra.title}</h4> <p>{extra.desc}</p>
+                        </div>
+                      </li>
+                    ))}
                   {/* <li>
                     <img src="/ferramentas.png" /> <h3>{c++}</h3>{" "}
                     <div>

@@ -311,6 +311,10 @@ export const Entregaveis = styled.section`
       align-items: center;
       position: relative;
       gap: 10px;
+      img {
+        max-width: 125px;
+        width: 100%;
+      }
       h3 {
         font-size: 100px;
         font-weight: 900;
