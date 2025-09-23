@@ -92,8 +92,15 @@ export function SendNps() {
                 </div>
               </div>
             ))}
-            <div>
-              <Label htmlFor="feedback" text="FeedBack" />
+            <div style={{ maxWidth: 800 + "px", textAlign: "center" }}>
+              <Label
+                htmlFor="feedback"
+                text={
+                  nps.name == "Pós Briefing"
+                    ? "Há alguma informação ou detalhe que você gostaria que tivéssemos abordado melhor durante o onboarding?"
+                    : "FeedBack"
+                }
+              />
               <textarea name="feedback" id="feedback"></textarea>
             </div>
 

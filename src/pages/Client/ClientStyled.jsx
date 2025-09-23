@@ -24,6 +24,8 @@ export const ClientContainer = styled.section`
 `;
 
 export const ClientStyled = styled.section`
+  position: relative;
+  z-index: 2;
   .catButtons {
     position: absolute;
     top: -6px;
@@ -31,6 +33,7 @@ export const ClientStyled = styled.section`
     display: flex;
     gap: 15px;
     transform: translateY(-50%);
+    z-index: -1;
     button {
       background-color: #333;
       box-shadow: 0 -20px 0 var(--dark) inset;
@@ -45,6 +48,28 @@ export const ClientStyled = styled.section`
     }
     @media only screen and (max-width: 560px) {
       gap: 0px;
+    }
+    @media only screen and (max-width: 490px) {
+      position: inherit;
+      top: inherit;
+      left: inherit;
+      transform: translateY(0);
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 30px;
+      button {
+        background-color: #333;
+        box-shadow: 0 0 0 var(--dark) inset;
+        &.active {
+          background-color: var(--main);
+        }
+        border-radius: 5px;
+        padding: 8px 10px;
+        &:hover {
+          background-color: var(--main);
+        }
+      }
     }
   }
   padding: 20px;

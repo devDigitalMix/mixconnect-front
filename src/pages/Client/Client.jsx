@@ -594,44 +594,6 @@ export default function Client() {
         <img src="/grande-bottom.png" id="grande-bottom" />
         <img src="/grande-top.png" id="grande-top" />
         <ClientStyled>
-          <div className="catButtons">
-            <button
-              className={cat == "Comercial" ? "active" : undefined}
-              onClick={() => setCat("Comercial")}
-            >
-              Comercial
-            </button>
-            <button
-              className={cat == "Financeiro" ? "active" : undefined}
-              onClick={() => setCat("Financeiro")}
-            >
-              Financeiro
-            </button>
-            <button
-              className={cat == "Social" ? "active" : undefined}
-              onClick={() => setCat("Social")}
-            >
-              Social
-            </button>
-            <button
-              className={cat == "Dev" ? "active" : undefined}
-              onClick={() => setCat("Dev")}
-            >
-              Dev
-            </button>
-            <button
-              className={cat == "Tráfego" ? "active" : undefined}
-              onClick={() => setCat("Tráfego")}
-            >
-              Tráfego
-            </button>
-            <button
-              className={cat == "A&V" ? "active" : undefined}
-              onClick={() => setCat("A&V")}
-            >
-              A&V
-            </button>
-          </div>
           {createNps && (
             <CreateNpsContainer>
               {isNpsLoading ? (
@@ -830,6 +792,44 @@ export default function Client() {
               )}
             </ClientButtons>
           )}
+          <div className="catButtons">
+            <button
+              className={cat == "Comercial" ? "active" : undefined}
+              onClick={() => setCat("Comercial")}
+            >
+              Comercial
+            </button>
+            <button
+              className={cat == "Financeiro" ? "active" : undefined}
+              onClick={() => setCat("Financeiro")}
+            >
+              Financeiro
+            </button>
+            <button
+              className={cat == "Social" ? "active" : undefined}
+              onClick={() => setCat("Social")}
+            >
+              Social
+            </button>
+            <button
+              className={cat == "Dev" ? "active" : undefined}
+              onClick={() => setCat("Dev")}
+            >
+              Dev
+            </button>
+            <button
+              className={cat == "Tráfego" ? "active" : undefined}
+              onClick={() => setCat("Tráfego")}
+            >
+              Tráfego
+            </button>
+            <button
+              className={cat == "A&V" ? "active" : undefined}
+              onClick={() => setCat("A&V")}
+            >
+              A&V
+            </button>
+          </div>
           <ClientBody>
             {cat == "Comercial" &&
               (!update ? (
