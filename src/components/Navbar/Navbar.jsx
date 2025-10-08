@@ -75,7 +75,7 @@ export function Navbar() {
 
   return (
     <>
-      <Header>
+      <Header open={menuOpen}>
         <div id="nav">
           <img src="/navgradbottom.png" id="navgradbottom" />
           <img src="/navgradtop.png" id="navgradtop" />

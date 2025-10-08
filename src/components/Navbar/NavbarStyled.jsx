@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const Header = styled.header`
   width: 100%;
   position: relative;
-  z-index: 20;
+  z-index: ${({ open }) => (open ? "6" : "2")};
   #nav {
     margin: 30px auto;
     max-width: 1200px;
@@ -12,6 +12,7 @@ export const Header = styled.header`
     padding: 1px;
     background-color: var(--dark);
     position: relative;
+    z-index: 4;
     #navgradbottom {
       position: absolute;
       left: 0;
