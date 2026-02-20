@@ -155,7 +155,7 @@ export function Navbar() {
                   </Link>
                 )}
               <Link
-                to={"https://studiomix.tech/home"}
+                to={"https://studiomix.digitalmix.tech/home"}
                 onClick={() => handleButtonClick("")}
                 className="logoStudio"
               >
