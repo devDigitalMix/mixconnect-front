@@ -113,7 +113,7 @@ export default function Client() {
     try {
       response = await createNpsService(data);
       await navigator.clipboard.writeText(
-        `https://mixconnect.digitalmix.tech/sendnps/${response.data._id}`
+        `https://mixconnect.digitalmix.tech/sendnps/${response.data._id}`,
       );
       setTimeout(() => setCreateNps(false), 3000);
     } catch (error) {
@@ -277,7 +277,7 @@ export default function Client() {
         console.log(
           data.text == `excluir-${client.name}`,
           data.text,
-          `excluir-${client.name}`
+          `excluir-${client.name}`,
         );
         alert("Insira o nome correto");
         setIsLoading(false);
@@ -385,7 +385,7 @@ export default function Client() {
       const response = await getClientById(id);
       setClient(response.data);
       setPreview(
-        response.data.logo ? response.data.logo : "/avatar-default.png"
+        response.data.logo ? response.data.logo : "/avatar-default.png",
       );
       setSocialMedia(response.data.socialMedia || []);
       setDrives(response.data.drives || []);
@@ -855,6 +855,19 @@ export default function Client() {
                   ) : null}
                   {!received ? (
                     <div className="campo">
+                      <h2>Nome</h2>
+                      <button>
+                        <Skeleton width="200px" />
+                      </button>
+                    </div>
+                  ) : client.name ? (
+                    <div className="campo">
+                      <h2>Nome</h2>
+                      <button>{client.name}</button>
+                    </div>
+                  ) : null}
+                  {!received ? (
+                    <div className="campo">
                       <h2>Email</h2>
                       <button>
                         <Skeleton width="200px" />
@@ -990,7 +1003,7 @@ export default function Client() {
                         {client.dateStart && client.tempoContrato
                           ? getVigenciaFinal(
                               client.dateStart,
-                              client.tempoContrato
+                              client.tempoContrato,
                             )
                           : ""}
                       </button>
@@ -1130,7 +1143,7 @@ export default function Client() {
                         client.dateStart && client.tempoContrato
                           ? getVigenciaFinal(
                               client.dateStart,
-                              client.tempoContrato
+                              client.tempoContrato,
                             )
                           : ""
                       }
@@ -1422,7 +1435,7 @@ export default function Client() {
                         else if (lower.includes("linkedin")) label = "LinkedIn";
                         else {
                           const match = lower.match(
-                            /\/\/(?:www\.)?([^\.]+)\.com/
+                            /\/\/(?:www\.)?([^\.]+)\.com/,
                           );
                           label = match
                             ? match[1].charAt(0).toUpperCase() +
@@ -1604,7 +1617,7 @@ export default function Client() {
                           type="date"
                           name="dataVencimento"
                           defaultValue={formatDateInput(
-                            chosenDomain.dataVencimento
+                            chosenDomain.dataVencimento,
                           )}
                           placeholder="Data de Vencimento"
                         />
@@ -2081,7 +2094,7 @@ export default function Client() {
                         else {
                           // Tenta extrair o texto antes do .com
                           const match = lower.match(
-                            /\/\/(?:www\.)?([^\.]+)\.com/
+                            /\/\/(?:www\.)?([^\.]+)\.com/,
                           );
                           label = match
                             ? match[1].charAt(0).toUpperCase() +
