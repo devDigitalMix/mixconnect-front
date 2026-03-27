@@ -853,19 +853,7 @@ export default function Client() {
                       </button>
                     </div>
                   ) : null}
-                  {!received ? (
-                    <div className="campo">
-                      <h2>Nome</h2>
-                      <button>
-                        <Skeleton width="200px" />
-                      </button>
-                    </div>
-                  ) : client.name ? (
-                    <div className="campo">
-                      <h2>Nome</h2>
-                      <button>{client.name}</button>
-                    </div>
-                  ) : null}
+
                   {!received ? (
                     <div className="campo">
                       <h2>Email</h2>
@@ -1081,6 +1069,10 @@ export default function Client() {
                   <div className="campo">
                     <h2>Contrato</h2>
                     <Input type="file" name="contrato" />
+                  </div>
+                  <div className="campo">
+                    <h2>Nome</h2>
+                    <Input type="text" name="name" />
                   </div>
                   <div className="campo">
                     <h2>Telefone</h2>
